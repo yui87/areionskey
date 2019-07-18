@@ -113,6 +113,14 @@ export const meta = {
 			}
 		},
 
+		preview: {
+			validator: $.optional.bool,
+			default: false,
+			desc: {
+				'ja-JP': 'preview'
+			}
+		},
+
 		geo: {
 			validator: $.optional.nullable.obj({
 				coordinates: $.arr().length(2)
@@ -289,6 +297,7 @@ export default define(meta, async (ps, user, app) => {
 
 	// 投稿を作成
 	const note = await create(user, {
+		preview: ps.preview,
 		createdAt: new Date(),
 		files: files,
 		poll: ps.poll ? {
@@ -310,6 +319,8 @@ export default define(meta, async (ps, user, app) => {
 		apEmojis: ps.noExtractEmojis ? [] : undefined,
 		geo: ps.geo
 	});
+
+	console.log(JSON.stringify(note, null, 2));
 
 	return {
 		createdNote: await Notes.pack(note, user)
