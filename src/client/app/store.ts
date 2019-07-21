@@ -78,6 +78,7 @@ const defaultDeviceSettings = {
 	disableShowingAnimatedImages: false,
 	expandUsersPhotos: true,
 	expandUsersActivity: true,
+  showPostPreview: true,
 	enableMobileQuickNotificationView: false,
 	roomGraphicsQuality: 'medium',
 	roomUseOrthographicCamera: true,
