@@ -35,7 +35,7 @@
 				</div>
 				<span class="app" v-if="appearNote.app && $store.state.settings.showVia">via <b>{{ appearNote.app.name }}</b></span>
 			</div>
-			<footer v-if="appearNote.deletedAt == null" class="footer">
+			<footer v-if="appearNote.deletedAt == null && !preview" class="footer">
 				<mk-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
 				<button @click="reply()" class="button">
 					<template v-if="appearNote.reply"><fa icon="reply-all"/></template>
@@ -92,6 +92,11 @@ export default Vue.extend({
 			required: true
 		},
 		detail: {
+			type: Boolean,
+			required: false,
+			default: false
+		},
+		preview: {
 			type: Boolean,
 			required: false,
 			default: false
