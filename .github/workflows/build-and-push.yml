@@ -3,7 +3,7 @@ name: Build and Push to Container Registry
 on:
   push:
     branches:
-      - uma-milkey-v11
+      - Milkey-homes/main
 
 jobs:
   build-and-push:
