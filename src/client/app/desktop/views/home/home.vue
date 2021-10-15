@@ -30,6 +30,7 @@
 						<option value="queue">{{ $t('@.widgets.queue') }}</option>
 						<option value="nav">{{ $t('@.widgets.nav') }}</option>
 						<option value="tips">{{ $t('@.widgets.tips') }}</option>
+						<option value="aichan">{{ $t('@.widgets.aichan') }}</option>
 					</select>
 					<button @click="addWidget">{{ $t('add') }}</button>
 				</div>

@@ -382,6 +382,7 @@ common:
     tips: "Tips"
     hashtags: "Hashtags"
     queue: "Queue"
+    aichan: "Ai-chan"
   dev: "Failed to create the application. Please try again."
   ai-chan-kawaii: "Ai-chan kawaii!"
   you: "You"
