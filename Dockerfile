@@ -10,6 +10,7 @@ RUN apk add --no-cache \
     autoconf \
     automake \
     file \
+    git \
     g++ \
     gcc \
     libc-dev \
@@ -20,6 +21,7 @@ RUN apk add --no-cache \
     python3 \
     zlib-dev
 
+RUN git init
 RUN git submodule update --init
 COPY package.json yarn.lock ./
 RUN yarn install
