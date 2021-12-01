@@ -26,6 +26,7 @@ run.bat
 api-docs.json
 *.log
 /redis
+dump.rdb
 *.code-workspace
 .DS_Store
 /files
