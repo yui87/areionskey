@@ -99,6 +99,13 @@ export const meta = {
 			}
 		},
 
+		carefulRemote: {
+			validator: $.optional.bool,
+			desc: {
+				'ja-JP': 'リモートからのフォローを承認制にするか'
+			}
+		},
+
 		autoAcceptFollowed: {
 			validator: $.optional.bool,
 			desc: {
@@ -193,6 +200,7 @@ export default define(meta, async (ps, user, app) => {
 	if (typeof ps.isLocked == 'boolean') updates.isLocked = ps.isLocked;
 	if (typeof ps.isBot == 'boolean') updates.isBot = ps.isBot;
 	if (typeof ps.carefulBot == 'boolean') profileUpdates.carefulBot = ps.carefulBot;
+	if (typeof ps.carefulRemote == 'boolean') profileUpdates.carefulRemote = ps.carefulRemote;
 	if (typeof ps.autoAcceptFollowed == 'boolean') profileUpdates.autoAcceptFollowed = ps.autoAcceptFollowed;
 	if (typeof ps.isCat == 'boolean') updates.isCat = ps.isCat;
 	if (typeof ps.autoWatch == 'boolean') profileUpdates.autoWatch = ps.autoWatch;

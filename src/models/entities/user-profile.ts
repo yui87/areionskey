@@ -125,6 +125,11 @@ export class UserProfile {
 	})
 	public carefulBot: boolean;
 
+	@Column('boolean', {
+		default: false,
+	})
+	public carefulRemote: boolean;
+
 	@Column({
 		...id(),
 		nullable: true
