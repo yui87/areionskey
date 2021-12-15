@@ -13,8 +13,8 @@
 					<a class="avatar">
 						<img :src="avator" alt="avatar"/>
 					</a>
-					<button class="menu" ref="menu" @click="menu"><fa icon="ellipsis-h"/></button>
-					<mk-follow-button v-if="$store.getters.isSignedIn && $store.state.i.id != user.id" :user="user"/>
+					<button v-if="$store.getters.isSignedIn" class="menu" ref="menu" @click="menu"><fa icon="ellipsis-h"/></button>
+					<mk-follow-button v-if="!$store.getters.isSignedIn || ($store.getters.isSignedIn && $store.state.i.id != user.id)" :user="user" :key="user.id"/>
 				</div>
 				<div class="title">
 					<h1><mk-user-name :user="user" :key="user.id" :nowrap="false"/></h1>

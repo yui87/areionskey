@@ -17,6 +17,9 @@
 			<button @click="menu" class="menu" ref="menu"><fa icon="ellipsis-h"/></button>
 			<mk-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
 		</div>
+		<div class="actions" v-else>
+			<mk-follow-button :user="user" :inline="true" :transparent="false" class="follow"/>
+		</div>
 	</div>
 	<mk-avatar class="avatar" :user="user" :disable-preview="true"/>
 	<div class="body">
