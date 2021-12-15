@@ -85,6 +85,7 @@ common:
   following: "フォロー中"
   followers: "フォロワー"
   favorites: "お気に入り"
+  flush: "キャッシュをクリア"
 
   permissions:
     "read:account": "アカウントの情報を見る"
@@ -836,6 +837,7 @@ common/views/components/profile-editor.vue:
   is-bot: "このアカウントはBotです"
   is-locked: "フォローを承認制にする"
   careful-bot: "Botからのフォローだけ承認制にする"
+  careful-remote: "リモートからのフォローだけ承認制にする"
   auto-accept-followed: "フォローしているユーザーからのフォローを自動承認する"
   advanced: "その他"
   privacy: "プライバシー"
@@ -1864,6 +1866,8 @@ common/views/components/follow-button.vue:
   request-pending: "フォロー許可待ち"
   follow-processing: "フォロー処理中"
   follow-request: "フォロー申請"
+  remoteFollow: "リモートフォロー"
+  remoteFollowMessage: "以下のアカウントをフォローしたいインスタンスの検索ボックスに入れてフォローして下さい。\n```\n{acct}\n```\n\n\nまたは、以下にフォローしたいアカウントを入力して下さい。"
 
 mobile/views/components/note.vue:
   private: "この投稿は非公開です"
