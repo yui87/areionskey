@@ -82,6 +82,7 @@ common:
   following: "Following"
   followers: "Followers"
   favorites: "Favorites"
+  flush: "Clear cache"
   permissions:
     "read:account": "View account information"
     "write:account": "Update your account information"
