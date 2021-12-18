@@ -190,7 +190,7 @@ export default Vue.extend({
 			> div > header
 				align-items normal
 
-		&.reply
+		&.reply, &.mention
 			> div > header [data-icon]
 				color #007aff
 
@@ -202,8 +202,8 @@ export default Vue.extend({
 			> div > header [data-icon]
 				color #36aed2
 
-		&.mention, &.followRequest, &.pollVote
+		&.followRequest, &.pollVote
 			> div > header [data-icon]
-				color #88a6b7
+				color #5e7c8c
 
 </style>
