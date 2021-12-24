@@ -11,21 +11,21 @@ updates:
       interval: "daily"
     open-pull-requests-limit: 99
     labels:
-      - "📦Dependencies"
-      - "🧶JavaScript"
+      - "📦 Dependencies"
+      - "🧶 JavaScript"
 
   - package-ecosystem: "docker" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
     labels:
-      - "📦Dependencies"
-      - "⚓Docker"
+      - "📦 Dependencies"
+      - "⚓ Docker"
 
   - package-ecosystem: "gitsubmodule" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
     labels:
-      - "📦Dependencies"
-      - "⛓Submodules"
+      - "📦 Dependencies"
+      - "⛓ Submodules"
