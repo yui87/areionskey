@@ -25,8 +25,8 @@ import { UserProfiles, Users } from '../models';
 import { networkChart } from '../services/chart';
 import { genAvatar } from '../misc/gen-avatar';
 import { createTemp } from '../misc/create-temp';
-//import { parseAcct } from '@/misc/acct';
-import parseAcct from '@/misc/acct/parse';
+//import { parseAcct } from '../misc/acct';
+import parseAcct from '../misc/acct/parse';
 
 export const serverLogger = new Logger('server', 'gray', false);
 
