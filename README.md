@@ -1,4 +1,6 @@
-<h1 align="center">Areionskey</h1>
+<div align="center">
+
+<h1>Areionskey</h1>
 
 [![GHCR](https://github.com/sakura-tel/areionskey/actions/workflows/ghcr.yml/badge.svg?branch=sakura-tel%2Fmain)](https://github.com/sakura-tel/areionskey/actions/workflows/ghcr.yml)
 [![E2E Test](https://github.com/sakura-tel/areionskey/actions/workflows/e2e.yml/badge.svg?branch=sakura-tel%2Fmain)](https://github.com/sakura-tel/areionskey/actions/workflows/e2e.yml)
@@ -8,6 +10,8 @@
 🏇 Areionskey is a distributed microblogging platform based on [Mei v11](https://github.com/mei23/misskey-v11).
 
 [Official Instance](https://uma.milkey.homes)
+
+</div>
 
 ## Contribution
 
