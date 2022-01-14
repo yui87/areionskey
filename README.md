@@ -12,7 +12,7 @@
 ## Contribution
 
 - Please check the [contribution guide](CONTRIBUTING.md).
-- If you want to translate, you can use [GitLocalize](https://gitlocalize.com/repo/6993).
+- If you want to translate, you can use [GitLocalize](https://gitlocalize.com/repo/6995).
 
 ### Collaborators
 
