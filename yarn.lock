@@ -9912,7 +9912,7 @@ whatwg-url@^5.0.0:
   integrity sha1-lmRU6HZUYuN2RNNib2dCzotwll0=
   dependencies:
     tr46 "~0.0.3"
-    webidl-conversions "^3.0.0"
+    webidl-conversions "^7.0.0"
 
 when@^3.7.7:
   version "3.7.8"
