@@ -150,6 +150,12 @@ export class Meta {
 	public localDriveCapacityMb: number;
 
 	@Column('integer', {
+		default: 2048,
+		comment: 'Drive capacity of a premium user (MB)'
+	})
+	public premiumDriveCapacityMb: number;
+
+	@Column('integer', {
 		default: 32,
 		comment: 'Drive capacity of a remote user (MB)'
 	})
