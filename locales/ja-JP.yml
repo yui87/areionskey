@@ -347,8 +347,8 @@ common:
   search: "検索"
   delete: "削除"
   loading: "読み込み中"
-  ok: "おｋ"
-  cancel: "やめる"
+  ok: "OK"
+  cancel: "キャンセル"
   update-available-title: "更新があります"
   update-available: "Misskeyの新しいバージョンがあります({newer}。現在{current}を利用中)。ページを再度読み込みすると更新が適用されます。"
   my-token-regenerated: "あなたのトークンが更新されたのでサインアウトします。"
@@ -1149,7 +1149,7 @@ desktop/views/components/notes.vue:
   retry: "リトライ"
 
 desktop/views/components/notifications.vue:
-  empty: "ありません！"
+  empty: "ありません"
   youGotNewFollower: "フォローされました"
   receiveFollowRequest: "フォローリクエストされました"
 
@@ -1213,7 +1213,7 @@ desktop/views/components/settings.2fa.vue:
   activate-key: "クリックしてセキュリティキーをアクティベートしてください"
   security-key-name: "キー名"
   register-security-key: "キーの登録を完了"
-  something-went-wrong: "わー！ キーを登録する際に問題が発生しました:"
+  something-went-wrong: "キーを登録する際に問題が発生しました:"
   key-unregistered: "キーが削除されました"
   use-password-less-login: "パスワードなしのログインを使用"
 
@@ -1825,7 +1825,7 @@ desktop/views/widgets/notifications.vue:
 desktop/views/widgets/polls.vue:
   title: "アンケート"
   refresh: "他を見る"
-  nothing: "ありません！"
+  nothing: "ありません"
 
 desktop/views/widgets/post-form.vue:
   title: "投稿"
@@ -1839,12 +1839,12 @@ desktop/views/widgets/profile.vue:
 desktop/views/widgets/trends.vue:
   title: "トレンド"
   refresh: "他を見る"
-  nothing: "ありません！"
+  nothing: "ありません"
 
 desktop/views/widgets/users.vue:
   title: "おすすめユーザー"
   refresh: "他を見る"
-  no-one: "いません！"
+  no-one: "いません"
 
 mobile/views/components/drive.vue:
   used: "使用中"
@@ -1918,7 +1918,7 @@ mobile/views/components/notification.vue:
   receiveFollowRequest: "フォローリクエストされました"
 
 mobile/views/components/notifications.vue:
-  empty: "ありません！"
+  empty: "ありません"
 
 mobile/views/components/sub-note-content.vue:
   private: "この投稿は非公開です"
@@ -2385,8 +2385,8 @@ pages:
       _for:
         arg1: "回数"
         arg2: "処理"
-    typeError: 'スロット{slot}は"{expect}"を受け付けますが、"{actual}"が入れられています！'
-    thereIsEmptySlot: "スロット{slot}が空です！"
+    typeError: 'スロット{slot}は"{expect}"を受け付けますが、"{actual}"が入れられています'
+    thereIsEmptySlot: "スロット{slot}が空です"
     types:
       string: "テキスト"
       number: "数値"
