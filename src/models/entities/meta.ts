@@ -282,14 +282,14 @@ export class Meta {
 
 	@Column('varchar', {
 		length: 512,
-		default: 'https://github.com/sakura-tel/misskey-v11',
+		default: 'https://github.com/sakura-tel/areionskey',
 		nullable: false
 	})
 	public repositoryUrl: string;
 
 	@Column('varchar', {
 		length: 512,
-		default: 'https://github.com/sakura-tel/misskey-v11/issues/new',
+		default: 'https://github.com/sakura-tel/areionskey/issues/new',
 		nullable: true
 	})
 	public feedbackUrl: string | null;

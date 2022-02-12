@@ -264,7 +264,7 @@ export default Vue.extend({
 			maintainerName: null,
 			maintainerEmail: null,
 			ToSUrl: null,
-			repositoryUrl: "https://github.com/sakura-tel/misskey-v11",
+			repositoryUrl: "https://github.com/sakura-tel/areionskey",
 			feedbackUrl: null,
 			disableRegistration: false,
 			disableLocalTimeline: false,

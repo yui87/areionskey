@@ -11,11 +11,13 @@
 
 [Official Instance](https://uma.milkey.homes)
 
+[Official Wiki](https://wiki.sakura.tel/areionskey)
+
 </div>
 
 ## Contribution
 
-- Please check the [contribution guide](CONTRIBUTING.md).
+- Please check the [contribution guideline](https://wiki.sakura.tel/areionskey/contribution).
 - If you want to translate, you can use [GitLocalize](https://gitlocalize.com/repo/6995).
 
 ### Collaborators
