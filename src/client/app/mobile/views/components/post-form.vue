@@ -25,8 +25,8 @@
 						<mk-user-name :user="u"/>
 						<button @click="removeVisibleUser(u)"><fa icon="times"/></button>
 					</span>
-					<button @click="addVisibleUser">{{ $t('@.post-form.add-visible-user') }}</button>
 				</div>
+				<button @click="addVisibleUser"><fa icon="plus"/></button>
 			</div>
 			<div class="local-only" v-if="localOnly === true"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
 			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
@@ -160,6 +160,7 @@ export default Vue.extend({
 					max-width 100%
 					min-width 100%
 					min-height 80px
+
 				> .emoji
 					position absolute
 					top 0
@@ -194,9 +195,10 @@ export default Vue.extend({
 					display inline
 					top -1px
 					font-size 14px
+					color var(--text)
 
 					> span
-						margin-left 14px
+						margin-left 8px
 
 						> button
 							padding 4px 8px
@@ -208,12 +210,12 @@ export default Vue.extend({
 							&:active
 								color var(--primaryDarken30)
 
+				> button
+					margin-left 4px
+
 			> .local-only
 				margin 0 0 8px 0
 				color var(--primary)
-
-			> input
-				z-index 1
 
 			> input
 				display block
@@ -226,6 +228,7 @@ export default Vue.extend({
 				border none
 				border-radius 0
 				box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
+				z-index 1
 
 				&:disabled
 					opacity 0.5
