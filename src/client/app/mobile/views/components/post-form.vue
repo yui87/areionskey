@@ -174,7 +174,7 @@ export default Vue.extend({
 				padding 16px
 
 			> .with-quote
-				margin 0 0 8px 0
+				margin 0 0 8px 12px
 				color var(--primary)
 
 				> button
@@ -188,7 +188,7 @@ export default Vue.extend({
 						color var(--primaryDarken30)
 
 			> .to-specified
-				margin 0 0 8px 0
+				margin 0 0 8px 12px
 				color var(--primary)
 
 				> .visibleUsers
@@ -214,7 +214,7 @@ export default Vue.extend({
 					margin-left 4px
 
 			> .local-only
-				margin 0 0 8px 0
+				margin 0 0 8px 12px
 				color var(--primary)
 
 			> input
