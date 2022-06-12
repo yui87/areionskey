@@ -1,6 +1,19 @@
 ChangeLog
 =========
 
+1.3.8 (2022/06/12)
+--------------------
+### ✨Improvements
+- めいv11 Commit [224cfe95ce5e3c0bfd94c13e1ea5384bb8c3dc8c](https://github.com/mei23/misskey-v11/commit/224cfe95ce5e3c0bfd94c13e1ea5384bb8c3dc8c) までをマージ
+- Docker Container 構築時の Alpine Linux を v3.15 に変更
+
+### 🐛Fixes
+- モバイルUIの投稿フォームにある絵文字ピッカーアイコンに文字が被る問題を修正
+- 猫耳の色を修正（というか復元）
+
+### ❌Abolitions
+- メンションのアバター表示（セキュリティアップデートを優先ゆえに実装を後で考える）
+
 1.3.7 (2022/02/13)
 --------------------
 ### ✨Improvements
