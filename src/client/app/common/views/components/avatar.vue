@@ -100,7 +100,7 @@ export default Vue.extend({
 	&.cat::before,
 	&.cat::after
 		background #df548f
-		border solid 4px currentColor
+		border solid 4px var(--noteText)
 		box-sizing border-box
 		content ''
 		display inline-block
