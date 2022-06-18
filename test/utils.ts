@@ -190,3 +190,10 @@ export const simpleGet = async (path: string, accept = '*/*'): Promise<{ status?
 		req.end();
 	});
 };
+
+export const getDocument = async (path: string): Promise<Document> => {
+	const html = await getHtml(`http://localhost:${port}${path}`);
+	const { window } = new JSDOM(html);
+	const doc = window.document;
+	return doc;
+};
