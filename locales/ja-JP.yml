@@ -821,6 +821,9 @@ common/views/components/trends.vue:
   count: "{}人が投稿"
   empty: "トレンドなし"
 
+common/views/components/tag-cloud.vue:
+  empty: "ありません"
+
 common/views/components/language-settings.vue:
   title: "表示言語"
   pick-language: "言語を選択"
@@ -947,7 +950,7 @@ common/views/widgets/server.vue:
 
 common/views/widgets/memo.vue:
   title: "付箋"
-  memo: "ここに書いて！"
+  memo: "ここに入力"
   save: "保存"
 
 common/views/widgets/slideshow.vue:
@@ -1203,7 +1206,7 @@ desktop/views/components/settings.2fa.vue:
   scan: "次に、表示されているQRコードをスキャンします:"
   done: "お使いのデバイスに表示されているトークンを入力して完了します:"
   submit: "完了"
-  success: "設定が完了しました！"
+  success: "設定が完了しました"
   failed: "設定に失敗しました。トークンに誤りがないかご確認ください。"
   info: "次回サインインからは、同様にパスワードに加えてデバイスに表示されているトークンを入力します。"
   totp-header: "認証アプリ"
