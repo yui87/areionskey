@@ -14,6 +14,8 @@ html
 		link(rel='icon' href= icon || '/favicon.ico')
 		link(rel='apple-touch-icon' href= icon || '/apple-touch-icon.png')
 		link(rel='manifest' href='/manifest.json')
+		meta(name='twitter:card' content= player ? 'player' : 'summary')
+		meta(property='og:site_name' content= instanceName || 'Misskey')
 
 		if noindex
 			meta(name='robots' content='noindex')
