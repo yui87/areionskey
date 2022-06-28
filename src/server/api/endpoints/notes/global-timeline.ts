@@ -91,7 +91,6 @@ export default define(meta, async (ps, user) => {
 		.leftJoinAndSelect('renoteUser.banner', 'renoteUserBanner');
 
 	if (user) generateMuteQuery(query, user);
-	if (user) generateBlockedUserQuery(query, user);
 
 	if (ps.withFiles) {
 		query.andWhere('note.fileIds != \'{}\'');

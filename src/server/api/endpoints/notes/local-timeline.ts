@@ -108,7 +108,6 @@ export default define(meta, async (ps, user) => {
 
 	generateVisibilityQuery(query, user);
 	if (user) generateMuteQuery(query, user);
-	if (user) generateBlockedUserQuery(query, user);
 
 	if (ps.withFiles) {
 		query.andWhere('note.fileIds != \'{}\'');
