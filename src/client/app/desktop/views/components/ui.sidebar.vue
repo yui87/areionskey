@@ -9,9 +9,6 @@
 			<div class="home" :class="{ active: $route.name == 'index' }" @click="goToTop">
 				<router-link to="/"><fa icon="home"/></router-link>
 			</div>
-			<div class="featured" :class="{ active: $route.name == 'featured' }">
-				<router-link to="/featured"><fa :icon="faNewspaper"/></router-link>
-			</div>
 			<div class="explore" :class="{ active: $route.name == 'explore' || $route.name == 'explore-tag' }">
 				<router-link to="/explore"><fa :icon="faHashtag"/></router-link>
 			</div>
