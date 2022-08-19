@@ -1,0 +1,16 @@
+{
+  id: 'mi-dark',
+
+  name: 'Mi Dark',
+  desc: 'Default dark theme',
+  kind: 'dark',
+	author: 'syuilo, yui87',
+
+  base: 'dark',
+
+	vars: {
+    primary: '#86B300',
+    secondary: '#272727',
+    text: '#C7D1D8',
+  }
+}

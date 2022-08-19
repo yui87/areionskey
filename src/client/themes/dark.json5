@@ -1,9 +1,9 @@
 {
 	id: 'dark',
 
-	name: 'Dark',
+	name: 'Classic Dark',
 	author: 'syuilo',
-	desc: 'Default dark theme',
+	desc: 'Default dark theme (Misskey v11)',
 	kind: 'dark',
 
 	vars: {

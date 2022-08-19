@@ -1,0 +1,16 @@
+{
+  id: 'mi-light',
+
+	name: 'Mi Light',
+	desc: 'Default light theme',
+	kind: 'light',
+	author: 'syuilo, yui87',
+
+	base: 'light',
+
+	vars: {
+		primary: '#86B300',
+		secondary: '#FFFFFF',
+		text: '#666666',
+	},
+}

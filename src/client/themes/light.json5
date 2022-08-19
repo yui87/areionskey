@@ -1,9 +1,9 @@
 {
 	id: 'light',
 
-	name: 'Light',
+	name: 'Classic Light',
 	author: 'syuilo',
-	desc: 'Default light theme',
+	desc: 'Default light theme (Misskey v11)',
 	kind: 'light',
 
 	vars: {

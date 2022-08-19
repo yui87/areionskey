@@ -10,6 +10,8 @@ export type Theme = {
 	props: { [key: string]: string };
 };
 
+export const miLightTheme: Theme = require('../themes/mi-light.json5');
+export const miDarkTheme: Theme = require('../themes/mi-dark.json5');
 export const lightTheme: Theme = require('../themes/light.json5');
 export const darkTheme: Theme = require('../themes/dark.json5');
 export const lavenderTheme: Theme = require('../themes/lavender.json5');
@@ -26,6 +28,8 @@ export const grayTheme: Theme = require('../themes/gray.json5');
 export const tweetDeckTheme: Theme = require('../themes/tweet-deck.json5');
 
 export const builtinThemes = [
+  miLightTheme,
+  miDarkTheme,
 	lightTheme,
 	darkTheme,
 	lavenderTheme,
