@@ -219,7 +219,6 @@ export default Vue.extend({
 			padding 8px
 
 			> button
-				padding 0
 				width 100%
 
 				&:before
