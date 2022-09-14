@@ -839,13 +839,6 @@
     "@types/glob" "*"
     "@types/node" "*"
 
-"@types/sanitize-html@2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@types/sanitize-html/-/sanitize-html-2.5.0.tgz#bfef58fbcf2674b20ffcc23c3506faa68c3a13e3"
-  integrity sha512-PeFIEZsO9m1+ACJlXUaimgrR+5DEDiIXhz7Hso307jmq5Yz0lb5kDp8LiTr5dMMMliC/jNNx/qds7Zoxa4zexw==
-  dependencies:
-    htmlparser2 "^6.0.0"
-
 "@types/seedrandom@3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@types/seedrandom/-/seedrandom-3.0.2.tgz#7f30db28221067a90b02e73ffd46b6685b18df1a"
