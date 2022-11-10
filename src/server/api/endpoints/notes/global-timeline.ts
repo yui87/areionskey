@@ -7,7 +7,6 @@ import { makePaginationQuery } from '../../common/make-pagination-query';
 import { Notes } from '../../../../models';
 import { generateMuteQuery } from '../../common/generate-mute-query';
 import { activeUsersChart } from '../../../../services/chart';
-import { generateBlockedUserQuery } from '../../common/generate-block-query';
 
 export const meta = {
 	desc: {

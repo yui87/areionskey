@@ -5,7 +5,6 @@ import { fetchMeta } from '../../../../misc/fetch-meta';
 import { Notes } from '../../../../models';
 import { PackedNote } from '../../../../models/repositories/note';
 import { PackedUser } from '../../../../models/repositories/user';
-import { isBlockerUserRelated } from '../../../../misc/is-blocker-user-related';
 
 export default class extends Channel {
 	public readonly chName = 'localTimeline';

@@ -9,7 +9,6 @@ import { makePaginationQuery } from '../../common/make-pagination-query';
 import { generateVisibilityQuery } from '../../common/generate-visibility-query';
 import { activeUsersChart } from '../../../../services/chart';
 import { Brackets } from 'typeorm';
-import { generateBlockedUserQuery } from '../../common/generate-block-query';
 
 export const meta = {
 	desc: {
