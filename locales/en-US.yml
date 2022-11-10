@@ -1661,6 +1661,8 @@ desktop/views/pages/user/user.friends.vue:
   title: "Frequent mentions"
   loading: "Loading"
   no-users: "No frequent mentions"
+desktop/views/pages/user/user.home.vue:
+  activity: "Activity"
 desktop/views/pages/user/user.photos.vue:
   title: "Photos"
   loading: "Loading"
