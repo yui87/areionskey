@@ -342,6 +342,7 @@ common:
   my-token-regenerated: "Your token has been regenerated, so you will be signed out."
   premium-user: "Premium account"
   verified-user: "Official account"
+  bot-user: "Bot account"
   hide-password: "Hide Password"
   show-password: "Show Password"
   enter-username: "Please enter username"
