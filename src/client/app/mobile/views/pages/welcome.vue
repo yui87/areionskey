@@ -10,9 +10,9 @@
 		<div class="about">
 			<p v-html="description || this.$t('@.about')"></p>
 			<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
-		</div>
-		<div class="signin">
-			<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			<div class="signin">
+				<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			</div>
 		</div>
 		<div class="tl">
 			<mk-welcome-timeline/>
@@ -184,11 +184,8 @@ export default Vue.extend({
 			> p
 				margin 8px
 
-			> .signup
-				font-weight bold
-
-		> .signin
-			margin 16px 0
+			> .signin
+				margin-top 8px
 
 		> .tl
 			margin 16px 0
