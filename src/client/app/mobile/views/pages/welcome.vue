@@ -125,7 +125,8 @@ export default Vue.extend({
 	methods: {
 		signin() {
 			this.$root.dialog({
-				type: 'signin'
+				type: 'signin',
+				showOkButton: false
 			});
 		}
 	}
