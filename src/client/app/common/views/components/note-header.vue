@@ -6,7 +6,7 @@
 	</router-link>
 	<span class="is-premium" v-if="note.user.isPremium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
 	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><img svg-inline src="../../../../assets/horseshoe.svg" class="horseshoe"/></span>
-	<span class="is-bot" v-if="note.user.isBot" :title="$t('@.bot-user')"><fa icon="cog"/></span>
+	<span class="is-bot" v-if="note.user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 	<span class="username"><mk-acct :user="note.user"/></span>
 	<div class="info">
 		<span class="app" v-if="note.app && !mini && $store.state.settings.showVia">via <b>{{ note.app.name }}</b></span>
