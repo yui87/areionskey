@@ -1718,7 +1718,7 @@ admin/views/federation.vue:
   remove-all-following-info: "{host}からのフォローをすべて解除します。そのインスタンスがもう存在しなくなった場合などに実行してください。"
   delete-all-files: "ファイルをすべて削除"
   block: "ブロック"
-  marked-as-closed: "閉鎖されているとマーク"
+  marked-as-closed: "配信停止"
   lookup: "照会"
   instances: "連合"
   instance-not-registered: "そのインスタンスは登録されていません"
@@ -1745,7 +1745,7 @@ admin/views/federation.vue:
     all: "すべて"
     blocked: "ブロック"
     not-responding: "応答なし"
-    marked-as-closed: "閉鎖とマーク済み"
+    marked-as-closed: "配信停止"
   result-is-truncated: "上位{n}件を表示しています。"
   charts: "チャート"
   chart-srcs:

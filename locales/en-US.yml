@@ -1572,7 +1572,7 @@ admin/views/federation.vue:
   remove-all-following-info: "Unfollow all accounts from {host}. Please run this if the instance no longer exists."
   delete-all-files: "Remove all files"
   block: "Block"
-  marked-as-closed: "Marked as closed"
+  marked-as-closed: "Disable delivery"
   lookup: "Look up"
   instances: "Federated"
   instance-not-registered: "The instance has not been discovered"
@@ -1599,7 +1599,7 @@ admin/views/federation.vue:
     all: "All"
     blocked: "Blocked"
     not-responding: "Without response"
-    marked-as-closed: "Marked as closed"
+    marked-as-closed: "Disable delivery"
   result-is-truncated: "Displaying the top {n} items."
   charts: "Charts"
   chart-srcs:
