@@ -41,11 +41,11 @@
 					</dl>
 				</div>
 				<div class="info">
-					<p class="location" v-if="user.host === null && user.location">
+					<p class="location" v-if="user.location">
 						<fa icon="map-marker"/>{{ user.location }}
 					</p>
-					<p class="birthday" v-if="user.host === null && user.birthday">
-						<fa icon="birthday-cake"/>{{ user.birthday.replace('-', '年').replace('-', '月') + '日' }} ({{ $t('years-old', { age }) }})
+					<p class="birthday" v-if="user.birthday">
+						<fa icon="birthday-cake"/>{{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})
 					</p>
 				</div>
 				<div class="status">
