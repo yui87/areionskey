@@ -167,7 +167,7 @@ export default Vue.extend({
 			text-align center
 			margin 0
 			color var(--text)
-		
+
 		> h1
 			margin-bottom 16px
 			font-weight bold
@@ -185,8 +185,9 @@ export default Vue.extend({
 			> p
 				margin 8px
 
+			> .signup
 			> .signin
-				margin-top 8px
+				margin 0.5em
 
 		> .tl
 			margin 16px 0
