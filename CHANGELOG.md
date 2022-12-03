@@ -1,6 +1,23 @@
 ChangeLog
 =========
 
+2.0.0 (2022/12/04)
+--------------------
+### 💥BREAKING CHANGES
+- Drop Node.js v12.x support
+
+### To Update
+以下を実施してください
+- Areionskey 再起動
+
+### ✨Improvements
+- めいv11 [v11.37.1-20221204012750](https://github.com/mei23/misskey-v11/releases/tag/11.37.1-20221204012750) by @mei23 までの変更/修正を適用
+
+### 🐛Fixes
+- favorite -> bookmark [19a2cc1](https://github.com/sakura-tel/areionskey/commit/19a2cc10de12b659bec8e2a9cf6240bd98749b64) [3737abd](https://github.com/sakura-tel/areionskey/commit/3737abdf09fc706572ef946112379770893ed036)
+- profile: Location, birthday の連合 を修正 [853afa6](https://github.com/sakura-tel/areionskey/commit/853afa6007d49c51dd4f8db775dfd119fdc8235b)
+- 依存関係の更新
+
 1.6.3 (2022/12/03)
 --------------------
 ### To Update
