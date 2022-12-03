@@ -6,7 +6,7 @@ import { makePaginationQuery } from '../../common/make-pagination-query';
 
 export const meta = {
 	desc: {
-		'ja-JP': 'お気に入りに登録した投稿一覧を取得します。',
+		'ja-JP': 'ブックマークに登録した投稿一覧を取得します。',
 		'en-US': 'Get favorited notes'
 	},
 

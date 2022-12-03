@@ -9,7 +9,7 @@ export const meta = {
 	stability: 'stable',
 
 	desc: {
-		'ja-JP': '指定した投稿のお気に入りを解除します。',
+		'ja-JP': '指定した投稿のブックマークを解除します。',
 		'en-US': 'Unfavorite a note.'
 	},
 
