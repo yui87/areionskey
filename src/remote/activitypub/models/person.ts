@@ -169,10 +169,6 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 				featured: person.featured ? getApId(person.featured) : undefined,
 				uri: person.id,
 				tags,
-				profile: {
-					birthday: bday ? bday[0] : undefined,
-					location: person['vcard:Address'] || undefined,
-				},
 				isBot,
 				isCat: (person as any).isCat === true,
 				movedToUserId: movedTo?.id || null,
@@ -183,6 +179,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 				description: person.summary ? htmlToMfm(truncate(person.summary, MAX_SUMMARY_LENGTH), person.tag) : null,
 				url: getOneApHrefNullable(person.url),
 				fields,
+				birthday: bday ? bday[0] : null,
+				location: person['vcard:Address'] || null,
 				userHost: host
 			});
 
@@ -374,6 +372,8 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 		url: person.url,
 		fields,
 		description: person.summary ? htmlToMfm(truncate(person.summary, MAX_SUMMARY_LENGTH), person.tag) : null,
+		birthday: bday ? bday[0] : null,
+		location: person['vcard:Address'] || null,
 		twitterUserId: null,
 		twitterScreenName: null,
 		githubId: null,
