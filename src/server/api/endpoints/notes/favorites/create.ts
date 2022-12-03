@@ -11,7 +11,7 @@ export const meta = {
 
 	desc: {
 		'ja-JP': '指定した投稿をブックマークに登録します。',
-		'en-US': 'Favorite a note.'
+		'en-US': 'Bookmark a note.'
 	},
 
 	tags: ['notes', 'favorites'],

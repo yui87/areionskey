@@ -10,7 +10,7 @@ export const meta = {
 
 	desc: {
 		'ja-JP': '指定した投稿のブックマークを解除します。',
-		'en-US': 'Unfavorite a note.'
+		'en-US': 'Unbookmark a note.'
 	},
 
 	tags: ['notes', 'favorites'],
