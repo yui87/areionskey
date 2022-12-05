@@ -897,8 +897,7 @@ common/views/widgets/server.vue:
   toggle: "Toggle views"
 common/views/widgets/memo.vue:
   title: "Sticky note"
-  memo: "Write here!"
-  save: "Save"
+  placeholder: "Write here"
 common/views/widgets/slideshow.vue:
   folder-customize-mode: "To specify a folder, please exit customization mode"
   folder: "Please click and specify a folder"

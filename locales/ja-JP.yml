@@ -971,8 +971,7 @@ common/views/widgets/server.vue:
 
 common/views/widgets/memo.vue:
   title: "付箋"
-  memo: "ここに入力"
-  save: "保存"
+  placeholder: "ここに入力"
 
 common/views/widgets/slideshow.vue:
   folder-customize-mode: "フォルダを指定するには、カスタマイズモードを終了してください"
