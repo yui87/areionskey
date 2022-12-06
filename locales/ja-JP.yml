@@ -370,8 +370,8 @@ common:
   view-on-remote: "正確な情報を見る"
   renoted-by: "{user}がRenote"
   no-notes: "投稿がありません"
-  turn-on-darkmode: "闇に飲まれる"
-  turn-off-darkmode: "光あれ"
+  turn-on-darkmode: "ダークモードへ"
+  turn-off-darkmode: "ライトモードへ"
 
   error:
     title: "問題が発生しました"
@@ -2073,7 +2073,7 @@ deck:
   select-list: "リストを選択してください"
   select-tagTl:
     title: "ハッシュタグを選択してください"
-    text: "ハッシュタグはホームから追加できます"
+    text: "ハッシュタグは 設定→ハッシュタグ から追加できます"
   swap-left: "左に移動"
   swap-right: "右に移動"
   swap-up: "上に移動"

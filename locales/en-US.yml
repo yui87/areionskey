@@ -189,7 +189,7 @@ common:
   note-placeholders:
     a: "What are you doing?"
     b: "What's happening?"
-    c: "What’s on your mind?"
+    c: "What's on your mind?"
     d: "What do you want to say?"
     e: "Write here"
     f: "Waiting for your writing."
@@ -354,8 +354,8 @@ common:
   view-on-remote: "For completion, view it remotely."
   renoted-by: "Renoted by {user}"
   no-notes: "Without any notes"
-  turn-on-darkmode: "Switch to Dark mode"
-  turn-off-darkmode: "Light mode"
+  turn-on-darkmode: "Switch to dark mode"
+  turn-off-darkmode: "Switch to light mode"
   error:
     title: "Something happened :("
     retry: "Retry"
@@ -452,7 +452,7 @@ common/views/components/games/reversi/reversi.index.vue:
   rule-desc: 'Reversi is a strategy board game for two players, played on an 8×8 uncheckered board. There are sixty-four identical game pieces called disks (often spelled "discs"), which are light on one side and dark on the other. Players take turns placing disks on the board with their assigned color facing up. During a play, any disks of the opponent''s color that are in a straight line and bounded by the disk just placed and another disk of the current player''s color are turned over to the current player''s color. The object of the game is to have the majority of disks turned to display your color when the last playable empty square is filled.'
   mode-invite: "Invite"
   mode-invite-desc: "Game with a specified user."
-  invitations: "You’ve got an invitation!"
+  invitations: "You've got an invitation!"
   my-games: "My game"
   all-games: "All games"
   enter-username: "Please enter username"
@@ -1040,7 +1040,7 @@ desktop/views/components/media-video.vue:
 desktop/views/components/followers-window.vue:
   followers: "{}'s followers"
 desktop/views/components/followers.vue:
-  empty: "Seems like you don’t have any followers."
+  empty: "Seems like you don't have any followers."
 desktop/views/components/following-window.vue:
   following: "Following {}"
 desktop/views/components/following.vue:
@@ -1872,7 +1872,7 @@ deck:
   select-list: "Select a list"
   select-tagTl:
     title: "Select a hashtag"
-    text: "Hashtags can be added from Home"
+    text: 'Hashtags can be added from "Hashtag" in Settings'
   swap-left: "Move left"
   swap-right: "Move right"
   swap-up: "Move up"
