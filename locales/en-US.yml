@@ -52,7 +52,7 @@ common:
   got-it: "Got it!"
   customization-tips:
     title: "Customization tips"
-    paragraph: '<p>Home customization allows you to add/delete, drag and drop and rearrange widgets.</p><p>You can change the display by <strong><strong>right</strong> clicking</strong> on some widgets.</p><p>To delete a widget, drag and drop the widget onto <strong>the area labeled "Trash"</strong> in the header.</p><p>To finish the customization, click "Done" on the upper right.</p>'
+    paragraph: 'Home customization allows you to add/delete, drag and drop and rearrange widgets. You can change the display by right clicking on some widgets. To delete a widget, drag and drop the widget onto the area labeled "Trash" in the header. To finish the customization, click "Done" on the upper right.'
     gotit: "Got it!"
   notification:
     file-uploaded: "File uploaded!"
@@ -1908,6 +1908,8 @@ deck/deck.notification.vue:
   receiveFollowRequest: "Follow request received"
 deck/deck.notifications.vue:
   empty: "No notifications"
+deck/deck.widgets-column.vue:
+  edit: "Edit"
 docs:
   edit-this-page-on-github: "Found an error, or do you want to contribute to the documentation?"
   edit-this-page-on-github-link: "Edit this page at GitHub!"
