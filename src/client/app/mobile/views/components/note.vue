@@ -31,7 +31,6 @@
 					</div>
 					<mk-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
 					<mk-url-preview v-for="url in urls" :url="url" :key="url" :compact="true"/>
-					<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><fa icon="map-marker-alt"/> {{ $t('location') }}</a>
 					<div class="renote" v-if="appearNote.renote"><mk-note-preview :note="appearNote.renote"/></div>
 				</div>
 				<span class="app" v-if="appearNote.app && $store.state.settings.showVia">via <b>{{ appearNote.app.name }}</b></span>
@@ -240,18 +239,6 @@ export default Vue.extend({
 						> img
 							display block
 							max-width 100%
-
-					> .location
-						margin 4px 0
-						font-size 12px
-						color #ccc
-
-					> .map
-						width 100%
-						height 200px
-
-						&:empty
-							display none
 
 					> .mk-poll
 						font-size 80%

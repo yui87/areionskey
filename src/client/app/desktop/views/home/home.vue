@@ -13,7 +13,6 @@
 						<option value="timemachine">{{ $t('@.widgets.timemachine') }}</option>
 						<option value="activity">{{ $t('@.widgets.activity') }}</option>
 						<option value="rss">{{ $t('@.widgets.rss') }}</option>
-						<option value="trends">{{ $t('@.widgets.trends') }}</option>
 						<option value="photo-stream">{{ $t('@.widgets.photo-stream') }}</option>
 						<option value="slideshow">{{ $t('@.widgets.slideshow') }}</option>
 						<option value="version">{{ $t('@.widgets.version') }}</option>
@@ -24,7 +23,6 @@
 						<option value="post-form">{{ $t('@.widgets.post-form') }}</option>
 						<option value="messaging">{{ $t('@.messaging') }}</option>
 						<option value="memo">{{ $t('@.widgets.memo') }}</option>
-						<option value="hashtags">{{ $t('@.widgets.hashtags') }}</option>
 						<option value="posts-monitor">{{ $t('@.widgets.posts-monitor') }}</option>
 						<option value="server">{{ $t('@.widgets.server') }}</option>
 						<option value="queue">{{ $t('@.widgets.queue') }}</option>
@@ -337,7 +335,7 @@ export default Vue.extend({
 		display flex
 		justify-content center
 		margin 0 auto
-		max-width 1240px
+		max-width 1500px
 
 		> *
 			.customize-container
