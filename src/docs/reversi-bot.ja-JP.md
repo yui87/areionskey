@@ -102,7 +102,7 @@ y = Math.floor(pos / mapWidth)
   value: false
 }
 ```
-`id` ... コントロールのID。
+`id` ... コントロールの ID。
 `type` ... コントロールの種類。後述します。
 `label` ... コントロールと一緒に表記するテキスト。
 `value` ... コントロールのデフォルト値。

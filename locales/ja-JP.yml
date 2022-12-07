@@ -50,12 +50,12 @@ common:
     renote: "Renote"
     mention: "言及"
     reaction: "リアクション"
-  got-it: "わかった"
+  got-it: "OK"
 
   customization-tips:
     title: "カスタマイズのヒント"
     paragraph: "ホームのカスタマイズでは、ウィジェットを追加/削除したり、ドラッグ&ドロップして並べ替えたりすることができます。一部のウィジェットは、右クリックすることで表示を変更することができます。ウィジェットを削除するには、ヘッダーの ゴミ箱 と書かれたエリアにウィジェットをドラッグ&ドロップします。カスタマイズを終了するには、右上の 完了 をクリックします。"
-    gotit: "わかった"
+    gotit: "OK"
 
   notification:
     file-uploaded: "ファイルがアップロードされました"
@@ -69,7 +69,7 @@ common:
     receiveFollowRequest: "フォローリクエストされました"
 
   time:
-    unknown: "なぞのじかん"
+    unknown: "不明"
     future: "未来"
     just_now: "たった今"
     seconds_ago: "{} 秒前"
@@ -1173,7 +1173,7 @@ desktop/views/components/note.vue:
 
 desktop/views/components/notes.vue:
   error: "読み込みに失敗しました。"
-  retry: "リトライ"
+  retry: "再試行"
 
 desktop/views/components/notifications.vue:
   empty: "ありません"
@@ -1698,6 +1698,7 @@ admin/views/announcements.vue:
   add: "追加"
   title: "タイトル"
   text: "内容"
+  image-url: "画像 URL"
   saved: "保存しました"
   _remove:
     are-you-sure: " $1 を削除しますか？"

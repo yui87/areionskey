@@ -1,3 +1,3 @@
 # Misskey (v11) API
 
-[APIリファレンス](/api-doc)
+[API リファレンス](/api-doc)

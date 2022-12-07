@@ -1554,6 +1554,7 @@ admin/views/announcements.vue:
   add: "Add"
   title: "Title"
   text: "Content"
+  image-url: "Image URL"
   saved: "Saved"
   _remove:
     are-you-sure: 'Delete "$1"?'
