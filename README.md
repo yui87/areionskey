@@ -1,6 +1,7 @@
 # Areionskey
 
 [![GHCR](https://github.com/sakura-tel/areionskey/actions/workflows/ghcr.yml/badge.svg)](https://github.com/sakura-tel/areionskey/actions/workflows/ghcr.yml)
+[![Node.js CI](https://github.com/sakura-tel/areionskey/actions/workflows/nodejs.yml/badge.svg)](https://github.com/sakura-tel/areionskey/actions/workflows/nodejs.yml)
 [![E2E Test](https://github.com/sakura-tel/areionskey/actions/workflows/e2e.yml/badge.svg)](https://github.com/sakura-tel/areionskey/actions/workflows/e2e.yml)
 [![gitlocalized](https://gitlocalize.com/repo/8223/whole_project/badge.svg)](https://gitlocalize.com/repo/8223/whole_project?utm_source=badge)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/sakura-tel/areionskey)
