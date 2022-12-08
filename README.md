@@ -1,6 +1,4 @@
-<div align="center">
-
-<h1>Areionskey</h1>
+# Areionskey
 
 [![GHCR](https://github.com/sakura-tel/areionskey/actions/workflows/ghcr.yml/badge.svg)](https://github.com/sakura-tel/areionskey/actions/workflows/ghcr.yml)
 [![E2E Test](https://github.com/sakura-tel/areionskey/actions/workflows/e2e.yml/badge.svg)](https://github.com/sakura-tel/areionskey/actions/workflows/e2e.yml)
@@ -11,24 +9,13 @@
 
 [Official Instance](https://uma.milkey.homes)
 
-</div>
-
 ## Contribution
 
 - Please check the [contribution guideline](CONTRIBUTING.md).
 - If you want to translate, you can use [GitLocalize](https://gitlocalize.com/repo/6995).
 
-### Collaborators
+## Collaborators
 
-<table>
- <tr>
-  <td><img src="https://avatars.githubusercontent.com/u/85814493?s=120&v=4"></img></td>
-	<td><img src="https://avatars.githubusercontent.com/u/83960488?s=120&v=4"></img></td>
-	<td><img src="https://avatars.githubusercontent.com/u/101872529?s=120&v=4"></img></td>
- </tr>
- <tr>
-  <td align="center"><a href="https://github.com/fs5m8">@fs5m8</a></td>
-	<td align="center"><a href="https://github.com/atsu1125">@atsu1125</a></td>
-	<td align="center"><a href="https://github.com/yui87">@yui87</a></td>
- </tr>
-</table>
+| [@fs5m8](https://github.com/fs5m8) | [@atsu1125](https://github.com/atsu1125) | [@yui87](https://github.com/yui87)|
+|-|-|-|
+| ![@fs5m8](https://avatars.githubusercontent.com/u/85814493?s=120&v=4) | ![@atsu1125](https://avatars.githubusercontent.com/u/83960488?s=120&v=4) | ![@yui87](https://avatars.githubusercontent.com/u/101872529?s=120&v=4) |
