@@ -16,6 +16,6 @@
 
 ## Collaborators
 
-| [@fs5m8](https://github.com/fs5m8) | [@atsu1125](https://github.com/atsu1125) | [@yui87](https://github.com/yui87)|
-|-|-|-|
+| [@fs5m8](https://github.com/fs5m8) | [@atsu1125](https://github.com/atsu1125) | [@yui87](https://github.com/yui87) |
+|------|------|------|
 | ![@fs5m8](https://avatars.githubusercontent.com/u/85814493?s=120&v=4) | ![@atsu1125](https://avatars.githubusercontent.com/u/83960488?s=120&v=4) | ![@yui87](https://avatars.githubusercontent.com/u/101872529?s=120&v=4) |
