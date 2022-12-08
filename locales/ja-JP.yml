@@ -949,7 +949,7 @@ common/views/widgets/broadcast.vue:
 common/views/widgets/calendar.vue:
   year: "{}年"
   month: "{}月"
-  day: "{}日"
+  day: "{}"
   today: "今日:"
   this-month: "今月:"
   this-year: "今年:"

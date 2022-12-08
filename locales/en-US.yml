@@ -878,8 +878,8 @@ common/views/widgets/broadcast.vue:
   next: "Next"
   prev: "Previous"
 common/views/widgets/calendar.vue:
-  year: "Year {}"
-  month: "{},"
+  year: "{}"
+  month: "{}"
   day: "{}"
   today: "Today: "
   this-month: "Month:"
