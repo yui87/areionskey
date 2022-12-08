@@ -1083,6 +1083,7 @@ desktop/views/components/post-form.vue:
   note-failed: "Failed to post"
   reply-failed: "Failed to reply"
   renote-failed: "Failed to Renote"
+  preview: "Preview"
 desktop/views/components/post-form-window.vue:
   note: "New Post"
   reply: "Reply"
