@@ -153,9 +153,9 @@ export default Vue.extend({
 
 				> .text
 					text-align left
-					margin 8px
 
 				> .reactions
+					text-align left
 					pointer-events none
 
 </style>
