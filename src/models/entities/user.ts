@@ -211,6 +211,11 @@ export class User {
 	@JoinColumn()
 	public movedToUser: User | null;
 
+	@Column('boolean', {
+		default: false,
+	})
+	public avoidSearchIndex: boolean;
+
 	constructor(data: Partial<User>) {
 		if (data == null) return;
 

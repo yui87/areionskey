@@ -153,6 +153,7 @@ export class UserRepository extends Repository<User> {
 			isCat: user.isCat || falsy,
 			isVerified: user.isVerified || falsy,
 			isPremium: user.isPremium || falsy,
+			avoidSearchIndex: user.avoidSearchIndex || falsy,
 
 			// カスタム絵文字添付
 			emojis: populateEmojis(user.emojis, user.host),
