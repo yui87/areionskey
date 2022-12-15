@@ -1815,7 +1815,7 @@ mobile/views/pages/home.vue:
 mobile/views/pages/tag.vue:
   no-posts-found: 'No posts contains "{q}" found.'
 mobile/views/pages/widgets.vue:
-  dashboard: "Dashboard"
+  dashboard: "Widgets"
   widgets-hints: 'You can add/delete/rearrange widgets. To move the widget, drag "三". Tap "x" to delete the widget. Some widgets can change display by tapping.'
   add-widget: "Add"
   customization-tips: "Customization tips"

@@ -2003,7 +2003,7 @@ mobile/views/pages/tag.vue:
   no-posts-found: "ハッシュタグ {q} が付けられた投稿は見つかりませんでした。"
 
 mobile/views/pages/widgets.vue:
-  dashboard: "ダッシュボード"
+  dashboard: "ウィジェット"
   widgets-hints: "ウィジェットを追加/削除したり並べ替えたりできます。ウィジェットを移動するには、三本線のアイコンをドラッグします。ウィジェットを削除するには x をタップします。いくつかのウィジェットはタップすることで表示を変更できます。"
   add-widget: "追加"
   customization-tips: "カスタマイズのヒント"
