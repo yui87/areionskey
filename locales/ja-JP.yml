@@ -152,6 +152,7 @@ common:
     enter-username: "ユーザー名を入力してください"
     specified-recipient: "宛先"
     add-visible-user: "ユーザーを追加"
+    specified-warn: "ダイレクト投稿は暗号化されません"
     cw-placeholder: "内容への注釈 (オプション)"
     username-prompt: "ユーザー名を入力してください"
     enter-file-name: "ファイル名を編集"

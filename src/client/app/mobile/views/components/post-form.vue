@@ -31,6 +31,7 @@
 					</span>
 				</div>
 				<button @click="addVisibleUser"><fa icon="plus"/></button>
+				<p> <fa icon="exclamation-triangle"/> {{ $t('@.post-form.specified-warn') }} </p>
 			</div>
 			<div class="local-only" v-if="localOnly === true"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
 			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
@@ -112,7 +113,6 @@ export default Vue.extend({
 		> header
 			z-index 1000
 			height 50px
-			box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
 
 			> .cancel
 				padding 0
@@ -161,6 +161,7 @@ export default Vue.extend({
 					background var(--mobilePostFormTextareaBg)
 					border none
 					border-radius 0
+					outline none
 					box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
 					max-width 100%
 					min-width 100%
@@ -233,6 +234,9 @@ export default Vue.extend({
 
 				> button
 					margin-left 4px
+
+				> p
+					margin 4px 0 0 0
 
 			> .local-only
 				margin 0 12px 8px 12px
