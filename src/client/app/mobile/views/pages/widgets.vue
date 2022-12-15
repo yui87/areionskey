@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa icon="home"/></span>{{ $t('dashboard') }}</template>
+	<template #header><span style="margin-right:4px;"><fa :icon="['far', 'calendar-alt']"/></span>{{ $t('dashboard') }}</template>
 	<template #func>
 		<button @click="customizing = !customizing"><fa icon="cog"/></button>
 	</template>
@@ -15,7 +15,6 @@
 					<option value="rss">{{ $t('@.widgets.rss') }}</option>
 					<option value="photo-stream">{{ $t('@.widgets.photo-stream') }}</option>
 					<option value="slideshow">{{ $t('@.widgets.slideshow') }}</option>
-					<option value="hashtags">{{ $t('@.widgets.hashtags') }}</option>
 					<option value="posts-monitor">{{ $t('@.widgets.posts-monitor') }}</option>
 					<option value="version">{{ $t('@.widgets.version') }}</option>
 					<option value="server">{{ $t('@.widgets.server') }}</option>
@@ -89,9 +88,6 @@ export default Vue.extend({
 				name: 'rss',
 				id: 'c', data: {}
 			}, {
-				name: 'photo-stream',
-				id: 'd', data: {}
-			}, {
 				name: 'nav',
 				id: 'f', data: {}
 			}, {
@@ -157,8 +153,14 @@ main
 		padding 32px 8px
 
 	> header
-		padding 8px
+		padding 8px 10px
 		background #fff
+
+		> button
+			margin 0 8px
+
+		> p
+			margin 8px 0 0
 
 	.widget
 		margin-bottom 8px
