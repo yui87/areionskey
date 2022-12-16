@@ -166,7 +166,7 @@ router.get(['/@:user', '/@:user/:sub'], async (ctx, next) => {
 		await ctx.render('user', {
 			user, profile, me,
 			sub: ctx.params.sub,
-			instanceName: meta.name || 'Misskey',
+			instanceName: meta.name || 'Areionskey',
 			icon: meta.iconUrl
 		});
 		ctx.set('Cache-Control', 'public, max-age=30');
@@ -217,7 +217,7 @@ router.get('/notes/:note', async ctx => {
 			note: _note,
 			summary: getNoteSummary(_note),
 			imageUrl,
-			instanceName: meta.name || 'Misskey',
+			instanceName: meta.name || 'Areionskey',
 			icon: meta.iconUrl
 		});
 
@@ -253,7 +253,7 @@ router.get('/@:user/pages/:page', async ctx => {
 		const meta = await fetchMeta();
 		await ctx.render('page', {
 			page: _page,
-			instanceName: meta.name || 'Misskey'
+			instanceName: meta.name || 'Areionskey'
 		});
 
 		if (['public'].includes(page.visibility)) {
@@ -314,8 +314,8 @@ router.get('*', async ctx => {
 	const noindex = ctx.path.match(/^[/](search|tags[/]|explore|featured)/);
 	await ctx.render('base', {
 		img: meta.bannerUrl,
-		title: meta.name || 'Misskey',
-		instanceName: meta.name || 'Misskey',
+		title: meta.name || 'Areionskey',
+		instanceName: meta.name || 'Areionskey',
 		desc: meta.description,
 		icon: meta.iconUrl,
 		noindex
