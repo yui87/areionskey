@@ -27,7 +27,7 @@
 					</ul>
 					<ul>
 						<li><router-link to="/i/drive" :data-active="$route.name == 'drive'"><i><fa icon="cloud" fixed-width/></i>{{ $t('@.drive') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/widgets" :data-active="$route.name == 'widgets'"><i><fa :icon="['far', 'calendar-alt']" fixed-width/></i>{{ $t('widgets') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/widgets" :data-active="$route.name == 'widgets'"><i><fa icon="calculator" fixed-width/></i>{{ $t('widgets') }}<i><fa icon="angle-right"/></i></router-link></li>
 						<li><router-link to="/i/favorites" :data-active="$route.name == 'favorites'"><i><fa icon="star" fixed-width/></i>{{ $t('@.favorites') }}<i><fa icon="angle-right"/></i></router-link></li>
 						<li><router-link to="/i/lists" :data-active="$route.name == 'user-lists'"><i><fa icon="list" fixed-width/></i>{{ $t('user-lists') }}<i><fa icon="angle-right"/></i></router-link></li>
 						<li><router-link to="/i/groups" :data-active="$route.name == 'user-groups'"><i><fa :icon="faUsers" fixed-width/></i>{{ $t('user-groups') }}<i><fa icon="angle-right"/></i></router-link></li>
