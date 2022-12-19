@@ -88,11 +88,14 @@ export default Vue.extend({
 				name: 'rss',
 				id: 'c', data: {}
 			}, {
+				name: 'server',
+				id: 'd', data: {}
+			}, {
 				name: 'nav',
-				id: 'f', data: {}
+				id: 'e', data: {}
 			}, {
 				name: 'version',
-				id: 'g', data: {}
+				id: 'd', data: {}
 			}]);
 		}
 	},
