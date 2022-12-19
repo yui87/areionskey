@@ -95,7 +95,7 @@ export default Vue.extend({
 				id: 'e', data: {}
 			}, {
 				name: 'version',
-				id: 'd', data: {}
+				id: 'f', data: {}
 			}]);
 		}
 	},
