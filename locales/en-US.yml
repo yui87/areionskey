@@ -1743,8 +1743,9 @@ mobile/views/components/drive.file-detail.vue:
   hash: "Hash (md5)"
   exif: "EXIF"
   nsfw: "NSFW"
-  mark-as-sensitive: "Mark as 'sensitive'"
-  unmark-as-sensitive: "Unmark as 'sensitive'"
+  mark-as-sensitive: "Mark as NSFW"
+  unmark-as-sensitive: "Unmark as NSFW"
+  delete: "Delete"
 mobile/views/components/media-video.vue:
   sensitive: "The content is NSFW"
   click-to-show: "Click to show"
