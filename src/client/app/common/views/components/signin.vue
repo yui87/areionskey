@@ -128,8 +128,8 @@ export default Vue.extend({
 		},
 
 		onReminder() {
-					this.$emit('reminder');
-				},
+			this.$emit('reminder');
+		},
 
 		onSubmit() {
 			this.signing = true;
@@ -176,9 +176,15 @@ export default Vue.extend({
 		},
 
 		onFlush() {
-			const r = confirm('ブラウザに保存されたキャッシュをクリアしますか？');
-			if (r) location.href = '/flush';
-		},
+			this.$root.dialog({
+				type: 'warning',
+				text: this.$t('flush-are-you-sure'),
+				showCancelButton: true
+			}).then(({ canceled }) => {
+				if (canceled) return;
+				location.href = '/flush';
+			});
+		}
 	}
 });
 </script>

@@ -752,6 +752,7 @@ common/views/components/signin.vue:
   login-failed: "ログインできませんでした。ユーザー名とパスワードを確認してください。"
   tap-key: "セキュリティキーをクリックしてログイン"
   enter-2fa-code: "認証コードを入力してください"
+  flush-are-you-sure: "ブラウザに保存されたキャッシュをクリアしますか？"
 
 common/views/components/signup.vue:
   invitation-code: "招待コード"
