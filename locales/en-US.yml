@@ -487,6 +487,9 @@ common/views/components/connect-failed.vue:
   description: "There is a problem with your Internet connection, or the server may be down or under maintenance. Please {try again} later."
   thanks: "Thank you for using Areionskey."
   troubleshoot: "Troubleshoot"
+  flush: "Clean cache"
+  set-version: "Specify version"
+  flush-are-you-sure: "Are you sure you want to clean browser cache?"
 common/views/components/connect-failed.troubleshooter.vue:
   title: "Troubleshooting"
   network: "Network connection"
@@ -504,8 +507,6 @@ common/views/components/connect-failed.troubleshooter.vue:
   no-server-desc: "The network connection of your device is normal, but you could not connect to the Areionskey server. There is a possibility that the server is either down, or under maintenance, please try again later."
   success: "Successfully connected to the Areionskey server"
   success-desc: "Looks like we have a connection. Please reload the page."
-  flush: "Clean cache"
-  set-version: "Specify version"
 common/views/components/media-banner.vue:
   sensitive: "NSFW"
   click-to-show: "Click to show"

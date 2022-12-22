@@ -518,6 +518,9 @@ common/views/components/connect-failed.vue:
   description: "インターネット回線に問題があるか、サーバーがダウン または メンテナンスしている可能性があります。しばらくしてから{再度お試し}ください。"
   thanks: "いつも Areionskey をご利用いただきありがとうございます。"
   troubleshoot: "トラブルシュート"
+  flush: "キャッシュの削除"
+  set-version: "バージョン指定"
+  flush-are-you-sure: "ブラウザに保存されたキャッシュをクリアしますか？"
 
 common/views/components/connect-failed.troubleshooter.vue:
   title: "トラブルシューティング"
@@ -536,8 +539,6 @@ common/views/components/connect-failed.troubleshooter.vue:
   no-server-desc: "お使いのコンピュータのインターネット接続は正常ですが、Areionskey のサーバーには接続できませんでした。サーバーがダウン または メンテナンスしている可能性があるので、しばらくしてから再度ごアクセスください。"
   success: "Areionskey のサーバーに接続できました"
   success-desc: "正常に接続できるようです。ページを再度読み込みしてください。"
-  flush: "キャッシュの削除"
-  set-version: "バージョン指定"
 
 common/views/components/media-banner.vue:
   sensitive: "閲覧注意"
