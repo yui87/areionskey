@@ -314,16 +314,12 @@ export default Vue.extend({
 						font-weight bold
 
 			.about
-				margin 0
-				padding 2px 0
+				margin 0 0 8px 0
+				padding 1em 0
 				text-align center
 				font-size 0.8em
 				color $color
 				opacity 0.5
-
-				> p
-					margin 0
-					padding 0
 
 .nav-enter-active,
 .nav-leave-active {
