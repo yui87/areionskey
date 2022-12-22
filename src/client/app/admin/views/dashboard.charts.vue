@@ -507,6 +507,7 @@ export default Vue.extend({
 
 	> header
 		display flex
+		flex-wrap wrap
 		margin 0 8px
 		padding 0 0 8px 0
 		font-size 1em

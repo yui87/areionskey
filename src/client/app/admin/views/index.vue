@@ -205,8 +205,6 @@ export default Vue.extend({
 			margin 0 16px 16px 16px
 			padding 16px 0
 			align-items center
-			border-top solid 1px #555
-			border-bottom solid 1px #555
 
 			> .avatar
 				height 48px
@@ -225,7 +223,6 @@ export default Vue.extend({
 		> .back-to-misskey
 			margin 16px 16px 0 16px
 			padding 0
-			border-top solid 1px #555
 
 			> a
 				display block
