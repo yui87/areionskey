@@ -49,7 +49,7 @@
 						<img v-if="announcement.image" :src="announcement.image" alt="" style="display: block; max-height: 120px; max-width: 100%;"/>
 					</article>
 				</div>
-				<a :href="aboutUrl"><p class="about">{{ $t('about') }}</p></a>
+				<a :href="aboutUrl"><p class="about">Areionskey {{ version }} ({{ codename }})</p></a>
 			</div>
 			<div class="notifications" v-if="showNotifications">
 				<header>
@@ -66,7 +66,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import { lang } from '../../../config';
+import { lang, version, codename } from '../../../config';
 import { faNewspaper, faHashtag, faHome, faColumns, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faSun, faStickyNote, faBell } from '@fortawesome/free-regular-svg-icons';
 import { search } from '../../../common/scripts/search';
@@ -88,6 +88,7 @@ export default Vue.extend({
 			announcements: [],
 			searching: false,
 			showNotifications: false,
+			version, codename,
 			faNewspaper, faHashtag, faMoon, faSun, faHome, faColumns, faStickyNote, faUsers, faBell,
 		};
 	},
@@ -313,12 +314,16 @@ export default Vue.extend({
 						font-weight bold
 
 			.about
-				margin 0 0 8px 0
-				padding 1em 0
+				margin 0
+				padding 2px 0
 				text-align center
 				font-size 0.8em
 				color $color
 				opacity 0.5
+
+				> p
+					margin 0
+					padding 0
 
 .nav-enter-active,
 .nav-leave-active {
