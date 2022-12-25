@@ -1045,10 +1045,10 @@ desktop:
   invalid-filetype: "この形式のファイルはサポートされていません"
 
 desktop/views/components/activity.chart.vue:
-  total: "Black ... Total"
-  notes: "Blue ... Notes"
-  replies: "Red ... Replies"
-  renotes: "Green ... Renotes"
+  total: "Black: Total"
+  notes: "Blue: Notes"
+  replies: "Red: Replies"
+  renotes: "Green: Renotes"
 
 desktop/views/components/activity.vue:
   title: "アクティビティ"

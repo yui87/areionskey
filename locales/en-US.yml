@@ -963,10 +963,10 @@ desktop:
   unable-to-process: "The operation could not be completed."
   invalid-filetype: "This filetype is not acceptable here"
 desktop/views/components/activity.chart.vue:
-  total: "Black ... Total"
-  notes: "Blue ... Notes"
-  replies: "Red ... Replies"
-  renotes: "Green ... Renotes"
+  total: "Black: Total"
+  notes: "Blue: Notes"
+  replies: "Red: Replies"
+  renotes: "Green: Renotes"
 desktop/views/components/activity.vue:
   title: "Activity"
   toggle: "Toggle views"
