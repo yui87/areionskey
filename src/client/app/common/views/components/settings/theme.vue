@@ -334,7 +334,7 @@ export default Vue.extend({
 			top: 50%;
 			left: 50%;
 			overflow: hidden;
-			padding: 0 200px;
+			padding: 0 80px;
 			transform: translate3d(-50%, -50%, 0);
 
 			input {
