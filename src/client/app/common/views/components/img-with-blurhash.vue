@@ -71,7 +71,7 @@ export default Vue.extend({
 	> canvas
 		width 100%
 		height 100%
-		object-fit contain
+		object-fit cover
 
 	> img
 		width 100%
