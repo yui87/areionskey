@@ -33,9 +33,6 @@
 				<button @click="addVisibleUser"><fa icon="plus"/></button>
 				<p> <fa icon="exclamation-triangle"/> {{ $t('@.post-form.specified-warn') }} </p>
 			</div>
-			<div class="hashtags" v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags">
-				<a v-for="tag in recentHashtags.slice(0, 5)" :key="tag" @click="addTag(tag)">#{{ tag }}</a>
-			</div>
 			<div class="local-only" v-if="localOnly === true"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
 			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
 			<div class="textarea">
