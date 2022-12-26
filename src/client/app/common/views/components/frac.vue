@@ -39,8 +39,6 @@ export default Vue.extend({
 
 <style lang="stylus" scoped>
 .mk-frac
-	-webkit-font-feature-settings 'tnum'
-	-moz-font-feature-settings 'tnum'
 	font-feature-settings 'tnum'
 	font-variant-numeric tabular-nums
 

@@ -348,7 +348,6 @@ export default Vue.extend({
 					color var(--text)
 
 	> nav
-		position -webkit-sticky
 		position sticky
 		top 47px
 		background-color $bg
