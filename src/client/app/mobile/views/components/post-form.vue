@@ -180,7 +180,8 @@ export default Vue.extend({
 					border none
 					border-radius 0
 					outline none
-					box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
+					border-top solid var(--lineWidth) var(--faceDivider)
+					border-bottom solid var(--lineWidth) var(--faceDivider)
 					max-width 100%
 					min-width 100%
 					min-height 80px
@@ -270,7 +271,6 @@ export default Vue.extend({
 				background var(--mobilePostFormTextareaBg)
 				border none
 				border-radius 0
-				box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
 				z-index 1
 
 				&:disabled
@@ -304,6 +304,7 @@ export default Vue.extend({
 
 		> .preview
 			background var(--face)
+			border-radius 0 0 8px 8px
 
 			> summary
 				padding 4px 14px 14px 14px
