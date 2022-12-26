@@ -31,7 +31,7 @@ export default Vue.extend({
 		length(value: number) {
 			const string = value.toString();
 
-			return string.includes('e') ? -~string.substr(string.indexOf('e')) : string.length;
+			return string.includes('e') ? -~string.substring(string.indexOf('e')) : string.length;
 		},
 	},
 });
