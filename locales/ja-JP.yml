@@ -238,6 +238,7 @@ common:
     paste-dialog-desc: "ペースト時にファイル名を編集するダイアログを表示するようにします。"
     keep-cw: "CW 保持"
     keep-cw-desc: "投稿にリプライする際、リプライ元の投稿に CW が設定されていたとき、デフォルトで同じ CW を設定するようにします。"
+    enable-post-preview: "ノートのプレビューを使用する"
     i-like-sushi: "私は(プリンよりむしろ)寿司が好き"
     show-reversi-board-labels: "リバーシのボードの行と列のラベルを表示"
     use-avatar-reversi-stones: "リバーシの石にアバターを使う"

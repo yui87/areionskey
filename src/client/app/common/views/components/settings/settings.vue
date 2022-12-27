@@ -121,6 +121,7 @@
 				<ui-switch v-model="keepCw">{{ $t('@._settings.keep-cw') }}
 					<template #desc>{{ $t('@._settings.keep-cw-desc') }}</template>
 				</ui-switch>
+				<ui-switch v-model="enablePostPreview">{{ $t('@._settings.enable-post-preview') }}</ui-switch>
 				<ui-switch v-if="$root.isMobile" v-model="disableViaMobile">{{ $t('@._settings.disable-via-mobile') }}</ui-switch>
 			</section>
 
@@ -467,6 +468,11 @@ export default Vue.extend({
 		postStyle: {
 			get() { return this.$store.state.device.postStyle; },
 			set(value) { this.$store.commit('device/set', { key: 'postStyle', value }); }
+		},
+
+		enablePostPreview: {
+			get() { return this.$store.state.settings.enablePostPreview; },
+			set(value) { this.$store.dispatch('settings/set', { key: 'enablePostPreview', value }); }
 		},
 
 		disableViaMobile: {
