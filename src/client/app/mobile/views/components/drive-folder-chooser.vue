@@ -48,10 +48,11 @@ export default Vue.extend({
 	> .body
 		width 100%
 		height 100%
-		background #fff
+		background var(--faceHeader)
 
 		> header
-			border-bottom solid 1px #eee
+			border-bottom solid 1px var(--faceDivider)
+			color var(--text)
 
 			> h1
 				margin 0
