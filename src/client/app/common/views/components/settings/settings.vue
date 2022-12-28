@@ -209,9 +209,9 @@
 				<ui-switch v-model="enableSounds">{{ $t('@._settings.enable-sounds') }}
 					<template #desc>{{ $t('@._settings.enable-sounds-desc') }}</template>
 				</ui-switch>
-				<ui-switch :disabled="!enableSounds" v-if="!$root.isMobile" v-model="enableSoundsInTimeline">{{ $t('@._settings.enable-sounds-intimeline')}}
+				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInTimeline">{{ $t('@._settings.enable-sounds-intimeline')}}
 				</ui-switch>
-				<ui-switch :disabled="!enableSounds" v-if="!$root.isMobile" v-model="enableSoundsInNotifications">{{ $t('@._settings.enable-sounds-innotifications')}}
+				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInNotifications">{{ $t('@._settings.enable-sounds-innotifications')}}
 				</ui-switch>
 				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInMessage">{{ $t('@._settings.enable-sounds-inmessage')}}
 				</ui-switch>
