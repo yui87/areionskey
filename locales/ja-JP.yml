@@ -423,6 +423,7 @@ common:
     aichan: "藍"
 
   dev: "アプリの作成に失敗しました。再度お試しください。"
+  with-great-power: "大いなる力には大いなる責任が伴う。"
   ai-chan-kawaii: "藍ちゃかわいい"
   you: "あなた"
 
@@ -1405,6 +1406,7 @@ admin/views/db.vue:
   vacuum: "バキューム"
   vacuum-info: "データベースの掃除を行います。データはそのままで、ディスク使用量を減らします。通常この操作は自動で定期的に行われます。"
   vacuum-exclamation: "バキュームを行うと、しばらくの間データベースの負荷が高くなり、ユーザーの操作を受け付けなくなる場合があります。"
+  vacuum-are-you-sure: "データベースをバキュームしますか？"
 
 admin/views/dashboard.vue:
   dashboard: "ダッシュボード"
@@ -1445,6 +1447,7 @@ admin/views/logs.vue:
     error: "エラー"
     debug: "デバッグ"
   delete-all: "全て削除"
+  delete-all-are-you-sure: "ログを全て削除しますか？"
 
 admin/views/abuse.vue:
   title: "スパム報告"
@@ -1613,6 +1616,7 @@ admin/views/drive.vue:
 
 admin/views/users.vue:
   operation: "操作"
+  confirm: "確認"
   username-or-userid: "ユーザー名 または ユーザー ID"
   user-not-found: "ユーザーが見つかりません"
   lookup: "照会"
@@ -1787,6 +1791,7 @@ admin/views/federation.vue:
   blocked-hosts: "ブロック"
   blocked-hosts-info: "ブロックしたいホストを改行で区切って記述します。"
   save: "保存"
+  saved: "保存しました"
 
 admin/views/relay.vue:
   add-relay: "リレーの追加"

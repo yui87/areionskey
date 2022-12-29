@@ -413,7 +413,7 @@ export default Vue.extend({
 			const confirm = await this.$root.dialog({
 				type: 'warning',
 				showCancelButton: true,
-				title: 'confirm',
+				title: this.$t('confirm'),
 				text,
 			});
 
