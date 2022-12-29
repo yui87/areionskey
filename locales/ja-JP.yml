@@ -87,12 +87,14 @@ common:
   messaging: "トーク"
   home: "ホーム"
   deck: "デッキ"
+  desktop-mode: "デスクトップ"
+  mobile-mode: "モバイル"
+  turn-on-darkmode: "ダークモード"
+  turn-off-darkmode: "ライトモード"
   timeline: "タイムライン"
   explore: "みつける"
   following: "フォロー中"
   followers: "フォロワー"
-  desktop-mode: 'デスクトップ版'
-  mobile-mode: 'モバイル版'
   favorites: "ブックマーク"
   flush: "キャッシュをクリア"
 
@@ -378,8 +380,6 @@ common:
   view-on-remote: "正確な情報を見る"
   renoted-by: "{user} が Renote"
   no-notes: "投稿がありません"
-  turn-on-darkmode: "ダークモードへ"
-  turn-off-darkmode: "ライトモードへ"
 
   error:
     title: "問題が発生しました"
@@ -550,7 +550,7 @@ common/views/components/media-banner.vue:
 
 common/views/components/theme.vue:
   theme: "テーマ"
-  light-theme: "非ダークモード時に使用するテーマ"
+  light-theme: "ライトモード時に使用するテーマ"
   dark-theme: "ダークモード時に使用するテーマ"
   light-themes: "明るいテーマ"
   dark-themes: "暗いテーマ"
@@ -943,7 +943,7 @@ common/views/components/user-group-editor.vue:
 common/views/components/user-lists.vue:
   user-lists: "リスト"
   create-list: "リストを作成"
-  list-name: "リスト名"
+  list-name: "リスト名を入力してください"
 
 common/views/components/user-groups.vue:
   user-groups: "グループ"
@@ -987,7 +987,7 @@ common/views/widgets/server.vue:
 
 common/views/widgets/memo.vue:
   title: "付箋"
-  placeholder: "ここに入力"
+  placeholder: "ここに入力してください"
 
 common/views/widgets/slideshow.vue:
   folder-customize-mode: "フォルダを指定するには、カスタマイズモードを終了してください"
@@ -1341,7 +1341,7 @@ desktop/views/components/timeline.vue:
   hashtag: "ハッシュタグ"
   add-tag-timeline: "ハッシュタグを追加"
   add-list: "リストを追加"
-  list-name: "リスト名"
+  list-name: "リスト名を入力してください"
 
 desktop/views/components/ui.header.vue:
   welcome-back: "おかえりなさい、"
@@ -2208,9 +2208,10 @@ pages:
   fontSansSerif: "サンセリフ"
   set-eye-catching-image: "アイキャッチ画像を設定"
   remove-eye-catching-image: "アイキャッチ画像を削除"
+  enter-title: "タイトルを入力してください"
   choose-block: "ブロックを追加"
   select-type: "種類を選択"
-  enter-variable-name: "変数名を決めてください"
+  enter-variable-name: "変数名を入力してください"
   the-variable-name-is-already-used: "その変数名は既に使われています"
   content-blocks: "コンテンツ"
   input-blocks: "入力"

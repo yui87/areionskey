@@ -82,12 +82,14 @@ common:
   messaging: "Talk"
   home: "Home"
   deck: "Deck"
+  desktop-mode: "Desktop"
+  mobile-mode: "Mobile"
+  turn-on-darkmode: "Dark mode"
+  turn-off-darkmode: "Light mode"
   timeline: "Timeline"
   explore: "Explore"
   following: "Following"
   followers: "Followers"
-  desktop-mode: 'Desktop mode'
-  mobile-mode: 'Mobile mode'
   favorites: "Bookmarks"
   flush: "Clear cache"
   permissions:
@@ -362,8 +364,6 @@ common:
   view-on-remote: "For completion, view it remotely."
   renoted-by: "Renoted by {user}"
   no-notes: "Without any notes"
-  turn-on-darkmode: "Switch to dark mode"
-  turn-off-darkmode: "Switch to light mode"
   error:
     title: "Something happened :("
     retry: "Retry"
@@ -516,8 +516,8 @@ common/views/components/media-banner.vue:
   click-to-show: "Click to show"
 common/views/components/theme.vue:
   theme: "Theme"
-  light-theme: "Theme to use in Light mode"
-  dark-theme: "Theme during dark mode"
+  light-theme: "Theme in Light mode"
+  dark-theme: "Theme in Dark mode"
   light-themes: "Light theme"
   dark-themes: "Dark theme"
   install-a-theme: "Install a theme"
@@ -877,7 +877,7 @@ common/views/components/user-group-editor.vue:
 common/views/components/user-lists.vue:
   user-lists: "Lists"
   create-list: "Create a list"
-  list-name: "List name"
+  list-name: "Please enter a list name"
 common/views/components/user-groups.vue:
   user-groups: "Groups"
   create-group: "Create a group"
@@ -1221,7 +1221,7 @@ desktop/views/components/timeline.vue:
   hashtag: "Hashtag"
   add-tag-timeline: "Add hashtag cloud"
   add-list: "Add list"
-  list-name: "List name"
+  list-name: "Please enter a list name"
 desktop/views/components/ui.header.vue:
   welcome-back: "Welcome back,"
   adjective: "-san"
@@ -1998,9 +1998,10 @@ pages:
   fontSansSerif: "Sans Serif"
   set-eye-catching-image: "Set an eye-catching image"
   remove-eye-catching-image: "Delete an eye-catching image"
+  enter-title: "Please enter a title"
   choose-block: "Add a block"
   select-type: "Select a type"
-  enter-variable-name: "Please choose a variable name"
+  enter-variable-name: "Please enter a variable name"
   the-variable-name-is-already-used: "This variable name is already used"
   content-blocks: "Content"
   input-blocks: "Input"
