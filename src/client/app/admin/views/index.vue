@@ -135,7 +135,9 @@ export default Vue.extend({
 			return this.$store.state.i;
 		},
 		isModerator() {
-			return this.i.isAdmin || this.i.isModerator;
+			if (this.i) {
+				return this.i.isAdmin || this.i.isModerator;
+			}
 		}
 	}
 });
