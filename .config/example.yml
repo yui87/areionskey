@@ -133,7 +133,7 @@ autoAdmin: true
 #mediaProxy: https://example.com/proxy
 
 # Sign to ActivityPub GET request (default: true)
-#signToActivityPubGet: flase
+#signToActivityPubGet: false
 
 # Allowed network address (default: all allowed)
 #allowedPrivateNetworks: [
@@ -145,3 +145,7 @@ autoAdmin: true
 
 # Hide server infomation (default: false)
 #hideServerInfo: true
+
+# Header for get original IP address from reverse proxy
+# ex. X-Forwarded-For, CF-Connecting-IP
+#proxyIpHeader: 'X-Forwarded-For'
