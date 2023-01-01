@@ -17,7 +17,7 @@
 					ref="text"
 					v-autocomplete="{ model: 'text' }"
 				></textarea>
-				<button class="emoji" @click="emoji" ref="emoji" v-if="!$root.isMobile">
+				<button title="Pick" class="emoji" @click="emoji" ref="emoji">
 					<fa :icon="['far', 'laugh']"/>
 				</button>
 			</div>
