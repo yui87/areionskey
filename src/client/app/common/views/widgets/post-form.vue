@@ -167,7 +167,7 @@ export default define({
 		},
 
 		async emoji() {
-			const Picker = await import('../../../desktop/views/components/emoji-picker-dialog.vue').then(m => m.default);
+			const Picker = await import('../../../common/views/components/emoji-picker-dialog.vue').then(m => m.default);
 			const button = this.$refs.emoji;
 			const rect = button.getBoundingClientRect();
 			const vm = this.$root.new(Picker, {

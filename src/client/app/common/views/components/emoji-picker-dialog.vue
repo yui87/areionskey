@@ -6,11 +6,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import contains from '../../../common/scripts/contains';
+import contains from '../../scripts/contains';
 
 export default Vue.extend({
 	components: {
-		XPicker: () => import('../../../common/views/components/emoji-picker.vue').then(m => m.default)
+		XPicker: () => import('./emoji-picker.vue').then(m => m.default)
 	},
 
 	props: {
