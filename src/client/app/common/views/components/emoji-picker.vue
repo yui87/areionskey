@@ -13,7 +13,7 @@
 	<div class="emojis">
 		<div class="search">
 			<ui-input v-model="q" :autofocus="false" style="margin: 0.4em;">
-				<span>{{ $t('search') }}</span>
+				<span>{{ $t('search-emoji') }}</span>
 			</ui-input>
 			<div class="list" v-if="searchResults.length > 0">
 				<button v-for="(emoji, i) in (searchResults || [])"
@@ -75,7 +75,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import { emojilist } from '../../../../../misc/emojilist';
 import { getStaticImageUrl } from '../../../common/scripts/get-static-image-url';
-import { faAsterisk, faLeaf, faUtensils, faFutbol, faCity, faDice, faGlobe, faHistory, faUser, faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { faAsterisk, faLeaf, faUtensils, faFutbol, faCity, faDice, faGlobe, faHistory, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faFlag, faLaugh } from '@fortawesome/free-regular-svg-icons';
 import { groupByX } from '../../../../../prelude/array';
 
@@ -360,7 +360,6 @@ export default Vue.extend({
 			left 0
 			z-index 1
 			padding 8px
-			background var(--faceHeader)
 			color var(--text)
 
 		> header.category

@@ -679,6 +679,7 @@ common/views/components/reaction-picker.vue:
 common/views/components/emoji-picker.vue:
   recent-emoji: "Recently used"
   custom-emoji: "Custom Emoji"
+  search-emoji: "Search Emoji"
   no-category: "Uncategorized"
   face: "Face mark"
   people: "People"

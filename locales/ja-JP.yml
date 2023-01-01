@@ -725,6 +725,7 @@ common/views/components/reaction-picker.vue:
 common/views/components/emoji-picker.vue:
   recent-emoji: "最近使った絵文字"
   custom-emoji: "カスタム絵文字"
+  search-emoji: "絵文字を検索"
   no-category: "カテゴリなし"
   face: "顔文字"
   people: "人"
