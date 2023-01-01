@@ -26,7 +26,8 @@ export default Vue.extend({
 
 	mounted() {
 		this.$nextTick(() => {
-			const width = this.$el.offsetWidth;
+			// const width = this.$el.offsetWidth;
+			const width = (this.$el.offsetWidth ? this.$el.offsetWidth : 350);
 			const height = this.$el.offsetHeight;
 
 			let x = this.x;
@@ -40,8 +41,13 @@ export default Vue.extend({
 				y = window.innerHeight - height + window.pageYOffset;
 			}
 
-			this.$el.style.left = x + 'px';
-			this.$el.style.top = y + 'px';
+			if (this.$root.isMobile) {
+				this.$el.style.left = (window.innerWidth / 2) - (width / 2) + 'px';
+				this.$el.style.top = y + 40 + 'px';
+			} else {
+				this.$el.style.left = x + 'px';
+				this.$el.style.top = y + 'px';
+			}
 
 			for (const el of Array.from(document.querySelectorAll('body *'))) {
 				el.addEventListener('mousedown', this.onMousedown);
