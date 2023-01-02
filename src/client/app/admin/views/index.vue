@@ -15,7 +15,10 @@
 			</div>
 			<div class="me">
 				<img class="avatar" :src="i.avatarUrl" alt="avatar"/>
-				<p class="name"><mk-user-name :user="i"/></p>
+				<div class="info">
+					<div class="name"><mk-user-name :user="$store.state.i"/></div>
+					<span class="role">{{ $store.getters.role }}</span>
+				</div>
 			</div>
 			<ul>
 				<li><router-link to="/dashboard" active-class="active"><fa icon="home" fixed-width/>{{ $t('dashboard') }}</router-link></li>
@@ -214,14 +217,25 @@ export default Vue.extend({
 				border-radius 100%
 				vertical-align middle
 
-			> .name
-				margin 0 16px
-				padding 0
-				color #fff
-				overflow hidden
-				text-overflow ellipsis
-				white-space nowrap
-				font-size 15px
+			> .info
+				> .name
+					margin 0 16px
+					padding 0
+					color #fff
+					overflow hidden
+					text-overflow ellipsis
+					white-space nowrap
+					font-size 15px
+				> .role
+					margin 0 16px
+					padding 3px
+					border-radius 3px
+					font-size 12px
+					color #fff
+					background-color rgba(255, 255, 255, 0.1)
+					overflow hidden
+					text-overflow ellipsis
+					white-space nowrap
 
 		> .back-to-misskey
 			margin 16px 16px 0 16px
