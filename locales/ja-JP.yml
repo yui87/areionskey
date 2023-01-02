@@ -256,6 +256,7 @@ common:
     show-via: "via を表示する"
     reduce-motion: "UI の動きを減らす"
     this-setting-is-this-device-only: "このデバイスのみ"
+    make-custom-emojis-bigger: "カスタム絵文字を大きく表示する"
     use-os-default-emojis: "OS 標準の絵文字を使用"
     line-width: "線の太さ"
     line-width-thin: "細い"
