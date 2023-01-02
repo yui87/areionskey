@@ -58,6 +58,7 @@ const defaultDeviceSettings = {
 	roundedCorners: true,
 	reduceMotion: false,
 	makeCustomEmojisBigger: true,
+	useSticker: false,
 	darkmode: true,
 	darkTheme: 'bb5a8287-a072-4b0a-8ae5-ea2a0d33f4f2',
 	lightTheme: 'light',

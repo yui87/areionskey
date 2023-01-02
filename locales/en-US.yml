@@ -243,6 +243,7 @@ common:
     reduce-motion: "Reduce motion in UI"
     this-setting-is-this-device-only: "Only for this device"
     make-custom-emojis-bigger: "Make custom emojis bigger"
+    use-sticker: "Use Sticker"
     use-os-default-emojis: "Use the OS default Emojis"
     line-width: "Line thickness"
     line-width-thin: "Thin"

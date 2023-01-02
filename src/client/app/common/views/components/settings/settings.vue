@@ -37,6 +37,7 @@
 				<ui-switch v-model="showFullAcct">{{ $t('@._settings.show-full-acct') }}</ui-switch>
 				<ui-switch v-model="showVia">{{ $t('@._settings.show-via') }}</ui-switch>
 				<ui-switch v-model="makeCustomEmojisBigger">{{ $t('@._settings.make-custom-emojis-bigger') }}</ui-switch>
+				<ui-switch v-model="useSticker">{{ $t('@._settings.use-sticker') }}</ui-switch>
 				<ui-switch v-model="useOsDefaultEmojis">{{ $t('@._settings.use-os-default-emojis') }}</ui-switch>
 				<ui-switch v-model="iLikeSushi">{{ $t('@._settings.i-like-sushi') }}</ui-switch>
 			</section>
@@ -394,6 +395,11 @@ export default Vue.extend({
 		makeCustomEmojisBigger: {
 			get() { return this.$store.state.device.makeCustomEmojisBigger; },
 			set(value) { this.$store.commit('device/set', { key: 'makeCustomEmojisBigger', value }); }
+		},
+
+		useSticker: {
+			get() { return this.$store.state.device.useSticker; },
+			set(value) { this.$store.commit('device/set', { key: 'useSticker', value }); }
 		},
 
 		reduceMotion: {
