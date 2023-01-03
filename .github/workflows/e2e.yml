@@ -21,7 +21,7 @@ jobs:
           POSTGRES_HOST_AUTH_METHOD: trust
 
       redis:
-        image: redis:4.0-alpine
+        image: redis:6.2-alpine
         ports:
           - 6379:6379
 
