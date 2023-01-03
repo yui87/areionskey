@@ -22,10 +22,10 @@ export default Vue.extend({
 		word-wrap normal
 
 	&:not(.nowrap).sticker
-		>>> .fvgwvorwhxigeolkkrcderjzcawqrscl:only-child
+		:deep(.fvgwvorwhxigeolkkrcderjzcawqrscl:only-child)
 			font-size 4em
 
-	>>> .title
+	:deep(.title)
 		display block
 		margin-bottom 4px
 		padding 4px
@@ -34,7 +34,7 @@ export default Vue.extend({
 		background var(--mfmTitleBg)
 		border-radius 4px
 
-	>>> .quote
+	:deep(.quote)
 		display block
 		margin 8px
 		padding 6px 0 6px 12px
