@@ -27,7 +27,7 @@ services:
 
   db:
     restart: always
-    image: postgres:11-alpine
+    image: postgres:15-alpine
     networks:
       - internal_network
     env_file:
@@ -37,7 +37,7 @@ services:
 
 #  es:
 #    restart: always
-#    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2
+#    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7
 #    environment:
 #      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
 #    networks:
