@@ -1,19 +1,22 @@
 <template>
 	<mk-window ref="window" is-modal width="800px" :can-close="false">
 		<template #header>{{ title }}</template>
-		<div class="body">
-			<vue-cropper ref="cropper"
-				:src="imageUrl"
-				:view-mode="1"
-				:aspect-ratio="aspectRatio"
-				:container-style="{ width: '100%', 'max-height': '400px' }"
-			/>
+
+		<div class="hjirwjri">
+			<div class="body">
+				<vue-cropper ref="cropper"
+					:src="imageUrl"
+					:view-mode="1"
+					:aspect-ratio="aspectRatio"
+					:container-style="{ width: '100%', 'max-height': '400px' }"
+				/>
+			</div>
+			<div class="footer">
+				<ui-button inline @click="skip" style="margin-right:16px;">{{ $t('skip') }}</ui-button>
+				<ui-button inline @click="cancel" style="margin-right:16px;">{{ $t('cancel') }}</ui-button>
+				<ui-button inline @click="ok" primary>{{ $t('ok') }}</ui-button>
+			</div>
 		</div>
-		<ui-horizon-group no-grow :class="$style.actions">
-			<ui-button @click="skip">{{ $t('skip') }}</ui-button>
-			<ui-button @click="cancel">{{ $t('cancel') }}</ui-button>
-			<ui-button @click="ok" primary>{{ $t('ok') }}</ui-button>
-		</ui-horizon-group>
 	</mk-window>
 </template>
 
@@ -71,18 +74,23 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="stylus" module>
+<style lang="stylus" scoped>
+.hjirwjri
+	display flex
+	flex-direction column
+	height 100%
 
-.header
-	> [data-icon]
-		margin-right 4px
+	.body
+		flex 1
 
-.img
-	width 100%
-	max-height 400px
+		img
+			width 100%
+			max-height 400px
 
-.actions
-	text-align center
+	.footer
+		padding 16px
+		background var(--desktopPostFormBg)
+		text-align right
 
 </style>
 
