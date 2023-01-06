@@ -499,7 +499,7 @@ export default (opts) => ({
 		},
 
 		doPreview() {
-			this.preview = {
+			this.preview = this.canPost ? {
 				id: `${Math.random()}`,
 				createdAt: new Date().toISOString(),
 				userId: this.$store.state.i.id,
