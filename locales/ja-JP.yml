@@ -141,6 +141,7 @@ common:
     submit: "投稿"
     reply: "返信"
     renote: "Renote"
+    quote: "引用"
     posting: "投稿中"
     attach-media-from-local: "ドライブにアップロードしてメディアを添付"
     attach-media-from-drive: "ドライブからメディアを添付"

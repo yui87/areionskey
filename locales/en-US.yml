@@ -133,6 +133,7 @@ common:
     submit: "Post"
     reply: "Reply"
     renote: "Renote"
+    quote: "Quote"
     posting: "Posting"
     attach-media-from-local: "Attach media from your device"
     attach-media-from-drive: "Attach media from your Drive"
