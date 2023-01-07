@@ -150,7 +150,7 @@ common:
     specified-recipient: "Recipient"
     add-visible-user: "Add a user"
     specified-warn: "Direct posts are not encrypted"
-    cw-placeholder: "Comments for the post (optional)"
+    cw-placeholder: "Annotate"
     username-prompt: "Please enter username"
     enter-file-name: "Edit file name"
     preview: "Preview"
