@@ -1116,7 +1116,7 @@ desktop/views/components/renote-form.vue:
   quote: "Quote..."
   cancel: "Cancel"
   renote: "Renote"
-  renote-home: "Renote (Unlisted)"
+  renote-home: "Unlisted Renote"
   reposting: "Renoting..."
   success: "Renoted!"
   failure: "Failed to Renote"
