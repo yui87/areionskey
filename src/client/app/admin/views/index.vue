@@ -13,7 +13,7 @@
 			<div class="mi">
 				<img svg-inline src="../assets/header-icon.svg"/>
 			</div>
-			<div class="me">
+			<div class="me" v-if="i">
 				<img class="avatar" :src="i.avatarUrl" alt="avatar"/>
 				<div class="info">
 					<div class="name"><mk-user-name :user="$store.state.i"/></div>
@@ -226,13 +226,14 @@ export default Vue.extend({
 					text-overflow ellipsis
 					white-space nowrap
 					font-size 15px
+
 				> .role
 					margin 0 16px
-					padding 3px
+					padding 1px 6px
 					border-radius 3px
-					font-size 12px
-					color #fff
-					background-color rgba(255, 255, 255, 0.1)
+					font-size 80%
+					color var(--noteHeaderAdminFg)
+					background var(--noteHeaderAdminBg)
 					overflow hidden
 					text-overflow ellipsis
 					white-space nowrap
