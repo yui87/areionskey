@@ -74,7 +74,7 @@ export default Vue.component('misskey-flavored-markdown', {
 					return [createElement('b', genEl(token.children))];
 				}
 
-				case 'strike': {
+				case 'delete': {
 					return [createElement('del', genEl(token.children))];
 				}
 

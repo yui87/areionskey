@@ -1213,11 +1213,11 @@ describe('MFM', () => {
 			});
 		});
 
-		describe('strike', () => {
+		describe('delete', () => {
 			it('simple', () => {
 				const tokens = parse('~~foo~~');
 				assert.deepStrictEqual(tokens, [
-					tree('strike', [
+					tree('delete', [
 						text('foo')
 					], {}),
 				]);

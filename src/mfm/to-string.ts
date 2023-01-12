@@ -25,7 +25,7 @@ export function toString(tokens: MfmForest | null, opts?: RestoreOptions): strin
 			return `<small>${appendChildren(token.children, opts)}</small>`;
 		},
 
-		strike(token, opts) {
+		delete(token, opts) {
 			return `~~${appendChildren(token.children, opts)}~~`;
 		},
 

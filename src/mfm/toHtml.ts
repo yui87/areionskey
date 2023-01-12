@@ -36,7 +36,7 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			return el;
 		},
 
-		strike(token) {
+		delete(token) {
 			const el = doc.createElement('del');
 			appendChildren(token.children, el);
 			return el;
