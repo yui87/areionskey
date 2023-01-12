@@ -1324,11 +1324,18 @@ describe('MFM', () => {
 		});
 
 		it('emoji in text', () => {
-			const tokens = parsePlain('foo:bar:baz');
+			const tokens = parsePlain('foo :bar:baz');
 			assert.deepStrictEqual(tokens, [
-				text('foo'),
+				text('foo '),
 				leaf('emoji', { name: 'bar' }),
 				text('baz'),
+			]);
+		});
+
+		it('emoji in text exclusion', () => {
+			const tokens = parsePlain('foo:bar:baz');
+			assert.deepStrictEqual(tokens, [
+				text('foo:bar:baz'),
 			]);
 		});
 
