@@ -95,10 +95,6 @@ export function toString(tokens: MfmForest | null, opts?: RestoreOptions): strin
 			return `${appendChildren(token.children, {doNyaize: false}).replace(/^/gm, '>').trim()}\n`;
 		},
 
-		title(token, opts) {
-			return `[${appendChildren(token.children, opts)}]\n`;
-		},
-
 		text(token, opts) {
 			return (opts && opts.doNyaize) ? nyaize(token.node.props.text) : token.node.props.text;
 		},

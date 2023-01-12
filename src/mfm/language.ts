@@ -23,7 +23,6 @@ export const mfmLanguage = P.createLanguage({
 	root: r => P.alt(r.block, r.inline).atLeast(1),
 	plain: r => P.alt(r.emoji, r.text).atLeast(1),
 	block: r => P.alt(
-		r.title,
 		r.quote,
 		r.search,
 		r.blockCode,
@@ -37,14 +36,6 @@ export const mfmLanguage = P.createLanguage({
 			return P.makeFailure(i, 'not newline');
 		}
 	}),
-	title: r => r.startOfLine.then(P((input, i) => {
-		const text = input.substring(i);
-		const match = text.match(/^([【\[]([^【\[】\]\n]+?)[】\]])(\n|$)/);
-		if (!match) return P.makeFailure(i, 'not a title');
-		const q = match[2].trim();
-		const contents = r.inline.atLeast(1).tryParse(q);
-		return P.makeSuccess(i + match[0].length, createTree('title', contents, {}));
-	})),
 	quote: r => r.startOfLine.then(P((input, i) => {
 		const text = input.substring(i);
 		if (!text.match(/^>[\s\S]+?/)) return P.makeFailure(i, 'not a quote');

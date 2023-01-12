@@ -150,12 +150,6 @@ export function toHtml(tokens: MfmForest | null, mentionedRemoteUsers: IMentione
 			return el;
 		},
 
-		title(token) {
-			const el = doc.createElement('h1');
-			appendChildren(token.children, el);
-			return el;
-		},
-
 		text(token) {
 			const el = doc.createElement('span');
 			const nodes = (token.node.props.text as string).split(/\r\n|\r|\n/).map(x => doc.createTextNode(x) as Node);

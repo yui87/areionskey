@@ -252,14 +252,6 @@ export default Vue.component('misskey-flavored-markdown', {
 					}
 				}
 
-				case 'title': {
-					return [createElement('div', {
-						attrs: {
-							class: 'title'
-						}
-					}, genEl(token.children))];
-				}
-
 				case 'emoji': {
 					const customEmojis = (this.$root.getMetaSync() || { emojis: [] }).emojis || [];
 					return [createElement('mk-emoji', {
