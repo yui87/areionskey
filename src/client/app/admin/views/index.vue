@@ -218,6 +218,8 @@ export default Vue.extend({
 				vertical-align middle
 
 			> .info
+				overflow hidden
+
 				> .name
 					margin 0 16px
 					padding 0
