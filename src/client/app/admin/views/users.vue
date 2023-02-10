@@ -12,7 +12,7 @@
 				<x-user :user="user"/>
 				<div class="actions">
 					<ui-button v-if="user.host != null" @click="updateRemoteUser"><fa :icon="faSync"/> {{ $t('update-remote-user') }}</ui-button>
-					<ui-button @click="resetPassword"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
+					<ui-button @click="resetPassword" :disabled="user.isAdmin"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
 					<ui-horizon-group>
 						<ui-button @click="setPremium" :disabled="changing"><fa :icon="faCrown"/> {{ $t('premium') }}</ui-button>
 						<ui-button @click="unsetPremium" :disabled="changing">{{ $t('unpremium') }}</ui-button>
@@ -29,7 +29,7 @@
 						<ui-button @click="suspendUser" :disabled="suspending || user.isModerator || user.isAdmin"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
 						<ui-button @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
 					</ui-horizon-group>
-					<ui-button @click="deleteAllFiles"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
+					<ui-button @click="deleteAllFiles" :disabled="(user.isModerator && !$store.getters.isAdmin) || user.isAdmin"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
 					<ui-button @click="deleteAccount" :disabled="deleting || user.isModerator || user.isAdmin"><fa :icon="faTrashAlt"/> {{ $t('delete-account') }}</ui-button>
 					<ui-textarea v-if="user" :value="user | json5" readonly tall style="margin-top:16px;"></ui-textarea>
 				</div>
