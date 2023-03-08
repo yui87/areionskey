@@ -1678,8 +1678,8 @@ admin/views/users.vue:
       premiumed: "プレミアムアカウント"
       silenced: "サイレンス済み"
       suspended: "凍結済み"
-      bot: "ボットアカウント"
-      cat: "ねこアカウント"
+      bot: "Bot アカウント"
+      cat: "Cat アカウント"
     origin:
       title: "オリジン"
       combined: "ローカル+リモート"
