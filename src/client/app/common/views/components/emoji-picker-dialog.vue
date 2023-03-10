@@ -66,9 +66,9 @@ export default Vue.extend({
 			}
 		},
 
-		chosen(emoji) {
-			this.$emit('chosen', emoji);
-			this.close();
+		chosen(args: { emoji: string, close: boolean }) {
+			this.$emit('chosen', args.emoji);
+			if (args.close) this.close();
 		},
 
 		close() {
