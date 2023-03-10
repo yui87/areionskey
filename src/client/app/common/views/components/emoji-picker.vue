@@ -335,6 +335,7 @@ export default defineComponent({
 			this.skinTone = skinTone;
 			this.$store.commit('device/set', { key: 'emojiSkinTone', value: skinTone });
 		},
+
 		emojiToSkinToneModifiedChar(emoji: any, skinTone: string | null | undefined): string {
 			if (emoji.st === 1) {
 				return this.getSkinToneModifiedChar(emoji.char, skinTone);
@@ -342,6 +343,7 @@ export default defineComponent({
 				return emoji.char;
 			}
 		},
+		
 		getSkinToneModifiedChar(char: string, skinTone: string | null | undefined): string {
 			if (!skinTone) return char;
 			let sgs = Array.from(char);
@@ -352,6 +354,7 @@ export default defineComponent({
 			}
 			return sgs.join('');
 		},
+
 		chosen(emoji: any, skinTone?: string) {
 			const getKey = (emoji: any) => emoji.char ? emoji.st === 1 ? this.getSkinToneModifiedChar(emoji.char, skinTone) : emoji.char : `:${emoji.name}:`;
 

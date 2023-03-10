@@ -152,7 +152,8 @@ export default Vue.extend({
 				y: rect.top + window.pageYOffset
 			});
 			vm.$once('chosen', emoji => {
-				this.react(emoji);
+				const m = emoji.match(emojiRegex);
+				this.react(m ? m[1] : emoji);
 			});
 			this.$once('hook:beforeDestroy', () => {
 				vm.close();
@@ -163,7 +164,7 @@ export default Vue.extend({
 			this.title = e.target.title;
 		},
 
-		onMouseout(e) {
+		onMouseout() {
 			this.title = this.$t('choose-reaction');
 		},
 
