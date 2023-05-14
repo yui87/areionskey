@@ -9923,10 +9923,10 @@ watchpack@^2.4.0:
     glob-to-regexp "^0.4.1"
     graceful-fs "^4.1.2"
 
-web-push@3.5.0:
-  version "3.5.0"
-  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.5.0.tgz#4576533746052eda3bd50414b54a1b0a21eeaeae"
-  integrity sha512-JC0V9hzKTqlDYJ+LTZUXtW7B175qwwaqzbbMSWDxHWxZvd3xY0C2rcotMGDavub2nAAFw+sXTsqR65/KY2A5AQ==
+web-push@3.6.1:
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/web-push/-/web-push-3.6.1.tgz#a8145e2039a3764c8438156eb8fac6685db6f51a"
+  integrity sha512-+eN2/4Ybu+nkRgXqlPXUzqeA5BgQ7J4StYJM/e2uJpsSIGhkZJFrTlCx+ow9sD0mn+4jgbo2FkFoMBKftl49ZQ==
   dependencies:
     asn1.js "^5.3.0"
     http_ece "1.1.0"
