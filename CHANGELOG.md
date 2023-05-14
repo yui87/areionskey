@@ -1,6 +1,26 @@
 ChangeLog
 =========
 
+2.4.3 (2023/05/14)
+--------------------
+### To Update
+以下を実施してください
+- Areionskey 再起動
+
+### ✨Improvements
+- Emoji-picker: サイズ等変更 by @fs5m8 [83117ac](https://github.com/sakura-tel/areionskey/commit/83117acea54b9096bbb89c1479c00474aa54107a) [9fa797a](https://github.com/sakura-tel/areionskey/commit/9fa797a23fcbf7ffc581c1d09740f106baadd62a)
+- Emoji-picker: Skintones に対応 by @mei23 [281d11d](https://github.com/sakura-tel/areionskey/commit/281d11dd6b10dd0a236408563aa1906cec622ed6)
+- Admin: 公式・プレミアム・Cat・Bot アカウント を表示するように by @atsu1125 [5b53fc1](https://github.com/sakura-tel/areionskey/commit/5b53fc15204aec032a439dce021d1798a67e2091)
+- User: アカウントの見つけやすさを追加 by @atsu1125 [21f3bec](https://github.com/sakura-tel/areionskey/commit/21f3bec2d03e7b27e7ebd29d39ff2427f3d40397)
+- URLチェックの強化 by @mei23 [3619cec](https://github.com/sakura-tel/areionskey/commit/3619cec0405b483572156d3dea21f05e8c02ab2d)
+
+### 🐛Fixes
+- Deck: デッキを読む際にタイムラインを2回ロードしてしまうのを修正 by @mei23 [18d6d16](https://github.com/sakura-tel/areionskey/commit/18d6d1669262a5325fc5508bf59fecb4cc365720)
+- 依存関係の更新
+
+### ❌Abolitions
+- DB: log を削除 by @fs5m8 [4cb73bb](https://github.com/sakura-tel/areionskey/commit/4cb73bb7b810aa8ea848748d99ef65420f0c26fa)
+
 2.4.2 (2023/02/11)
 --------------------
 ### To Update
@@ -10,7 +30,7 @@ ChangeLog
 ### ✨Improvements
 - OGP: 項目を追加 by @fs5m8 [2d35b67](https://github.com/sakura-tel/areionskey/commit/2d35b67cec463b90f576f7e6dd62f1c574f17f35)
 - URLチェックの強化 by @mei23 [cd43d69](https://github.com/sakura-tel/areionskey/commit/cd43d6943211e0ce5e49cf67f6cc4713f6cf21d1) [1f6ae07](https://github.com/sakura-tel/areionskey/commit/1f6ae07f57787ac2d24097847cc5cbaf263841f5) [88d237a](https://github.com/sakura-tel/areionskey/commit/88d237a18ae0fdd0e79b09929fa61542cf86e24b) [8f793fc](https://github.com/sakura-tel/areionskey/commit/8f793fc0f9ada1ab8412295ab5fcd64d14e90b61)
-- admin: ファイル全削除の権限を変更 by @atsu1125 [827cf4b](https://github.com/sakura-tel/areionskey/commit/827cf4baeabbb7752db11ffb8fcf3100c7c5d42b
+- admin: ファイル全削除の権限を変更 by @atsu1125 [827cf4b](https://github.com/sakura-tel/areionskey/commit/827cf4baeabbb7752db11ffb8fcf3100c7c5d42b)
 
 ### 🐛Fixes
 - StyleSheet: 特定の固定幅フォントの指定を削除 by @fs5m8 [0a24cd7](https://github.com/sakura-tel/areionskey/commit/0a24cd728b8b7523aa35d9172500713abc6c30f7)
