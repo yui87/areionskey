@@ -4838,7 +4838,15 @@ http-headers@^3.0.1:
   dependencies:
     next-line "^1.1.0"
 
-http-proxy-agent@5.0.0, http-proxy-agent@^5.0.0:
+http-proxy-agent@6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/http-proxy-agent/-/http-proxy-agent-6.0.1.tgz#c18aa52daa625a9bd00243f57252fd44e86ff40b"
+  integrity sha512-rD8wrfJHbnVll9lkIpQH3vDbKON1Ssciggwydom/r89HLBXEqdMhL6wx7QF5WePDPSr0OdoztdXoojbrXadG5Q==
+  dependencies:
+    agent-base "^7.0.1"
+    debug "^4.3.4"
+
+http-proxy-agent@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/http-proxy-agent/-/http-proxy-agent-5.0.0.tgz#5129800203520d434f142bc78ff3c170800f2b43"
   integrity sha512-n2hY8YdoRE1i7r6M0w9DIw5GgZN0G25P8zLCRQ8rjXtTU3vsNFBI/vWK/UIeE6g5MUUz6avwAPXmL6Fy9D/90w==
