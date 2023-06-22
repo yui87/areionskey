@@ -144,7 +144,7 @@
 		"rimraf": "4.4.1",
 		"rndstr": "1.0.0",
 		"s-age": "1.1.2",
-		"sanitize-html": "2.10.0",
+		"sanitize-html": "2.11.0",
 		"seedrandom": "3.0.5",
 		"sharp": "0.29.3",
 		"showdown": "2.1.0",
