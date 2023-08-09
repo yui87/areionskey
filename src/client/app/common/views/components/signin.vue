@@ -1,7 +1,7 @@
 <template>
 <form class="mk-signin" :class="{ signing, totpLogin }" @submit.prevent="onSubmit">
 	<div class="normal-signin" v-if="!totpLogin">
-		<ui-input v-model="username" type="text" pattern="^[a-zA-Z0-9_]+$" spellcheck="false" autofocus required>
+		<ui-input v-model="username" type="text" pattern="^[a-zA-Z0-9_]+$" spellcheck="false" autofocus required @input="onUsernameChange">
 			<span>{{ $t('username') }}</span>
 			<template #prefix>@</template>
 			<template #suffix>@{{ host }}</template>
@@ -77,6 +77,16 @@ export default Vue.extend({
 	},
 
 	methods: {
+		onUsernameChange() {
+			this.$root.api('users/show', {
+				username: this.username
+			}).then(user => {
+				this.user = user;
+			}, () => {
+				this.user = null;
+			});
+		},
+
 		queryKey() {
 			this.queryingKey = true;
 			return navigator.credentials.get({
