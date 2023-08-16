@@ -1,4 +1,4 @@
-FROM node:18.12.1-alpine3.15 AS base
+FROM node:18.17.1-alpine3.18 AS base
 
 ENV NODE_ENV=production
 
