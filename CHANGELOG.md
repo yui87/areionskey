@@ -1,6 +1,28 @@
 ChangeLog
 =========
 
+3.0.0 (2023/08/17)
+--------------------
+### 💥BREAKING CHANGES
+- Drop Node.js v14.x support
+- Now support Node.js version is 16.20.2 or later
+
+### To Update
+以下を実施してください
+- Dockerfile 確認 (Alpine Linux v3.15 -> v3.18, Node.js v18.12.1 -> v18.17.1 )
+- Areionskey 再起動
+
+### ✨Improvements
+- Search: ユーザネームによる検索を改善 by @fs5m8 [e2201a0](https://github.com/sakura-tel/areionskey/commit/e2201a02fc7649276586d1a75b602c7fa6deb5c7)
+- Endpoint: ユーザネームやホストで検索可能に by @sousuke0422 [96d7925](https://github.com/sakura-tel/areionskey/commit/96d7925b1ab67eaa829daeac72fde3fb033a907f)
+- Export: ファイルをURLを含めるように変更 by @CGsama [a820b7d](https://github.com/sakura-tel/areionskey/commit/a820b7d3ffefbd7907a92d339f91d9c6bbc4d46c)
+- Reaction: 作成時のパフォーマンスを改善 by @mei23 [90abd62](https://github.com/sakura-tel/areionskey/commit/90abd62fcd4c17c80789baa4e9c2cda4a3a41ebc)
+
+### 🐛Fixes
+- 2FA: 有効にすると必ずサインイン時にサインインできないのを修正 by @fs5m8 [c33b233](https://github.com/sakura-tel/areionskey/commit/c33b2339145ceb95e1ed6ad42466879cc9d4ccf4)
+- 言語ファイルの更新
+- 依存関係の更新
+
 2.4.3 (2023/05/14)
 --------------------
 ### To Update
