@@ -5,7 +5,7 @@ ChangeLog
 --------------------
 ### 💥BREAKING CHANGES
 - Drop Node.js v14.x support
-- Now support Node.js version is 16.20.2 or later
+- Now support Node.js version is 16.20.1 or later
 
 ### To Update
 以下を実施してください
