@@ -15,7 +15,6 @@ import { createNotification } from '../../create-notification';
 import deleteReaction from './delete';
 import { NoteReaction } from '../../../models/entities/note-reaction';
 import { isDuplicateKeyValueError } from '../../../misc/is-duplicate-key-value-error';
-import { IdentifiableError } from '../../../misc/identifiable-error';
 
 export default async (user: User, note: Note, reaction?: string) => {
 
