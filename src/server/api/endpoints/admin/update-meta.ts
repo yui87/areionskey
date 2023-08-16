@@ -225,21 +225,21 @@ export const meta = {
 		enableTwitterIntegration: {
 			validator: $.optional.bool,
 			desc: {
-				'ja-JP': 'Twitter連携機能を有効にするか否か'
+				'ja-JP': 'X (Twitter) 連携機能を有効にするか否か'
 			}
 		},
 
 		twitterConsumerKey: {
 			validator: $.optional.nullable.str,
 			desc: {
-				'ja-JP': 'TwitterアプリのConsumer key'
+				'ja-JP': 'X (Twitter) アプリのConsumer key'
 			}
 		},
 
 		twitterConsumerSecret: {
 			validator: $.optional.nullable.str,
 			desc: {
-				'ja-JP': 'TwitterアプリのConsumer secret'
+				'ja-JP': 'X (Twitter) アプリのConsumer secret'
 			}
 		},
 

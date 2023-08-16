@@ -469,7 +469,7 @@ common/views/components/reactions-viewer.details.vue:
 common/views/components/url-preview.vue:
   enable-player: "プレイヤーを開く"
   disable-player: "プレイヤーを閉じる"
-  expandTweet: "ツイートを展開する"
+  expandTweet: "投稿 (ツイート) を展開する"
 
 common/views/components/user-list.vue:
   no-users: "ユーザーがいません"
@@ -756,7 +756,7 @@ common/views/components/signin.vue:
   token: "トークン"
   signing-in: "サインインしています..."
   or: "または"
-  signin-with-twitter: "Twitter でサインイン"
+  signin-with-twitter: "X (Twitter) でサインイン"
   signin-with-github: "GitHub でサインイン"
   signin-with-discord: "Discord でサインイン"
   login-failed: "サインインできませんでした。ユーザー名とパスワードを確認してください。"
@@ -1517,9 +1517,9 @@ admin/views/instance.vue:
   hidden-tags: "非表示ハッシュタグ"
   hidden-tags-info: "集計から除外するハッシュタグを改行で区切って記述します。"
   external-service-integration-config: "外部サービス連携"
-  twitter-integration-config: "Twitter 連携の設定"
+  twitter-integration-config: "X (Twitter) 連携の設定"
   twitter-integration-info: "コールバック URL は {url} に設定します。"
-  enable-twitter-integration: "Twitter 連携を有効にする"
+  enable-twitter-integration: "X (Twitter) 連携を有効にする"
   twitter-integration-consumer-key: "Consumer key"
   twitter-integration-consumer-secret: "Consumer secret"
   github-integration-config: "GitHub 連携の設定"

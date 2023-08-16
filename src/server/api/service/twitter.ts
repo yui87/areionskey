@@ -55,7 +55,7 @@ router.get('/disconnect/twitter', async ctx => {
 		twitterScreenName: null,
 	});
 
-	ctx.body = `Twitterの連携を解除しました :v:`;
+	ctx.body = `X (Twitter) の連携を解除しました。`;
 
 	// Publish i updated event
 	publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
@@ -142,7 +142,7 @@ router.get('/tw/cb', async ctx => {
 			.getOne();
 
 		if (link == null) {
-			ctx.throw(404, `@${result.screenName}と連携しているAreionskeyアカウントはありませんでした...`);
+			ctx.throw(404, `@${result.screenName} と連携している Areionskey アカウントはありませんでした。`);
 			return;
 		}
 
@@ -178,7 +178,7 @@ router.get('/tw/cb', async ctx => {
 			twitterScreenName: result.screenName,
 		});
 
-		ctx.body = `Twitter: @${result.screenName} を、Areionskey: @${user.username} に接続しました！`;
+		ctx.body = `X (Twitter): @${result.screenName} を、Areionskey: @${user.username} に接続しました。`;
 
 		// Publish i updated event
 		publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {

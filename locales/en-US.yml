@@ -444,7 +444,7 @@ common/views/components/reactions-viewer.details.vue:
 common/views/components/url-preview.vue:
   enable-player: "Enable playback"
   disable-player: "Close the player"
-  expandTweet: "Expand tweet"
+  expandTweet: "Expand post (tweet)"
 common/views/components/user-list.vue:
   no-users: "There are no users."
 common/views/components/games/reversi/reversi.vue:
@@ -708,7 +708,7 @@ common/views/components/signin.vue:
   token: "Token"
   signing-in: "Signing in..."
   or: "Or"
-  signin-with-twitter: "Sign in with Twitter"
+  signin-with-twitter: "Sign in with X (Twitter)"
   signin-with-github: "Sign in with GitHub"
   signin-with-discord: "Sign in with Discord"
   login-failed: "Unable to sign in. The username or password you entered is incorrect."
@@ -1380,9 +1380,9 @@ admin/views/instance.vue:
   hidden-tags: "Hidden hashtags"
   hidden-tags-info: "List up the hashtags delimited by line breaks that you want exclude from statistics."
   external-service-integration-config: "Connect an external service"
-  twitter-integration-config: "Settings of connecting to Twitter"
+  twitter-integration-config: "Settings of connecting to X (Twitter)"
   twitter-integration-info: "The callback URL is set on {url}."
-  enable-twitter-integration: "Enable connection to Twitter"
+  enable-twitter-integration: "Enable connection to X (Twitter)"
   twitter-integration-consumer-key: "Consumer key"
   twitter-integration-consumer-secret: "Consumer Secret"
   github-integration-config: "Setting of connecting to GitHub"

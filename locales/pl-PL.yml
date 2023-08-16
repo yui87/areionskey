@@ -440,7 +440,7 @@ common/views/components/signin.vue:
   token: "Token"
   signing-in: "Logowanie…"
   or: "lub"
-  signin-with-twitter: "Zaloguj się za pomocą Twittera"
+  signin-with-twitter: "Zaloguj się za pomocą X (Twitter)a"
   signin-with-github: "Zaloguj się za pomocą GitHuba"
   signin-with-discord: "Zaloguj się za pomocą Discorda"
   login-failed: "Logowanie nie powiodło się. Upewnij się, że podałeś prawidłową nazwę użytkownika i hasło."

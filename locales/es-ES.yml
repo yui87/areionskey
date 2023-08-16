@@ -510,7 +510,7 @@ common/views/components/signin.vue:
   token: "Identificador"
   signing-in: "Entrando..."
   or: "O"
-  signin-with-twitter: "Ingresar con Twitter"
+  signin-with-twitter: "Ingresar con X (Twitter)"
   signin-with-github: "Ingresar con Github"
   signin-with-discord: "Ingresar con Discord"
   login-failed: "Autenticación fallida. Asegúrate de haber usado el nombre de usuario y contraseña correctos."

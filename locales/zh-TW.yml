@@ -48,7 +48,7 @@ common/views/components/theme.vue:
   install-a-theme: "安裝主題"
   save-created-theme: "保存主題"
 common/views/components/signin.vue:
-  signin-with-twitter: "用 Twitter 帳號登入"
+  signin-with-twitter: "用 X (Twitter) 帳號登入"
   signin-with-github: "用 GitHub 帳號登入"
   signin-with-discord: "用 Discord 帳號登入"
   login-failed: "登錄失敗。 請檢查用戶名和密碼。"
