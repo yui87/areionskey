@@ -55,7 +55,7 @@ router.get('/disconnect/github', async ctx => {
 		githubLogin: null,
 	});
 
-	ctx.body = `GitHubの連携を解除しました :v:`;
+	ctx.body = `GitHub の連携を解除しました。`;
 
 	// Publish i updated event
 	publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
@@ -182,7 +182,7 @@ router.get('/gh/cb', async ctx => {
 			.getOne();
 
 		if (link == null) {
-			ctx.throw(404, `@${login}と連携しているAreionskeyアカウントはありませんでした...`);
+			ctx.throw(404, `@${login} と連携している Areionskey アカウントはありませんでした。`);
 			return;
 		}
 
@@ -240,7 +240,7 @@ router.get('/gh/cb', async ctx => {
 			githubLogin: login,
 		});
 
-		ctx.body = `GitHub: @${login} を、Areionskey: @${user.username} に接続しました！`;
+		ctx.body = `GitHub: @${login} を、Areionskey: @${user.username} に接続しました。`;
 
 		// Publish i updated event
 		publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {

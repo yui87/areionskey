@@ -58,7 +58,7 @@ router.get('/disconnect/discord', async ctx => {
 		discordDiscriminator: null,
 	});
 
-	ctx.body = `Discordの連携を解除しました :v:`;
+	ctx.body = `Discord の連携を解除しました。`;
 
 	// Publish i updated event
 	publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
@@ -193,7 +193,7 @@ router.get('/dc/cb', async ctx => {
 			.getOne();
 
 		if (profile == null) {
-			ctx.throw(404, `@${username}#${discriminator}と連携しているAreionskeyアカウントはありませんでした...`);
+			ctx.throw(404, `@${username}(#${discriminator}) と連携している Areionskey アカウントはありませんでした。`);
 			return;
 		}
 
@@ -267,7 +267,7 @@ router.get('/dc/cb', async ctx => {
 			discordDiscriminator: discriminator
 		});
 
-		ctx.body = `Discord: @${username}#${discriminator} を、Areionskey: @${user.username} に接続しました！`;
+		ctx.body = `Discord: @${username}(#${discriminator}) を、Areionskey: @${user.username} に接続しました。`;
 
 		// Publish i updated event
 		publishMainStream(user.id, 'meUpdated', await Users.pack(user, user, {
