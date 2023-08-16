@@ -100,10 +100,10 @@ export default Vue.extend({
 	computed: {
 		foundUsers(): any {
 			return {
-				endpoint: 'users/search',
+				endpoint: 'users/search-by-username-and-host',
 				limit: 30,
 				params: {
-					query: this.query,
+					username: this.query,
 				}
 			};
 		},
