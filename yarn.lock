@@ -9103,9 +9103,9 @@ stylus@^0.59.0:
     sax "~1.2.4"
     source-map "^0.7.3"
 
-"summaly@git+https://github.com/mei23/summaly.git#3.6.0":
-  version "3.6.0"
-  resolved "git+https://github.com/mei23/summaly.git#16aca62826d1485eec7456c5ca79967509c42cff"
+"summaly@git+https://github.com/mei23/summaly.git#3.8.3":
+  version "3.8.3"
+  resolved "git+https://github.com/mei23/summaly.git#c22753b76e3e95714c2d77f14229bd5dabb04c22"
   dependencies:
     cheerio "1.0.0-rc.12"
     escape-regexp "0.0.1"
