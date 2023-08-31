@@ -981,10 +981,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/lolex@5.1.3":
-  version "5.1.3"
-  resolved "https://registry.yarnpkg.com/@types/lolex/-/lolex-5.1.3.tgz#8437df7d3979a336462a08c83a48aeee0bd8c6b7"
-  integrity sha512-Y7uJI0orgyOgO4tRRj9sn7pqXphJY8wS7GPUex5IGq+6kanfQnakHd2/y3BZVIl002We8e4ikTwocLUmmf/a6A==
+"@types/lolex@5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@types/lolex/-/lolex-5.1.4.tgz#07a445a722a42e33eb6566fa0f18341db7ab44e6"
+  integrity sha512-3+ObDpTE83hBilkGYJAJx8BH7EAb9prGLsouhPT0kn3gBANef9EvS73yZFy8CnsieS6iI54hfCxnqJUDXU67TQ==
 
 "@types/mime@*":
   version "2.0.1"
