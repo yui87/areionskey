@@ -6,13 +6,6 @@
 		<a @click="reload">{{ this.$t('description').match(/\{(.+?)\}/)[1] }}</a>
 		<span>{{ this.$t('description').substring(this.$t('description').indexOf('}') + 1) }}</span>
 	</p>
-	<button v-if="!troubleshooting" @click="troubleshooting = true">{{ $t('troubleshoot') }}</button>
-	<x-troubleshooter v-if="troubleshooting"/>
-	<p class="tools">
-		<a @click="onFlush">{{ $t('@.flush') }}</a>
-		<!-- <a href="/assets/flush.html">{{ $t('flush') }}</a> -->
-		<a href="/assets/version.html">{{ $t('set-version') }}</a>
-	</p>
 	<p class="thanks">{{ $t('thanks') }}</p>
 </div>
 </template>
@@ -20,16 +13,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import XTroubleshooter from './connect-failed.troubleshooter.vue';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/connect-failed.vue'),
 	components: {
-		XTroubleshooter
 	},
 	data() {
 		return {
-			troubleshooting: false
 		};
 	},
 	mounted() {
@@ -70,31 +60,6 @@ export default Vue.extend({
 		font-size 1em
 		color #666
 
-	> button
-		display block
-		margin 1em auto
-		padding 8px 10px
-		color var(--primaryForeground)
-		background var(--primary)
-
-		&:focus
-			outline solid 3px var(--primaryAlpha03)
-
-		&:hover
-			background var(--primaryLighten10)
-
-		&:active
-			background var(--primaryDarken10)
-
-	> .tools
-		display block
-		margin 0 auto
-		max-width 600px
-		font-size 1em
-
-		> a
-			margin 0 4px
-
 	> .thanks
 		display block
 		margin 2em auto 0 auto
@@ -104,6 +69,10 @@ export default Vue.extend({
 		font-style oblique
 		color #aaa
 		border-top solid 1px #eee
+
+	@media (max-width 500px)
+		padding 24px 18px
+		font-size 80%
 
 </style>
 

@@ -133,7 +133,32 @@ export const post = async (user: any, params?: any): Promise<any> => {
 	return res.body ? res.body.createdNote : null;
 };
 
-export const simpleGet = async (path: string, accept = '*/*'): Promise<{ status?: number, type?: string, location?: string }> => {
+/**
+ * Upload file
+ * @param user User
+ * @param _path Optional, absolute path or relative from ./resources/
+ */
+export const uploadFile = async (user: any, _path?: string): Promise<any> => {
+	const absPath = _path == null ? `${__dirname}/resources/Lenna.jpg` : path.isAbsolute(_path) ? _path : `${__dirname}/resources/${_path}`;
+
+	const formData = new FormData();
+	formData.append('i', user.token);
+	formData.append('file', fs.createReadStream(absPath));
+	formData.append('force', 'true');
+
+	const res = await got<string>(`http://localhost:${port}/api/drive/files/create`, {
+		method: 'POST',
+		body: formData,
+		timeout: 30 * 1000,
+		retry: 0,
+	});
+
+	const body = res.statusCode !== 204 ? await JSON.parse(res.body) : null;
+
+	return body;
+};
+
+export const simpleGet = async (path: string, accept = '*/*'): Promise<{ status?: number, type?: string, location?: string, cspx?: unknown }> => {
 	// node-fetchだと3xxを取れない
 	return await new Promise((resolve, reject) => {
 		const req = http.request(`http://localhost:${port}${path}`, {
@@ -144,10 +169,14 @@ export const simpleGet = async (path: string, accept = '*/*'): Promise<{ status?
 			if (res.statusCode! >= 400) {
 				reject(res);
 			} else {
+				let cspx = res.headers['content-security-policy'];
+				if (typeof cspx === 'string') cspx = cspx.replace(/nonce-(\S+)/, 'nonce-X');
+
 				resolve({
 					status: res.statusCode,
 					type: res.headers['content-type'],
 					location: res.headers.location,
+					cspx,
 				});
 			}
 		});
