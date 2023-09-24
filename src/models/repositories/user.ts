@@ -226,6 +226,7 @@ export class UserRepository extends Repository<User> {
 				carefulBot: profile!.carefulBot,
 				carefulRemote: profile!.carefulRemote,
 				autoAcceptFollowed: profile!.autoAcceptFollowed,
+				isIndexable: user.isIndexable,
 				isDeleted: user.isDeleted,
 				isExplorable: user.isExplorable,
 				hasUnreadMessagingMessage: this.getHasUnreadMessagingMessage(user.id),

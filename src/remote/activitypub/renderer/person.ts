@@ -71,6 +71,7 @@ export async function renderPerson(user: ILocalUser) {
 		tag,
 		manuallyApprovesFollowers: user.isLocked,
 		discoverable: !!user.isExplorable,
+		indexable: user.isIndexable,
 		publicKey: renderKey(user, keypair, `#main-key`),
 		isCat: user.isCat,
 		attachment: attachment.length ? attachment : undefined,

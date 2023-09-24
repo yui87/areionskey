@@ -809,6 +809,7 @@ common/views/components/profile-editor.vue:
   auto-accept-followed: "Automatically approve follows from the people you follow"
   avoid-search-index: "Avoid search engine index"
   is-explorable: "Make account visible in \"Explore\""
+  isIndexable: "Allow post search"
   advanced: "Other"
   privacy: "Privacy"
   save: "Save"

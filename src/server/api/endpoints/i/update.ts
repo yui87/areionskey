@@ -127,6 +127,13 @@ export const meta = {
 			}
 		},
 
+		isIndexable: {
+			validator: $.optional.bool,
+			desc: {
+				'ja-JP': '投稿検索を許可する'
+			}
+		},
+
 		isBot: {
 			validator: $.optional.bool,
 			desc: {
@@ -218,6 +225,7 @@ export default define(meta, async (ps, user, app) => {
 	if (typeof ps.autoAcceptFollowed == 'boolean') profileUpdates.autoAcceptFollowed = ps.autoAcceptFollowed;
 	if (typeof ps.avoidSearchIndex == 'boolean') updates.avoidSearchIndex = ps.avoidSearchIndex;
 	if (typeof ps.isExplorable == 'boolean') updates.isExplorable = ps.isExplorable;
+	if (typeof ps.isIndexable == 'boolean') updates.isIndexable = ps.isIndexable;
 	if (typeof ps.isCat == 'boolean') updates.isCat = ps.isCat;
 	if (typeof ps.autoWatch == 'boolean') profileUpdates.autoWatch = ps.autoWatch;
 	if (typeof ps.alwaysMarkNsfw == 'boolean') profileUpdates.alwaysMarkNsfw = ps.alwaysMarkNsfw;

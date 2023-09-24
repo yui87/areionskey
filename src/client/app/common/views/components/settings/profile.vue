@@ -101,6 +101,7 @@
 			<ui-switch v-model="autoAcceptFollowed" :disabled="!isLocked && !carefulBot && !carefulRemote" @change="save(false)">{{ $t('auto-accept-followed') }}</ui-switch>
 			<ui-switch v-model="avoidSearchIndex" @change="save(false)">{{ $t('avoid-search-index') }}</ui-switch>
 			<ui-switch v-model="isExplorable" @change="save(false)">{{ $t('is-explorable') }}</ui-switch>
+			<ui-switch v-model="isIndexable" @change="save(false)">{{ $t('isIndexable') }}</ui-switch>
 		</div>
 	</section>
 
@@ -188,6 +189,7 @@ export default Vue.extend({
 			autoAcceptFollowed: false,
 			avoidSearchIndex: false,
 			isExplorable: false,
+			isIndexable: true,
 			saving: false,
 			avatarUploading: false,
 			bannerUploading: false,
@@ -232,6 +234,7 @@ export default Vue.extend({
 		this.autoAcceptFollowed = this.$store.state.i.autoAcceptFollowed;
 		this.avoidSearchIndex = this.$store.state.i.avoidSearchIndex;
 		this.isExplorable = this.$store.state.i.isExplorable;
+		this.isIndexable = this.$store.state.i.isIndexable;
 
 		this.fieldName0 = this.$store.state.i.fields[0] ? this.$store.state.i.fields[0].name : null;
 		this.fieldValue0 = this.$store.state.i.fields[0] ? this.$store.state.i.fields[0].value : null;
@@ -315,6 +318,7 @@ export default Vue.extend({
 				autoAcceptFollowed: !!this.autoAcceptFollowed,
 				avoidSearchIndex: !!this.avoidSearchIndex,
 				isExplorable: !!this.isExplorable,
+				isIndexable: !!this.isIndexable,
 			}).then(i => {
 				this.saving = false;
 				this.$store.state.i.avatarId = i.avatarId;
