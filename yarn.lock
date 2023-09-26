@@ -1257,10 +1257,10 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@types/websocket@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.6.tgz#ec8dce5915741632ac3a4b1f951b6d4156e32d03"
-  integrity sha512-JXkliwz93B2cMWOI1ukElQBPN88vMg3CruvW4KVSKpflt3NyNCJImnhIuB/f97rG7kakqRJGFiwkA895Kn02Dg==
+"@types/websocket@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@types/websocket/-/websocket-1.0.7.tgz#94ef83be9414db30c147d400cee08d5d767deeb0"
+  integrity sha512-62Omr8U0PO+hgjLCpPnMsmjh2/FRwIGOktZHyYAUzooEJotwkXHMp7vCacdYi8haxBNOiw9bc2HIHI+b/MPNjA==
   dependencies:
     "@types/node" "*"
 
