@@ -246,7 +246,7 @@
 		"@types/tmp": "0.2.4",
 		"@types/uuid": "9.0.4",
 		"@types/web-push": "3.3.2",
-		"@types/webpack": "5.28.2",
+		"@types/webpack": "5.28.3",
 		"@types/webpack-stream": "3.2.12",
 		"@types/websocket": "1.0.6",
 		"eslint": "8.47.0",
