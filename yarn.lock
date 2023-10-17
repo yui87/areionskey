@@ -7868,10 +7868,10 @@ punycode@2.3.0, punycode@^2.1.0, punycode@^2.1.1, punycode@^2.3.0:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
   integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
-pureimage@0.4.11:
-  version "0.4.11"
-  resolved "https://registry.yarnpkg.com/pureimage/-/pureimage-0.4.11.tgz#848bef5795fc32fb9f820a36abe1e2d7f52f4053"
-  integrity sha512-QC1ytVjR2EZaB3yuiV/+NURXNgq6tHVy8mOJuIcxjCgsiybaDOpxgSamWiLdLuEiOd882xsd9Dq/1HMutiVrkw==
+pureimage@0.4.13:
+  version "0.4.13"
+  resolved "https://registry.yarnpkg.com/pureimage/-/pureimage-0.4.13.tgz#82a3f21853570d15e3631c555b4ecf9b9fe9ab3e"
+  integrity sha512-P8aonTNAnXWJn2pBIqyeWw0I/D4YDOfEavCVvbDG+wx3dCujQX0ENZiW5OcHfbd8HKLfVhCf4F/3Xivf1yWDiA==
   dependencies:
     jpeg-js "^0.4.4"
     opentype.js "^0.4.3"
