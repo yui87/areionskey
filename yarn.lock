@@ -850,10 +850,10 @@
   resolved "https://registry.yarnpkg.com/@types/is-url/-/is-url-1.2.31.tgz#db6f969683f02f6bc5f4fe465603ede5c6845bc4"
   integrity sha512-ZkuJ+NIr+/V6Xz+S14kYT3g0wYmUa9+bOXXL6Z3nDsy38GqHIu4QF1q2Z0f8y8Pfd8zivikE9fTFa5cfkOROSg==
 
-"@types/js-yaml@4.0.7":
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.7.tgz#f11c2ec37bb748fa5cfa3262abcb8b1cfd83d8ae"
-  integrity sha512-RJZP9WAMMr1514KbdSXkLRrKvYQacjr1+HWnY8pui/uBTBoSgD9ZGR17u/d4nb9NpERp0FkdLBe7hq8NIPBgkg==
+"@types/js-yaml@4.0.8":
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.8.tgz#7574e422d70d4a1b41f517d1d9abc61be2299a97"
+  integrity sha512-m6jnPk1VhlYRiLFm3f8X9Uep761f+CK8mHyS65LutH2OhmBF0BeMEjHgg05usH8PLZMWWc/BUR9RPmkvpWnyRA==
 
 "@types/jsdom@21.1.1":
   version "21.1.1"
