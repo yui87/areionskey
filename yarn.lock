@@ -1049,10 +1049,10 @@
   resolved "https://registry.yarnpkg.com/@types/parsimmon/-/parsimmon-1.10.7.tgz#6100f80a3ac6b5ea371e8c940e85c03fc080ec42"
   integrity sha512-QnO7brOMB4XCVJzU0GZAYhpay7CZLiXowKBOyAmiRcJ4SIGlrh6/cfWdTod+yfSsyli9tx7aunwQij50yHX9Fg==
 
-"@types/portscanner@2.1.2":
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/@types/portscanner/-/portscanner-2.1.2.tgz#3196e3a686fbee5272a9c89de78469566e01a270"
-  integrity sha512-jRh0WZHlSneF90WZxMjS9pxl5nab3GzTP7RzPI/QdKAjKHscJrwGdFdw61KrESRC3T3n5aQBDgsvtib97nJOXw==
+"@types/portscanner@2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/portscanner/-/portscanner-2.1.3.tgz#0d1f5d944566d784cb91b80d2a381ff1c4e67ef6"
+  integrity sha512-pNpbFvtlSTX5XYtz4unH25IMwV34oswXzfEXsuXTC6VieeY2yZbht+neIMKnDwg5jPDu3ZLyuKmFPIUnZCp6Mg==
 
 "@types/pug@2.0.7":
   version "2.0.7"
