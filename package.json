@@ -204,7 +204,7 @@
 		"@types/double-ended-queue": "2.1.5",
 		"@types/escape-regexp": "0.0.2",
 		"@types/fluent-ffmpeg": "2.1.22",
-		"@types/is-url": "1.2.30",
+		"@types/is-url": "1.2.31",
 		"@types/js-yaml": "4.0.7",
 		"@types/jsdom": "21.1.1",
 		"@types/jsonld": "1.5.6",
