@@ -1020,10 +1020,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.17.3.tgz#6d327abaa4be34a74e421ed6409a0ae2f47f4c3d"
   integrity sha512-e6ZowgGJmTuXa3GyaPbTGxX17tnThl2aSSizrFthQ7m9uLGZBXiGhgE55cjRZTF5kjZvYn9EOPOMljdjwbflxw==
 
-"@types/nodemailer@6.4.12":
-  version "6.4.12"
-  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.12.tgz#d2f3b0ed703f567366e4b9c247e7c8392c1c8312"
-  integrity sha512-FMXpf8/U9tpcjGwwOh2nSPKiPmxmIDEwHjYyUMMKYlHn7WSeJeDtT61pnpcjk1QDK9+5ktnyuxXVsTvvTx1zoA==
+"@types/nodemailer@6.4.13":
+  version "6.4.13"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.4.13.tgz#3b3b47a27d1a33631a16763eb2ecdbd567147296"
+  integrity sha512-889Vq/77eEpidCwh52sVWpbnqQmIwL8yVBekNbrztVEaWKOCRH3Eq6hjIJh1jwsGDEAJEH0RR+YhpH9mfELLKA==
   dependencies:
     "@types/node" "*"
 
