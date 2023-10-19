@@ -1059,10 +1059,10 @@
   resolved "https://registry.yarnpkg.com/@types/pug/-/pug-2.0.8.tgz#1a85ecb760f7472d9ec3bab19bfe17454c69499d"
   integrity sha512-QzhsZ1dMGyJbn/D9V80zp4GIA4J4rfAjCCxc3MP+new0E8dyVdSkR735Lx+n3LIaHNFcjHL5+TbziccuT+fdoQ==
 
-"@types/punycode@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/punycode/-/punycode-2.1.0.tgz#89e4f3d09b3f92e87a80505af19be7e0c31d4e83"
-  integrity sha512-PG5aLpW6PJOeV2fHRslP4IOMWn+G+Uq8CfnyJ+PDS8ndCbU+soO+fB3NKCKo0p/Jh2Y4aPaiQZsrOXFdzpcA6g==
+"@types/punycode@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/punycode/-/punycode-2.1.1.tgz#c962e4eac4a3030641d8fa11a50292941110555a"
+  integrity sha512-41wbJ1+JU2hECp2FDMAAzUZyiFyfeqAW/aTVsqY2RsDi5M2sliZgBp+7rv1Rc8oMJv0tt+74b6Sb1EcWldTCpA==
 
 "@types/q@^1.5.1":
   version "1.5.2"
