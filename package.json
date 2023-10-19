@@ -241,7 +241,7 @@
 		"@types/seedrandom": "3.0.7",
 		"@types/sharp": "0.29.5",
 		"@types/showdown": "2.0.3",
-		"@types/speakeasy": "2.0.8",
+		"@types/speakeasy": "2.0.9",
 		"@types/tinycolor2": "1.4.3",
 		"@types/tmp": "0.2.5",
 		"@types/uuid": "9.0.6",
