@@ -1116,10 +1116,10 @@
   resolved "https://registry.yarnpkg.com/@types/rename/-/rename-1.0.5.tgz#e883790f38783c354304c98c69ec87695b1fdbbc"
   integrity sha512-8/ynozXfy9NZ8JhQRSTb0HMuu5Isl547Mih1fMEpNLi9coPcI16UdvIdSqssMgQEdbWsgQIPkLpkpAcK4DEZ3Q==
 
-"@types/request-stats@3.0.1":
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/@types/request-stats/-/request-stats-3.0.1.tgz#ff82b3327192f9f4afc8b8aa2303cb722ecd71c4"
-  integrity sha512-HflMYoNKLevMPWXwJpEUzSiWKb8svKy7fwV+ZwRMPLiHFEr1zFhqYtHd0UlnZ4TCXZoCl9akbR1vNHMVWxvjKg==
+"@types/request-stats@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@types/request-stats/-/request-stats-3.0.2.tgz#89849964d48112fb093c9e73c5d670c487f9b69e"
+  integrity sha512-BRu/G0KmnXbZK+UvLIfY8kGl23CUM+y+PBvNPymm8xUZWvcf19F1HEiWf1UNjrEblFH8IA+pQa5ZqW9EQXMIIQ==
   dependencies:
     "@types/node" "*"
 
