@@ -231,7 +231,7 @@
 		"@types/parsimmon": "1.10.9",
 		"@types/portscanner": "2.1.4",
 		"@types/pug": "2.0.9",
-		"@types/punycode": "2.1.1",
+		"@types/punycode": "2.1.2",
 		"@types/qrcode": "1.5.4",
 		"@types/random-seed": "0.3.5",
 		"@types/ratelimiter": "3.4.5",
