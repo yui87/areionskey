@@ -240,7 +240,7 @@
 		"@types/request-stats": "3.0.3",
 		"@types/seedrandom": "3.0.8",
 		"@types/sharp": "0.29.5",
-		"@types/showdown": "2.0.3",
+		"@types/showdown": "2.0.4",
 		"@types/speakeasy": "2.0.10",
 		"@types/tinycolor2": "1.4.3",
 		"@types/tmp": "0.2.6",
