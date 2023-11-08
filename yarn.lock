@@ -1111,10 +1111,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/rename@1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@types/rename/-/rename-1.0.6.tgz#cdf05d05e406f498ff62f15936bee39f3f1de286"
-  integrity sha512-uLznlquGwzyFMxjBGcR3mY+k/zWv+9kk3yEzsldIU5OzjRw0i6EdZ1ydVCjTEYQ4HkWGBY+bXn62lrGKS+G1iw==
+"@types/rename@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@types/rename/-/rename-1.0.7.tgz#e26a97c2a3111de8ba1206029b0b26b702d36091"
+  integrity sha512-E9qapfghUGfBMi3jNhsmCKPIp3f2zvNKpaX1BDGLGJNjzpgsZ/RTx7NaNksFjGoJ+r9NvWF1NSM5vVecnNjVmw==
 
 "@types/request-stats@3.0.2":
   version "3.0.2"
