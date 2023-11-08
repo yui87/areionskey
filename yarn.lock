@@ -1165,10 +1165,10 @@
   resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
   integrity sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
 
-"@types/speakeasy@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@types/speakeasy/-/speakeasy-2.0.9.tgz#621fff385854dac3c09c98e0f7e465b1e15a3971"
-  integrity sha512-7x3cymisAaN7JhNWB1z0C7qeAmHTK3jnhJJtGZmNxmXbWucLn7l5bofKZEYXfF7N6yPWDB/gc3jcw/uMYeB+ng==
+"@types/speakeasy@2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@types/speakeasy/-/speakeasy-2.0.10.tgz#a1f0e474696abd165e544478b9b02549778fa4e2"
+  integrity sha512-QVRlDW5r4yl7p7xkNIbAIC/JtyOcClDIIdKfuG7PWdDT1MmyhtXSANsildohy0K+Lmvf/9RUtLbNLMacvrVwxA==
   dependencies:
     "@types/node" "*"
 
