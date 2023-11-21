@@ -855,10 +855,10 @@
   resolved "https://registry.yarnpkg.com/@types/dateformat/-/dateformat-3.0.1.tgz#98d747a2e5e9a56070c6bf14e27bff56204e34cc"
   integrity sha512-KlPPdikagvL6ELjWsljbyDIPzNCeliYkqRpI+zea99vBBbCIA5JNshZAwQKTON139c87y9qvTFVgkFd14rtS4g==
 
-"@types/double-ended-queue@2.1.6":
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/@types/double-ended-queue/-/double-ended-queue-2.1.6.tgz#dd3d41b57b22d7d24b75772bd0df5fd7ef8d10f7"
-  integrity sha512-y8BMSZCr8vP861n9I5gCXoj8j7Lmk1MFip/ZCxArEqDXc8l0Ep4czaAluZOVSDLlQ9ZqAMCAaN/8SxjXso2OmQ==
+"@types/double-ended-queue@2.1.7":
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/@types/double-ended-queue/-/double-ended-queue-2.1.7.tgz#02c24d0a3539a38c51ccb46e4102c659e8ad0c91"
+  integrity sha512-OVbdb2iOJakEg/Ou6dVZsH0LLxlO+GFjc1FB2W8/jT7bnhoFVJwnZOqi/H26ospeMBaEbGiX3Qy2a7r6pfZKXQ==
 
 "@types/escape-regexp@0.0.3":
   version "0.0.3"
