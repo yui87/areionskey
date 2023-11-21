@@ -1141,10 +1141,10 @@
   resolved "https://registry.yarnpkg.com/@types/portscanner/-/portscanner-2.1.4.tgz#6515e58b439740e59defbb32828d7be60d858b1d"
   integrity sha512-AtwMmUj76lRJ1sXqCU5TGUPeWsA+1nbyltWteRmMz1zLMMTlSE+AEm6M93XeiSxV/qwadFd3uBGQj4f+1b6fvA==
 
-"@types/pug@2.0.9":
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/@types/pug/-/pug-2.0.9.tgz#97e765bb8eb0b90380524583f1f10838f29822f9"
-  integrity sha512-Yg4LkgFYvn1faISbDNWmcAC1XoDT8IoMUFspp5mnagKk+UvD2N0IWt5A7GRdMubsNWqgCLmrkf8rXkzNqb4szA==
+"@types/pug@2.0.10":
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/@types/pug/-/pug-2.0.10.tgz#52f8dbd6113517aef901db20b4f3fca543b88c1f"
+  integrity sha512-Sk/uYFOBAB7mb74XcpizmH0KOR2Pv3D2Hmrh1Dmy5BmK3MpdSa5kqZcg6EKBdklU0bFXX9gCfzvpnyUehrPIuA==
 
 "@types/punycode@2.1.2":
   version "2.1.2"
