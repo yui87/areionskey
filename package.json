@@ -248,7 +248,7 @@
 		"@types/web-push": "3.6.3",
 		"@types/webpack": "5.28.3",
 		"@types/webpack-stream": "3.2.15",
-		"@types/websocket": "1.0.9",
+		"@types/websocket": "1.0.10",
 		"eslint": "8.47.0",
 		"eslint-plugin-node": "11.1.0",
 		"mocha": "10.2.0"
