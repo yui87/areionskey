@@ -998,10 +998,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa-favicon@2.0.22":
-  version "2.0.22"
-  resolved "https://registry.yarnpkg.com/@types/koa-favicon/-/koa-favicon-2.0.22.tgz#e9bf817234f31b13d5d6664f178efa402920708b"
-  integrity sha512-oyLEtX7JgJ6Fm3luqcuKi6qjTBHWMwS9dQblxkIPgtQiHEyfYm99ow6igqI440yV+k61S+ubnbmv1q0kZWyV/A==
+"@types/koa-favicon@2.1.3":
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/@types/koa-favicon/-/koa-favicon-2.1.3.tgz#4abf8b157b5902e546974e51622adf28c3989591"
+  integrity sha512-L1XAF8k1iOuh3hA/ZjEqWURm9/62a8A1x7BZR9ZCMw8nbnUBt6oZksz2rfKRCEwESqI2e6WVGlF03fs9DbQQXQ==
   dependencies:
     "@types/koa" "*"
 
