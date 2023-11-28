@@ -197,7 +197,7 @@
 		"@redocly/openapi-core": "1.4.1",
 		"@typescript-eslint/eslint-plugin": "5.62.0",
 		"@typescript-eslint/parser": "5.62.0",
-		"@types/bcryptjs": "2.4.5",
+		"@types/bcryptjs": "2.4.6",
 		"@types/bull": "4.10.0",
 		"@types/cbor": "6.0.0",
 		"@types/dateformat": "3.0.1",
