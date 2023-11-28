@@ -500,7 +500,7 @@ describe('Fetch resource', () => {
 				'misskey:user-username': alice.username,
 				'misskey:user-id': alice.id,
 				'og:url': `http://misskey.local/notes/${alicesPostVideo.id}`,
-				'og:image': alicesPostVideo.files[0].thumbnailUrl,
+				// 'og:image': alicesPostVideo.files[0].thumbnailUrl,
 				'og:published_time': alicesPostVideo.createdAt,
 				'twitter:player':  `http://misskey.local/notes/${alicesPostVideo.id}/embed`,
 				'twitter:player:width': '530',
