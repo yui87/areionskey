@@ -12,7 +12,7 @@ process.env.NODE_ENV = 'test';
 
 import * as assert from 'assert';
 import * as childProcess from 'child_process';
-import { async, startServer, signup, post, api, uploadFile, simpleGet, port, shutdownServer } from './utils';
+import { async, startServer, signup, post, api, simpleGet, port, shutdownServer, uploadFile, getDocument } from './utils';
 import * as openapi from '@redocly/openapi-core';
 import rndstr from 'rndstr';
 import { randomUUID } from 'crypto';
