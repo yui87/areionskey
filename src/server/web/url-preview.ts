@@ -16,6 +16,7 @@ function getSummaryInstance(): Summary {
 	if (summaryInstance) return summaryInstance;
 	summaryInstance = new Summary({
 		allowedPlugins: [
+			'twitter',
 			'youtube',
 		],
 	});
