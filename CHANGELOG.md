@@ -1,6 +1,37 @@
 ChangeLog
 =========
 
+3.1.0 (2023/11/29)
+--------------------
+### To Update
+以下を実施してください
+- Areionskey 再起動
+
+### ✨Improvements
+- Server/AP: signed headers の認証 by @mei23, @perillamint, @yunochi, @zotanmew [d4710e6](https://github.com/sakura-tel/areionskey/commit/d4710e63e3738350cba4e3f145dba783d779fede)
+- Package: migration:revert を呼べるように by @mei23 [8f71cf3](https://github.com/sakura-tel/areionskey/commit/8f71cf31bfeb4614fcd2728adfc31c466219f09a)
+- node-fetch -> got に完全移行 by @mei23 [491c29f](https://github.com/sakura-tel/areionskey/commit/491c29f1bdf1d37a794cc520853c27ed4879a335)
+- Note/Polls: ローカルのみの note では Update を配信しないように bt @mei23 [c3e289d](https://github.com/sakura-tel/areionskey/commit/c3e289d283af6571eab1e1f639258d939256fef2)
+- Note: 編集を受信可能に by @mei23 [0832337](https://github.com/sakura-tel/areionskey/commit/08323374ea96fcb2d3819684bfdda40099e09ffc)
+- Note: 検索可能性を追加 by @mei23 [d8c8ddb](https://github.com/sakura-tel/areionskey/commit/d8c8ddbe74c1e283a0cbd85b7f4de88eeadd82e3) [fd0b903](https://github.com/sakura-tel/areionskey/commit/fd0b90364e1493c451f019bce1db481ff4848686)
+- Server/Web: DNS Lookup に CacheableLookup を利用するように by @mei23 [00f1864](https://github.com/sakura-tel/areionskey/commit/8f02f5c92638e398da6d13d4a9e21b16d1531938)
+- Note: 組み込み動画プレーヤー by @mei23 [6401793](https://github.com/sakura-tel/areionskey/commit/6401793268c02bc3d7eb32503dff2ab6b71ff33f)
+- CSP by @mei23 [8bc1a5d](https://github.com/sakura-tel/areionskey/commit/8bc1a5ded6ffee4e672b8d6baadfa680517ea388)
+- Note: プレビュー(サマリ)の改善 by @mei23 [46d8b56](https://github.com/sakura-tel/areionskey/commit/46d8b567462f995a3c77f3a7e9562c23f3cffbdc) [a9ef440](https://github.com/sakura-tel/areionskey/commit/a9ef440d01fa38c62202700cb7d74430d4a84c95) 
+- Test: URL チェックの改善 by @mei23 [5cfd288](https://github.com/sakura-tel/areionskey/commit/5cfd288fef854672cdea65b03e306614699b14d4)
+- Link: Discord ユーザ名規則の変更 by @mei23 [9a10726](https://github.com/sakura-tel/areionskey/commit/9a10726f8485046633d7fe2b21d2a1eea8347945)
+
+### 🐛Fixes
+- Emoji: List 修正 by @mei23 [dcddba0](https://github.com/sakura-tel/areionskey/commit/dcddba00033a613cf4fd484fb955471504ebc43c)
+- api-doc: Chrome から閲覧できるように修正 by @mei23 [1670be1](https://github.com/sakura-tel/areionskey/commit/1670be103f3efe9060a0f05d3e2f7c222a0bfdf9)
+- Server: Queue 制限のチューン by @mei23 [4c8316e](https://github.com/sakura-tel/areionskey/commit/4c8316e278af87f578e4dfe497afae11fce2452f)
+- ルームを利用できるように修正 by @fs5m8 [00f1864](https://github.com/sakura-tel/areionskey/commit/00f1864d840d86d65fc7f838a14cbb833e2624ae)
+- 言語ファイルの更新
+- 依存関係の更新
+
+### Put on hold
+- Test: 項目に HTML meta を追加 by @mei23 [5bb35ec](https://github.com/sakura-tel/areionskey/commit/5bb35ecb5d470353f95adb3f48bc01c8db382fa3)
+
 3.0.0 (2023/08/17)
 --------------------
 ### 💥BREAKING CHANGES
