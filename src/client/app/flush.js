@@ -1,5 +1,5 @@
 const msg = document.getElementById('msg');
-const successText = `\nSuccess Flush! <a href="/">Back to Misskey</a>\n成功しました。<a href="/">Misskeyを開き直してください。</a>`;
+const successText = `\nSuccess Flush! <a href="/">Back to Areionskey</a>\n成功しました。<a href="/">Areionskey を開き直してください。</a>`;
 
 message('Start flushing.');
 

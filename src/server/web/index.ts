@@ -255,7 +255,7 @@ router.get('/notes/:note', async ctx => {
 			note: _note,
 			summary: getNoteSummary(_note),
 			imageUrl,
-			instanceName: meta.name || 'Misskey',
+			instanceName: meta.name || 'Areionskey',
 			icon: meta.iconUrl,
 			player, width, height, stream, type,
 		});
