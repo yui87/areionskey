@@ -9546,9 +9546,10 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   resolved "https://registry.yarnpkg.com/tweetnacl/-/tweetnacl-0.14.5.tgz#5ae68177f192d4456269d108afa93ff8743f4f64"
   integrity sha1-WuaBd/GS1EViadEIr6k/+HQ/T2Q=
 
-"twemoji-parser@git+https://github.com/mei23/twemoji-parser.git#15.0.1":
-  version "15.0.1"
-  resolved "git+https://github.com/mei23/twemoji-parser.git#d374b2f54efaf3ecf21948daecf851b69c9a7d62"
+"twemoji-parser@git+https://github.com/mei23/twemoji-parser.git#15.0.2":
+  version "15.0.2"
+  uid "3d4dedcfd0a7528ed05fe7d340eb3e7f47761eac"
+  resolved "git+https://github.com/mei23/twemoji-parser.git#3d4dedcfd0a7528ed05fe7d340eb3e7f47761eac"
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
