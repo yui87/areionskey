@@ -6328,9 +6328,10 @@ memoizee@0.4.X:
     next-tick "1"
     timers-ext "^0.1.5"
 
-memoji@mei23/memoji#15.0.1:
-  version "15.0.1"
-  resolved "https://codeload.github.com/mei23/memoji/tar.gz/4958da7c75c18703b7d9409d668516efd0fd84e2"
+memoji@mei23/memoji#15.0.2:
+  version "15.0.2"
+  uid e69655af638459955986282cc37122ec11a6ff88
+  resolved "https://codeload.github.com/mei23/memoji/tar.gz/e69655af638459955986282cc37122ec11a6ff88"
 
 merge-source-map@^1.1.0:
   version "1.1.0"
