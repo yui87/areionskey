@@ -22,7 +22,7 @@ export default define({
 	name: 'rss',
 	props: () => ({
 		compact: false,
-		url: 'https://p.nikkansports.com/goku-uma/rss/atom.xml'
+		url: 'https://www.nikkansports.com/keiba/atom.xml'
 	})
 }).extend({
 	i18n: i18n(),
