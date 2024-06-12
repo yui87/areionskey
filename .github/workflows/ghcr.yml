@@ -18,7 +18,7 @@ jobs:
         uses: docker/metadata-action@v4
         id: meta
         with:
-          images: ghcr.io/yui87/areionskey
+          images: ghcr.io/kwing0310/areionskey
           tags: type=semver,pattern={{version}}
 
       - name: Login to GitHub Container Registry
