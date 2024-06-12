@@ -38,7 +38,7 @@ const MAX_NAME_LENGTH = 128;
 const MAX_SUMMARY_LENGTH = 2048;
 
 const truncate = (value: string, maxLength: number) => {
-	return value.substr(0, maxLength);
+	return value.substring(0, maxLength);
 };
 
 /**
@@ -90,7 +90,7 @@ function validateActor(x: IObject, uri: string): IActor {
 /**
  * Personをフェッチします。
  *
- * Misskeyに対象のPersonが登録されていればそれを返します。
+ * Areionskeyに対象のPersonが登録されていればそれを返します。
  */
 export async function fetchPerson(uri: string, resolver?: Resolver): Promise<User | null> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
@@ -146,6 +146,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 			})
 		: null;
 
+	const bday = person['vcard:bday']?.match(/^\d{4}-\d{2}-\d{2}/);
+
 	// Create user
 	let user: IRemoteUser;
 	try {
@@ -159,6 +161,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 				lastFetchedAt: new Date(),
 				name: person.name ? truncate(person.name, MAX_NAME_LENGTH) : person.name,
 				isLocked: !!person.manuallyApprovesFollowers,
+				isExplorable: !!person.discoverable,
+				isIndexable: !(person.indexable === false),
 				username: person.preferredUsername,
 				usernameLower: person.preferredUsername!.toLowerCase(),
 				host,
@@ -177,6 +181,8 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 				description: person.summary ? htmlToMfm(truncate(person.summary, MAX_SUMMARY_LENGTH), person.tag) : null,
 				url: getOneApHrefNullable(person.url),
 				fields,
+				birthday: bday ? bday[0] : null,
+				location: person['vcard:Address'] || null,
 				userHost: host
 			});
 
@@ -260,14 +266,14 @@ export async function createPerson(uri: string, resolver?: Resolver): Promise<Us
 	});
 	//#endregion
 
-	await updateFeatured(user!.id).catch(err => logger.error(err));
+	await updateFeatured(user!.id, resolver).catch(err => logger.error(err));
 
 	return user!;
 }
 
 /**
  * Personの情報を更新します。
- * Misskeyに対象のPersonが登録されていなければ無視します。
+ * Areionskeyに対象のPersonが登録されていなければ無視します。
  * @param uri URI of Person
  * @param resolver Resolver
  * @param hint Hint of Person object (この値が正当なPersonの場合、Remote resolveをせずに更新に利用します)
@@ -326,6 +332,8 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 			})
 		: null;
 
+	const bday = person['vcard:bday']?.match(/^\d{4}-\d{2}-\d{2}/);
+
 	const updates = {
 		lastFetchedAt: new Date(),
 		inbox: person.inbox,
@@ -337,6 +345,8 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 		isBot: getApType(object) === 'Service',
 		isCat: (person as any).isCat === true,
 		isLocked: !!person.manuallyApprovesFollowers,
+		isExplorable: !!person.discoverable,
+		isIndexable: !(person.indexable === false),
 		movedToUserId: movedTo?.id || null,
 	} as Partial<User>;
 
@@ -362,6 +372,8 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 		url: person.url,
 		fields,
 		description: person.summary ? htmlToMfm(truncate(person.summary, MAX_SUMMARY_LENGTH), person.tag) : null,
+		birthday: bday ? bday[0] : null,
+		location: person['vcard:Address'] || null,
 		twitterUserId: null,
 		twitterScreenName: null,
 		githubId: null,
@@ -381,14 +393,14 @@ export async function updatePerson(uri: string, resolver?: Resolver | null, hint
 		followerSharedInbox: person.sharedInbox || (person.endpoints ? person.endpoints.sharedInbox : undefined)
 	});
 
-	await updateFeatured(exist.id).catch(err => logger.error(err));
+	await updateFeatured(exist.id, resolver).catch(err => logger.error(err));
 }
 
 /**
  * Personを解決します。
  *
- * Misskeyに対象のPersonが登録されていればそれを返し、そうでなければ
- * リモートサーバーからフェッチしてMisskeyに登録しそれを返します。
+ * Areionskeyに対象のPersonが登録されていればそれを返し、そうでなければ
+ * リモートサーバーからフェッチしてAreionskeyに登録しそれを返します。
  */
 export async function resolvePerson(uri: string, resolver?: Resolver): Promise<User> {
 	if (typeof uri !== 'string') throw new Error('uri is not string');
@@ -430,14 +442,14 @@ export function analyzeAttachments(attachments: IObject | IObject[] | undefined)
 	return { fields, services };
 }
 
-export async function updateFeatured(userId: User['id']) {
+export async function updateFeatured(userId: User['id'], resolver?: Resolver) {
 	const user = await Users.findOne(userId).then(ensure);
 	if (!Users.isRemoteUser(user)) return;
 	if (!user.featured) return;
 
 	logger.info(`Updating the featured: ${user.uri}`);
 
-	const resolver = new Resolver();
+	if (resolver == null) resolver = new Resolver();
 
 	// Resolve to (Ordered)Collection Object
 	const collection = await resolver.resolveCollection(user.featured);

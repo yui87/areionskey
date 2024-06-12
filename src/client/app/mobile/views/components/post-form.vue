@@ -31,12 +31,13 @@
 					</span>
 				</div>
 				<button @click="addVisibleUser"><fa icon="plus"/></button>
+				<p> <fa icon="exclamation-triangle"/> {{ $t('@.post-form.specified-warn') }} </p>
 			</div>
 			<div class="local-only" v-if="localOnly === true"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
 			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
 			<div class="textarea">
 				<textarea v-model="text" ref="text" :disabled="posting" :placeholder="placeholder" v-autocomplete="{ model: 'text' }" @paste="onPaste"></textarea>
-				<button class="emoji" @click="emoji" ref="emoji">
+				<button title="Pick" class="emoji" @click="emoji" ref="emoji">
 					<fa :icon="['far', 'laugh']"/>
 				</button>
 			</div>
@@ -48,21 +49,21 @@
 				<button class="drive" @click="chooseFileFromDrive"><fa icon="cloud"/></button>
 				<button class="kao" @click="kao"><fa :icon="['far', 'smile']"/></button>
 				<button class="poll" @click="poll = true"><fa icon="chart-pie"/></button>
-				<button class="poll" @click="useCw = !useCw"><fa :icon="['far', 'eye-slash']"/></button>
+				<button class="poll" @click="useCw = !useCw"><fa :icon="useCw ? ['fas', 'eye'] : ['far', 'eye-slash']"/></button>
 				<button class="visibility" @click="setVisibility" ref="visibilityButton">
 					<span v-if="visibility === 'public'"><fa icon="globe"/></span>
 					<span v-if="visibility === 'home'"><fa icon="home"/></span>
-					<span v-if="visibility === 'followers'"><fa icon="unlock"/></span>
+					<span v-if="visibility === 'followers'"><fa icon="lock"/></span>
 					<span v-if="visibility === 'specified'"><fa icon="envelope"/></span>
 				</button>
 			</footer>
 			<input ref="file" class="file" type="file" multiple="multiple" @change="onChangeFile"/>
 		</div>
+		<details v-if="preview && this.$store.state.settings.enablePostPreview" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
+			<summary>{{ $t('@.post-form.preview') }}</summary>
+			<mk-note class="note" :note="preview" :key="preview.id" :compact="true" :preview="true" />
+		</details>
 	</div>
-	<details v-if="preview" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
-		<summary>{{ $t('@.post-form.preview') }}</summary>
-		<mk-note class="note" :note="preview" :key="preview.id" :compact="true" :preview="true" />
-	</details>
 </div>
 </template>
 
@@ -79,6 +80,21 @@ export default Vue.extend({
 			mobile: true
 		}),
 	],
+
+	watch: {
+		text() {
+			this.doPreview();
+		},
+		files() {
+			this.doPreview();
+		},
+		visibility() {
+			this.doPreview();
+		},
+		localOnly() {
+			this.doPreview();
+		},
+	},
 
 	methods: {
 		cancel() {
@@ -112,7 +128,6 @@ export default Vue.extend({
 		> header
 			z-index 1000
 			height 50px
-			box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
 
 			> .cancel
 				padding 0
@@ -161,7 +176,9 @@ export default Vue.extend({
 					background var(--mobilePostFormTextareaBg)
 					border none
 					border-radius 0
-					box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
+					border-top solid var(--lineWidth) var(--faceDivider)
+					border-bottom solid var(--lineWidth) var(--faceDivider)
+					outline none
 					max-width 100%
 					min-width 100%
 					min-height 80px
@@ -234,6 +251,9 @@ export default Vue.extend({
 				> button
 					margin-left 4px
 
+				> p
+					margin 4px 0 0 0
+
 			> .local-only
 				margin 0 12px 8px 12px
 				color var(--primary)
@@ -248,7 +268,8 @@ export default Vue.extend({
 				background var(--mobilePostFormTextareaBg)
 				border none
 				border-radius 0
-				box-shadow 0 1px 0 0 var(--mobilePostFormDivider)
+				border-top solid var(--lineWidth) var(--faceDivider)
+				outline none
 				z-index 1
 
 				&:disabled
@@ -280,15 +301,16 @@ export default Vue.extend({
 					border-radius 0
 					box-shadow none
 
-	> .preview
-		background var(--face)
+		> .preview
+			background var(--face)
+			border-radius 0 0 8px 8px
 
-		> summary
-			padding 0px 16px 16px 20px
-			font-size 14px
-			color var(--text)
+			> summary
+				padding 10px 14px 14px 14px
+				font-size 16px
+				color var(--text)
 
-		> .note
-			border-top solid var(--lineWidth) var(--faceDivider)
+			> .note
+				border-top solid var(--lineWidth) var(--faceDivider)
 
 </style>

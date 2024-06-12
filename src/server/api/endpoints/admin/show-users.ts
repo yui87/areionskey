@@ -1,6 +1,7 @@
 import $ from 'cafy';
 import define from '../../define';
 import { Users } from '../../../../models';
+import { sqlLikeEscape } from '../../../../misc/sql-like-escape';
 
 export const meta = {
 	tags: ['admin'],
@@ -37,8 +38,12 @@ export const meta = {
 				'admin',
 				'moderator',
 				'adminOrModerator',
+				'verified',
+				'premiumed',
 				'silenced',
 				'suspended',
+				'cat',
+				'bot',
 			]),
 			default: 'all'
 		},
@@ -73,10 +78,12 @@ export default define(meta, async (ps, me) => {
 		case 'moderator': query.where('user.isModerator = TRUE'); break;
 		case 'adminOrModerator': query.where('user.isAdmin = TRUE OR isModerator = TRUE'); break;
 		case 'verified': query.where('user.isVerified = TRUE'); break;
-		case 'premium': query.where('user.isPremium = TRUE'); break;
+		case 'premiumed': query.where('user.isPremium = TRUE'); break;
 		case 'alive': query.where('user.updatedAt > :date', { date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) }); break;
 		case 'silenced': query.where('user.isSilenced = TRUE'); break;
 		case 'suspended': query.where('user.isSuspended = TRUE'); break;
+		case 'cat': query.where('user.isCat = TRUE'); break;
+		case 'bot': query.where('user.isBot = TRUE'); break;
 	}
 
 	switch (ps.origin) {
@@ -85,11 +92,11 @@ export default define(meta, async (ps, me) => {
 	}
 
 	if (ps.username) {
-		query.andWhere('user.usernameLower like :username', { username: ps.username.toLowerCase() + '%' });
+		query.andWhere('user.usernameLower like :username', { username: sqlLikeEscape(ps.username.toLowerCase()) + '%' });
 	}
 
 	if (ps.hostname) {
-		query.andWhere('user.host like :hostname', { hostname: '%' + ps.hostname.toLowerCase() + '%' });
+		query.andWhere('user.host like :hostname', { hostname: '%' + sqlLikeEscape(ps.hostname.toLowerCase()) + '%' });
 	}
 
 	switch (ps.sort) {

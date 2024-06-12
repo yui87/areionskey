@@ -4,7 +4,6 @@ import { entities as charts } from '../services/chart/entities';
 import { dbLogger } from './logger';
 import * as highlight from 'cli-highlight';
 
-import { Log } from '../models/entities/log';
 import { User } from '../models/entities/user';
 import { DriveFile } from '../models/entities/drive-file';
 import { DriveFolder } from '../models/entities/drive-folder';
@@ -51,6 +50,7 @@ import { ModerationLog } from '../models/entities/moderation-log';
 import { UsedUsername } from '../models/entities/used-username';
 import { Relay } from '../models/entities/relay';
 import { envOption } from '../env';
+import { PasswordResetRequest } from '../models/entities/password-reset-request';
 
 const sqlLogger = dbLogger.createSubLogger('sql', 'white', false);
 
@@ -118,7 +118,6 @@ export const entities = [
 	NoteUnread,
 	Page,
 	PageLike,
-	Log,
 	DriveFile,
 	DriveFolder,
 	Poll,
@@ -135,6 +134,7 @@ export const entities = [
 	ReversiGame,
 	ReversiMatching,
 	Relay,
+	PasswordResetRequest,
 	...charts as any
 ];
 

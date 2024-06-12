@@ -9,7 +9,7 @@ import { User } from '../../models/entities/user';
 import { Blockings, Users, FollowRequests, Followings } from '../../models';
 import { perUserFollowingChart } from '../chart';
 import { genId } from '../../misc/gen-id';
-import { publishBlockingChanged, publishFollowingChanged } from '../server-event';
+import { publishFollowingChanged } from '../server-event';
 
 export default async function(blocker: User, blockee: User) {
 	await Promise.all([
@@ -26,13 +26,11 @@ export default async function(blocker: User, blockee: User) {
 		blockeeId: blockee.id,
 	});
 
-	if (Users.isLocalUser(blocker) && Users.isRemoteUser(blockee)) {
-		const content = renderActivity(renderBlock(blocker, blockee));
-		deliver(blocker, content, blockee.inbox);
-	}
-
-	publishBlockingChanged(blocker.id);
-	if (Users.isLocalUser(blockee)) publishBlockingChanged(blockee.id);
+	// Do not deliver block
+	// if (Users.isLocalUser(blocker) && Users.isRemoteUser(blockee)) {
+	// 	const content = renderActivity(renderBlock(blocker, blockee));
+	// 	deliver(blocker, content, blockee.inbox);
+	// }
 }
 
 async function cancelRequest(follower: User, followee: User) {
@@ -110,5 +108,11 @@ async function unFollow(follower: User, followee: User) {
 	if (Users.isLocalUser(follower) && Users.isRemoteUser(followee)) {
 		const content = renderActivity(renderUndo(renderFollow(follower, followee), follower));
 		deliver(follower, content, followee.inbox);
+	}
+
+	// リモートからフォローを受けていたらReject送信
+	if (Users.isRemoteUser(follower) && Users.isLocalUser(followee)) {
+		const content = renderActivity(renderReject(renderFollow(follower, followee), followee));
+		deliver(followee, content, follower.inbox);
 	}
 }

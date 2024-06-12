@@ -15,9 +15,14 @@
 						</router-link>
 					</div>
 				</header>
-				<div class="text">
-					<mfm v-if="note.text" :text="note.cw != null ? note.cw : note.text" :author="note.user" :custom-emojis="note.emojis"/>
+				<p v-if="note.cw != null" class="cw">
+					<mfm v-if="note.cw != ''" class="text" :text="note.cw" :author="note.user" :custom-emojis="note.emojis" :no-sticker="true"/>
+					<mk-cw-button v-model="showContent" :note="note"/>
+				</p>
+				<div class="text" v-show="note.cw == null || showContent">
+					<mfm v-if="note.text" :text="note.text" :author="note.user" :custom-emojis="note.emojis" :no-sticker="true"/>
 				</div>
+				<mk-reactions-viewer class="reactions" :note="note"/>
 			</div>
 		</div>
 	</transition-group>
@@ -40,7 +45,8 @@ export default Vue.extend({
 		return {
 			fetching: true,
 			notes: [],
-			connection: null
+			connection: null,
+			showContent: false,
 		};
 	},
 
@@ -57,6 +63,10 @@ export default Vue.extend({
 	},
 
 	methods: {
+		toggleShowContent() {
+			this.showContent = !this.showContent;
+		},
+		
 		fetch(cb?) {
 			this.fetching = true;
 			this.$root.api('notes', {
@@ -112,7 +122,6 @@ export default Vue.extend({
 			> .avatar
 				display block
 				float left
-				position -webkit-sticky
 				position sticky
 				top 16px
 				width 42px
@@ -150,7 +159,22 @@ export default Vue.extend({
 						> .created-at
 							color var(--noteHeaderInfo)
 
+				> .cw
+					text-align left
+					cursor default
+					display block
+					margin 0
+					padding 0
+					overflow-wrap break-word
+
+					> .text
+						margin-right 8px
+
 				> .text
 					text-align left
+
+				> .reactions
+					text-align left
+					pointer-events none
 
 </style>

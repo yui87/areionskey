@@ -4,12 +4,11 @@
 	:class="{ reacted: note.myReaction == reaction }"
 	@click="toggleReaction(reaction)"
 	v-if="count > 0"
-	v-particle="!isMe"
 	@mouseover="onMouseover"
 	@mouseleave="onMouseleave"
 	ref="reaction"
 >
-	<mk-reaction-icon :reaction="reaction" :customEmojis="note.emojis" ref="icon"/>
+	<mk-reaction-icon class="icon" :reaction="reaction" :customEmojis="note.emojis" ref="icon"/>
 	<span>{{ count }}</span>
 </span>
 </template>
@@ -51,11 +50,6 @@ export default Vue.extend({
 			isHovering: false
 		};
 	},
-	computed: {
-		isMe(): boolean {
-			return this.$store.getters.isSignedIn && this.$store.state.i.id === this.note.userId;
-		},
-	},
 	mounted() {
 		if (!this.isInitial) this.anime();
 	},
@@ -67,7 +61,6 @@ export default Vue.extend({
 	},
 	methods: {
 		toggleReaction() {
-			if (this.isMe) return;
 			if (!this.canToggle) return;
 
 			const oldReaction = this.note.myReaction;
@@ -99,7 +92,6 @@ export default Vue.extend({
 			this.closeDetails();
 		},
 		openDetails() {
-			if (this.$root.isMobile) return;
 			this.$root.api('notes/reactions', {
 				noteId: this.note.id,
 				type: this.reaction,
@@ -181,9 +173,6 @@ export default Vue.extend({
 	&, *
 		-webkit-touch-callout none
 		-webkit-user-select none
-		-khtml-user-select none
-		-moz-user-select none
-		-ms-user-select none
 		user-select none
 
 	*
@@ -196,6 +185,9 @@ export default Vue.extend({
 		> span
 			color var(--primaryForeground)
 
+		> .icon
+			filter drop-shadow(0 0 2px rgba(0, 0, 0, 0.5))
+
 	&:not(.reacted)
 		background var(--reactionViewerButtonBg)
 
@@ -203,7 +195,7 @@ export default Vue.extend({
 			background var(--reactionViewerButtonHoverBg)
 
 	> span
-		font-size 1.1em
 		line-height 32px
+		margin 0 0 0 2px
 		color var(--text)
 </style>

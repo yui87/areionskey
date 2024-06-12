@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import * as config from '../../../config';
 import anime from 'animejs';
 
 export default Vue.extend({
@@ -18,10 +19,13 @@ export default Vue.extend({
 		}
 	},
 	mounted() {
+		this.onNotify();
 		this.$nextTick(() => {
 			anime({
 				targets: this.$el,
-				[this.pos]: '0px',
+				[this.pos]: this.pos === 'bottom'
+										? this.$store.state.device.inDeckMode ? '108px' : '58px'
+										: this.$store.state.device.inDeckMode ? '0px' : '48px',
 				duration: 500,
 				easing: 'easeOutQuad'
 			});
@@ -36,6 +40,16 @@ export default Vue.extend({
 				});
 			}, 6000);
 		});
+	},
+
+	methods: {
+		onNotify() {
+			if (this.$store.state.device.enableSounds && this.$store.state.device.enableSoundsInNotifications) {
+				const sound = new Audio(`${config.url}/assets/notify.mp3`);
+				sound.volume = this.$store.state.device.soundVolume;
+				sound.play();
+			}
+		}
 	}
 });
 </script>
@@ -64,10 +78,8 @@ export default Vue.extend({
 
 	> div
 		height 100%
-		-webkit-backdrop-filter blur(2px)
-		backdrop-filter blur(2px)
-		background-color rgba(#000, 0.5)
-		border-radius 7px
+		background-color rgba(#000, 0.7)
+		border-radius 6px
 		overflow hidden
 
 </style>

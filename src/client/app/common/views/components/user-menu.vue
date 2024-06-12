@@ -7,7 +7,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
-import { faExclamationCircle, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faMicrophoneSlash, faSync } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
@@ -37,7 +37,19 @@ export default Vue.extend({
 				icon: 'ban',
 				text: this.user.isBlocking ? this.$t('unblock') : this.$t('block'),
 				action: this.toggleBlock
-			}, null, {
+			}]);
+		}
+
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id && this.user.isFollowed) {
+			menu = menu.concat([null, {
+				icon: 'ban',
+				text: this.$t('breakfollow'),
+				action: this.invalidateFollow
+			}]);
+		}
+
+		if (this.$store.getters.isSignedIn && this.$store.state.i.id != this.user.id) {
+			menu = menu.concat([null, {
 				icon: faExclamationCircle,
 				text: this.$t('report-abuse'),
 				action: this.reportAbuse
@@ -45,15 +57,27 @@ export default Vue.extend({
 		}
 
 		if (this.$store.getters.isSignedIn && (this.$store.state.i.isAdmin || this.$store.state.i.isModerator)) {
-			menu = menu.concat([null, {
+			menu = menu.concat(null);
+
+			if (this.user.host != null) {
+				menu = menu.concat({
+					icon: faSync,
+					text: this.$t("update-remote-user"),
+					action: this.updateRemoteUser,
+				});
+			}
+			menu = menu.concat({
 				icon: faMicrophoneSlash,
 				text: this.user.isSilenced ? this.$t('unsilence') : this.$t('silence'),
 				action: this.toggleSilence
-			}, {
-				icon: faSnowflake,
-				text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
-				action: this.toggleSuspend
-			}]);
+			});
+			if ((!this.user.isAdmin && !this.user.isModerator) || ((this.user.isAdmin || this.user.isModerator) && this.user.isSuspended)) {
+				menu = menu.concat({
+					icon: faSnowflake,
+					text: this.user.isSuspended ? this.$t('unsuspend') : this.$t('suspend'),
+					action: this.toggleSuspend
+				});
+			}
 		}
 
 		return {
@@ -152,6 +176,23 @@ export default Vue.extend({
 			}
 		},
 
+		async invalidateFollow() {
+			if (!await this.getConfirmed(this.$t('breakfollow-confirm'))) return;
+			this.$root.api('following/invalidate', {
+				userId: this.user.id
+				}).then(() => {
+					this.$root.dialog({
+						type: 'success',
+						splash: true
+					});
+				}, e => {
+					this.$root.dialog({
+						type: 'error',
+						text: e
+					});
+			});
+		},
+
 		async reportAbuse() {
 			const reported = this.$t('report-abuse-reported'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
 			const { canceled, result: comment } = await this.$root.dialog({
@@ -217,12 +258,21 @@ export default Vue.extend({
 			const confirm = await this.$root.dialog({
 				type: 'warning',
 				showCancelButton: true,
-				title: 'confirm',
+				title: this.$t('confirm'),
 				text,
 			});
 
 			return !confirm.canceled;
 		},
+
+		async updateRemoteUser() {
+			const updated = this.$t('remote-user-updated'); // なぜか後で参照すると null になるので最初にメモリに確保しておく
+			await this.$root.api('admin/update-remote-user', { userId: this.user.id });
+			this.$root.dialog({
+				type: 'success',
+				text: updated
+			});
+		}
 	}
 });
 </script>

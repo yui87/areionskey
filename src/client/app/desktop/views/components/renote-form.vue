@@ -80,6 +80,7 @@ export default Vue.extend({
 .mk-renote-form
 	> .preview
 		margin 16px 22px
+		overflow initial
 
 	> footer
 		height 72px
@@ -103,7 +104,7 @@ export default Vue.extend({
 
 			&.home
 				right 148px
-				font-size 13px
+				font-size 12px
 
 			&.ok
 				right 16px

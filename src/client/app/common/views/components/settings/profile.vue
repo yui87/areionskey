@@ -21,11 +21,13 @@
 			<ui-input v-model="location">
 				<span>{{ $t('location') }}</span>
 				<template #prefix><fa icon="map-marker-alt"/></template>
+				<template #desc>{{ $t('location-caution') }}</template>
 			</ui-input>
 
 			<ui-input v-model="birthday" type="date">
 				<template #title>{{ $t('birthday') }}</template>
 				<template #prefix><fa icon="birthday-cake"/></template>
+				<template #desc>{{ $t('birthday-caution') }}</template>
 			</ui-input>
 
 			<ui-textarea v-model="description" :max="500">
@@ -79,20 +81,27 @@
 		<header><fa :icon="faCogs"/> {{ $t('advanced') }}</header>
 
 		<div>
-			<ui-switch v-model="isCat" @change="save(false)">{{ $t('is-cat') }}</ui-switch>
-			<ui-switch v-model="isBot" @change="save(false)">{{ $t('is-bot') }}</ui-switch>
+			<ui-switch v-model="isCat" @change="save(false)">{{ $t('is-cat') }}
+				<template #desc>{{ $t('is-cat-desc') }}</template>
+			</ui-switch>
+			<ui-switch v-model="isBot" @change="save(false)">{{ $t('is-bot') }}
+				<template #desc>{{ $t('is-bot-desc') }}</template>
+			</ui-switch>
 			<ui-switch v-model="alwaysMarkNsfw">{{ $t('@._settings.always-mark-nsfw') }}</ui-switch>
 		</div>
 	</section>
 
 	<section>
-		<header><fa :icon="faUnlockAlt"/> {{ $t('privacy') }}</header>
+		<header><fa :icon="faLock"/> {{ $t('privacy') }}</header>
 
 		<div>
 			<ui-switch v-model="isLocked" @change="save(false)">{{ $t('is-locked') }}</ui-switch>
 			<ui-switch v-model="carefulBot" :disabled="isLocked" @change="save(false)">{{ $t('careful-bot') }}</ui-switch>
 			<ui-switch v-model="carefulRemote" :disabled="isLocked" @change="save(false)">{{ $t('careful-remote') }}</ui-switch>
 			<ui-switch v-model="autoAcceptFollowed" :disabled="!isLocked && !carefulBot && !carefulRemote" @change="save(false)">{{ $t('auto-accept-followed') }}</ui-switch>
+			<ui-switch v-model="avoidSearchIndex" @change="save(false)">{{ $t('avoid-search-index') }}</ui-switch>
+			<ui-switch v-model="isExplorable" @change="save(false)">{{ $t('is-explorable') }}</ui-switch>
+			<ui-switch v-model="isIndexable" @change="save(false)">{{ $t('isIndexable') }}</ui-switch>
 		</div>
 	</section>
 
@@ -140,10 +149,10 @@
 import Vue from 'vue';
 import i18n from '../../../../i18n';
 import { apiUrl, host } from '../../../../config';
-import { toUnicode } from 'punycode';
+import { toUnicode } from 'punycode/';
 import langmap from 'langmap';
 import { unique } from '../../../../../../prelude/array';
-import { faDownload, faUpload, faUnlockAlt, faBoxes, faCogs } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faUpload, faLock, faBoxes, faCogs } from '@fortawesome/free-solid-svg-icons';
 import { faSave, faEnvelope } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
@@ -178,11 +187,14 @@ export default Vue.extend({
 			carefulBot: false,
 			carefulRemote: false,
 			autoAcceptFollowed: false,
+			avoidSearchIndex: false,
+			isExplorable: false,
+			isIndexable: true,
 			saving: false,
 			avatarUploading: false,
 			bannerUploading: false,
 			exportTarget: 'notes',
-			faDownload, faUpload, faSave, faEnvelope, faUnlockAlt, faBoxes, faCogs
+			faDownload, faUpload, faSave, faEnvelope, faLock, faBoxes, faCogs
 		};
 	},
 
@@ -220,6 +232,9 @@ export default Vue.extend({
 		this.carefulBot = this.$store.state.i.carefulBot;
 		this.carefulRemote = this.$store.state.i.carefulRemote;
 		this.autoAcceptFollowed = this.$store.state.i.autoAcceptFollowed;
+		this.avoidSearchIndex = this.$store.state.i.avoidSearchIndex;
+		this.isExplorable = this.$store.state.i.isExplorable;
+		this.isIndexable = this.$store.state.i.isIndexable;
 
 		this.fieldName0 = this.$store.state.i.fields[0] ? this.$store.state.i.fields[0].name : null;
 		this.fieldValue0 = this.$store.state.i.fields[0] ? this.$store.state.i.fields[0].value : null;
@@ -300,7 +315,10 @@ export default Vue.extend({
 				isLocked: !!this.isLocked,
 				carefulBot: !!this.carefulBot,
 				carefulRemote: !!this.carefulRemote,
-				autoAcceptFollowed: !!this.autoAcceptFollowed
+				autoAcceptFollowed: !!this.autoAcceptFollowed,
+				avoidSearchIndex: !!this.avoidSearchIndex,
+				isExplorable: !!this.isExplorable,
+				isIndexable: !!this.isIndexable,
 			}).then(i => {
 				this.saving = false;
 				this.$store.state.i.avatarId = i.avatarId;

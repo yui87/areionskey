@@ -13,13 +13,23 @@
 					<a class="avatar">
 						<img :src="avator" alt="avatar"/>
 					</a>
-					<button v-if="$store.getters.isSignedIn" class="menu" ref="menu" @click="menu"><fa icon="ellipsis-h"/></button>
-					<mk-follow-button v-if="!$store.getters.isSignedIn || ($store.getters.isSignedIn && $store.state.i.id != user.id)" :user="user" :key="user.id"/>
+					<div class="actions" v-if="$store.getters.isSignedIn">
+						<button v-if="$store.getters.isSignedIn" class="menu" ref="menu" @click="menu"><fa icon="ellipsis-h"/></button>
+						<mk-follow-button v-if="$store.state.i.id != user.id && !user.isBlocking" :user="user" :inline="true" :transparent="false" class="follow"/>
+					</div>
+					<div class="actions" v-else>
+						<mk-follow-button :user="user" :inline="true" :transparent="false" class="follow"/>
+					</div>
 				</div>
 				<div class="title">
 					<h1><mk-user-name :user="user" :key="user.id" :nowrap="false"/></h1>
 					<span class="username"><mk-acct :user="user" :detail="true" :key="user.id"/></span>
 					<span class="moved" v-if="user.movedToUser != null">moved to <router-link :to="user.movedToUser | userPage()"><mk-acct :user="user.movedToUser" :detail="true"/></router-link></span>
+					<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
+					<span class="is-moderator" v-if="user.isModerator" :title="$t('@.moderator')"><fa :icon="faUserShield"/></span>
+					<span class="is-premium" v-if="user.isPremium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
+					<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><img svg-inline src="../../../../../assets/horseshoe.svg" class="horseshoe"/></span>
+					<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 					<span class="followed" v-if="user.isFollowed">{{ $t('follows-you') }}</span>
 				</div>
 				<div class="description">
@@ -37,11 +47,11 @@
 					</dl>
 				</div>
 				<div class="info">
-					<p class="location" v-if="user.host === null && user.location">
+					<p class="location" v-if="user.location">
 						<fa icon="map-marker"/>{{ user.location }}
 					</p>
-					<p class="birthday" v-if="user.host === null && user.birthday">
-						<fa icon="birthday-cake"/>{{ user.birthday.replace('-', '年').replace('-', '月') + '日' }} ({{ $t('years-old', { age }) }})
+					<p class="birthday" v-if="user.birthday">
+						<fa icon="birthday-cake"/>{{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})
 					</p>
 				</div>
 				<div class="status">
@@ -89,6 +99,7 @@ import XUserMenu from '../../../../common/views/components/user-menu.vue';
 import XHome from './home.vue';
 import { getStaticImageUrl } from '../../../../common/scripts/get-static-image-url';
 import XIntegrations from '../../../../common/views/components/integrations.vue';
+import { faUserShield } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/pages/user.vue'),
@@ -100,7 +111,8 @@ export default Vue.extend({
 		return {
 			fetching: true,
 			user: null,
-			page: this.$route.name == 'user' ? 'home' : null
+			page: this.$route.name == 'user' ? 'home' : null,
+			faUserShield
 		};
 	},
 	computed: {
@@ -156,12 +168,12 @@ export default Vue.extend({
 	> .is-suspended
 	> .is-remote
 		&.is-suspended
-			color #570808
-			background #ffdbdb
+			color var(--suspendedInfoFg)
+			background var(--suspendedInfoBg)
 
 		&.is-remote
-			color #573c08
-			background #fff0db
+			color var(--remoteInfoFg)
+			background var(--remoteInfoBg)
 
 		> p
 			margin 0 auto
@@ -214,12 +226,14 @@ export default Vue.extend({
 							border 4px solid $bg
 							border-radius 12px
 
-				> .menu
-					margin 0 0 0 auto
-					padding 8px
-					margin-right 8px
-					font-size 18px
-					color var(--text)
+				> .actions
+					position absolute
+					right 0
+
+					> .menu
+						padding 0 14px
+						font-size 18px
+						color var(--text)
 
 			> .title
 				margin 8px 0
@@ -238,7 +252,32 @@ export default Vue.extend({
 					color var(--mobileUserPageAcct)
 
 				> .moved
-					margin-left 8px
+					margin-left 4px
+
+				> .is-admin
+					margin-left .5em
+					color var(--noteHeaderAdminFg)
+
+				> .is-moderator
+					color #ff9e3d
+					margin-left .5em
+
+				> .is-premium
+					margin-left .5em
+					color #FFC107
+
+				> .is-verified
+					margin-left .5em
+					color #4dabf7
+
+					> .horseshoe
+						width 1em
+						height 1em
+						vertical-align: -.125em
+
+				> .is-bot
+					margin-left .5em
+					color var(--noteHeaderBadgeFg)
 
 				> .followed
 					margin-left 8px
@@ -316,7 +355,6 @@ export default Vue.extend({
 					color var(--text)
 
 	> nav
-		position -webkit-sticky
 		position sticky
 		top 47px
 		background-color $bg

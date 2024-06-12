@@ -498,7 +498,6 @@ export default Vue.extend({
 	> nav
 		display block
 		position sticky
-		position -webkit-sticky
 		top 0
 		z-index 1
 		width 100%
@@ -507,8 +506,6 @@ export default Vue.extend({
 		white-space nowrap
 		font-size 0.9em
 		color var(--text)
-		-webkit-backdrop-filter blur(12px)
-		backdrop-filter blur(12px)
 		background-color var(--mobileDriveNavBg)
 		border-bottom solid 1px rgba(#000, 0.13)
 

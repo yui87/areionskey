@@ -34,7 +34,7 @@ export const meta = {
 			version: {
 				type: 'string' as const,
 				optional: false as const, nullable: false as const,
-				description: 'The version of Misskey of this instance.',
+				description: 'The version of Areionskey of this instance.',
 				example: config.version
 			},
 			name: {
@@ -123,16 +123,15 @@ export default define(meta, async (ps, me) => {
 		repositoryUrl: instance.repositoryUrl,
 		feedbackUrl: instance.feedbackUrl,
 
-		secure: config.https != null,
-		machine: os.hostname(),
-		os: os.platform(),
-		node: process.version,
-		psql: await getConnection().query('SHOW server_version').then(x => x[0].server_version),
-		redis: redis.server_info.redis_version,
+		machine: config.hideServerInfo ? 'Unknown' : os.hostname(),
+		os: config.hideServerInfo ? 'Unknown' : os.platform(),
+		node: config.hideServerInfo ? 'Unknown' : process.version,
+		psql: config.hideServerInfo ? 'Unknown' : await getConnection().query('SHOW server_version').then(x => x[0].server_version),
+		redis: config.hideServerInfo ? 'Unknown' : redis.server_info.redis_version,
 
 		cpu: {
-			model: os.cpus()[0].model,
-			cores: os.cpus().length
+			model: config.hideServerInfo ? 'Unknown' : os.cpus()[0].model,
+			cores: config.hideServerInfo ? 'Unknown' : os.cpus().length
 		},
 
 		announcements: instance.announcements || [],
@@ -184,7 +183,7 @@ export default define(meta, async (ps, me) => {
 		};
 	}
 
-	if (me && (me.isAdmin || me.isModerator)) {
+	if (me && (me.isAdmin)) {
 		response.useStarForReactionFallback = instance.useStarForReactionFallback;
 		response.pinnedUsers = instance.pinnedUsers;
 		response.hiddenTags = instance.hiddenTags;

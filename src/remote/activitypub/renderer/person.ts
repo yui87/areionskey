@@ -52,7 +52,7 @@ export async function renderPerson(user: ILocalUser) {
 
 	const keypair = await UserKeypairs.findOne(user.id).then(ensure);
 
-	return {
+	const person = {
 		type: isSystem ? 'Application' : user.isBot ? 'Service' : 'Person',
 		id,
 		inbox: `${id}/inbox`,
@@ -70,8 +70,20 @@ export async function renderPerson(user: ILocalUser) {
 		image: banner ? renderImage(banner) : null,
 		tag,
 		manuallyApprovesFollowers: user.isLocked,
+		discoverable: !!user.isExplorable,
+		indexable: user.isIndexable,
 		publicKey: renderKey(user, keypair, `#main-key`),
 		isCat: user.isCat,
-		attachment: attachment.length ? attachment : undefined
-	};
+		attachment: attachment.length ? attachment : undefined,
+	} as any;
+
+	if (profile?.birthday) {
+		person['vcard:bday'] = profile.birthday;
+	}
+
+	if (profile?.location) {
+		person['vcard:Address'] = profile.location;
+	}
+
+	return person;
 }

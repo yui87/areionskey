@@ -8,7 +8,7 @@
 		</time>
 	</div>
 	<div class="content">
-		<mk-analog-clock :dark="true"/>
+		<mk-analog-clock :dark="$store.state.device.darkmode"/>
 	</div>
 </div>
 </template>
@@ -69,16 +69,15 @@ export default Vue.extend({
 			cursor: default
 
 		&:hover
-			background #232626
 
 			& + .content
 				visibility visible
 
 			> time
-				color #fff !important
+				color var(--desktopHeaderHoverFg) !important
 
 				*
-					color #fff !important
+					color var(--desktopHeaderHoverFg) !important
 
 		&:after
 			content ""
@@ -103,7 +102,8 @@ export default Vue.extend({
 		z-index 3
 		margin 0
 		padding 0
-		width 256px
-		background #232626
+		width 250px
+		border-radius 125px 0 125px 125px
+		background var(--desktopHeaderBg)
 
 </style>

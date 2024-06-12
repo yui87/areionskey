@@ -15,7 +15,7 @@
 		<template v-for="(note, i) in _notes">
 			<mk-note
 				:note="note"
-				:key="note.id"
+				:key="`${note.id}-${note.updatedAt}`"
 				:compact="true"
 			/>
 			<p class="date" :key="note.id + '_date'" v-if="i != notes.length - 1 && note._date != _notes[i + 1]._date">
@@ -93,7 +93,6 @@ export default Vue.extend({
 	created() {
 		this.column.$on('top', this.onTop);
 		this.column.$on('bottom', this.onBottom);
-		this.init();
 	},
 
 	beforeDestroy() {

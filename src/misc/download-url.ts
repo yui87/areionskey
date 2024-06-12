@@ -4,17 +4,20 @@ import * as util from 'util';
 import got, * as Got from 'got';
 import { httpAgent, httpsAgent, StatusError } from './fetch';
 import config from '../config';
-import * as chalk from 'chalk';
 import Logger from '../services/logger';
-import * as IPCIDR from 'ip-cidr';
-const PrivateIp = require('private-ip');
+import { checkPrivateIp } from './check-private-ip';
+import { checkAllowedUrl } from './check-allowed-url';
 
 const pipeline = util.promisify(stream.pipeline);
 
 export async function downloadUrl(url: string, path: string) {
-	const logger = new Logger('download');
+	if (!checkAllowedUrl(url)) {
+		throw new StatusError('Invalid URL', 400);
+	}
 
-	logger.info(`Downloading ${chalk.cyan(url)} ...`);
+	const logger = new Logger('download-url');
+
+	logger.info(`Downloading ${url} ...`);
 
 	const timeout = 30 * 1000;
 	const operationTimeout = 60 * 1000;
@@ -39,12 +42,15 @@ export async function downloadUrl(url: string, path: string) {
 		},
 		http2: false,	// default
 		retry: 0,
+	}).on('redirect', (res: Got.Response, opts: Got.NormalizedOptions) => {
+		if (!checkAllowedUrl(opts.url)) {
+			logger.warn(`Invalid URL: ${opts.url}`);
+			req.destroy();
+		}
 	}).on('response', (res: Got.Response) => {
-		if ((process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') && !config.proxy && res.ip) {
-			if (isPrivateIp(res.ip)) {
-				logger.warn(`Blocked address: ${res.ip}`);
-				req.destroy();
-			}
+		if (checkPrivateIp(res.ip)) {
+			logger.warn(`Blocked address: ${res.ip}`);
+			req.destroy();
 		}
 
 		const contentLength = res.headers['content-length'];
@@ -56,7 +62,7 @@ export async function downloadUrl(url: string, path: string) {
 			}
 		}
 	}).on('downloadProgress', (progress: Got.Progress) => {
-		if (progress.transferred > maxSize) {
+		if (progress.transferred > maxSize && progress.percent !== 1) {
 			logger.warn(`maxSize exceeded (${progress.transferred} > ${maxSize}) on downloadProgress`);
 			req.destroy();
 		}
@@ -72,16 +78,5 @@ export async function downloadUrl(url: string, path: string) {
 		}
 	}
 
-	logger.succ(`Download finished: ${chalk.cyan(url)}`);
-}
-
-function isPrivateIp(ip: string) {
-	for (const net of config.allowedPrivateNetworks || []) {
-		const cidr = new IPCIDR(net);
-		if (cidr.contains(ip)) {
-			return false;
-		}
-	}
-
-	return PrivateIp(ip);
+	logger.succ(`Download finished: ${url}`);
 }

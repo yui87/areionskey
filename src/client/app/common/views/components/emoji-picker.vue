@@ -11,29 +11,52 @@
 		</button>
 	</header>
 	<div class="emojis">
+		<div class="search">
+			<ui-input v-model="q" :autofocus="false" style="margin: 0.4em;">
+				<span>{{ $t('search-emoji') }}</span>
+			</ui-input>
+			<div class="list" v-if="searchResults.length > 0">
+				<button v-for="emoji in (searchResults || [])"
+					:title="emoji.sources ? emoji.sources.map(x => `${x.name}@${x.host}`).join(',\n') : emoji.name"
+					@click="chosen(emoji)"
+					:key="emoji.char || emoji.name"
+				>
+					<mk-emoji v-if="emoji.char != null" :emoji="emoji.char" :local="emoji.local"/>
+					<img v-else loading="lazy" :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
+				</button>
+			</div>
+		</div>
 		<template v-if="categories[0].isActive">
 			<header class="category"><fa :icon="faHistory" fixed-width/> {{ $t('recent-emoji') }}</header>
 			<div class="list">
-				<button v-for="(emoji, i) in ($store.state.device.recentEmojis || [])"
+				<button v-for="emoji in ($store.state.device.recentEmojis || [])"
 					:title="emoji.name"
 					@click="chosen(emoji)"
-					:key="i"
+					:key="emoji.char || emoji.name"
 				>
 					<mk-emoji v-if="emoji.char != null" :emoji="emoji.char"/>
-					<img v-else :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
+					<img v-else loading="lazy" :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
 				</button>
 			</div>
 		</template>
 
-		<header class="category"><fa :icon="categories.find(x => x.isActive).icon" fixed-width/> {{ categories.find(x => x.isActive).text }}</header>
+		<header class="category">
+			<fa :icon="categories.find(x => x.isActive).icon" fixed-width/>
+			{{ categories.find(x => x.isActive).text }}
+			<div class="skinTones">
+				<button class="skinTone" v-for="st in SKIN_TONES" :key="st" @click="changeSkinTone(st)">
+					<mk-emoji :emoji="getSkinToneModifiedChar(SKIN_TONES_SAMPLE, st)"/>
+				</button>
+			</div>
+		</header>
 		<template v-if="categories.find(x => x.isActive).name">
 			<div class="list">
 				<button v-for="emoji in emojilist.filter(e => e.category === categories.find(x => x.isActive).name)"
 					:title="emoji.name"
-					@click="chosen(emoji)"
-					:key="emoji.name"
+					@click="chosen(emoji, skinTone)"
+					:key="`${emoji.name}-${skinTone}`"
 				>
-					<mk-emoji :emoji="emoji.char"/>
+					<mk-emoji :emoji="emojiToSkinToneModifiedChar(emoji, skinTone)" :local="emoji.local"/>
 				</button>
 			</div>
 		</template>
@@ -46,7 +69,7 @@
 						@click="chosen(emoji)"
 						:key="emoji.name"
 					>
-						<img :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
+						<img loading="lazy" :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
 					</button>
 				</div>
 			</div>
@@ -56,15 +79,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import { defineComponent } from 'vue';
 import i18n from '../../../i18n';
 import { emojilist } from '../../../../../misc/emojilist';
 import { getStaticImageUrl } from '../../../common/scripts/get-static-image-url';
-import { faAsterisk, faLeaf, faUtensils, faFutbol, faCity, faDice, faGlobe, faHistory, faUser  } from '@fortawesome/free-solid-svg-icons';
+import { faAsterisk, faLeaf, faUtensils, faFutbol, faCity, faDice, faGlobe, faHistory, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faHeart, faFlag, faLaugh } from '@fortawesome/free-regular-svg-icons';
 import { groupByX } from '../../../../../prelude/array';
 
-export default Vue.extend({
+const SKIN_TONES_SAMPLE = '\u{1F44D}';	// thumbs up
+const SKIN_TONES = [ null, '\u{1F3FB}', '\u{1F3FC}', '\u{1F3FD}', '\u{1F3FE}', '\u{1F3FF}' ];
+
+export default defineComponent({
 	i18n: i18n('common/views/components/emoji-picker.vue'),
 
 	data() {
@@ -73,6 +99,11 @@ export default Vue.extend({
 			getStaticImageUrl,
 			customEmojis: {},
 			faGlobe, faHistory,
+			q: null,
+			searchResults: [],
+			skinTone: null,
+			SKIN_TONES_SAMPLE,
+			SKIN_TONES,
 			categories: [{
 				text: this.$t('custom-emoji'),
 				icon: faAsterisk,
@@ -126,6 +157,147 @@ export default Vue.extend({
 		}
 	},
 
+	watch: {
+		q() {
+			if (this.q == null || this.q === '') {
+				this.searchResults = [];
+				return;
+			}
+
+			const q = this.q.replace(/:/g, '');
+
+			const searchCustom = () => {
+				const max = 8;
+				const emojis = (this.$root.getMetaSync() || { emojis: [] }).emojis || [];
+				const matches = new Set();
+
+				const exactMatch = emojis.find(e => e.name === q);
+				if (exactMatch) matches.add(exactMatch);
+
+				if (q.includes(' ')) { // AND検索
+					const keywords = q.split(' ');
+
+					// 名前にキーワードが含まれている
+					for (const emoji of emojis) {
+						if (keywords.every(keyword => emoji.name.includes(keyword))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					// 名前またはエイリアスにキーワードが含まれている
+					for (const emoji of emojis) {
+						if (keywords.every(keyword => emoji.name.includes(keyword) || emoji.aliases.some(alias => alias.includes(keyword)))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+				} else {
+					for (const emoji of emojis) {
+						if (emoji.name.startsWith(q)) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					for (const emoji of emojis) {
+						if (emoji.aliases.some(alias => alias.startsWith(q))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					for (const emoji of emojis) {
+						if (emoji.name.includes(q)) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					for (const emoji of emojis) {
+						if (emoji.aliases.some(alias => alias.includes(q))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+				}
+
+				return matches;
+			};
+
+			const searchUnicode = () => {
+				const max = 8;
+				const emojis = this.emojilist;
+				const matches = new Set();
+
+				const exactMatch = emojis.find(e => e.name === q);
+				if (exactMatch) matches.add(exactMatch);
+
+				if (q.includes(' ')) { // AND検索
+					const keywords = q.split(' ');
+
+					// 名前にキーワードが含まれている
+					for (const emoji of emojis) {
+						if (keywords.every(keyword => emoji.name.includes(keyword))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					// 名前またはエイリアスにキーワードが含まれている
+					for (const emoji of emojis) {
+						if (keywords.every(keyword => emoji.name.includes(keyword) || emoji.keywords.some(alias => alias.includes(keyword)))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+				} else {
+					for (const emoji of emojis) {
+						if (emoji.name.startsWith(q)) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					for (const emoji of emojis) {
+						if (emoji.keywords.some(keyword => keyword.startsWith(q))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					for (const emoji of emojis) {
+						if (emoji.name.includes(q)) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+					if (matches.size >= max) return matches;
+
+					for (const emoji of emojis) {
+						if (emoji.keywords.some(keyword => keyword.includes(q))) {
+							matches.add(emoji);
+							if (matches.size >= max) break;
+						}
+					}
+				}
+
+				return matches;
+			};
+
+			const searchResultCustom = Array.from(searchCustom());
+			const searchResultUnicode = Array.from(searchUnicode());
+			this.searchResults = searchResultCustom.concat(searchResultUnicode);
+		}
+	},
+
 	created() {
 		let local = (this.$root.getMetaSync() || { emojis: [] }).emojis || [];
 		local = groupByX(local, (x: any) => x.category || '');
@@ -133,6 +305,10 @@ export default Vue.extend({
 
 		if (this.$store.state.device.activeEmojiCategoryName) {
 			this.goCategory(this.$store.state.device.activeEmojiCategoryName);
+		}
+
+		if (SKIN_TONES.includes(this.$store.state.device.emojiSkinTone)) {
+			this.skinTone = this.$store.state.device.emojiSkinTone;
 		}
 	},
 
@@ -155,8 +331,32 @@ export default Vue.extend({
 			}
 		},
 
-		chosen(emoji: any) {
-			const getKey = (emoji: any) => emoji.char || `:${emoji.name}:`;
+		changeSkinTone(skinTone: string) {
+			this.skinTone = skinTone;
+			this.$store.commit('device/set', { key: 'emojiSkinTone', value: skinTone });
+		},
+
+		emojiToSkinToneModifiedChar(emoji: any, skinTone: string | null | undefined): string {
+			if (emoji.st === 1) {
+				return this.getSkinToneModifiedChar(emoji.char, skinTone);
+			} else {
+				return emoji.char;
+			}
+		},
+		
+		getSkinToneModifiedChar(char: string, skinTone: string | null | undefined): string {
+			if (!skinTone) return char;
+			let sgs = Array.from(char);
+			if (sgs[1] === '\u{FE0F}') {
+				sgs.splice(1, 1, skinTone);
+			} else {
+				sgs.splice(1, 0, skinTone);
+			}
+			return sgs.join('');
+		},
+
+		chosen(emoji: any, skinTone?: string) {
+			const getKey = (emoji: any) => emoji.char ? emoji.st === 1 ? this.getSkinToneModifiedChar(emoji.char, skinTone) : emoji.char : `:${emoji.name}:`;
 
 			let recents = this.$store.state.device.recentEmojis || [];
 			recents = recents.filter((e: any) => getKey(e) !== getKey(emoji));
@@ -193,9 +393,16 @@ export default Vue.extend({
 				transition color 0s
 
 	> .emojis
-		height 300px
+		height 320px
 		overflow-y auto
 		overflow-x hidden
+
+		> .search
+			top 0
+			left 0
+			z-index 1
+			padding 8px
+			color var(--text)
 
 		> header.category
 			position sticky
@@ -207,12 +414,20 @@ export default Vue.extend({
 			color var(--text)
 			font-size 12px
 
-		>>> header.sub
+			> .skinTones
+				display inline-flex
+				position absolute
+				right 8px
+
+				> .skinTone
+					padding: 0 3px
+
+		:deep(header.sub)
 			padding 4px 8px
 			color var(--text)
 			font-size 12px
 
-		>>> div.list
+		:deep(div.list)
 			display grid
 			grid-template-columns 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr
 			gap 4px

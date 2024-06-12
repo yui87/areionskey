@@ -1,5 +1,5 @@
 <template>
-<component :is="hasRoute ? 'router-link' : 'a'" class="mk-url" :[attr]="hasRoute ? url.substr(local.length) : url" :rel="rel" :target="target">
+<component :is="hasRoute ? 'router-link' : 'a'" class="mk-url" :[attr]="hasRoute ? url.substring(local.length) : url" :rel="rel" :target="target">
 	<template v-if="!self">
 		<span class="schema">{{ schema }}//</span>
 		<span class="hostname">{{ hostname }}</span>
@@ -8,7 +8,7 @@
 	<template v-if="pathname === '/' && self">
 		<span class="self">{{ hostname }}</span>
 	</template>
-	<span class="pathname" v-if="pathname != ''">{{ self ? pathname.substr(1) : pathname }}</span>
+	<span class="pathname" v-if="pathname != ''">{{ self ? pathname.substring(1) : pathname }}</span>
 	<span class="query">{{ query }}</span>
 	<span class="hash">{{ hash }}</span>
 	<fa icon="external-link-square-alt" v-if="target === '_blank'"/>
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { toUnicode as decodePunycode } from 'punycode';
+import { toUnicode as decodePunycode } from 'punycode/';
 import { url as local } from '../../../config';
 
 export default Vue.extend({
@@ -25,11 +25,11 @@ export default Vue.extend({
 	data() {
 		const isSelf = this.url.startsWith(local);
 		const hasRoute = isSelf && (
-			(this.url.substr(local.length) === '/') ||
-			this.url.substr(local.length).startsWith('/@') ||
-			this.url.substr(local.length).startsWith('/notes/') ||
-			this.url.substr(local.length).startsWith('/tags/') ||
-			this.url.substr(local.length).startsWith('/pages/'));
+			(this.url.substring(local.length) === '/') ||
+			this.url.substring(local.length).startsWith('/@') ||
+			this.url.substring(local.length).startsWith('/notes/') ||
+			this.url.substring(local.length).startsWith('/tags/') ||
+			this.url.substring(local.length).startsWith('/pages/'));
 		return {
 			local,
 			schema: null,
@@ -46,6 +46,7 @@ export default Vue.extend({
 	},
 	created() {
 		const url = new URL(this.url);
+		if (!['http:', 'https:'].includes(url.protocol)) throw new Error('invalid url');
 		this.schema = url.protocol;
 		this.hostname = decodePunycode(url.hostname);
 		this.port = url.port;

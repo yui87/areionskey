@@ -7,6 +7,7 @@ import config from '../../config';
 import { SchemaType } from '../../misc/schema';
 import { awaitAll } from '../../prelude/await-all';
 import { populateEmojis } from '../../misc/populate-emojis';
+import { sanitizeUrl } from '../../misc/sanitize-url';
 
 export type PackedUser = SchemaType<typeof packedUserSchema>;
 
@@ -145,7 +146,7 @@ export class UserRepository extends Repository<User> {
 			name: user.name,
 			username: user.username,
 			host: user.host,
-			avatarUrl: user.avatar ? DriveFiles.getPublicUrl(user.avatar, true) : config.url + '/avatar/' + user.id,
+			avatarUrl: user.avatar ? sanitizeUrl(DriveFiles.getPublicUrl(user.avatar, true)) : config.url + '/avatar/' + user.id,
 			avatarBlurhash: user.avatar?.blurhash || null,
 			avatarColor: null,
 			isAdmin: user.isAdmin || falsy,
@@ -153,6 +154,7 @@ export class UserRepository extends Repository<User> {
 			isCat: user.isCat || falsy,
 			isVerified: user.isVerified || falsy,
 			isPremium: user.isPremium || falsy,
+			avoidSearchIndex: user.avoidSearchIndex || falsy,
 
 			// カスタム絵文字添付
 			emojis: populateEmojis(user.emojis, user.host),
@@ -169,10 +171,10 @@ export class UserRepository extends Repository<User> {
 			} : {}),
 
 			...(opts.detail ? {
-				url: profile!.url,
+				url: sanitizeUrl(profile!.url),
 				createdAt: user.createdAt.toISOString(),
 				updatedAt: user.updatedAt ? user.updatedAt.toISOString() : null,
-				bannerUrl: user.banner ? DriveFiles.getPublicUrl(user.banner, false) : null,
+				bannerUrl: user.banner ? sanitizeUrl(DriveFiles.getPublicUrl(user.banner, false)) : null,
 				bannerBlurhash: user.bannerBlurhash,
 				bannerColor: user.banner?.properties?.avgColor || null,
 				isLocked: user.isLocked,
@@ -224,7 +226,9 @@ export class UserRepository extends Repository<User> {
 				carefulBot: profile!.carefulBot,
 				carefulRemote: profile!.carefulRemote,
 				autoAcceptFollowed: profile!.autoAcceptFollowed,
+				isIndexable: user.isIndexable,
 				isDeleted: user.isDeleted,
+				isExplorable: user.isExplorable,
 				hasUnreadMessagingMessage: this.getHasUnreadMessagingMessage(user.id),
 				hasUnreadNotification: this.getHasUnreadNotification(user.id),
 				pendingReceivedFollowRequestsCount: FollowRequests.count({
@@ -360,7 +364,7 @@ export const packedUserSchema = {
 			type: 'string' as const,
 			nullable: false as const, optional: true as const,
 			format: 'date-time',
-			description: 'The date that the user account was created on Misskey.'
+			description: 'The date that the user account was created on Areionskey.'
 		},
 		updatedAt: {
 			type: 'string' as const,

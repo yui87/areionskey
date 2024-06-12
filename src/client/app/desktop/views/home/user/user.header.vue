@@ -9,14 +9,18 @@
 			</p>
 			<div>
 				<span class="username"><mk-acct :user="user" :detail="true" /></span>
-				<span v-if="user.isBot" :title="$t('is-bot')"><fa icon="robot"/></span>
 				<span v-if="user.movedToUser != null">moved to <router-link :to="user.movedToUser | userPage()"><mk-acct :user="user.movedToUser" :detail="true"/></router-link></span>
+				<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
+				<span class="is-moderator" v-if="user.isModerator" :title="$t('@.moderator')"><fa :icon="faUserShield"/></span>
+				<span class="is-premium" v-if="user.isPremium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
+				<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><img svg-inline src="../../../../../assets/horseshoe.svg" class="horseshoe"/></span>
+				<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 			</div>
 		</div>
 		<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
 		<div class="actions" v-if="$store.getters.isSignedIn">
 			<button @click="menu" class="menu" ref="menu"><fa icon="ellipsis-h"/></button>
-			<mk-follow-button v-if="$store.state.i.id != user.id" :user="user" :inline="true" :transparent="false" class="follow"/>
+			<mk-follow-button v-if="$store.state.i.id != user.id && !user.isBlocking" :user="user" :inline="true" :transparent="false" class="follow"/>
 		</div>
 		<div class="actions" v-else>
 			<mk-follow-button :user="user" :inline="true" :transparent="false" class="follow"/>
@@ -40,8 +44,8 @@
 			</dl>
 		</div>
 		<div class="info">
-			<span class="location" v-if="user.host === null && user.location"><fa icon="map-marker"/> {{ user.location }}</span>
-			<span class="birthday" v-if="user.host === null && user.birthday"><fa icon="birthday-cake"/> {{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
+			<span class="location" v-if="user.location"><fa icon="map-marker"/> {{ user.location }}</span>
+			<span class="birthday" v-if="user.birthday"><fa icon="birthday-cake"/> {{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
 		</div>
 		<div class="status">
 			<router-link :to="user | userPage()" class="notes-count"><b>{{ user.notesCount | number }}</b>{{ $t('posts') }}</router-link>
@@ -58,6 +62,7 @@ import i18n from '../../../../i18n';
 import * as age from 's-age';
 import XUserMenu from '../../../../common/views/components/user-menu.vue';
 import XIntegrations from '../../../../common/views/components/integrations.vue';
+import { faUserShield } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('desktop/views/pages/user/user.header.vue'),
@@ -65,6 +70,11 @@ export default Vue.extend({
 		XIntegrations
 	},
 	props: ['user'],
+	data() {
+		return {
+			faUserShield
+		}
+	},
 	computed: {
 		style(): any {
 			if (this.user.bannerUrl == null) return {};
@@ -194,12 +204,32 @@ export default Vue.extend({
 			> div
 				> *
 					display inline-block
-					margin-right 16px
+					margin-right .5em
 					line-height 20px
 					opacity 0.8
 
 					&.username
 						font-weight bold
+
+				> .is-admin
+					color var(--noteHeaderAdminFg)
+
+				> .is-moderator
+					color #ff9e3d
+
+				> .is-premium
+					color #FFC107
+
+				> .is-verified
+					color #4dabf7
+
+					> .horseshoe
+						width 1em
+						height 1em
+						vertical-align: -.125em
+
+				> .is-bot
+					color var(--noteHeaderBadgeFg)
 
 	> .avatar
 		display block

@@ -21,12 +21,13 @@
 					</span>
 				</div>
 				<button :title="$t('@.post-form.add-visible-user')" @click="addVisibleUser"><fa icon="plus"/></button>
+				<p> <fa icon="exclamation-triangle"/> {{ $t('@.post-form.specified-warn') }} </p>
 			</div>
 			<div class="local-only" v-if="localOnly === true"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
 			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
 			<div class="textarea">
 				<textarea :class="{ with: (files.length != 0 || poll) }" ref="text" v-model="text" :disabled="posting" @keydown="onKeydown" @paste="onPaste" :placeholder="placeholder" v-autocomplete="{ model: 'text' }"></textarea>
-				<button class="emoji" @click="emoji" ref="emoji">
+				<button title="Pick" class="emoji" @click="emoji" ref="emoji">
 					<fa :icon="['far', 'laugh']"/>
 				</button>
 				<x-post-form-attaches class="files" :class="{ with: poll }" :files="files"/>
@@ -42,7 +43,7 @@
 		<button class="visibility" :title="$t('@.post-form.visibility')" @click="setVisibility" ref="visibilityButton">
 			<span v-if="visibility === 'public'"><fa icon="globe"/></span>
 			<span v-if="visibility === 'home'"><fa icon="home"/></span>
-			<span v-if="visibility === 'followers'"><fa icon="unlock"/></span>
+			<span v-if="visibility === 'followers'"><fa icon="lock"/></span>
 			<span v-if="visibility === 'specified'"><fa icon="envelope"/></span>
 		</button>
 		<p class="text-count" :class="{ over: trimmedLength(text) > maxNoteTextLength }">{{ maxNoteTextLength - trimmedLength(text) }}</p>
@@ -52,7 +53,7 @@
 		<input ref="file" type="file" multiple="multiple" tabindex="-1" @change="onChangeFile"/>
 		<div class="dropzone" v-if="draghover"></div>
 	</div>
-	<details v-if="preview" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
+	<details v-if="preview && this.$store.state.settings.enablePostPreview" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
 		<summary>{{ $t('@.post-form.preview') }}</summary>
 		<mk-note class="note" :note="preview" :key="preview.id" :compact="true" :preview="true" />
 	</details>
@@ -263,6 +264,9 @@ export default Vue.extend({
 			> button
 				margin-left 4px
 
+			> p
+				margin 4px 0 0 0
+
 		> .local-only
 			margin 0 0 8px 0
 			color var(--primary)
@@ -353,7 +357,7 @@ export default Vue.extend({
 
 	> summary
 		padding 0px 16px 16px 20px
-		font-size 14px
+		font-size 16px
 		color var(--text)
 
 	> .note

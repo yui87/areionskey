@@ -3,7 +3,7 @@ import $ from 'cafy';
 import define from '../../define';
 import { Users, Followings } from '../../../../models';
 import { generateMuteQueryForUsers } from '../../common/generate-mute-query';
-import { generateBlockedUserQuery, generateBlockQueryForUsers } from '../../common/generate-block-query';
+import { generateBlockQueryForUsers } from '../../common/generate-block-query';
 
 export const meta = {
 	desc: {
@@ -42,6 +42,7 @@ export const meta = {
 export default define(meta, async (ps, me) => {
 	const query = Users.createQueryBuilder('user')
 		.where('user.isLocked = FALSE')
+		.andWhere('user.isExplorable = TRUE')
 		.andWhere('user.host IS NULL')
 		.andWhere('user.updatedAt >= :date', { date: new Date(Date.now() - ms('7days')) })
 		.andWhere('user.id != :meId', { meId: me.id })
@@ -49,7 +50,6 @@ export default define(meta, async (ps, me) => {
 
 	generateMuteQueryForUsers(query, me);
 	generateBlockQueryForUsers(query, me);
-	generateBlockedUserQuery(query, me);
 
 	const followingQuery = Followings.createQueryBuilder('following')
 		.select('following.followeeId')

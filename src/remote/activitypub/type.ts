@@ -151,6 +151,8 @@ export interface IActor extends IObject {
 	name?: string;
 	preferredUsername?: string;
 	manuallyApprovesFollowers?: boolean;
+	discoverable?: boolean;
+	indexable?: boolean;
 	inbox: string;
 	sharedInbox?: string;	// 後方互換性のため
 	publicKey?: {
@@ -165,6 +167,8 @@ export interface IActor extends IObject {
 		sharedInbox?: string;
 	};
 	movedTo?: string | IObject;
+	'vcard:bday'?: string;
+	'vcard:Address'?: string;
 }
 
 export const isCollection = (object: IObject): object is ICollection =>

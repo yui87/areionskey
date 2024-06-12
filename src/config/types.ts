@@ -6,7 +6,6 @@ export type Source = {
 	feedback_url?: string;
 	url: string;
 	port: number;
-	https?: { [x: string]: string };
 	disableHsts?: boolean;
 	db: {
 		host: string;
@@ -64,10 +63,12 @@ export type Source = {
 	mediaProxy?: string;
 
 	signToActivityPubGet?: boolean;
+
+	proxyIpHeader?: string;
 };
 
 /**
- * Misskeyが自動的に(ユーザーが設定した情報から推論して)設定する情報
+ * Areionskeyが自動的に(ユーザーが設定した情報から推論して)設定する情報
  */
 export type Mixin = {
 	version: string;

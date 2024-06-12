@@ -43,6 +43,11 @@ export const meta = {
 			message: 'No such emoji.',
 			code: 'NO_SUCH_EMOJI',
 			id: '684dec9d-a8c2-4364-9aa8-456c49cb1dc8'
+		},
+		emojiNameCorrupts: {
+			message: 'Emoji name corrupts.',
+			code: 'EMOJI_NAME_CORRUPTS',
+			id: '03bc7ada-edee-4959-b7f5-3901a939729c'
 		}
 	}
 };
@@ -51,6 +56,8 @@ export default define(meta, async (ps) => {
 	const emoji = await Emojis.findOne(ps.id);
 
 	if (emoji == null) throw new ApiError(meta.errors.noSuchEmoji);
+
+	if (!ps.name.match(/^[a-zA-Z0-9_+-]+$/)) throw new ApiError(meta.errors.emojiNameCorrupts);
 
 	const type = await detectUrlMime(ps.url);
 

@@ -190,8 +190,8 @@ export default Vue.extend({
 
 		onMessage(message) {
 			// サウンドを再生する
-			if (this.$store.state.device.enableSounds) {
-				const sound = new Audio(`${url}/assets/message.mp3`);
+			if (this.$store.state.device.enableSounds && this.$store.state.device.enableSoundsInMessage) {
+				const sound = new Audio(`${url}/assets/notify.mp3`);
 				sound.volume = this.$store.state.device.soundVolume;
 				sound.play();
 			}
@@ -384,7 +384,6 @@ export default Vue.extend({
 				background var(--messagingRoomBg)
 
 	> footer
-		position -webkit-sticky
 		position sticky
 		z-index 2
 		bottom 0

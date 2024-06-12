@@ -211,6 +211,21 @@ export class User {
 	@JoinColumn()
 	public movedToUser: User | null;
 
+	@Column('boolean', {
+		default: false,
+	})
+	public avoidSearchIndex: boolean;
+
+	@Column('boolean', {
+		default: true,
+	})
+	public isExplorable: boolean;
+
+	@Column('boolean', {
+		default: true,
+	})
+	public isIndexable: boolean;
+
 	constructor(data: Partial<User>) {
 		if (data == null) return;
 

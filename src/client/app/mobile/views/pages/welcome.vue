@@ -9,16 +9,14 @@
 		<p class="pba" v-html="$t('@.powered-by-areionskey')"></p>
 		<div class="about">
 			<p v-html="description || this.$t('@.about')"></p>
-			<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
-		</div>
-		<div class="signin">
-			<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			<div class="sign">
+				<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
+				<span class="divider">|</span>
+				<a href="/signin" @click.prevent="signin()">{{ $t('@.signin') }}</a>
+			</div>
 		</div>
 		<div class="tl">
 			<mk-welcome-timeline/>
-		</div>
-		<div class="hashtags">
-			<mk-tag-cloud/>
 		</div>
 		<div class="photos">
 			<div v-for="photo in photos" :style="`background-image: url(${photo.thumbnailUrl})`"></div>
@@ -78,7 +76,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import { copyright, host } from '../../../config';
 import { concat } from '../../../../../prelude/array';
-import { toUnicode } from 'punycode';
+import { toUnicode } from 'punycode/';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/pages/welcome.vue'),
@@ -128,7 +126,8 @@ export default Vue.extend({
 	methods: {
 		signin() {
 			this.$root.dialog({
-				type: 'signin'
+				type: 'signin',
+				showOkButton: false
 			});
 		}
 	}
@@ -169,7 +168,7 @@ export default Vue.extend({
 			text-align center
 			margin 0
 			color var(--text)
-		
+
 		> h1
 			margin-bottom 16px
 			font-weight bold
@@ -187,11 +186,12 @@ export default Vue.extend({
 			> p
 				margin 8px
 
-			> .signup
-				font-weight bold
+			> .sign
+				margin 8px 0
+				font-size 115%
 
-		> .signin
-			margin 16px 0
+				> .divider
+					margin 0 16px
 
 		> .tl
 			margin 16px 0
@@ -200,11 +200,6 @@ export default Vue.extend({
 				max-height 300px
 				border-radius 6px
 				overflow auto
-				-webkit-overflow-scrolling touch
-
-		> .hashtags
-			padding 0 8px
-			height 200px
 
 		> .photos
 			display grid

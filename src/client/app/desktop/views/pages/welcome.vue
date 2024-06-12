@@ -57,12 +57,6 @@
 				</div>
 			</div>
 
-			<div class="tag-cloud block">
-				<div>
-					<mk-tag-cloud/>
-				</div>
-			</div>
-
 			<div class="nav block">
 				<div>
 					<mk-nav class="nav"/>
@@ -70,12 +64,6 @@
 			</div>
 
 			<div class="side">
-				<div class="trends block">
-					<div>
-						<mk-trends/>
-					</div>
-				</div>
-
 				<div class="tl block">
 					<header><fa :icon="['far', 'comment-alt']"/> {{ $t('timeline') }}</header>
 					<div>
@@ -142,7 +130,12 @@
 
 	<modal name="signin" class="modal" width="450px" height="auto" scrollable>
 		<header class="formHeader">{{ $t('@.signin') }}</header>
-		<mk-signin class="form"/>
+		<mk-signin class="form" @reminder="reminder" />
+	</modal>
+
+	<modal name="reminder" class="modal" width="450px" height="auto" scrollable>
+		<header class="formHeader">{{ $t('@.reminder') }}</header>
+		<mk-reminder class="form" @done="doneReminder" />
 	</modal>
 </div>
 </template>
@@ -152,7 +145,7 @@ import Vue from 'vue';
 import i18n from '../../../i18n';
 import { host, copyright } from '../../../config';
 import { concat } from '../../../../../prelude/array';
-import { toUnicode } from 'punycode';
+import { toUnicode } from 'punycode/';
 
 export default Vue.extend({
 	i18n: i18n('desktop/views/pages/welcome.vue'),
@@ -212,6 +205,15 @@ export default Vue.extend({
 
 		signin() {
 			this.$modal.show('signin');
+		},
+
+		reminder() {
+			this.$modal.hide('signin');
+			this.$modal.show('reminder');
+		},
+		
+		doneReminder() {
+			this.$modal.hide('reminder');
 		},
 
 		dark() {
@@ -364,10 +366,10 @@ export default Vue.extend({
 
 		> .body
 			display grid
-			grid-template-rows 390px 1fr 256px 64px
+			grid-template-rows 450px 1fr 64px
 			grid-template-columns 1fr 1fr 350px
 			gap 16px
-			height 1150px
+			height 938px
 
 			> .main
 				grid-row 1
@@ -460,39 +462,26 @@ export default Vue.extend({
 						background-position center center
 						background-size cover
 
-			> .tag-cloud
-				grid-row 3
-				grid-column 1 / 3
-
-				> div
-					height 256px
-					padding 32px
-
 			> .nav
 				display flex
 				justify-content center
 				align-items center
-				grid-row 4
+				grid-row 3
 				grid-column 1 / 3
 				font-size 14px
 
 			> .side
 				display grid
-				grid-row 1 / 5
+				grid-row 1 / 4
 				grid-column 3
 				grid-template-rows 1fr 350px
 				grid-template-columns 1fr
 				gap 16px
 
 				> .tl
-					grid-row 1
+					grid-row 1 / 3
 					grid-column 1
 					overflow auto
-
-				> .trends
-					grid-row 2
-					grid-column 1
-					padding 8px
 
 				> .info
 					grid-row 3

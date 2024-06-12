@@ -26,7 +26,7 @@
 		</header>
 		<div class="body">
 			<p v-if="appearNote.cw != null" class="cw">
-				<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" />
+				<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" :no-sticker="true"/>
 				<mk-cw-button v-model="showContent" :note="appearNote"/>
 			</p>
 			<div class="content" v-show="appearNote.cw == null || showContent">
@@ -40,8 +40,6 @@
 				</div>
 				<mk-poll v-if="appearNote.poll" :note="appearNote"/>
 				<mk-url-preview v-for="url in urls" :url="url" :key="url" :detail="true"/>
-				<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><fa icon="map-marker-alt"/> {{ $t('location') }}</a>
-				<div class="map" v-if="appearNote.geo" ref="map"></div>
 				<div class="renote" v-if="appearNote.renote">
 					<mk-note-preview :note="appearNote.renote"/>
 				</div>
@@ -50,10 +48,15 @@
 		<router-link class="time" :to="appearNote | notePage">
 			<mk-time :time="appearNote.createdAt" mode="detail"/>
 		</router-link>
+		<div  class="time" v-if="appearNote.updatedAt != null">
+			<fa :icon="faEdit"/>
+			{{ }}
+			<mk-time :time="appearNote.updatedAt" mode="detail"/>
+		</div>
 		<div class="visibility-info">
 			<span class="visibility" v-if="appearNote.visibility != 'public'">
 				<fa v-if="appearNote.visibility == 'home'" icon="home"/>
-				<fa v-if="appearNote.visibility == 'followers'" icon="unlock"/>
+				<fa v-if="appearNote.visibility == 'followers'" icon="lock"/>
 				<fa v-if="appearNote.visibility == 'specified'" icon="envelope"/>
 			</span>
 			<span class="localOnly" v-if="appearNote.localOnly == true"><fa icon="heart"/></span>
@@ -71,11 +74,11 @@
 			<button v-else>
 				<fa icon="ban"/>
 			</button>
-			<button v-if="!isMyNote && appearNote.myReaction == null" class="reactionButton" @click="react()" ref="reactButton">
-				<fa icon="plus"/>
+			<button v-if="appearNote.myReaction == null" class="reactionButton" @click="react()" ref="reactButton">
+				<fa icon="plus"/><p class="count" v-if="Object.values(appearNote.reactions).some(x => x)">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
 			</button>
-			<button v-if="!isMyNote && appearNote.myReaction != null" class="reactionButton reacted" @click="undoReact(appearNote)" ref="reactButton">
-				<fa icon="minus"/>
+			<button v-if="appearNote.myReaction != null" class="reactionButton reacted" @click="undoReact(appearNote)" ref="reactButton">
+				<fa icon="minus"/><p class="count" v-if="Object.values(appearNote.reactions).some(x => x)">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
 			</button>
 			<button @click="menu()" ref="menuButton">
 				<fa icon="ellipsis-h"/>
@@ -94,6 +97,7 @@ import i18n from '../../../i18n';
 import XSub from './note.sub.vue';
 import noteSubscriber from '../../../common/scripts/note-subscriber';
 import noteMixin from '../../../common/scripts/note-mixin';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('mobile/views/components/note-detail.vue'),
@@ -116,6 +120,7 @@ export default Vue.extend({
 
 	data() {
 		return {
+			faEdit,
 			conversation: [],
 			conversationFetching: false,
 			replies: []
@@ -285,18 +290,6 @@ export default Vue.extend({
 						padding 16px
 						border dashed 1px var(--quoteBorder)
 						border-radius 8px
-
-				> .location
-					margin 4px 0
-					font-size 12px
-					color var(--text)
-
-				> .map
-					width 100%
-					height 200px
-
-					&:empty
-						display none
 
 				> .mk-url-preview
 					margin-top 8px

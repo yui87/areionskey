@@ -17,7 +17,7 @@
 	<!-- トランジションを有効にするとなぜかメモリリークする -->
 	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" name="mk-notes" class="notes transition" tag="div" ref="notes">
 		<template v-for="(note, i) in _notes">
-			<mk-note :note="note" :key="note.id" :compact="true" ref="note"/>
+			<mk-note :note="note" :key="`${note.id}-${note.updatedAt}`" :compact="true" ref="note"/>
 			<p class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date">
 				<span><fa icon="angle-up"/>{{ note._datetext }}</span>
 				<span><fa icon="angle-down"/>{{ _notes[i + 1]._datetext }}</span>
@@ -67,7 +67,7 @@ export default Vue.extend({
 
 				if (self.isScrollTop()) {
 					// サウンドを再生する
-					if (self.$store.state.device.enableSounds && !silent) {
+					if (self.$store.state.device.enableSounds && self.$store.state.device.enableSoundsInTimeline && !silent) {
 						const sound = new Audio(`${config.url}/assets/post.mp3`);
 						sound.volume = self.$store.state.device.soundVolume;
 						sound.play();
@@ -154,7 +154,6 @@ export default Vue.extend({
 				margin-right 8px
 
 	> .newer-indicator
-		position -webkit-sticky
 		position sticky
 		z-index 100
 		height 3px

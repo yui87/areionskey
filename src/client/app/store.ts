@@ -25,6 +25,7 @@ const defaultSettings = {
 	showLocalRenotes: true,
 	loadRemoteMedia: true,
 	disableViaMobile: false,
+	enablePostPreview: true,
 	memo: null,
 	iLikeSushi: false,
 	rememberNoteVisibility: false,
@@ -56,6 +57,8 @@ const defaultDeviceSettings = {
 	deckTemporaryColumnIndex: 1,
 	roundedCorners: true,
 	reduceMotion: false,
+	makeCustomEmojisBigger: true,
+	useSticker: false,
 	darkmode: true,
 	darkTheme: 'mi-dark',
 	lightTheme: 'mi-light',
@@ -63,6 +66,10 @@ const defaultDeviceSettings = {
 	fontSize: 0,
 	themes: [],
 	enableSounds: true,
+	enableSoundsInTimeline: false,
+	enableSoundsInNotifications: true,
+	enableSoundsInMessage: true,
+	enableSoundsInReversi: true,
 	soundVolume: 0.5,
 	mediaVolume: 0.5,
 	lang: null,
@@ -84,6 +91,7 @@ const defaultDeviceSettings = {
 	roomUseOrthographicCamera: true,
 	activeEmojiCategoryName: undefined,
 	recentEmojis: [],
+	appType: 'auto',
 };
 
 export default (os: MiOS) => new Vuex.Store({
@@ -100,6 +108,10 @@ export default (os: MiOS) => new Vuex.Store({
 
 	getters: {
 		isSignedIn: state => state.i != null,
+
+		isAdmin: state => state.i && state.i.isAdmin,
+
+		role: state => state.i?.isAdmin ? 'Admin' : state.i?.isModerator ? 'Moderator' : null,
 
 		home: state => state.settings.homeProfiles[state.device.homeProfile],
 
@@ -189,7 +201,7 @@ export default (os: MiOS) => new Vuex.Store({
 		},
 
 		removeMobileHomeWidget(state, widget) {
-			Vue.set('state.settings.mobileHomeProfiles', state.device.mobileHomeProfile, state.settings.mobileHomeProfiles[state.device.mobileHomeProfile].filter(w => w.id != widget.id));
+			Vue.set(state.settings.mobileHomeProfiles, state.device.mobileHomeProfile, state.settings.mobileHomeProfiles[state.device.mobileHomeProfile].filter(w => w.id != widget.id));
 			os.store.dispatch('settings/updateMobileHomeProfile');
 		},
 

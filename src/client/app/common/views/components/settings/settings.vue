@@ -36,6 +36,8 @@
 				<ui-switch v-model="contrastedAcct">{{ $t('@._settings.contrasted-acct') }}</ui-switch>
 				<ui-switch v-model="showFullAcct">{{ $t('@._settings.show-full-acct') }}</ui-switch>
 				<ui-switch v-model="showVia">{{ $t('@._settings.show-via') }}</ui-switch>
+				<ui-switch v-model="makeCustomEmojisBigger">{{ $t('@._settings.make-custom-emojis-bigger') }}</ui-switch>
+				<ui-switch v-model="useSticker">{{ $t('@._settings.use-sticker') }}</ui-switch>
 				<ui-switch v-model="useOsDefaultEmojis">{{ $t('@._settings.use-os-default-emojis') }}</ui-switch>
 				<ui-switch v-model="iLikeSushi">{{ $t('@._settings.i-like-sushi') }}</ui-switch>
 			</section>
@@ -121,6 +123,7 @@
 				<ui-switch v-model="keepCw">{{ $t('@._settings.keep-cw') }}
 					<template #desc>{{ $t('@._settings.keep-cw-desc') }}</template>
 				</ui-switch>
+				<ui-switch v-model="enablePostPreview">{{ $t('@._settings.enable-post-preview') }}</ui-switch>
 				<ui-switch v-if="$root.isMobile" v-model="disableViaMobile">{{ $t('@._settings.disable-via-mobile') }}</ui-switch>
 			</section>
 
@@ -208,6 +211,14 @@
 				<ui-switch v-model="enableSounds">{{ $t('@._settings.enable-sounds') }}
 					<template #desc>{{ $t('@._settings.enable-sounds-desc') }}</template>
 				</ui-switch>
+				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInTimeline">{{ $t('@._settings.enable-sounds-intimeline')}}
+				</ui-switch>
+				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInNotifications">{{ $t('@._settings.enable-sounds-innotifications')}}
+				</ui-switch>
+				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInMessage">{{ $t('@._settings.enable-sounds-inmessage')}}
+				</ui-switch>
+				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInReversi">{{ $t('@._settings.enable-sounds-inreversi')}}
+				</ui-switch>
 				<label>{{ $t('@._settings.volume') }}</label>
 				<input type="range"
 					v-model="soundVolume"
@@ -257,7 +268,7 @@
 
 	<template v-if="page == null || page == 'security'">
 		<ui-card>
-			<template #title><fa icon="unlock-alt"/> {{ $t('@._settings.password') }}</template>
+			<template #title><fa icon="lock"/> {{ $t('@._settings.password') }}</template>
 			<section>
 				<x-password/>
 			</section>
@@ -381,6 +392,16 @@ export default Vue.extend({
 			set(value) { this.$store.commit('device/set', { key: 'useOsDefaultEmojis', value }); }
 		},
 
+		makeCustomEmojisBigger: {
+			get() { return this.$store.state.device.makeCustomEmojisBigger; },
+			set(value) { this.$store.commit('device/set', { key: 'makeCustomEmojisBigger', value }); }
+		},
+
+		useSticker: {
+			get() { return this.$store.state.device.useSticker; },
+			set(value) { this.$store.commit('device/set', { key: 'useSticker', value }); }
+		},
+
 		reduceMotion: {
 			get() { return this.$store.state.device.reduceMotion; },
 			set(value) { this.$store.commit('device/set', { key: 'reduceMotion', value }); }
@@ -421,6 +442,26 @@ export default Vue.extend({
 			set(value) { this.$store.commit('device/set', { key: 'enableSounds', value }); }
 		},
 
+		enableSoundsInTimeline: {
+			get() { return this.$store.state.device.enableSoundsInTimeline; },
+			set(value) { this.$store.commit('device/set', { key: 'enableSoundsInTimeline', value }); }
+		},
+
+		enableSoundsInNotifications: {
+			get() { return this.$store.state.device.enableSoundsInNotifications; },
+			set(value) { this.$store.commit('device/set', { key: 'enableSoundsInNotifications', value }); }
+		},
+
+		enableSoundsInMessage: {
+			get() { return this.$store.state.device.enableSoundsInMessage; },
+			set(value) { this.$store.commit('device/set', { key: 'enableSoundsInMessage', value }); }
+		},
+
+		enableSoundsInReversi: {
+			get() { return this.$store.state.device.enableSoundsInReversi; },
+			set(value) { this.$store.commit('device/set', { key: 'enableSoundsInReversi', value }); }
+		},
+
 		soundVolume: {
 			get() { return this.$store.state.device.soundVolume; },
 			set(value) { this.$store.commit('device/set', { key: 'soundVolume', value }); }
@@ -439,6 +480,11 @@ export default Vue.extend({
 		postStyle: {
 			get() { return this.$store.state.device.postStyle; },
 			set(value) { this.$store.commit('device/set', { key: 'postStyle', value }); }
+		},
+
+		enablePostPreview: {
+			get() { return this.$store.state.settings.enablePostPreview; },
+			set(value) { this.$store.dispatch('settings/set', { key: 'enablePostPreview', value }); }
 		},
 
 		disableViaMobile: {
@@ -675,7 +721,7 @@ export default Vue.extend({
 			});
 		},
 		soundTest() {
-			const sound = new Audio(`${url}/assets/message.mp3`);
+			const sound = new Audio(`${url}/assets/notify.mp3`);
 			sound.volume = this.$store.state.device.soundVolume;
 			sound.play();
 		},

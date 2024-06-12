@@ -91,7 +91,7 @@ export default abstract class Chart<T extends Record<string, any>> {
 		const obj = {} as any;
 		for (const k of Object.keys(x).filter(k => k.startsWith(Chart.columnPrefix))) {
 			// now k is ___x_y_z
-			const path = k.substr(Chart.columnPrefix.length).split(Chart.columnDot).join('.');
+			const path = k.substring(Chart.columnPrefix.length).split(Chart.columnDot).join('.');
 			nestedProperty.set(obj, path, x[k]);
 		}
 		return obj;
@@ -275,7 +275,7 @@ export default abstract class Chart<T extends Record<string, any>> {
 			data = this.getNewLog(obj);
 		} else {
 			// ログが存在しなかったら
-			// (Misskeyインスタンスを建てて初めてのチャート更新時)
+			// (Areionskeyインスタンスを建てて初めてのチャート更新時)
 
 			// 初期ログデータを作成
 			data = this.getNewLog(null);

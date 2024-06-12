@@ -37,6 +37,7 @@ export const meta = {
 				'moderator',
 				'adminOrModerator',
 				'verified',
+				'premiumed',
 				'alive'
 			]),
 			default: 'all'
@@ -65,12 +66,14 @@ export const meta = {
 
 export default define(meta, async (ps, me) => {
 	const query = Users.createQueryBuilder('user');
+	query.where('user.isExplorable = TRUE');
 
 	switch (ps.state) {
 		case 'admin': query.where('user.isAdmin = TRUE'); break;
 		case 'moderator': query.where('user.isModerator = TRUE'); break;
 		case 'adminOrModerator': query.where('user.isAdmin = TRUE OR isModerator = TRUE'); break;
 		case 'verified': query.where('user.isVerified = TRUE'); break;
+		case 'premiumed': query.where('user.isPremium = TRUE'); break;
 		case 'alive': query.where('user.updatedAt > :date', { date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5) }); break;
 	}
 

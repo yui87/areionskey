@@ -8,6 +8,8 @@ export const logger = new Logger('email');
 export async function sendEmail(to: string, subject: string, text: string) {
 	const meta = await fetchMeta(true);
 
+	const emailSettingUrl = `${config.url}/i/settings/profile`;
+
 	const enableAuth = meta.smtpUser != null && meta.smtpUser !== '';
 
 	const transporter = nodemailer.createTransport({
@@ -18,21 +20,21 @@ export async function sendEmail(to: string, subject: string, text: string) {
 		proxy: config.proxySmtp,
 		auth: enableAuth ? {
 			user: meta.smtpUser,
-			pass: meta.smtpPass
-		} : undefined
+			pass: meta.smtpPass,
+		} : undefined,
 	} as any);
 
 	try {
 		const info = await transporter.sendMail({
 			from: meta.email!,
 			to: to,
-			subject: subject || 'Areionskey',
-			text: text
+			subject: `[${ config.host }] ${ subject }`,
+			text: `${ config.host }: ${ subject }\n\n${ text }\n\n${ config.url }\nEmail setting: ${ emailSettingUrl }`,
 		});
 
-		logger.info('Message sent: %s', info.messageId);
-	} catch (e) {
-		logger.error(e);
-		throw e;
+		logger.info(`Message sent: ${info.messageId}`);
+	} catch (err) {
+		logger.error(err as Error);
+		throw err;
 	}
 }

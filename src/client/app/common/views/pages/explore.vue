@@ -3,7 +3,7 @@
 	<ui-input v-model="query" style="margin: 1.2em 0.5em 1.5em;">
 		<span>{{ $t('searchUser') }}</span>
 	</ui-input>
-	<mk-user-list v-if="query && query !== ''" :pagination="foundUsers" :key="`${query}`">
+	<mk-user-list v-if="query && query !== ''" :pagination="foundUsers" :key="`${query}`" :noMore="true">
 		<fa :icon="faSearch" fixed-width/>{{ query }}
 	</mk-user-list>
 
@@ -13,16 +13,16 @@
 	</div>
 
 	<template v-if="tag == null">
-		<mk-user-list :pagination="pinnedUsers" :expanded="false">
+		<mk-user-list :pagination="pinnedUsers" :expanded="false" :noMore="true">
 			<fa :icon="faBookmark" fixed-width/>{{ $t('pinned-users') }}
 		</mk-user-list>
-		<mk-user-list :pagination="verifiedUsers" :expanded="false">
+		<mk-user-list :pagination="verifiedUsers" :expanded="false" :noMore="true">
 			<fa :icon="faCertificate" fixed-width/>{{ $t('verified-users') }}
 		</mk-user-list>
-		<mk-user-list :pagination="recentlyUpdatedUsers" :expanded="false">
+		<mk-user-list :pagination="recentlyUpdatedUsers" :expanded="false" :noMore="true">
 			<fa :icon="faCommentAlt" fixed-width/>{{ $t('recently-updated-users') }}
 		</mk-user-list>
-		<mk-user-list :pagination="recentlyRegisteredUsers" :expanded="false">
+		<mk-user-list :pagination="recentlyRegisteredUsers" :expanded="false" :noMore="true">
 			<fa :icon="faPlus" fixed-width/>{{ $t('recently-registered-users') }}
 		</mk-user-list>
 	</template>
@@ -32,10 +32,10 @@
 	</div>
 
 	<template v-if="tag == null">
-		<mk-user-list :pagination="recentlyUpdatedUsersF" :expanded="false">
+		<mk-user-list :pagination="recentlyUpdatedUsersF" :expanded="false" :noMore="true">
 			<fa :icon="faCommentAlt" fixed-width/>{{ $t('recently-updated-users') }}
 		</mk-user-list>
-		<mk-user-list :pagination="recentlyRegisteredUsersF" :expanded="false">
+		<mk-user-list :pagination="recentlyRegisteredUsersF" :expanded="false" :noMore="true">
 			<fa :icon="faRocket" fixed-width/>{{ $t('recently-discovered-users') }}
 		</mk-user-list>
 	</template>
@@ -67,7 +67,7 @@ export default Vue.extend({
 	data() {
 		return {
 			pinnedUsers: { endpoint: 'pinned-users' },
-			verifiedUsers: { endpoint: 'users', limit: 10, params: {
+			verifiedUsers: { endpoint: 'users', limit: 20, params: {
 				state: 'verified',
 				origin: 'local',
 				sort: '+follower',
@@ -81,11 +81,11 @@ export default Vue.extend({
 				state: 'alive',
 				sort: '+createdAt',
 			} },
-			recentlyUpdatedUsersF: { endpoint: 'users', limit: 10, params: {
+			recentlyUpdatedUsersF: { endpoint: 'users', limit: 30, params: {
 				origin: 'combined',
 				sort: '+updatedAt',
 			} },
-			recentlyRegisteredUsersF: { endpoint: 'users', limit: 10, params: {
+			recentlyRegisteredUsersF: { endpoint: 'users', limit: 30, params: {
 				origin: 'combined',
 				sort: '+createdAt',
 			} },
@@ -100,10 +100,10 @@ export default Vue.extend({
 	computed: {
 		foundUsers(): any {
 			return {
-				endpoint: 'users/search',
+				endpoint: 'users/search-by-username-and-host',
 				limit: 30,
 				params: {
-					query: this.query,
+					username: this.query,
 				}
 			};
 		},

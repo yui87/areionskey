@@ -1,6 +1,6 @@
 <template>
 <mk-ui>
-	<template #header><span style="margin-right:4px;"><fa icon="home"/></span>{{ $t('dashboard') }}</template>
+	<template #header><span style="margin-right:4px;"><fa icon="calculator"/></span>{{ $t('dashboard') }}</template>
 	<template #func>
 		<button @click="customizing = !customizing"><fa icon="cog"/></button>
 	</template>
@@ -15,7 +15,6 @@
 					<option value="rss">{{ $t('@.widgets.rss') }}</option>
 					<option value="photo-stream">{{ $t('@.widgets.photo-stream') }}</option>
 					<option value="slideshow">{{ $t('@.widgets.slideshow') }}</option>
-					<option value="hashtags">{{ $t('@.widgets.hashtags') }}</option>
 					<option value="posts-monitor">{{ $t('@.widgets.posts-monitor') }}</option>
 					<option value="version">{{ $t('@.widgets.version') }}</option>
 					<option value="server">{{ $t('@.widgets.server') }}</option>
@@ -23,7 +22,7 @@
 					<option value="memo">{{ $t('@.widgets.memo') }}</option>
 					<option value="nav">{{ $t('@.widgets.nav') }}</option>
 					<option value="tips">{{ $t('@.widgets.tips') }}</option>
-					<option value="aichan">{{ $t('@.widgets.aichan') }}</option>
+					<!-- <option value="aichan">{{ $t('@.widgets.aichan') }}</option> -->
 				</select>
 				<button @click="addWidget">{{ $t('add-widget') }}</button>
 				<p><a @click="hint">{{ $t('customization-tips') }}</a></p>
@@ -89,14 +88,14 @@ export default Vue.extend({
 				name: 'rss',
 				id: 'c', data: {}
 			}, {
-				name: 'photo-stream',
+				name: 'server',
 				id: 'd', data: {}
 			}, {
 				name: 'nav',
-				id: 'f', data: {}
+				id: 'e', data: {}
 			}, {
 				name: 'version',
-				id: 'g', data: {}
+				id: 'f', data: {}
 			}]);
 		}
 	},
@@ -157,8 +156,15 @@ main
 		padding 32px 8px
 
 	> header
-		padding 8px
-		background #fff
+		padding 8px 10px
+		background var(--bg)
+
+		> button
+			margin 0 8px
+			color var(--text)
+
+		> p
+			margin 8px 0 0
 
 	.widget
 		margin-bottom 8px
@@ -168,11 +174,11 @@ main
 
 	.customize-container
 		margin 8px
-		background #fff
+		color var(--bg)
+		background var(--text)
 
 		> header
 			line-height 32px
-			background #eee
 
 			> .handle
 				padding 0 8px

@@ -6,19 +6,19 @@
 	</router-link>
 	<span class="is-premium" v-if="note.user.isPremium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
 	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><img svg-inline src="../../../../assets/horseshoe.svg" class="horseshoe"/></span>
-	<span class="is-admin" v-if="note.user.isAdmin">admin</span>
-	<span class="is-bot" v-if="note.user.isBot">bot</span>
-	<span class="is-cat" v-if="note.user.isCat">cat</span>
+	<span class="is-bot" v-if="note.user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 	<span class="username"><mk-acct :user="note.user"/></span>
 	<div class="info">
 		<span class="app" v-if="note.app && !mini && $store.state.settings.showVia">via <b>{{ note.app.name }}</b></span>
 		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
 		<router-link class="created-at" :to="note | notePage">
 			<mk-time :time="note.createdAt"/>
+			{{ }}
+			<span :title="$t('@.edited')" v-if="note.updatedAt != null"><fa :icon="faEdit"/></span>
 		</router-link>
 		<span class="visibility" v-if="note.visibility != 'public'">
 			<fa v-if="note.visibility == 'home'" icon="home"/>
-			<fa v-if="note.visibility == 'followers'" icon="unlock"/>
+			<fa v-if="note.visibility == 'followers'" icon="lock"/>
 			<fa v-if="note.visibility == 'specified'" icon="envelope"/>
 		</span>
 		<span class="localOnly" v-if="note.localOnly == true"><fa icon="heart"/></span>
@@ -29,6 +29,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../../i18n';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n(),
@@ -42,7 +43,13 @@ export default Vue.extend({
 			required: false,
 			default: false
 		}
-	}
+	},
+
+	data() {
+		return {
+			faEdit,
+		}
+	},
 });
 </script>
 
@@ -73,22 +80,6 @@ export default Vue.extend({
 		&:hover
 			text-decoration underline
 
-	> .is-admin
-	> .is-bot
-	> .is-cat
-		flex-shrink 0
-		align-self center
-		margin 0 .5em 0 0
-		padding 1px 6px
-		font-size 80%
-		color var(--noteHeaderBadgeFg)
-		background var(--noteHeaderBadgeBg)
-		border-radius 3px
-
-		&.is-admin
-			background var(--noteHeaderAdminBg)
-			color var(--noteHeaderAdminFg)
-
 	> .username
 		margin 0 .5em 0 0
 		overflow hidden
@@ -108,6 +99,10 @@ export default Vue.extend({
 	> .is-premium
 		margin 0 .5em 0 0
 		color #FFC107
+
+	> .is-bot
+		margin 0 .5em 0 0
+		color var(--noteHeaderBadgeFg)
 
 	> .info
 		margin-left auto

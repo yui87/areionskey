@@ -12,7 +12,7 @@
 				<x-user :user="user"/>
 				<div class="actions">
 					<ui-button v-if="user.host != null" @click="updateRemoteUser"><fa :icon="faSync"/> {{ $t('update-remote-user') }}</ui-button>
-					<ui-button @click="resetPassword"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
+					<ui-button @click="resetPassword" :disabled="user.isAdmin"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
 					<ui-horizon-group>
 						<ui-button @click="setPremium" :disabled="changing"><fa :icon="faCrown"/> {{ $t('premium') }}</ui-button>
 						<ui-button @click="unsetPremium" :disabled="changing">{{ $t('unpremium') }}</ui-button>
@@ -26,10 +26,11 @@
 						<ui-button @click="unsilenceUser">{{ $t('unmake-silence') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="suspendUser" :disabled="suspending"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
+						<ui-button @click="suspendUser" :disabled="suspending || user.isModerator || user.isAdmin"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
 						<ui-button @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
 					</ui-horizon-group>
-					<ui-button @click="deleteAllFiles"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
+					<ui-button @click="deleteAllFiles" :disabled="(user.isModerator && !$store.getters.isAdmin) || user.isAdmin"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
+					<ui-button @click="deleteAccount" :disabled="deleting || user.isModerator || user.isAdmin"><fa :icon="faTrashAlt"/> {{ $t('delete-account') }}</ui-button>
 					<ui-textarea v-if="user" :value="user | json5" readonly tall style="margin-top:16px;"></ui-textarea>
 				</div>
 			</div>
@@ -54,8 +55,11 @@
 					<option value="admin">{{ $t('users.state.admin') }}</option>
 					<option value="moderator">{{ $t('users.state.moderator') }}</option>
 					<option value="verified">{{ $t('users.state.verified') }}</option>
+					<option value="premiumed">{{ $t('users.state.premiumed') }}</option>
 					<option value="silenced">{{ $t('users.state.silenced') }}</option>
 					<option value="suspended">{{ $t('users.state.suspended') }}</option>
+					<option value="cat">{{ $t('users.state.cat') }}</option>
+					<option value="bot">{{ $t('users.state.bot') }}</option>
 				</ui-select>
 				<ui-select v-model="origin">
 					<template #label>{{ $t('users.origin.title') }}</template>
@@ -102,6 +106,7 @@ export default Vue.extend({
 			unverifying: false,
 			suspending: false,
 			unsuspending: false,
+			deleting: false,
 			sort: '+createdAt',
 			state: 'all',
 			origin: 'local',
@@ -175,14 +180,14 @@ export default Vue.extend({
 		async showUser() {
 			this.user = null;
 			const user = await this.fetchUser();
-			this.$root.api('admin/show-user', { userId: user.id }).then(info => {
+			this.$root.api('users/show', { userId: user.id }).then(info => {
 				this.user = info;
 			});
 			this.target = '';
 		},
 
 		async showUserOnClick(userId: string) {
-			this.$root.api('admin/show-user', { userId: userId }).then(info => {
+			this.$root.api('users/show', { userId: userId }).then(info => {
 				this.user = info;
 				this.$nextTick(() => {
 					this.$refs.user.scrollIntoView();
@@ -192,7 +197,7 @@ export default Vue.extend({
 
 		/** 処理対象ユーザーの情報を更新する */
 		async refreshUser() {
-			this.$root.api('admin/show-user', { userId: this.user.id }).then(info => {
+			this.$root.api('users/show', { userId: this.user.id }).then(info => {
 				this.user = info;
 			});
 		},
@@ -409,11 +414,34 @@ export default Vue.extend({
 			});
 		},
 
+		async deleteAccount() {
+			if (!await this.getConfirmed(this.$t('delete-account-confirm'))) return;
+
+			this.deleting = true;
+
+			const process = async () => {
+				await this.$root.api('admin/delete-account', { userId: this.user.id });
+				this.$root.dialog({
+					type: 'success',
+					splash: true
+				});
+			};
+
+			await process().catch(e => {
+				this.$root.dialog({
+					type: 'error',
+					text: e.message
+				});
+			});
+
+			this.deleting = false;
+		},
+
 		async getConfirmed(text: string): Promise<Boolean> {
 			const confirm = await this.$root.dialog({
 				type: 'warning',
 				showCancelButton: true,
-				title: 'confirm',
+				title: this.$t('confirm'),
 				text,
 			});
 

@@ -10,6 +10,7 @@ import { decodeReaction, convertLegacyReactions, convertLegacyReaction } from '.
 import { populateEmojis } from '../../misc/populate-emojis';
 import { parse } from '../../mfm/parse';
 import { toString } from '../../mfm/to-string';
+import { sanitizeUrl } from '../../misc/sanitize-url';
 
 export type PackedNote = SchemaType<typeof packedNoteSchema>;
 
@@ -154,6 +155,7 @@ export class NoteRepository extends Repository<Note> {
 		const packed = await awaitAll({
 			id: note.id,
 			createdAt: note.createdAt.toISOString(),
+			updatedAt: note.updatedAt?.toISOString(),
 			app: note.appId ? Apps.pack(note.appId) : undefined,
 			userId: note.userId,
 			user: Users.pack(note.user || note.userId, meId),
@@ -173,7 +175,7 @@ export class NoteRepository extends Repository<Note> {
 			replyId: note.replyId,
 			renoteId: note.renoteId,
 			mentions: note.mentions.length > 0 ? note.mentions : undefined,
-			uri: note.uri || undefined,
+			uri: sanitizeUrl(note.uri) || undefined,
 			geo: note.geo || undefined,
 
 			...(opts.detail ? {
@@ -232,7 +234,7 @@ export const packedNoteSchema = {
 			type: 'string' as const,
 			optional: false as const, nullable: false as const,
 			format: 'date-time',
-			description: 'The date that the Note was created on Misskey.'
+			description: 'The date that the Note was created on Areionskey.'
 		},
 		text: {
 			type: 'string' as const,

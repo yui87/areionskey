@@ -1,5 +1,5 @@
 <template>
-<mfm-core v-bind="$attrs" class="havbbuyv" :class="{ nowrap: $attrs['nowrap'] }" v-once/>
+<mfm-core v-bind="$attrs" class="havbbuyv" :class="{ nowrap: $attrs['nowrap'], sticker: !$attrs['no-sticker'] && $store.state.device.useSticker }" v-once/>
 </template>
 
 <script lang="ts">
@@ -19,25 +19,17 @@ export default Vue.extend({
 
 	&.nowrap
 		white-space pre
-		word-wrap normal // https://codeday.me/jp/qa/20190424/690106.html
+		word-wrap normal
 
-	>>> .title
-		display block
-		margin-bottom 4px
-		padding 4px
-		font-size 90%
-		text-align center
-		background var(--mfmTitleBg)
-		border-radius 4px
+	&:not(.nowrap).sticker
+		:deep(.fvgwvorwhxigeolkkrcderjzcawqrscl:only-child)
+			font-size 4em
 
-	>>> .quote
+	:deep(.quote)
 		display block
 		margin 8px
 		padding 6px 0 6px 12px
 		color var(--mfmQuote)
 		border-left solid 3px var(--mfmQuoteLine)
-
-	>>> pre code
-		font-size 80%
 
 </style>

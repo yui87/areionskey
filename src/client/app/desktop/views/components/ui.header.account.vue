@@ -49,17 +49,17 @@
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
-				<li v-if="($store.state.i.isLocked || $store.state.i.carefulBot || $store.state.i.carefulRemote)">
-					<router-link to="/i/follow-requests">
-						<i><fa :icon="['far', 'envelope']" fixed-width/></i>
-						<span>{{ $t('follow-requests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></span>
-						<i><fa icon="angle-right"/></i>
-					</router-link>
-				</li>
 				<li>
 					<router-link :to="`/@${ $store.state.i.username }/room`">
 						<i><fa :icon="faDoorOpen" fixed-width/></i>
 						<span>{{ $t('room') }}</span>
+						<i><fa icon="angle-right"/></i>
+					</router-link>
+				</li>
+				<li v-if="$store.state.i.pendingReceivedFollowRequestsCount">
+					<router-link to="/i/follow-requests">
+						<i><fa icon="user-clock" fixed-width/></i>
+						<span>{{ $t('follow-requests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
@@ -83,14 +83,20 @@
 			<ul>
 				<li @click="toggleDeckMode">
 					<p>
-						<template v-if="$store.state.device.inDeckMode"><span>{{ $t('@.home') }}</span><i><fa :icon="faHome"/></i></template>
-						<template v-else><span>{{ $t('@.deck') }}</span><i><fa :icon="faColumns"/></i></template>
+						<template v-if="$store.state.device.inDeckMode"><i><fa :icon="faHome" fixed-width/></i><span>{{ $t('@.home') }}</span></template>
+						<template v-else><i><fa :icon="faColumns" fixed-width/></i><span>{{ $t('@.deck') }}</span></template>
+					</p>
+				</li>
+				<li v-if="$store.state.device.appTypeForce == 'auto'" @click="toggleAppType">
+					<p>
+						<template v-if="$root.isMobile"><i><fa :icon="faDesktop" fixed-width/></i><span>{{ $t('@.desktop-mode') }}</span></template>
+						<template v-else><i><fa :icon="faMobileAlt" fixed-width/></i><span>{{ $t('@.mobile-mode') }}</span></template>
 					</p>
 				</li>
 				<li @click="dark">
 					<p>
+						<template><i><fa :icon="$store.state.device.darkmode ? faSun : faMoon" fixed-width/></i></template>
 						<span>{{ $store.state.device.darkmode ? $t('@.turn-off-darkmode') : $t('@.turn-on-darkmode') }}</span>
-						<template><i><fa :icon="$store.state.device.darkmode ? faSun : faMoon"/></i></template>
 					</p>
 				</li>
 			</ul>
@@ -113,7 +119,7 @@ import i18n from '../../../i18n';
 // import MkSettingsWindow from './settings-window.vue';
 import MkDriveWindow from './drive-window.vue';
 import contains from '../../../common/scripts/contains';
-import { faHome, faColumns, faUsers, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faColumns, faUsers, faDoorOpen, faDesktop, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
 import { faMoon, faSun, faStickyNote } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
@@ -121,7 +127,7 @@ export default Vue.extend({
 	data() {
 		return {
 			isOpen: false,
-			faHome, faColumns, faMoon, faSun, faStickyNote, faUsers, faDoorOpen
+			faHome, faColumns, faMoon, faSun, faStickyNote, faUsers, faDoorOpen, faDesktop, faMobileAlt
 		};
 	},
 	computed: {
@@ -167,6 +173,10 @@ export default Vue.extend({
 				key: 'darkmode',
 				value: !this.$store.state.device.darkmode
 			});
+		},
+		toggleAppType() {
+			this.$store.commit('device/set', { key: 'appType', value: this.$root.isMobile ? 'desktop' : 'mobile' });
+			location.replace('/');
 		},
 		toggleDeckMode() {
 			this.$store.commit('device/set', { key: 'deckMode', value: !this.$store.state.device.inDeckMode });

@@ -56,7 +56,7 @@ export function validateNote(object: any, uri: string) {
 /**
  * Noteをフェッチします。
  *
- * Misskeyに対象のNoteが登録されていればそれを返します。
+ * Areionskeyに対象のNoteが登録されていればそれを返します。
  */
 export async function fetchNote(object: string | IObject): Promise<Note | null> {
 	const dbResolver = new DbResolver();
@@ -98,7 +98,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver, s
 		throw new Error('actor has been suspended');
 	}
 
-	const noteAudience = await parseAudience(actor, note.to, note.cc);
+	const noteAudience = await parseAudience(actor, note.to, note.cc, resolver);
 	let visibility = noteAudience.visibility;
 	const visibleUsers = noteAudience.visibleUsers;
 
@@ -112,7 +112,7 @@ export async function createNote(value: string | IObject, resolver?: Resolver, s
 
 	let isTalk = note._misskey_talk && visibility === 'specified';
 
-	const apMentions = await extractApMentions(note.tag);
+	const apMentions = await extractApMentions(note.tag, resolver);
 	const apHashtags = await extractApHashtags(note.tag);
 
 	// 添付ファイル
@@ -267,8 +267,8 @@ export async function createNote(value: string | IObject, resolver?: Resolver, s
 /**
  * Noteを解決します。
  *
- * Misskeyに対象のNoteが登録されていればそれを返し、そうでなければ
- * リモートサーバーからフェッチしてMisskeyに登録しそれを返します。
+ * Areionskeyに対象のNoteが登録されていればそれを返し、そうでなければ
+ * リモートサーバーからフェッチしてAreionskeyに登録しそれを返します。
  */
 export async function resolveNote(value: string | IObject, resolver?: Resolver): Promise<Note | null> {
 	const uri = typeof value == 'string' ? value : value.id;

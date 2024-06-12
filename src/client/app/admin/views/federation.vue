@@ -152,7 +152,7 @@
 			<ui-textarea v-model="blockedHosts">
 				<template #desc>{{ $t('blocked-hosts-info') }}</template>
 			</ui-textarea>
-			<ui-button @click="saveBlockedHosts">{{ $t('save') }}</ui-button>
+			<ui-button @click="saveBlockedHosts" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 </div>
@@ -392,7 +392,7 @@ export default Vue.extend({
 					labels: {
 						formatter: this.data.bytes ? v => Vue.filter('bytes')(v, 0) : v => Vue.filter('number')(v),
 						style: {
-							color: tinycolor(getComputedStyle(document.documentElement).getPropertyValue('--text')).toRgbString()
+							colors: tinycolor(getComputedStyle(document.documentElement).getPropertyValue('--text')).toRgbString()
 						}
 					}
 				},

@@ -224,8 +224,8 @@ export default Vue.extend({
 					this.users = users;
 					this.fetching = false;
 				} else {
-					this.$root.api('users/search', {
-						query: this.q,
+					this.$root.api('users/search-by-username-and-host', {
+						username: this.q,
 						limit: 10,
 						detail: false
 					}).then(users => {
@@ -447,7 +447,7 @@ export default Vue.extend({
 
 			> img
 				width 24px
-				vertical-align bottom
+				vertical-align middle
 
 		.name
 			color var(--autocompleteItemText)

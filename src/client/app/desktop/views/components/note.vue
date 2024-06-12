@@ -18,7 +18,7 @@
 			<mk-note-header class="header" :note="appearNote" :mini="narrow"/>
 			<div class="body" v-if="appearNote.deletedAt == null">
 				<p v-if="appearNote.cw != null" class="cw">
-					<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" />
+					<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" :no-sticker="true"/>
 					<mk-cw-button v-model="showContent" :note="appearNote"/>
 				</p>
 				<div class="content" v-show="appearNote.cw == null || showContent">
@@ -31,7 +31,6 @@
 						<mk-media-list :media-list="appearNote.files"/>
 					</div>
 					<mk-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
-					<a class="location" v-if="appearNote.geo" :href="`https://maps.google.com/maps?q=${appearNote.geo.coordinates[1]},${appearNote.geo.coordinates[0]}`" rel="noopener" target="_blank"><fa icon="map-marker-alt"/> 位置情報</a>
 					<div class="renote" v-if="appearNote.renote"><mk-note-preview :note="appearNote.renote"/></div>
 					<mk-url-preview v-for="url in urls" :url="url" :key="url" :compact="compact"/>
 				</div>
@@ -51,13 +50,11 @@
 				<button v-else class="inhibitedButton button">
 					<fa icon="ban"/>
 				</button>
-				<button v-if="!isMyNote && appearNote.myReaction == null" class="reactionButton button" @click="react()" ref="reactButton" :title="$t('add-reaction')">
+				<button v-if="appearNote.myReaction == null" class="reactionButton button" @click="react()" ref="reactButton" :title="$t('add-reaction')">
 					<fa icon="plus"/>
-					<p class="count" v-if="Object.values(appearNote.reactions).some(x => x)">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
 				</button>
-				<button v-if="!isMyNote && appearNote.myReaction != null" class="reactionButton reacted button" @click="undoReact(appearNote)" ref="reactButton" :title="$t('undo-reaction')">
+				<button v-if="appearNote.myReaction != null" class="reactionButton reacted button" @click="undoReact(appearNote)" ref="reactButton" :title="$t('undo-reaction')">
 					<fa icon="minus"/>
-					<p class="count" v-if="Object.values(appearNote.reactions).some(x => x)">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
 				</button>
 				<button @click="menu()" ref="menuButton" class="button">
 					<fa icon="ellipsis-h"/>
@@ -205,8 +202,6 @@ export default Vue.extend({
 			width 58px
 			height 58px
 			border-radius 8px
-			//position -webkit-sticky
-			//position sticky
 			//top 74px
 
 		> .main
@@ -248,18 +243,6 @@ export default Vue.extend({
 							margin-left 4px
 							font-style oblique
 							color var(--renoteText)
-
-					> .location
-						margin 4px 0
-						font-size 12px
-						color #ccc
-
-					> .map
-						width 100%
-						height 300px
-
-						&:empty
-							display none
 
 					.mk-url-preview
 						margin-top 8px

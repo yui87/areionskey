@@ -1,9 +1,10 @@
 import { IRemoteUser } from '../../../../models/entities/user';
-import { getApType, IUpdate, isActor } from '../../type';
+import { getApType, IUpdate, isActor, isPost } from '../../type';
 import { apLogger } from '../../logger';
 import { updateQuestion } from '../../models/question';
 import Resolver from '../../resolver';
 import { updatePerson } from '../../models/person';
+import updateNote from './note';
 
 /**
  * Updateアクティビティを捌きます
@@ -26,8 +27,10 @@ export default async (actor: IRemoteUser, activity: IUpdate): Promise<string> =>
 		await updatePerson(actor.uri!, resolver, object);
 		return `ok: Person updated`;
 	} else if (getApType(object) === 'Question') {
-		await updateQuestion(object).catch(e => console.log(e));
+		await updateQuestion(object, resolver).catch(e => console.log(e));
 		return `ok: Question updated`;
+	} else if (isPost(object)) {
+		return await updateNote(actor, object);
 	} else {
 		return `skip: Unknown type: ${getApType(object)}`;
 	}

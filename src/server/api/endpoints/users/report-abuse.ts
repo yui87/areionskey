@@ -6,6 +6,8 @@ import { ApiError } from '../../error';
 import { getUser } from '../../common/getters';
 import { AbuseUserReports, Users } from '../../../../models';
 import { genId } from '../../../../misc/gen-id';
+import { sendEmail } from '../../../../services/send-email';
+import { fetchMeta } from '../../../../misc/fetch-meta';
 
 export const meta = {
 	desc: {
@@ -65,10 +67,6 @@ export default define(meta, async (ps, me) => {
 		throw new ApiError(meta.errors.cannotReportYourself);
 	}
 
-	if (user.isAdmin) {
-		throw new ApiError(meta.errors.cannotReportAdmin);
-	}
-
 	const report = await AbuseUserReports.save({
 		id: genId(),
 		createdAt: new Date(),
@@ -94,6 +92,11 @@ export default define(meta, async (ps, me) => {
 				reporterId: report.reporterId,
 				comment: report.comment
 			});
+		}
+
+		const meta = await fetchMeta();
+		if (meta.email) {
+			sendEmail(meta.maintainerEmail, 'New abuse report', ps.comment);
 		}
 	}, 1);
 });

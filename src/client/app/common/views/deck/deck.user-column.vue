@@ -14,7 +14,7 @@
 		<header :style="bannerStyle">
 			<div>
 				<button class="menu" @click="menu" ref="menu"><fa icon="ellipsis-h"/></button>
-				<mk-follow-button v-if="$store.getters.isSignedIn && user.id != $store.state.i.id" :user="user" class="follow" mini/>
+				<mk-follow-button v-if="$store.getters.isSignedIn && user.id != $store.state.i.id && !user.isBlocking" :user="user" class="follow" mini/>
 				<mk-avatar class="avatar" :user="user" :disable-preview="true" :key="user.id"/>
 				<router-link class="name" :to="user | userPage()">
 					<mk-user-name :user="user" :key="user.id" :nowrap="false"/>
@@ -39,8 +39,8 @@
 				</dl>
 			</div>
 			<div class="info">
-				<span class="location" v-if="user.host === null && user.location"><fa icon="map-marker"/> {{ user.location }}</span>
-				<span class="birthday" v-if="user.host === null && user.birthday"><fa icon="birthday-cake"/> {{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
+				<div class="location" v-if="user.location"><fa icon="map-marker"/> {{ user.location }}</div>
+				<div class="birthday" v-if="user.birthday"><fa icon="birthday-cake"/> {{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</div>
 			</div>
 			<div class="counts">
 				<div>
