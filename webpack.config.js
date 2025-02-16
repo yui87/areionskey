@@ -59,7 +59,10 @@ module.exports = {
 				options: {
 					cssSourceMap: false,
 					compilerOptions: {
-						preserveWhitespace: false
+						preserveWhitespace: false,
+						compatConfig: {
+							MODE: 2
+						}
 					}
 				}
 			}, {
@@ -162,6 +165,7 @@ module.exports = {
 			'.js', '.ts', '.json'
 		],
 		alias: {
+			vue: '@vue/compat/dist/vue.esm-bundler.js',
 			'const.styl': __dirname + '/src/client/const.styl'
 		},
 		fallback: {
