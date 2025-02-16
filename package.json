@@ -24,7 +24,8 @@
 		"gulp": "gulp build",
 		"clean": "gulp clean",
 		"cleanall": "gulp cleanall",
-		"lint": "eslint src/**/*.ts",
+		"lint": "eslint --ext .ts,.vue src",
+		"lintfix": "eslint --ext .ts,.vue src --fix",
 		"test": "cross-env TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true TS_NODE_PROJECT=\"./test/tsconfig.json\" mocha",
 		"format": "gulp format"
 	},
@@ -43,6 +44,8 @@
 		"@koa/multer": "3.0.2",
 		"@koa/router": "8.0.8",
 		"@swc/core": "1.4.12",
+		"@vue/compat": "3.1.0",
+		"@vue/compiler-sfc": "3.1.0",
 		"abort-controller": "3.0.0",
 		"animejs": "3.2.2",
 		"apexcharts": "3.48.0",
@@ -173,8 +176,6 @@
 		"v-animate-css": "0.0.6",
 		"v-debounce": "0.1.2",
 		"vue": "3.1.0",
-		"@vue/compat": "3.1.0",
-		"@vue/compiler-sfc": "3.1.0",
 		"vue-color": "2.8.1",
 		"vue-content-loading": "1.6.0",
 		"vue-cropperjs": "4.2.0",
@@ -197,8 +198,6 @@
 	},
 	"devDependencies": {
 		"@redocly/openapi-core": "1.4.1",
-		"@typescript-eslint/eslint-plugin": "5.62.0",
-		"@typescript-eslint/parser": "5.62.0",
 		"@types/bcryptjs": "2.4.6",
 		"@types/bull": "4.10.0",
 		"@types/cbor": "6.0.0",
@@ -251,8 +250,14 @@
 		"@types/webpack": "5.28.5",
 		"@types/webpack-stream": "3.2.15",
 		"@types/websocket": "1.0.10",
+		"@typescript-eslint/eslint-plugin": "5.62.0",
+		"@typescript-eslint/parser": "5.62.0",
 		"eslint": "8.54.0",
 		"eslint-plugin-node": "11.1.0",
-		"mocha": "10.4.0"
+		"eslint-plugin-vue": "9.32.0",
+		"eslint-plugin-vue-i18n": "0.3.0",
+		"eslint-plugin-vue-scoped-css": "2.9.0",
+		"mocha": "10.4.0",
+		"vue-eslint-parser": "9.4.3"
 	}
 }
