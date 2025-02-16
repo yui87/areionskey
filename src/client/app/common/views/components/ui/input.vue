@@ -1,21 +1,22 @@
 <template>
 <div class="ui-input" :class="[{ focused, filled, inline, disabled }, styl]">
-	<div class="icon" ref="icon"><slot name="icon"></slot></div>
+	<div ref="icon" class="icon"><slot name="icon"></slot></div>
 	<div class="input">
-		<div class="password-meter" v-if="withPasswordMeter" v-show="passwordStrength != ''" :data-strength="passwordStrength">
-			<div class="value" ref="passwordMetar"></div>
+		<div v-if="withPasswordMeter" v-show="passwordStrength != ''" class="password-meter" :data-strength="passwordStrength">
+			<div ref="passwordMetar" class="value"></div>
 		</div>
-		<span class="label" ref="label"><slot></slot></span>
-		<span class="title" ref="title">
+		<span ref="label" class="label"><slot></slot></span>
+		<span ref="title" class="title">
 			<slot name="title"></slot>
-			<span class="warning" v-if="invalid"><fa :icon="['fa', 'exclamation-circle']"/>{{ $refs.input.validationMessage }}</span>
+			<span v-if="invalid" class="warning"><fa :icon="['fa', 'exclamation-circle']"/>{{ $refs.input.validationMessage }}</span>
 		</span>
-		<div class="prefix" ref="prefix"><slot name="prefix"></slot></div>
+		<div ref="prefix" class="prefix"><slot name="prefix"></slot></div>
 		<template v-if="type != 'file'">
-			<input v-if="debounce" ref="input"
+			<input
+				v-if="debounce" ref="input"
+				v-model.lazy="v"
 				v-debounce="500"
 				:type="type"
-				v-model.lazy="v"
 				:disabled="disabled"
 				:required="required"
 				:readonly="readonly"
@@ -23,15 +24,16 @@
 				:pattern="pattern"
 				:autocomplete="autocomplete"
 				:spellcheck="spellcheck"
+				:list="id"
 				@focus="focused = true"
 				@blur="focused = false"
 				@keydown="$emit('keydown', $event)"
 				@change="$emit('change', $event)"
-				:list="id"
 			>
-			<input v-else ref="input"
-				:type="type"
+			<input
+				v-else ref="input"
 				v-model="v"
+				:type="type"
 				:disabled="disabled"
 				:required="required"
 				:readonly="readonly"
@@ -39,32 +41,34 @@
 				:pattern="pattern"
 				:autocomplete="autocomplete"
 				:spellcheck="spellcheck"
+				:list="id"
 				@focus="focused = true"
 				@blur="focused = false"
 				@keydown="$emit('keydown', $event)"
 				@change="$emit('change', $event)"
-				:list="id"
 			>
-			<datalist :id="id" v-if="datalist">
+			<datalist v-if="datalist" :id="id">
 				<option v-for="data in datalist" :value="data"/>
 			</datalist>
 		</template>
 		<template v-else>
-			<input ref="input"
+			<input
+				ref="input"
 				type="text"
 				:value="filePlaceholder"
 				readonly
 				@click="chooseFile"
 			>
-			<input ref="file"
+			<input
+				ref="file"
 				type="file"
 				:value="value"
 				@change="onChangeFile"
 			>
 		</template>
-		<div class="suffix" ref="suffix"><slot name="suffix"></slot></div>
+		<div ref="suffix" class="suffix"><slot name="suffix"></slot></div>
 	</div>
-	<div class="toggle" v-if="withPasswordToggle">
+	<div v-if="withPasswordToggle" class="toggle">
 		<a @click="togglePassword">
 			<span v-if="type == 'password'"><fa :icon="['fa', 'eye']"/> {{ $t('@.show-password') }}</span>
 			<span v-if="type != 'password'"><fa :icon="['far', 'eye-slash']"/> {{ $t('@.hide-password') }}</span>

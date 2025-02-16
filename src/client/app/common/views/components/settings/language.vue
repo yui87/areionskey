@@ -9,7 +9,7 @@
 			</optgroup>
 
 			<optgroup :label="$t('specify-language')">
-				<option v-for="x in langs" :value="x[0]" :key="x[0]">{{ x[1] }}</option>
+				<option v-for="x in langs" :key="x[0]" :value="x[0]">{{ x[1] }}</option>
 			</optgroup>
 		</ui-select>
 		<ui-info>Current: <i>{{ currentLanguage }}</i></ui-info>
@@ -42,7 +42,7 @@ export default Vue.extend({
 
 	created() {
 		try {
-			const locale = JSON.parse(localStorage.getItem('locale') || "{}");
+			const locale = JSON.parse(localStorage.getItem('locale') || '{}');
 			const localeKey = localStorage.getItem('localeKey');
 			this.currentLanguage = `${locale.meta.lang} (${localeKey})`;
 		} catch { }

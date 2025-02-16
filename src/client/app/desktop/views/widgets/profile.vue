@@ -1,19 +1,22 @@
 <template>
 <div class="egwyvoaaryotefqhqtmiyawwefemjfsd">
-	<ui-container :show-header="false" :naked="props.design == 2">
-		<div class="egwyvoaaryotefqhqtmiyawwefemjfsd-body"
+	<ui-container :showHeader="false" :naked="props.design == 2">
+		<div
+			class="egwyvoaaryotefqhqtmiyawwefemjfsd-body"
 			:data-compact="props.design == 1 || props.design == 2"
 			:data-melt="props.design == 2"
 		>
-			<div class="banner"
+			<div
+				class="banner"
 				:style="$store.state.i.bannerUrl ? `background-image: url(${$store.state.i.bannerUrl})` : ''"
 				:title="$t('update-banner')"
 				@click="updateBanner()"
 			></div>
-			<mk-avatar class="avatar" :user="$store.state.i"
-				:disable-link="true"
-				@click="updateAvatar()"
+			<mk-avatar
+				class="avatar" :user="$store.state.i"
+				:disableLink="true"
 				:title="$t('update-avatar')"
+				@click="updateAvatar()"
 			/>
 			<router-link class="name" :to="$store.state.i | userPage"><mk-user-name :user="$store.state.i"/></router-link>
 			<p class="username">@{{ $store.state.i | acct }}</p>

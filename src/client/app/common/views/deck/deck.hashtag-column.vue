@@ -6,7 +6,7 @@
 
 	<div class="xroyrflcmhhtmlwmyiwpfqiirqokfueb">
 		<div ref="chart" class="chart"></div>
-		<x-hashtag-tl :tag-tl="tagTl" class="tl" :key="JSON.stringify(tagTl)"/>
+		<x-hashtag-tl :key="JSON.stringify(tagTl)" :tagTl="tagTl" class="tl"/>
 	</div>
 </x-column>
 </template>

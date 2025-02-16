@@ -1,9 +1,9 @@
 <template>
-<mk-window ref="window" is-modal width="800px" height="500px" @closed="destroyDom">
+<mk-window ref="window" isModal width="800px" height="500px" @closed="destroyDom">
 	<template #header>
 		<span class="jqiaciqv">
 			<span class="title">{{ $t('choose-prompt') }}</span>
-			<span class="count" v-if="multiple && files.length > 0">({{ $t('chosen-files', { count: files.length }) }})</span>
+			<span v-if="multiple && files.length > 0" class="count">({{ $t('chosen-files', { count: files.length }) }})</span>
 		</span>
 	</template>
 
@@ -14,11 +14,11 @@
 			:type="type"
 			:multiple="multiple"
 			@selected="onSelected"
-			@change-selection="onChangeSelection"
+			@changeSelection="onChangeSelection"
 		/>
 		<div class="footer">
 			<button class="upload" :title="$t('title')" @click="upload"><fa icon="upload"/></button>
-			<ui-button inline @click="cancel" style="margin-right:16px;">{{ $t('cancel') }}</ui-button>
+			<ui-button inline style="margin-right:16px;" @click="cancel">{{ $t('cancel') }}</ui-button>
 			<ui-button inline primary :disabled="multiple && files.length == 0" @click="ok">{{ $t('ok') }}</ui-button>
 		</div>
 	</div>

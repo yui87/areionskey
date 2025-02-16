@@ -4,13 +4,13 @@
 		<template #func><slot name="func"></slot></template>
 		<slot name="header"></slot>
 	</x-header>
-	<x-nav v-if="$store.getters.isSignedIn" :is-open="isDrawerOpening"/>
+	<x-nav v-if="$store.getters.isSignedIn" :isOpen="isDrawerOpening"/>
 	<div class="content">
 		<slot></slot>
 	</div>
 	<mk-stream-indicator v-if="$store.getters.isSignedIn"/>
-	<button class="nav button" v-if="$store.state.device.inDeckMode" @click="isDrawerOpening = !isDrawerOpening"><fa icon="bars"/><i v-if="indicate"><fa icon="circle"/></i></button>
-	<button class="post button" v-if="$store.state.device.inDeckMode" @click="$post()"><fa icon="pencil-alt"/></button>
+	<button v-if="$store.state.device.inDeckMode" class="nav button" @click="isDrawerOpening = !isDrawerOpening"><fa icon="bars"/><i v-if="indicate"><fa icon="circle"/></i></button>
+	<button v-if="$store.state.device.inDeckMode" class="post button" @click="$post()"><fa icon="pencil-alt"/></button>
 	<x-footer v-if="!$store.state.device.inDeckMode"/>
 </div>
 </template>
@@ -71,7 +71,7 @@ export default Vue.extend({
 		}
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.$store.getters.isSignedIn) {
 			this.connection.dispose();
 		}

@@ -1,5 +1,5 @@
 <template>
-<x-container @remove="() => $emit('remove')" :draggable="true">
+<x-container :draggable="true" @remove="() => $emit('remove')">
 	<template #header><fa :icon="faQuestion"/> {{ $t('blocks.if') }}</template>
 	<template #func>
 		<button @click="add()">
@@ -19,7 +19,7 @@
 			</optgroup>
 		</ui-select>
 
-		<x-blocks class="children" v-model="value.children" :ai-script="aiScript"/>
+		<x-blocks v-model="value.children" class="children" :aiScript="aiScript"/>
 	</section>
 </x-container>
 </template>

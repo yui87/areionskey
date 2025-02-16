@@ -1,8 +1,8 @@
 <template>
 <div class="toltmoik">
-	<button @click="open()" :title="$t('@.messaging')">
+	<button :title="$t('@.messaging')" @click="open()">
 		<i class="bell"><fa :icon="faComments"/></i>
-		<i class="circle" v-if="hasUnreadMessagingMessage"><fa icon="circle"/></i>
+		<i v-if="hasUnreadMessagingMessage" class="circle"><fa icon="circle"/></i>
 	</button>
 </div>
 </template>

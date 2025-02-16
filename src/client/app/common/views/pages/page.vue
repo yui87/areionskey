@@ -1,5 +1,5 @@
 <template>
-<x-page v-if="page" :page="page" :key="page.id" :show-footer="true"/>
+<x-page v-if="page" :key="page.id" :page="page" :showFooter="true"/>
 </template>
 
 <script lang="ts">

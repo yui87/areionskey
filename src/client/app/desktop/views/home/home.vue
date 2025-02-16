@@ -1,7 +1,7 @@
 <template>
-<component :is="customize ? 'mk-dummy' : 'mk-ui'" v-hotkey.global="keymap" v-if="$store.getters.isSignedIn || $route.name != 'index'">
+<component :is="customize ? 'mk-dummy' : 'mk-ui'" v-if="$store.getters.isSignedIn || $route.name != 'index'" v-hotkey.global="keymap">
 	<div class="wqsofvpm" :data-customize="customize">
-		<div class="customize" v-if="customize">
+		<div v-if="customize" class="customize">
 			<a @click="done()"><fa icon="check"/>{{ $t('done') }}</a>
 			<div>
 				<div class="adder">
@@ -40,17 +40,18 @@
 		</div>
 		<div class="main" :class="{ side: widgets.left.length == 0 || widgets.right.length == 0 }">
 			<template v-if="customize">
-				<x-draggable v-for="place in ['left', 'right']"
+				<x-draggable
+					v-for="place in ['left', 'right']"
+					:key="place"
 					:list="widgets[place]"
 					:class="place"
 					:data-place="place"
 					group="x"
 					animation="150"
 					@sort="onWidgetSort"
-					:key="place"
 				>
-					<div v-for="widget in widgets[place]" class="customize-container" :key="widget.id" @contextmenu.stop.prevent="onWidgetContextmenu(widget.id)">
-						<component :is="`mkw-${widget.name}`" :widget="widget" :ref="widget.id" :is-customize-mode="true" platform="desktop"/>
+					<div v-for="widget in widgets[place]" :key="widget.id" class="customize-container" @contextmenu.stop.prevent="onWidgetContextmenu(widget.id)">
+						<component :is="`mkw-${widget.name}`" :ref="widget.id" :widget="widget" :isCustomizeMode="true" platform="desktop"/>
 					</div>
 				</x-draggable>
 				<div class="main">
@@ -61,8 +62,8 @@
 				</div>
 			</template>
 			<template v-else>
-				<div v-for="place in ['left', 'right']" :class="place" :key="place">
-					<component v-for="widget in widgets[place]" :is="`mkw-${widget.name}`" :key="widget.id" :ref="widget.id" :widget="widget" platform="desktop"/>
+				<div v-for="place in ['left', 'right']" :key="place" :class="place">
+					<component :is="`mkw-${widget.name}`" v-for="widget in widgets[place]" :key="widget.id" :ref="widget.id" :widget="widget" platform="desktop"/>
 				</div>
 				<div class="main">
 					<router-view ref="content"></router-view>
@@ -184,7 +185,7 @@ export default Vue.extend({
 		this.connection = this.$root.stream.useSharedConnection('main');
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 

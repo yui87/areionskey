@@ -5,7 +5,7 @@
 	<section class="fit-top">
 		<p>{{ $t('intro') }}</p>
 		<ui-select v-model="appTypeForce" :placeholder="$t('intro')">
-			<option v-for="x in ['auto', 'desktop', 'mobile']" :value="x" :key="x">{{ $t(`choices.${x}`) }}</option>
+			<option v-for="x in ['auto', 'desktop', 'mobile']" :key="x" :value="x">{{ $t(`choices.${x}`) }}</option>
 		</ui-select>
 		<ui-info warn>{{ $t('info') }}</ui-info>
 	</section>

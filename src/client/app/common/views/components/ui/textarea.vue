@@ -1,8 +1,9 @@
 <template>
 <div class="ui-textarea" :class="{ focused, filled, tall, pre }">
 	<div class="input">
-		<span class="label" ref="label"><slot></slot></span>
-		<textarea ref="input"
+		<span ref="label" class="label"><slot></slot></span>
+		<textarea
+			ref="input"
 			:value="value"
 			:required="required"
 			:readonly="readonly"

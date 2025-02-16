@@ -2,7 +2,7 @@
 <div class="muteblockuser">
 	<div class="avatar-link">
 		<a :href="user | userPage(null, true)">
-			<mk-avatar class="avatar" :user="user" :disable-link="true"/>
+			<mk-avatar class="avatar" :user="user" :disableLink="true"/>
 		</a>
 	</div>
 	<div class="text">

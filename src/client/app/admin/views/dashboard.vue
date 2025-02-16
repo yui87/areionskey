@@ -90,10 +90,10 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../i18n';
-import XCpuMemory from "./dashboard.cpu-memory.vue";
-import XQueue from "./dashboard.queue-charts.vue";
-import XCharts from "./dashboard.charts.vue";
-import XApLog from "./dashboard.ap-log.vue";
+import XCpuMemory from './dashboard.cpu-memory.vue';
+import XQueue from './dashboard.queue-charts.vue';
+import XCharts from './dashboard.charts.vue';
+import XApLog from './dashboard.ap-log.vue';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 import MarqueeText from 'vue-marquee-text-component';
 import randomColor from 'randomcolor';
@@ -141,7 +141,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 

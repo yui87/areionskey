@@ -1,17 +1,18 @@
 <template>
 <div>
-	<div class="gjisdzwh"
+	<div
+		class="gjisdzwh"
 		@dragover.stop="onDragover"
 		@dragenter="onDragenter"
 		@dragleave="onDragleave"
 		@drop.stop="onDrop"
 	>
 		<div class="content">
-			<div class="hashtags" v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags">
+			<div v-if="recentHashtags.length > 0 && $store.state.settings.suggestRecentHashtags" class="hashtags">
 				<b>{{ $t('@.post-form.recent-tags') }}:</b>
-				<a v-for="tag in recentHashtags.slice(0, 5)" @click="addTag(tag)" :title="$t('@.post-form.click-to-tagging')">#{{ tag }}</a>
+				<a v-for="tag in recentHashtags.slice(0, 5)" :title="$t('@.post-form.click-to-tagging')" @click="addTag(tag)">#{{ tag }}</a>
 			</div>
-			<div class="with-quote" v-if="quoteId"><fa icon="quote-left"/> {{ $t('@.post-form.quote-attached') }} <span> {{ quoteId }} </span><button @click="quoteId = null"><fa icon="times"/></button></div>
+			<div v-if="quoteId" class="with-quote"><fa icon="quote-left"/> {{ $t('@.post-form.quote-attached') }} <span> {{ quoteId }} </span><button @click="quoteId = null"><fa icon="times"/></button></div>
 			<div v-if="visibility === 'specified'" class="to-specified">
 				<fa icon="envelope"/> {{ $t('@.post-form.specified-recipient') }}
 				<div class="visibleUsers">
@@ -23,15 +24,15 @@
 				<button :title="$t('@.post-form.add-visible-user')" @click="addVisibleUser"><fa icon="plus"/></button>
 				<p> <fa icon="exclamation-triangle"/> {{ $t('@.post-form.specified-warn') }} </p>
 			</div>
-			<div class="local-only" v-if="localOnly === true"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
-			<input v-show="useCw" ref="cw" v-model="cw" :placeholder="$t('@.post-form.cw-placeholder')" v-autocomplete="{ model: 'cw' }">
+			<div v-if="localOnly === true" class="local-only"><fa icon="heart"/> {{ $t('@.post-form.local-only-message') }}</div>
+			<input v-show="useCw" ref="cw" v-model="cw" v-autocomplete="{ model: 'cw' }" :placeholder="$t('@.post-form.cw-placeholder')">
 			<div class="textarea">
-				<textarea :class="{ with: (files.length != 0 || poll) }" ref="text" v-model="text" :disabled="posting" @keydown="onKeydown" @paste="onPaste" :placeholder="placeholder" v-autocomplete="{ model: 'text' }"></textarea>
-				<button title="Pick" class="emoji" @click="emoji" ref="emoji">
+				<textarea ref="text" v-model="text" v-autocomplete="{ model: 'text' }" :class="{ with: (files.length != 0 || poll) }" :disabled="posting" :placeholder="placeholder" @keydown="onKeydown" @paste="onPaste"></textarea>
+				<button ref="emoji" title="Pick" class="emoji" @click="emoji">
 					<fa :icon="['far', 'laugh']"/>
 				</button>
 				<x-post-form-attaches class="files" :class="{ with: poll }" :files="files"/>
-				<x-poll-editor class="poll-editor" v-if="poll" ref="poll" @destroyed="poll = false" @updated="onPollUpdate()"/>
+				<x-poll-editor v-if="poll" ref="poll" class="poll-editor" @destroyed="poll = false" @updated="onPollUpdate()"/>
 			</div>
 		</div>
 		<mk-uploader ref="uploader" @uploaded="attachMedia" @change="onChangeUploadings"/>
@@ -40,7 +41,7 @@
 		<button class="kao" :title="$t('@.post-form.insert-a-kao')" @click="kao"><fa :icon="['far', 'smile']"/></button>
 		<button class="poll" :title="$t('@.post-form.create-poll')" @click="poll = !poll"><fa icon="chart-pie"/></button>
 		<button class="cw" :title="$t('@.post-form.hide-contents')" @click="useCw = !useCw"><fa :icon="useCw ? ['fas', 'eye'] : ['far', 'eye-slash']"/></button>
-		<button class="visibility" :title="$t('@.post-form.visibility')" @click="setVisibility" ref="visibilityButton">
+		<button ref="visibilityButton" class="visibility" :title="$t('@.post-form.visibility')" @click="setVisibility">
 			<span v-if="visibility === 'public'"><fa icon="globe"/></span>
 			<span v-if="visibility === 'home'"><fa icon="home"/></span>
 			<span v-if="visibility === 'followers'"><fa icon="lock"/></span>
@@ -51,11 +52,11 @@
 			{{ posting ? $t('@.post-form.posting') : submitText }}<mk-ellipsis v-if="posting"/>
 		</ui-button>
 		<input ref="file" type="file" multiple="multiple" tabindex="-1" @change="onChangeFile"/>
-		<div class="dropzone" v-if="draghover"></div>
+		<div v-if="draghover" class="dropzone"></div>
 	</div>
-	<details v-if="preview && this.$store.state.settings.enablePostPreview" class="preview" ref="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
+	<details v-if="preview && $store.state.settings.enablePostPreview" ref="preview" class="preview" :open="$store.state.device.showPostPreview" @toggle="togglePreview">
 		<summary>{{ $t('@.post-form.preview') }}</summary>
-		<mk-note class="note" :note="preview" :key="preview.id" :compact="true" :preview="true" />
+		<mk-note :key="preview.id" class="note" :note="preview" :compact="true" :preview="true"/>
 	</details>
 </div>
 </template>

@@ -3,19 +3,19 @@
 	<mk-avatar class="avatar" :user="note.user"/>
 	<fa icon="retweet"/>
 	<i18n path="@.renoted-by" tag="span">
-		<router-link class="name" :to="note.user | userPage" v-user-preview="note.userId" place="user">
+		<router-link v-user-preview="note.userId" class="name" :to="note.user | userPage" place="user">
 			<mk-user-name :user="note.user"/>
 		</router-link>
 	</i18n>
 	<div class="info">
-		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
+		<span v-if="note.viaMobile" class="mobile"><fa icon="mobile-alt"/></span>
 		<mk-time :time="note.createdAt"/>
-		<span class="visibility" v-if="note.visibility != 'public'">
+		<span v-if="note.visibility != 'public'" class="visibility">
 			<fa v-if="note.visibility == 'home'" icon="home"/>
 			<fa v-if="note.visibility == 'followers'" icon="lock"/>
 			<fa v-if="note.visibility == 'specified'" icon="envelope"/>
 		</span>
-		<span class="localOnly" v-if="note.localOnly == true"><fa icon="heart"/></span>
+		<span v-if="note.localOnly == true" class="localOnly"><fa icon="heart"/></span>
 	</div>
 </div>
 </template>
@@ -26,15 +26,15 @@ import i18n from '../../../i18n';
 
 export default Vue.extend({
 	i18n: i18n(),
+	inject: {
+		narrow: {
+			default: false
+		}
+	},
 	props: {
 		note: {
 			type: Object,
 			required: true
-		}
-	},
-	inject: {
-		narrow: {
-			default: false
 		}
 	},
 });

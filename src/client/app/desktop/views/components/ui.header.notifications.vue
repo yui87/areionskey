@@ -1,10 +1,10 @@
 <template>
-<div class="notifications" v-hotkey.global="keymap">
-	<button :data-active="isOpen" @click="toggle" :title="$t('title')">
+<div v-hotkey.global="keymap" class="notifications">
+	<button :data-active="isOpen" :title="$t('title')" @click="toggle">
 		<i class="bell"><fa :icon="['far', 'bell']"/></i>
-		<i class="circle" v-if="hasUnreadNotification"><fa icon="circle"/></i>
+		<i v-if="hasUnreadNotification" class="circle"><fa icon="circle"/></i>
 	</button>
-	<div class="pop" v-if="isOpen">
+	<div v-if="isOpen" class="pop">
 		<mk-notifications/>
 	</div>
 </div>

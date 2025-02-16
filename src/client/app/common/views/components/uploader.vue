@@ -6,14 +6,14 @@
 			<div class="top">
 				<p class="name"><fa icon="spinner" pulse/>{{ ctx.name }}</p>
 				<p class="status">
-					<span class="initing" v-if="ctx.progressValue === undefined">{{ $t('waiting') }}<mk-ellipsis/></span>
-					<span class="kb" v-if="ctx.progressValue !== undefined">{{ String(Math.floor(ctx.progressValue / 1024)).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') }}<i>KB</i> / {{ String(Math.floor(ctx.progressMax / 1024)).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') }}<i>KB</i></span>
-					<span class="percentage" v-if="ctx.progressValue !== undefined">{{ Math.floor((ctx.progressValue / ctx.progressMax) * 100) }}</span>
+					<span v-if="ctx.progressValue === undefined" class="initing">{{ $t('waiting') }}<mk-ellipsis/></span>
+					<span v-if="ctx.progressValue !== undefined" class="kb">{{ String(Math.floor(ctx.progressValue / 1024)).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') }}<i>KB</i> / {{ String(Math.floor(ctx.progressMax / 1024)).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') }}<i>KB</i></span>
+					<span v-if="ctx.progressValue !== undefined" class="percentage">{{ Math.floor((ctx.progressValue / ctx.progressMax) * 100) }}</span>
 				</p>
 			</div>
 			<progress v-if="ctx.progressValue !== undefined && ctx.progressValue !== ctx.progressMax" :value="ctx.progressValue" :max="ctx.progressMax"></progress>
-			<div class="progress initing" v-if="ctx.progressValue === undefined"></div>
-			<div class="progress waiting" v-if="ctx.progressValue !== undefined && ctx.progressValue === ctx.progressMax"></div>
+			<div v-if="ctx.progressValue === undefined" class="progress initing"></div>
+			<div v-if="ctx.progressValue !== undefined && ctx.progressValue === ctx.progressMax" class="progress waiting"></div>
 		</li>
 	</ol>
 </div>

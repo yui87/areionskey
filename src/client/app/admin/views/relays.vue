@@ -38,11 +38,11 @@ export default Vue.extend({
 		};
 	},
 
-	created() {
-		this.reload();
+	computed: {
 	},
 
-	computed: {
+	created() {
+		this.reload();
 	},
 
 	methods: {

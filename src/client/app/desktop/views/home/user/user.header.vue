@@ -1,51 +1,51 @@
 <template>
 <div class="header" :class="{ shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }">
 	<div class="banner-container" :style="style">
-		<div class="banner" ref="banner" :style="style"></div>
+		<div ref="banner" class="banner" :style="style"></div>
 		<div class="fade"></div>
 		<div class="title">
 			<p class="name">
 				<mk-user-name :user="user" :nowrap="false"/>
 			</p>
 			<div>
-				<span class="username"><mk-acct :user="user" :detail="true" /></span>
+				<span class="username"><mk-acct :user="user" :detail="true"/></span>
 				<span v-if="user.movedToUser != null">moved to <router-link :to="user.movedToUser | userPage()"><mk-acct :user="user.movedToUser" :detail="true"/></router-link></span>
-				<span class="is-admin" v-if="user.isAdmin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
-				<span class="is-moderator" v-if="user.isModerator" :title="$t('@.moderator')"><fa :icon="faUserShield"/></span>
-				<span class="is-premium" v-if="user.isPremium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
-				<span class="is-verified" v-if="user.isVerified" :title="$t('@.verified-user')"><img svg-inline src="../../../../../assets/horseshoe.svg" class="horseshoe"/></span>
-				<span class="is-bot" v-if="user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
+				<span v-if="user.isAdmin" class="is-admin" :title="$t('@.admin-user')"><fa icon="wrench"/></span>
+				<span v-if="user.isModerator" class="is-moderator" :title="$t('@.moderator')"><fa :icon="faUserShield"/></span>
+				<span v-if="user.isPremium" class="is-premium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
+				<span v-if="user.isVerified" class="is-verified" :title="$t('@.verified-user')"><img svg-inline src="../../../../../assets/horseshoe.svg" class="horseshoe"/></span>
+				<span v-if="user.isBot" class="is-bot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 			</div>
 		</div>
-		<span class="followed" v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed">{{ $t('follows-you') }}</span>
-		<div class="actions" v-if="$store.getters.isSignedIn">
-			<button @click="menu" class="menu" ref="menu"><fa icon="ellipsis-h"/></button>
+		<span v-if="$store.getters.isSignedIn && $store.state.i.id != user.id && user.isFollowed" class="followed">{{ $t('follows-you') }}</span>
+		<div v-if="$store.getters.isSignedIn" class="actions">
+			<button ref="menu" class="menu" @click="menu"><fa icon="ellipsis-h"/></button>
 			<mk-follow-button v-if="$store.state.i.id != user.id && !user.isBlocking" :user="user" :inline="true" :transparent="false" class="follow"/>
 		</div>
-		<div class="actions" v-else>
+		<div v-else class="actions">
 			<mk-follow-button :user="user" :inline="true" :transparent="false" class="follow"/>
 		</div>
 	</div>
-	<mk-avatar class="avatar" :user="user" :disable-preview="true"/>
+	<mk-avatar class="avatar" :user="user" :disablePreview="true"/>
 	<div class="body">
 		<div class="description">
-			<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+			<mfm v-if="user.description" :text="user.description" :isNote="false" :author="user" :i="$store.state.i" :customEmojis="user.emojis"/>
 			<p v-else class="empty">{{ $t('no-description') }}</p>
 			<x-integrations :user="user" style="margin-top:16px;"/>
 		</div>
-		<div class="fields" v-if="user.fields" :key="user.id">
-			<dl class="field" v-for="(field, i) in user.fields" :key="i">
+		<div v-if="user.fields" :key="user.id" class="fields">
+			<dl v-for="(field, i) in user.fields" :key="i" class="field">
 				<dt class="name">
-					<mfm :text="field.name" :plain="true" :custom-emojis="user.emojis"/>
+					<mfm :text="field.name" :plain="true" :customEmojis="user.emojis"/>
 				</dt>
 				<dd class="value">
-					<mfm :text="field.value" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+					<mfm :text="field.value" :author="user" :i="$store.state.i" :customEmojis="user.emojis"/>
 				</dd>
 			</dl>
 		</div>
 		<div class="info">
-			<span class="location" v-if="user.location"><fa icon="map-marker"/> {{ user.location }}</span>
-			<span class="birthday" v-if="user.birthday"><fa icon="birthday-cake"/> {{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
+			<span v-if="user.location" class="location"><fa icon="map-marker"/> {{ user.location }}</span>
+			<span v-if="user.birthday" class="birthday"><fa icon="birthday-cake"/> {{ user.birthday.replace('-', $t('year')).replace('-', $t('month')) + $t('day') }} ({{ $t('years-old', { age }) }})</span>
 		</div>
 		<div class="status">
 			<router-link :to="user | userPage()" class="notes-count"><b>{{ user.notesCount | number }}</b>{{ $t('posts') }}</router-link>
@@ -95,7 +95,7 @@ export default Vue.extend({
 			//window.addEventListener('resize', this.onScroll);
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.user.bannerUrl) {
 			//window.removeEventListener('load', this.onScroll);
 			//window.removeEventListener('scroll', this.onScroll);

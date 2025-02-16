@@ -1,14 +1,15 @@
 <template>
-<button class="wfliddvnhxvyusikowhxozkyxyenqxqr"
+<button
+	class="wfliddvnhxvyusikowhxozkyxyenqxqr"
 	:class="{ wait, block, inline, mini, transparent, active: isFollowing || hasPendingFollowRequestFromYou }"
-	@click="onClick"
 	:disabled="wait"
 	:inline="inline"
+	@click="onClick"
 >
 	<template v-if="!wait">
 		<fa :icon="iconAndText[0]"/> <template v-if="!mini">{{ iconAndText[1] }}</template>
 	</template>
-	<template v-else><fa icon="spinner" pulse fixed-width/></template>
+	<template v-else><fa icon="spinner" pulse fixedWidth/></template>
 </button>
 </template>
 
@@ -80,7 +81,7 @@ export default Vue.extend({
 		this.connection.on('unfollow', this.onFollowChange);
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 

@@ -25,10 +25,10 @@
 		</section>
 		<section>
 			<ui-switch v-model="disableRegistration" :disabled="!$store.getters.isAdmin">{{ $t('disable-registration') }}</ui-switch>
-			<ui-button v-if="disableRegistration" @click="invite" :disabled="!$store.getters.isAdmin">{{ $t('invite') }}</ui-button>
+			<ui-button v-if="disableRegistration" :disabled="!$store.getters.isAdmin" @click="invite">{{ $t('invite') }}</ui-button>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -47,7 +47,7 @@
 			<ui-switch v-model="useStarForReactionFallback" :disabled="!$store.getters.isAdmin">{{ $t('use-star-for-reaction-fallback') }}</ui-switch>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -92,7 +92,7 @@
 			<ui-input v-model="remoteDriveCapacityMb" type="number" :disabled="!cacheRemoteFiles">{{ $t('remote-drive-capacity-mb') }}<template #suffix>MB</template><template #desc>{{ $t('mb') }}</template></ui-input>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -102,7 +102,7 @@
 			<ui-textarea v-model="pinnedUsers">
 				<template #desc>{{ $t('pinned-users-info') }}</template>
 			</ui-textarea>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -114,7 +114,7 @@
 			<ui-info warn>{{ $t('proxy-account-warn') }}</ui-info>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -131,14 +131,14 @@
 				<ui-switch v-model="smtpAuth" :disabled="!$store.getters.isAdmin">{{ $t('smtp-auth') }}</ui-switch>
 				<ui-horizon-group inputs>
 					<ui-input v-model="smtpUser" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-user') }}</ui-input>
-					<ui-input v-model="smtpPass" type="password" :with-password-toggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
+					<ui-input v-model="smtpPass" type="password" :withPasswordToggle="true" :disabled="!enableEmail || !smtpAuth">{{ $t('smtp-pass') }}</ui-input>
 				</ui-horizon-group>
 				<ui-switch v-model="smtpSecure" :disabled="!enableEmail || !$store.getters.isAdmin">{{ $t('smtp-secure') }}<template #desc>{{ $t('smtp-secure-info') }}</template></ui-switch>
-				<ui-button @click="testEmail()" :disabled="!$store.getters.isAdmin">{{ $t('test-email') }}</ui-button>
+				<ui-button :disabled="!$store.getters.isAdmin" @click="testEmail()">{{ $t('test-email') }}</ui-button>
 			</template>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -155,7 +155,7 @@
 			</template>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -174,10 +174,10 @@
 		</section>
 		<section v-if="enableRecaptcha && recaptchaSiteKey">
 			<header>{{ $t('recaptcha-preview') }}</header>
-			<div ref="recaptcha" style="margin: 16px 0 0 0;" :key="recaptchaSiteKey"></div>
+			<div ref="recaptcha" :key="recaptchaSiteKey" style="margin: 16px 0 0 0;"></div>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -217,7 +217,7 @@
 			</template>
 		</section>
 		<section>
-			<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 
@@ -230,7 +230,7 @@
 				<ui-textarea v-model="hiddenTags">
 					<template #desc>{{ $t('hidden-tags-info') }}</template>
 				</ui-textarea>
-				<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+				<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 			</section>
 		</ui-card>
 
@@ -240,7 +240,7 @@
 				<ui-input v-model="summalyProxy">URL</ui-input>
 			</section>
 			<section>
-				<ui-button @click="updateMeta" :disabled="!$store.getters.isAdmin"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+				<ui-button :disabled="!$store.getters.isAdmin" @click="updateMeta"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 			</section>
 		</ui-card>
 	</details>
@@ -266,7 +266,7 @@ export default Vue.extend({
 			maintainerName: null,
 			maintainerEmail: null,
 			ToSUrl: null,
-			repositoryUrl: "https://github.com/sakura-tel/areionskey",
+			repositoryUrl: 'https://github.com/sakura-tel/areionskey',
 			feedbackUrl: null,
 			disableRegistration: false,
 			disableLocalTimeline: false,

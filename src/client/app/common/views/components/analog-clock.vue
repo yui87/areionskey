@@ -1,10 +1,12 @@
 <template>
 <svg class="mk-analog-clock" viewBox="0 0 10 10" preserveAspectRatio="none">
-	<circle v-for="angle, i in graduations"
+	<circle
+		v-for="angle, i in graduations"
 		:cx="5 + (Math.sin(angle) * (5 - graduationsPadding))"
 		:cy="5 - (Math.cos(angle) * (5 - graduationsPadding))"
 		:r="i % 5 == 0 ? 0.125 : 0.05"
-		:fill="i % 5 == 0 ? majorGraduationColor : minorGraduationColor"/>
+		:fill="i % 5 == 0 ? majorGraduationColor : minorGraduationColor"
+	/>
 
 	<line
 		:x1="5 - (Math.sin(sAngle) * (sHandLengthRatio * handsTailLength))"
@@ -12,21 +14,24 @@
 		:x2="5 + (Math.sin(sAngle) * ((sHandLengthRatio * 5) - handsPadding))"
 		:y2="5 - (Math.cos(sAngle) * ((sHandLengthRatio * 5) - handsPadding))"
 		:stroke="sHandColor"
-		stroke-width="0.05"/>
+		stroke-width="0.05"
+	/>
 	<line
 		:x1="5 - (Math.sin(mAngle) * (mHandLengthRatio * handsTailLength))"
 		:y1="5 + (Math.cos(mAngle) * (mHandLengthRatio * handsTailLength))"
 		:x2="5 + (Math.sin(mAngle) * ((mHandLengthRatio * 5) - handsPadding))"
 		:y2="5 - (Math.cos(mAngle) * ((mHandLengthRatio * 5) - handsPadding))"
 		:stroke="mHandColor"
-		stroke-width="0.1"/>
+		stroke-width="0.1"
+	/>
 	<line
 		:x1="5 - (Math.sin(hAngle) * (hHandLengthRatio * handsTailLength))"
 		:y1="5 + (Math.cos(hAngle) * (hHandLengthRatio * handsTailLength))"
 		:x2="5 + (Math.sin(hAngle) * ((hHandLengthRatio * 5) - handsPadding))"
 		:y2="5 - (Math.cos(hAngle) * ((hHandLengthRatio * 5) - handsPadding))"
 		:stroke="hHandColor"
-		stroke-width="0.1"/>
+		stroke-width="0.1"
+	/>
 </svg>
 </template>
 
@@ -122,7 +127,7 @@ export default Vue.extend({
 		update();
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.enabled = false;
 	},
 

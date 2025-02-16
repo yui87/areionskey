@@ -1,11 +1,11 @@
 <template>
 <div class="mk-selectdrive">
 	<header>
-		<h1>{{ $t('select-file') }}<span class="count" v-if="files.length > 0">({{ files.length }})</span></h1>
+		<h1>{{ $t('select-file') }}<span v-if="files.length > 0" class="count">({{ files.length }})</span></h1>
 		<button class="upload" @click="upload"><fa icon="upload"/></button>
 		<button v-if="multiple" class="ok" @click="ok"><fa icon="check"/></button>
 	</header>
-	<x-drive ref="browser" select-file :multiple="multiple" is-naked :top="$store.state.uiHeaderHeight"/>
+	<x-drive ref="browser" selectFile :multiple="multiple" isNaked :top="$store.state.uiHeaderHeight"/>
 </div>
 </template>
 

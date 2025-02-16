@@ -5,28 +5,28 @@
 	<section>
 		<header>{{ $t('mute') }}</header>
 		<ui-info v-if="!muteFetching && mute.length == 0">{{ $t('no-muted-users') }}</ui-info>
-		<div class="users" v-if="mute.length != 0">
-			<div class="user" v-for="user in mute" :key="user.id">
+		<div v-if="mute.length != 0" class="users">
+			<div v-for="user in mute" :key="user.id" class="user">
 				<x-user :user="user"/>
 				<span @click="unmute(user)">
 					<fa icon="times"/>
 				</span>
 			</div>
-			<ui-button v-if="this.muteCursor != null" @click="updateMute()">{{ $t('@.load-more') }}</ui-button>
+			<ui-button v-if="muteCursor != null" @click="updateMute()">{{ $t('@.load-more') }}</ui-button>
 		</div>
 	</section>
 
 	<section>
 		<header>{{ $t('block') }}</header>
 		<ui-info v-if="!blockFetching && block.length == 0">{{ $t('no-blocked-users') }}</ui-info>
-		<div class="users" v-if="block.length != 0">
-			<div class="user" v-for="user in block" :key="user.id">
+		<div v-if="block.length != 0" class="users">
+			<div v-for="user in block" :key="user.id" class="user">
 				<x-user :user="user"/>
 				<span @click="unblock(user)">
 					<fa icon="times"/>
 				</span>
 			</div>
-			<ui-button v-if="this.blockCursor != null" @click="updateBlock()">{{ $t('@.load-more') }}</ui-button>
+			<ui-button v-if="blockCursor != null" @click="updateBlock()">{{ $t('@.load-more') }}</ui-button>
 		</div>
 	</section>
 

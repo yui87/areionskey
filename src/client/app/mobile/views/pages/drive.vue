@@ -5,19 +5,19 @@
 		<template v-if="file"><mk-file-type-icon data-icon :type="file.type" style="margin-right:4px;"/>{{ file.name }}</template>
 		<template v-if="!folder && !file"><span style="margin-right:4px;"><fa icon="cloud"/></span>{{ $t('@.drive') }}</template>
 	</template>
-	<template #func v-if="folder || (!folder && !file)"><button @click="openContextMenu" ref="contextSource"><fa icon="ellipsis-h"/></button></template>
+	<template v-if="folder || (!folder && !file)" #func><button ref="contextSource" @click="openContextMenu"><fa icon="ellipsis-h"/></button></template>
 	<x-drive
 		ref="browser"
-		:init-folder="initFolder"
-		:init-file="initFile"
-		:is-naked="true"
+		:initFolder="initFolder"
+		:initFile="initFile"
+		:isNaked="true"
 		:top="$store.state.uiHeaderHeight"
-		@begin-fetch="Progress.start()"
-		@fetched-mid="Progress.set(0.5)"
+		@beginFetch="Progress.start()"
+		@fetchedMid="Progress.set(0.5)"
 		@fetched="Progress.done()"
-		@move-root="onMoveRoot"
-		@open-folder="onOpenFolder"
-		@open-file="onOpenFile"
+		@moveRoot="onMoveRoot"
+		@openFolder="onOpenFolder"
+		@openFile="onOpenFile"
 	/>
 </mk-ui>
 </template>
@@ -53,7 +53,7 @@ export default Vue.extend({
 	mounted() {
 		document.title = `${this.$root.instanceName} Drive`;
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		window.removeEventListener('popstate', this.onPopState);
 	},
 	methods: {

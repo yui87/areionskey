@@ -6,8 +6,9 @@
 			<button class="close" @click="cancel"><fa icon="times"/></button>
 			<button class="ok" @click="ok"><fa icon="check"/></button>
 		</header>
-		<x-drive ref="browser"
-			select-folder
+		<x-drive
+			ref="browser"
+			selectFolder
 		/>
 	</div>
 </div>

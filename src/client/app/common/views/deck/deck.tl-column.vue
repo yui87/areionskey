@@ -1,5 +1,5 @@
 <template>
-<x-column :menu="menu" :name="name" :column="column" :is-stacked="isStacked" :pos="pos">
+<x-column :menu="menu" :name="name" :column="column" :isStacked="isStacked" :pos="pos">
 	<template #header>
 		<fa v-if="column.type == 'home'" icon="home"/>
 		<fa v-if="column.type == 'local'" :icon="['far', 'comments']"/>
@@ -10,24 +10,27 @@
 		<span>{{ name }}</span>
 	</template>
 
-	<div class="editor" style="padding:12px" v-if="edit">
+	<div v-if="edit" class="editor" style="padding:12px">
 		<ui-switch v-model="column.isMediaOnly" @change="onChangeSettings">{{ $t('is-media-only') }}</ui-switch>
 	</div>
 
-	<x-list-tl v-if="column.type == 'list'"
+	<x-list-tl
+		v-if="column.type == 'list'"
+		ref="tl"
 		:list="column.list"
-		:media-only="column.isMediaOnly"
-		ref="tl"
+		:mediaOnly="column.isMediaOnly"
 	/>
-	<x-hashtag-tl v-else-if="column.type == 'hashtag'"
-		:tag-tl="$store.state.settings.tagTimelines.find(x => x.id == column.tagTlId)"
-		:media-only="column.isMediaOnly"
+	<x-hashtag-tl
+		v-else-if="column.type == 'hashtag'"
 		ref="tl"
+		:tagTl="$store.state.settings.tagTimelines.find(x => x.id == column.tagTlId)"
+		:mediaOnly="column.isMediaOnly"
 	/>
-	<x-tl v-else
+	<x-tl
+		v-else
+		ref="tl"
 		:src="column.type"
-		:media-only="column.isMediaOnly"
-		ref="tl"
+		:mediaOnly="column.isMediaOnly"
 	/>
 </x-column>
 </template>

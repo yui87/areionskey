@@ -1,11 +1,11 @@
 <template>
 <div class="mkw-posts-monitor">
-	<ui-container :show-header="props.design == 0" :naked="props.design == 2">
+	<ui-container :showHeader="props.design == 0" :naked="props.design == 2">
 		<template #header><fa icon="chart-line"/>{{ $t('title') }}</template>
-		<template #func><button @click="toggle" :title="$t('toggle')"><fa icon="sort"/></button></template>
+		<template #func><button :title="$t('toggle')" @click="toggle"><fa icon="sort"/></button></template>
 
 		<div class="qpdmibaztplkylerhdbllwcokyrfxeyj" :class="{ dual: props.view == 0 }">
-			<svg :viewBox="`0 0 ${ viewBoxX } ${ viewBoxY }`" v-show="props.view != 2">
+			<svg v-show="props.view != 2" :viewBox="`0 0 ${ viewBoxX } ${ viewBoxY }`">
 				<defs>
 					<linearGradient :id="localGradientId" x1="0" x2="0" y1="1" y2="0">
 						<stop offset="0%" stop-color="hsl(200, 80%, 70%)"></stop>
@@ -15,26 +15,30 @@
 						<polygon
 							:points="localPolygonPoints"
 							fill="#fff"
-							fill-opacity="0.5"/>
+							fill-opacity="0.5"
+						/>
 						<polyline
 							:points="localPolylinePoints"
 							fill="none"
 							stroke="#fff"
-							stroke-width="1"/>
+							stroke-width="1"
+						/>
 						<circle
 							:cx="localHeadX"
 							:cy="localHeadY"
 							r="1.5"
-							fill="#fff"/>
+							fill="#fff"
+						/>
 					</mask>
 				</defs>
 				<rect
 					x="-2" y="-2"
 					:width="viewBoxX + 4" :height="viewBoxY + 4"
-					:style="`stroke: none; fill: url(#${ localGradientId }); mask: url(#${ localMaskId })`"/>
+					:style="`stroke: none; fill: url(#${ localGradientId }); mask: url(#${ localMaskId })`"
+				/>
 				<text x="1" y="5">Local</text>
 			</svg>
-			<svg :viewBox="`0 0 ${ viewBoxX } ${ viewBoxY }`" v-show="props.view != 1">
+			<svg v-show="props.view != 1" :viewBox="`0 0 ${ viewBoxX } ${ viewBoxY }`">
 				<defs>
 					<linearGradient :id="fediGradientId" x1="0" x2="0" y1="1" y2="0">
 						<stop offset="0%" stop-color="hsl(200, 80%, 70%)"></stop>
@@ -44,23 +48,27 @@
 						<polygon
 							:points="fediPolygonPoints"
 							fill="#fff"
-							fill-opacity="0.5"/>
+							fill-opacity="0.5"
+						/>
 						<polyline
 							:points="fediPolylinePoints"
 							fill="none"
 							stroke="#fff"
-							stroke-width="1"/>
+							stroke-width="1"
+						/>
 						<circle
 							:cx="fediHeadX"
 							:cy="fediHeadY"
 							r="1.5"
-							fill="#fff"/>
+							fill="#fff"
+						/>
 					</mask>
 				</defs>
 				<rect
 					x="-2" y="-2"
 					:width="viewBoxX + 4" :height="viewBoxY + 4"
-					:style="`stroke: none; fill: url(#${ fediGradientId }); mask: url(#${ fediMaskId })`"/>
+					:style="`stroke: none; fill: url(#${ fediGradientId }); mask: url(#${ fediMaskId })`"
+				/>
 				<text x="1" y="5">Fedi</text>
 			</svg>
 		</div>

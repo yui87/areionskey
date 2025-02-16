@@ -1,14 +1,14 @@
 <template>
-<div class="rdfaahpb" v-hotkey.global="keymap">
-	<div class="backdrop" ref="backdrop" @click="close"></div>
-	<div class="popover" :class="{ isMobile: $root.isMobile }" ref="popover">
+<div v-hotkey.global="keymap" class="rdfaahpb">
+	<div ref="backdrop" class="backdrop" @click="close"></div>
+	<div ref="popover" class="popover" :class="{ isMobile: $root.isMobile }">
 		<p v-if="!$root.isMobile">{{ title }}</p>
-		<div class="buttons" ref="buttons" :class="{ showFocus }">
-			<button v-for="(reaction, i) in rs" :key="i" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout" :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction" v-particle><mk-reaction-icon :reaction="reaction"/></button>
+		<div ref="buttons" class="buttons" :class="{ showFocus }">
+			<button v-for="(reaction, i) in rs" :key="i" v-particle :tabindex="i + 1" :title="/^[a-z]+$/.test(reaction) ? $t('@.reactions.' + reaction) : reaction" @click="react(reaction)" @mouseover="onMouseover" @mouseout="onMouseout"><mk-reaction-icon :reaction="reaction"/></button>
 		</div>
 		<div v-if="enableEmojiReaction" class="text">
-			<input v-model="text" :placeholder="$t('input-reaction-placeholder')" @keyup.enter="reactText" @keydown.esc="close" @input="tryReactText" v-autocomplete="{ model: 'text', noZwsp: true }" ref="text">
-			<button title="Pick" class="emoji" @click="emoji" ref="emoji"><fa :icon="['far', 'laugh']"/></button>
+			<input ref="text" v-model="text" v-autocomplete="{ model: 'text', noZwsp: true }" :placeholder="$t('input-reaction-placeholder')" @keyup.enter="reactText" @keydown.esc="close" @input="tryReactText">
+			<button ref="emoji" title="Pick" class="emoji" @click="emoji"><fa :icon="['far', 'laugh']"/></button>
 		</div>
 	</div>
 </div>

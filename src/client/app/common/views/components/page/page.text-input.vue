@@ -1,6 +1,6 @@
 <template>
 <div>
-	<ui-input class="kudkigyw" v-model="v" type="text">{{ script.interpolate(value.text) }}</ui-input>
+	<ui-input v-model="v" class="kudkigyw" type="text">{{ script.interpolate(value.text) }}</ui-input>
 </div>
 </template>
 

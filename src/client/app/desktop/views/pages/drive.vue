@@ -1,6 +1,6 @@
 <template>
 <div class="mk-drive-page">
-	<x-drive :init-folder="folder" @move-root="onMoveRoot" @open-folder="onOpenFolder"/>
+	<x-drive :initFolder="folder" @moveRoot="onMoveRoot" @openFolder="onOpenFolder"/>
 </div>
 </template>
 

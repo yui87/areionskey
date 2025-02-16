@@ -1,8 +1,8 @@
 <template>
-<div class="mk-ui" v-hotkey.global="keymap">
-	<div class="bg" v-if="$store.getters.isSignedIn && $store.state.settings.wallpaper" :style="style"></div>
-	<x-header class="header" v-if="navbar == 'top'" v-show="!zenMode" ref="header"/>
-	<x-sidebar class="sidebar" v-if="navbar != 'top'" v-show="!zenMode" ref="sidebar"/>
+<div v-hotkey.global="keymap" class="mk-ui">
+	<div v-if="$store.getters.isSignedIn && $store.state.settings.wallpaper" class="bg" :style="style"></div>
+	<x-header v-if="navbar == 'top'" v-show="!zenMode" ref="header" class="header"/>
+	<x-sidebar v-if="navbar != 'top'" v-show="!zenMode" ref="sidebar" class="sidebar"/>
 	<div class="content" :class="[{ sidebar: navbar != 'top', zen: zenMode }, navbar]">
 		<slot></slot>
 	</div>

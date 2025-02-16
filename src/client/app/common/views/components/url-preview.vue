@@ -1,15 +1,15 @@
 <template>
 <div v-if="playerEnabled" class="player" :style="`padding: ${(player.height || 0) / (player.width || 1) * 100}% 0 0`">
-	<button class="disablePlayer" @click="playerEnabled = false" :title="$t('disable-player')"><fa icon="times"/></button>
-	<iframe :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1')" :width="player.width || '100%'" :heigth="player.height || 250" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen />
+	<button class="disablePlayer" :title="$t('disable-player')" @click="playerEnabled = false"><fa icon="times"/></button>
+	<iframe :src="player.url + (player.url.match(/\?/) ? '&autoplay=1&auto_play=1' : '?autoplay=1&auto_play=1')" :width="player.width || '100%'" :heigth="player.height || 250" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen/>
 </div>
-<div v-else-if="tweetId && tweetExpanded" class="twitter" ref="twitter">
+<div v-else-if="tweetId && tweetExpanded" ref="twitter" class="twitter">
 	<iframe ref="tweet" scrolling="no" frameborder="no" :style="{ 'margin-top': '8px', left: `${tweetLeft}px`, width: `${tweetLeft < 0 ? 'auto' : '100%'}`, height: `${tweetHeight}px` }" :src="`https://platform.twitter.com/embed/index.html?embedId=${embedId}&amp;hideCard=false&amp;hideThread=false&amp;lang=en&amp;theme=${$store.state.device.darkmode ? 'dark' : 'light'}&amp;id=${tweetId}`"></iframe>
 </div>
 <div v-else class="mk-url-preview">
-	<a :class="{ mini: narrow, compact }" :href="url" rel="nofollow noopener" target="_blank" :title="url" v-if="!fetching">
-		<div class="thumbnail" v-if="thumbnail && (!sensitive || $store.state.device.alwaysShowNsfw)" :style="`background-image: url('${thumbnail}')`">
-			<button v-if="!playerEnabled && player.url" @click.prevent="playerEnabled = true" :title="$t('enable-player')"><fa :icon="['far', 'play-circle']"/></button>
+	<a v-if="!fetching" :class="{ mini: narrow, compact }" :href="url" rel="nofollow noopener" target="_blank" :title="url">
+		<div v-if="thumbnail && (!sensitive || $store.state.device.alwaysShowNsfw)" class="thumbnail" :style="`background-image: url('${thumbnail}')`">
+			<button v-if="!playerEnabled && player.url" :title="$t('enable-player')" @click.prevent="playerEnabled = true"><fa :icon="['far', 'play-circle']"/></button>
 		</div>
 		<article>
 			<header>
@@ -17,12 +17,12 @@
 			</header>
 			<p v-if="description" :title="description">{{ description.length > 85 ? description.slice(0, 85) + '…' : description }}</p>
 			<footer>
-				<img class="icon" v-if="icon" :src="icon"/>
+				<img v-if="icon" class="icon" :src="icon"/>
 				<p :title="sitename">{{ sitename }}</p>
 			</footer>
 		</article>
 	</a>
-	<div class="expandTweet" v-if="tweetId">
+	<div v-if="tweetId" class="expandTweet">
 		<a @click="tweetExpanded = true">
 			<fa :icon="faTwitter"/> {{ $t('expandTweet') }}
 		</a>
@@ -38,6 +38,12 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('common/views/components/url-preview.vue'),
+
+	inject: {
+		narrow: {
+			default: false
+		}
+	},
 	props: {
 		url: {
 			type: String,
@@ -55,12 +61,6 @@ export default Vue.extend({
 			required: false,
 			default: false
 		},
-	},
-
-	inject: {
-		narrow: {
-			default: false
-		}
 	},
 
 	data() {
@@ -131,6 +131,10 @@ export default Vue.extend({
 		if (areaWidth && areaWidth < 300) this.tweetLeft = areaWidth - 290;
 	},
 
+	beforeUnmount() {
+		(window as any).removeEventListener('message', this.adjustTweetHeight);
+	},
+
 	methods: {
 		isBlokedUrl(url: URL) {
 			if (url.pathname.match(/\.(?:jpg|gif|png)$/)) return true;
@@ -146,10 +150,6 @@ export default Vue.extend({
 			const height = embed?.params[0]?.height;
 			if (height) this.tweetHeight = height;
  		},
-	},
-
-	beforeDestroy() {
-		(window as any).removeEventListener('message', this.adjustTweetHeight);
 	},
 });
 </script>

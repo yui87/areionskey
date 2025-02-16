@@ -31,7 +31,7 @@
 			</optgroup>
 		</select>
 		<div>
-			<span @click="span = 'day'" :class="{ active: span == 'day' }">{{ $t('per-day') }}</span> | <span @click="span = 'hour'" :class="{ active: span == 'hour' }">{{ $t('per-hour') }}</span>
+			<span :class="{ active: span == 'day' }" @click="span = 'day'">{{ $t('per-day') }}</span> | <span :class="{ active: span == 'hour' }" @click="span = 'hour'">{{ $t('per-hour') }}</span>
 		</div>
 	</header>
 	<div ref="chart"></div>
@@ -146,7 +146,7 @@ export default Vue.extend({
 		this.render();
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.chartInstance.destroy();
 	},
 

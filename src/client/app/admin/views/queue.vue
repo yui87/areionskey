@@ -48,7 +48,7 @@
 				</ui-select>
 			</ui-horizon-group>
 			<sequential-entrance animation="entranceFromTop" delay="25">
-				<div class="xvvuvgsv" v-for="job in jobs" :key="job.id">
+				<div v-for="job in jobs" :key="job.id" class="xvvuvgsv">
 					<b>{{ job.id }}</b>
 					<template v-if="domain === 'deliver'">
 						<span>{{ job.data.to }}</span>

@@ -43,7 +43,7 @@
 			</section>
 			<section>
 				<ui-switch v-model="suggestRecentHashtags">{{ $t('@._settings.suggest-recent-hashtags') }}</ui-switch>
-				<ui-switch v-model="showClockOnHeader" v-if="!$root.isMobile">{{ $t('@._settings.show-clock-on-header') }}</ui-switch>
+				<ui-switch v-if="!$root.isMobile" v-model="showClockOnHeader">{{ $t('@._settings.show-clock-on-header') }}</ui-switch>
 				<ui-switch v-model="alwaysShowNsfw">{{ $t('@._settings.always-show-nsfw') }}</ui-switch>
 				<ui-switch v-model="showReplyTarget">{{ $t('@._settings.show-reply-target') }}</ui-switch>
 				<ui-switch v-model="disableAnimatedMfm">{{ $t('@._settings.disable-animated-mfm') }}</ui-switch>
@@ -117,10 +117,12 @@
 			<template #title><fa icon="sliders-h"/> {{ $t('@._settings.behavior') }}</template>
 
 			<section>
-				<ui-switch v-model="fetchOnScroll">{{ $t('@._settings.fetch-on-scroll') }}
+				<ui-switch v-model="fetchOnScroll">
+					{{ $t('@._settings.fetch-on-scroll') }}
 					<template #desc>{{ $t('@._settings.fetch-on-scroll-desc') }}</template>
 				</ui-switch>
-				<ui-switch v-model="keepCw">{{ $t('@._settings.keep-cw') }}
+				<ui-switch v-model="keepCw">
+					{{ $t('@._settings.keep-cw') }}
 					<template #desc>{{ $t('@._settings.keep-cw-desc') }}</template>
 				</ui-switch>
 				<ui-switch v-model="enablePostPreview">{{ $t('@._settings.enable-post-preview') }}</ui-switch>
@@ -133,8 +135,8 @@
 					{{ $t('@._settings.reactions') }}<template #desc>{{ $t('@._settings.reactions-description') }}</template>
 				</ui-textarea>
 				<ui-horizon-group>
-					<ui-button @click="save('reactions', reactions.trim().split('\n'))" primary><fa :icon="faSave"/> {{ $t('@._settings.save') }}</ui-button>
-					<ui-button @click="previewReaction()" ref="reactionsPreviewButton"><fa :icon="faEye"/> {{ $t('@._settings.preview') }}</ui-button>
+					<ui-button primary @click="save('reactions', reactions.trim().split('\n'))"><fa :icon="faSave"/> {{ $t('@._settings.save') }}</ui-button>
+					<ui-button ref="reactionsPreviewButton" @click="previewReaction()"><fa :icon="faEye"/> {{ $t('@._settings.preview') }}</ui-button>
 				</ui-horizon-group>
 			</section>
 
@@ -171,7 +173,8 @@
 
 			<section>
 				<header>{{ $t('@._settings.web-search-engine') }}</header>
-				<ui-input v-model="webSearchEngine">{{ $t('@._settings.web-search-engine') }}
+				<ui-input v-model="webSearchEngine">
+					{{ $t('@._settings.web-search-engine') }}
 					<template #desc>{{ $t('@._settings.web-search-engine-desc') }}</template>
 				</ui-input>
 				<ui-button @click="save('webSearchEngine', webSearchEngine)"><fa :icon="faSave"/> {{ $t('@._settings.save') }}</ui-button>
@@ -179,13 +182,15 @@
 
 			<section v-if="!$root.isMobile">
 				<header>{{ $t('@._settings.paste') }}</header>
-				<ui-input v-model="pastedFileName">{{ $t('@._settings.pasted-file-name') }}
-					<template v-if="pastedFileName === this.$store.state.settings.pastedFileName" #desc>{{ $t('@._settings.pasted-file-name-desc') }}</template>
+				<ui-input v-model="pastedFileName">
+					{{ $t('@._settings.pasted-file-name') }}
+					<template v-if="pastedFileName === $store.state.settings.pastedFileName" #desc>{{ $t('@._settings.pasted-file-name-desc') }}</template>
 					<template v-else #desc>{{ pastedFileNamePreview() }}</template>
 				</ui-input>
 				<ui-button @click="save('pastedFileName', pastedFileName)"><fa :icon="faSave"/> {{ $t('@._settings.save') }}</ui-button>
 
-				<ui-switch v-model="pasteDialog">{{ $t('@._settings.paste-dialog') }}
+				<ui-switch v-model="pasteDialog">
+					{{ $t('@._settings.paste-dialog') }}
 					<template #desc>{{ $t('@._settings.paste-dialog-desc') }}</template>
 				</ui-switch>
 			</section>
@@ -208,20 +213,26 @@
 			<template #title><fa icon="volume-up"/> {{ $t('@._settings.sound') }}</template>
 
 			<section>
-				<ui-switch v-model="enableSounds">{{ $t('@._settings.enable-sounds') }}
+				<ui-switch v-model="enableSounds">
+					{{ $t('@._settings.enable-sounds') }}
 					<template #desc>{{ $t('@._settings.enable-sounds-desc') }}</template>
 				</ui-switch>
-				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInTimeline">{{ $t('@._settings.enable-sounds-intimeline')}}
+				<ui-switch v-model="enableSoundsInTimeline" :disabled="!enableSounds">
+					{{ $t('@._settings.enable-sounds-intimeline') }}
 				</ui-switch>
-				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInNotifications">{{ $t('@._settings.enable-sounds-innotifications')}}
+				<ui-switch v-model="enableSoundsInNotifications" :disabled="!enableSounds">
+					{{ $t('@._settings.enable-sounds-innotifications') }}
 				</ui-switch>
-				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInMessage">{{ $t('@._settings.enable-sounds-inmessage')}}
+				<ui-switch v-model="enableSoundsInMessage" :disabled="!enableSounds">
+					{{ $t('@._settings.enable-sounds-inmessage') }}
 				</ui-switch>
-				<ui-switch :disabled="!enableSounds" v-model="enableSoundsInReversi">{{ $t('@._settings.enable-sounds-inreversi')}}
+				<ui-switch v-model="enableSoundsInReversi" :disabled="!enableSounds">
+					{{ $t('@._settings.enable-sounds-inreversi') }}
 				</ui-switch>
 				<label>{{ $t('@._settings.volume') }}</label>
-				<input type="range"
+				<input
 					v-model="soundVolume"
+					type="range"
 					:disabled="!enableSounds"
 					max="1"
 					step="0.1"
@@ -306,7 +317,7 @@
 						<span>{{ $t('@._settings.latest-version') }} <i>{{ latestVersion ? latestVersion : version }}</i></span>
 					</template>
 				</p>
-				<ui-button @click="checkForUpdate" :disabled="checkingForUpdate">
+				<ui-button :disabled="checkingForUpdate" @click="checkForUpdate">
 					<template v-if="checkingForUpdate">{{ $t('@._settings.update-checking') }}<mk-ellipsis/></template>
 					<template v-else>{{ $t('@._settings.do-update') }}</template>
 				</ui-button>

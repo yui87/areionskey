@@ -2,23 +2,23 @@
 <div class="mk-notes" :class="{ shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }">
 	<slot name="header"></slot>
 
-	<div class="newer-indicator" :style="{ top: $store.state.uiHeaderHeight + 'px' }" v-show="queue.length > 0"></div>
+	<div v-show="queue.length > 0" class="newer-indicator" :style="{ top: $store.state.uiHeaderHeight + 'px' }"></div>
 
-	<div class="empty" v-if="empty">{{ $t('@.no-notes') }}</div>
+	<div v-if="empty" class="empty">{{ $t('@.no-notes') }}</div>
 
 	<mk-error v-if="error" @retry="init()"/>
 
-	<div class="placeholder" v-if="fetching">
-		<template v-for="i in 10">
-			<mk-note-skeleton :key="i"/>
+	<div v-if="fetching" class="placeholder">
+		<template v-for="i in 10" :key="i">
+			<mk-note-skeleton/>
 		</template>
 	</div>
 
 	<!-- トランジションを有効にするとなぜかメモリリークする -->
-	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" name="mk-notes" class="notes transition" tag="div" ref="notes">
-		<template v-for="(note, i) in _notes">
-			<mk-note :note="note" :key="`${note.id}-${note.updatedAt}`" :compact="true" ref="note"/>
-			<p class="date" :key="note.id + '_date'" v-if="i != items.length - 1 && note._date != _notes[i + 1]._date">
+	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" ref="notes" name="mk-notes" class="notes transition" tag="div">
+		<template v-for="(note, i) in _notes" :key="note.id">
+			<mk-note ref="note" :note="note" :compact="true"/>
+			<p v-if="i != items.length - 1 && note._date != _notes[i + 1]._date" class="date">
 				<span><fa icon="angle-up"/>{{ note._datetext }}</span>
 				<span><fa icon="angle-down"/>{{ _notes[i + 1]._datetext }}</span>
 			</p>
@@ -26,9 +26,9 @@
 	</component>
 
 	<footer v-if="more">
-		<button @click="fetchMore()" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }">
+		<button :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" @click="fetchMore()">
 			<template v-if="!moreFetching">{{ $t('@.load-more') }}</template>
-			<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>
+			<template v-if="moreFetching"><fa icon="spinner" pulse fixedWidth/></template>
 		</button>
 	</footer>
 </div>

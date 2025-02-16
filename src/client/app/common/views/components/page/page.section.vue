@@ -3,7 +3,7 @@
 	<component :is="'h' + h">{{ value.title }}</component>
 
 	<div class="children">
-		<x-block v-for="child in value.children" :value="child" :page="page" :script="script" :key="child.id" :h="h + 1"/>
+		<x-block v-for="child in value.children" :key="child.id" :value="child" :page="page" :script="script" :h="h + 1"/>
 	</div>
 </section>
 </template>

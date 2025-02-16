@@ -76,14 +76,14 @@ export default Vue.extend({
 		};
 	},
 
-	mounted() {
-		this.fetchEmojis();
-	},
-
 	computed: {
 		categoryList() {
 			return unique(this.emojis.map((x: any) => x.category || '').filter((x: string) => x !== ''));
 		}
+	},
+
+	mounted() {
+		this.fetchEmojis();
 	},
 
 	methods: {

@@ -1,37 +1,37 @@
 <template>
 <div>
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header><fa :icon="faUsers"/> {{ $t('owned-groups') }}</template>
 		<ui-margin>
 			<ui-button @click="add"><fa :icon="faPlus"/> {{ $t('create-group') }}</ui-button>
 		</ui-margin>
-		<div class="hwgkdrbl" v-for="group in ownedGroups" :key="group.id">
+		<div v-for="group in ownedGroups" :key="group.id" class="hwgkdrbl">
 			<ui-hr/>
 			<ui-margin>
 				<router-link :to="`/i/groups/${group.id}`">{{ group.name }}</router-link>
-				<x-avatars :user-ids="group.userIds" style="margin-top:8px;"/>
+				<x-avatars :userIds="group.userIds" style="margin-top:8px;"/>
 			</ui-margin>
 		</div>
 	</ui-container>
 
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header><fa :icon="faUsers"/> {{ $t('joined-groups') }}</template>
-		<div class="hwgkdrbl" v-for="(group, i) in joinedGroups" :key="group.id">
+		<div v-for="(group, i) in joinedGroups" :key="group.id" class="hwgkdrbl">
 			<ui-hr v-if="i != 0"/>
 			<ui-margin>
 				<div style="color:var(--text);">{{ group.name }}</div>
-				<x-avatars :user-ids="group.userIds" style="margin-top:8px;"/>
+				<x-avatars :userIds="group.userIds" style="margin-top:8px;"/>
 			</ui-margin>
 		</div>
 	</ui-container>
 
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header><fa :icon="faEnvelopeOpenText"/> {{ $t('invites') }}</template>
-		<div class="fvlojuur" v-for="(invite, i) in invites" :key="invite.id">
+		<div v-for="(invite, i) in invites" :key="invite.id" class="fvlojuur">
 			<ui-hr v-if="i != 0"/>
 			<ui-margin>
 				<div class="name" style="color:var(--text);">{{ invite.group.name }}</div>
-				<x-avatars :user-ids="invite.group.userIds" style="margin-top:8px;"/>
+				<x-avatars :userIds="invite.group.userIds" style="margin-top:8px;"/>
 				<ui-horizon-group>
 					<ui-button @click="acceptInvite(invite)"><fa :icon="faCheck"/> {{ $t('accept-invite') }}</ui-button>
 					<ui-button @click="rejectInvite(invite)"><fa :icon="faBan"/> {{ $t('reject-invite') }}</ui-button>

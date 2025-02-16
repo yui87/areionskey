@@ -1,7 +1,7 @@
 <template>
 <button class="nrvgflfuaxwgkxoynpnumyookecqrrvh" @click="toggle">
-	<b>{{ value ? this.$t('hide') : this.$t('show') }}</b>
-	<span v-if="!value">{{ this.label }}</span>
+	<b>{{ value ? $t('hide') : $t('show') }}</b>
+	<span v-if="!value">{{ label }}</span>
 </button>
 </template>
 

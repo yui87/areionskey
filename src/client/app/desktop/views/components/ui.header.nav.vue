@@ -7,7 +7,7 @@
 		<li class="explore" :class="{ active: $route.name == 'explore' || $route.name == 'explore-tag' }">
 			<router-link to="/explore"><fa :icon="faHashtag"/><p>{{ $t('@.explore') }}</p></router-link>
 		</li>
-		<li class="game" v-if="this.$store.getters.isSignedIn">
+		<li v-if="$store.getters.isSignedIn" class="game">
 			<a @click="game">
 				<fa icon="gamepad"/>
 				<p>{{ $t('game') }}</p>
@@ -41,7 +41,7 @@ export default Vue.extend({
 			this.connection.on('reversiNoInvites', this.onReversiNoInvites);
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.$store.getters.isSignedIn) {
 			this.connection.dispose();
 		}

@@ -1,6 +1,6 @@
 <template>
 <div class="hveuntkp">
-	<div class="controller" v-if="objectSelected">
+	<div v-if="objectSelected" class="controller">
 		<section>
 			<p class="name">{{ selectedFurnitureName }}</p>
 			<x-preview ref="preview"/>
@@ -17,8 +17,8 @@
 			</template>
 		</section>
 		<section>
-			<ui-button @click="translate()" :primary="isTranslateMode"><fa :icon="faArrowsAlt"/> {{ $t('translate') }}</ui-button>
-			<ui-button @click="rotate()" :primary="isRotateMode"><fa :icon="faUndo"/> {{ $t('rotate') }}</ui-button>
+			<ui-button :primary="isTranslateMode" @click="translate()"><fa :icon="faArrowsAlt"/> {{ $t('translate') }}</ui-button>
+			<ui-button :primary="isRotateMode" @click="rotate()"><fa :icon="faUndo"/> {{ $t('rotate') }}</ui-button>
 			<ui-button v-if="isTranslateMode || isRotateMode" @click="exit()"><fa :icon="faBan"/> {{ $t('exit') }}</ui-button>
 		</section>
 		<section>
@@ -26,7 +26,7 @@
 		</section>
 	</div>
 
-	<div class="menu" v-if="isMyRoom">
+	<div v-if="isMyRoom" class="menu">
 		<section>
 			<ui-button @click="add()"><fa :icon="faBoxOpen"/> {{ $t('add-furniture') }}</ui-button>
 		</section>
@@ -67,6 +67,24 @@ export default Vue.extend({
 
 	components: {
 		XPreview
+	},
+
+	beforeRouteLeave(to, from, next) {
+		if (this.changed) {
+			this.$root.dialog({
+				type: 'warning',
+				text: this.$t('leave-confirm'),
+				showCancelButton: true
+			}).then(({ canceled }) => {
+				if (canceled) {
+					next(false);
+				} else {
+					next();
+				}
+			});
+		} else {
+			next();
+		}
 	},
 
 	props: {
@@ -128,25 +146,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeRouteLeave(to, from, next) {
-		if (this.changed) {
-			this.$root.dialog({
-				type: 'warning',
-				text: this.$t('leave-confirm'),
-				showCancelButton: true
-			}).then(({ canceled }) => {
-				if (canceled) {
-					next(false);
-				} else {
-					next();
-				}
-			});
-		} else {
-			next();
-		}
-	},
-
-	beforeDestroy() {
+	beforeUnmount() {
 		room.destroy();
 		window.removeEventListener('beforeunload', this.beforeunload);
 	},

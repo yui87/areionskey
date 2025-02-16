@@ -1,5 +1,5 @@
 <template>
-<x-container @remove="() => $emit('remove')" :draggable="true">
+<x-container :draggable="true" @remove="() => $emit('remove')">
 	<template #header><fa :icon="faImage"/> {{ $t('blocks.image') }}</template>
 	<template #func>
 		<button @click="choose()">
@@ -8,7 +8,7 @@
 	</template>
 
 	<section class="oyyftmcf">
-		<x-file-thumbnail class="preview" v-if="file" :file="file" fit="contain" @click="choose()"/>
+		<x-file-thumbnail v-if="file" class="preview" :file="file" fit="contain" @click="choose()"/>
 	</section>
 </x-container>
 </template>

@@ -1,25 +1,26 @@
 <template>
-<div class="mk-messaging-form"
+<div
+	class="mk-messaging-form"
 	@dragover.stop="onDragover"
 	@drop.stop="onDrop"
 >
 	<textarea
-		v-model="text"
 		ref="textarea"
+		v-model="text"
+		v-autocomplete="{ model: 'text' }"
+		:placeholder="$t('input-message-here')"
 		@keypress="onKeypress"
 		@paste="onPaste"
-		:placeholder="$t('input-message-here')"
-		v-autocomplete="{ model: 'text' }"
 	></textarea>
-	<div class="file" @click="file = null" v-if="file">{{ file.name }}</div>
+	<div v-if="file" class="file" @click="file = null">{{ file.name }}</div>
 	<mk-uploader ref="uploader" @uploaded="onUploaded"/>
-	<button class="send" @click="send" :disabled="!canSend || sending" :title="$t('send')">
+	<button class="send" :disabled="!canSend || sending" :title="$t('send')" @click="send">
 		<template v-if="!sending"><fa icon="paper-plane"/></template><template v-if="sending"><fa icon="spinner .spin"/></template>
 	</button>
-	<button class="attach-from-local" @click="chooseFile" :title="$t('attach-from-local')">
+	<button class="attach-from-local" :title="$t('attach-from-local')" @click="chooseFile">
 		<fa icon="upload"/>
 	</button>
-	<button class="attach-from-drive" @click="chooseFileFromDrive" :title="$t('attach-from-drive')">
+	<button class="attach-from-drive" :title="$t('attach-from-drive')" @click="chooseFileFromDrive">
 		<fa :icon="['far', 'folder-open']"/>
 	</button>
 	<input ref="file" type="file" @change="onChangeFile"/>

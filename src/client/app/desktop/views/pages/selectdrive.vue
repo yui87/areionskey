@@ -1,9 +1,10 @@
 <template>
 <div class="mkp-selectdrive">
-	<x-drive ref="browser"
+	<x-drive
+		ref="browser"
 		:multiple="multiple"
 		@selected="onSelected"
-		@change-selection="onChangeSelection"
+		@changeSelection="onChangeSelection"
 	/>
 	<footer>
 		<button class="upload" :title="$t('upload')" @click="upload"><fa icon="upload"/></button>

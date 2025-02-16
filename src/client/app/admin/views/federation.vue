@@ -3,13 +3,13 @@
 	<ui-card>
 		<template #title><fa :icon="faTerminal"/> {{ $t('instance') }}</template>
 		<section class="fit-top">
-			<ui-input class="target" v-model="target" type="text" @enter="showInstance()">
+			<ui-input v-model="target" class="target" type="text" @enter="showInstance()">
 				<span>{{ $t('host') }}</span>
 				<template #prefix><fa :icon="faServer"/></template>
 			</ui-input>
 			<ui-button @click="showInstance()"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
 
-			<div class="instance" v-if="instance">
+			<div v-if="instance" class="instance">
 				<ui-horizon-group inputs>
 					<ui-input :value="instance.host" type="text" readonly>
 						<span>{{ $t('host') }}</span>
@@ -80,11 +80,11 @@
 				</details>
 				<details>
 					<summary>{{ $t('delete-all-files') }}</summary>
-					<ui-button @click="deleteAllFiles()" style="margin-top: 16px;"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
+					<ui-button style="margin-top: 16px;" @click="deleteAllFiles()"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
 				</details>
 				<details>
 					<summary>{{ $t('remove-all-following') }}</summary>
-					<ui-button @click="removeAllFollowing()" style="margin-top: 16px;"><fa :icon="faMinusCircle"/> {{ $t('remove-all-following') }}</ui-button>
+					<ui-button style="margin-top: 16px;" @click="removeAllFollowing()"><fa :icon="faMinusCircle"/> {{ $t('remove-all-following') }}</ui-button>
 					<ui-info warn>{{ $t('remove-all-following-info', { host: instance.host }) }}</ui-info>
 				</details>
 			</div>
@@ -133,7 +133,7 @@
 					<span>{{ $t('status') }}</span>
 				</header>
 				<div v-for="instance in instances" :style="{ opacity: instance.isNotResponding ? 0.5 : 1 }">
-					<a @click.prevent="showInstance(instance.host)" rel="nofollow noopener" target="_blank" :href="`https://${instance.host}`" :style="{ textDecoration: instance.isMarkedAsClosed ? 'line-through' : 'none' }">{{ instance.host }}</a>
+					<a rel="nofollow noopener" target="_blank" :href="`https://${instance.host}`" :style="{ textDecoration: instance.isMarkedAsClosed ? 'line-through' : 'none' }" @click.prevent="showInstance(instance.host)">{{ instance.host }}</a>
 					<span>{{ instance.notesCount | number }}</span>
 					<span>{{ instance.usersCount | number }}</span>
 					<span>{{ instance.followingCount | number }}</span>
@@ -152,7 +152,7 @@
 			<ui-textarea v-model="blockedHosts">
 				<template #desc>{{ $t('blocked-hosts-info') }}</template>
 			</ui-textarea>
-			<ui-button @click="saveBlockedHosts" :disabled="!$store.getters.isAdmin">{{ $t('save') }}</ui-button>
+			<ui-button :disabled="!$store.getters.isAdmin" @click="saveBlockedHosts">{{ $t('save') }}</ui-button>
 		</section>
 	</ui-card>
 </div>
@@ -266,7 +266,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.chartInstance.destroy();
 	},
 

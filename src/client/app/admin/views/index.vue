@@ -1,70 +1,71 @@
 <template>
-	<div class="mk-admin" v-if="isModerator" :class="{ isMobile }">
-		<header v-show="isMobile">
-			<button class="nav" @click="navOpend = true"><fa icon="bars"/></button>
-			<span>Areionskey Admin</span>
-		</header>
-		<div class="nav-backdrop"
-			v-if="navOpend && isMobile"
-			@click="navOpend = false"
-			@touchstart="navOpend = false"
-		></div>
-		<nav v-show="navOpend">
-			<div class="mi">
-				<img svg-inline src="../assets/header-icon.svg"/>
+<div v-if="isModerator" class="mk-admin" :class="{ isMobile }">
+	<header v-show="isMobile">
+		<button class="nav" @click="navOpend = true"><fa icon="bars"/></button>
+		<span>Areionskey Admin</span>
+	</header>
+	<div
+		v-if="navOpend && isMobile"
+		class="nav-backdrop"
+		@click="navOpend = false"
+		@touchstart="navOpend = false"
+	></div>
+	<nav v-show="navOpend">
+		<div class="mi">
+			<img svg-inline src="../assets/header-icon.svg"/>
+		</div>
+		<div v-if="i" class="me">
+			<img class="avatar" :src="i.avatarUrl" alt="avatar"/>
+			<div class="info">
+				<div class="name"><mk-user-name :user="$store.state.i"/></div>
+				<span class="role">{{ $store.getters.role }}</span>
 			</div>
-			<div class="me" v-if="i">
-				<img class="avatar" :src="i.avatarUrl" alt="avatar"/>
-				<div class="info">
-					<div class="name"><mk-user-name :user="$store.state.i"/></div>
-					<span class="role">{{ $store.getters.role }}</span>
-				</div>
-			</div>
-			<ul>
-				<li><router-link to="/dashboard" active-class="active"><fa icon="home" fixed-width/>{{ $t('dashboard') }}</router-link></li>
-				<li><router-link to="/instance" active-class="active" v-if="$store.getters.isAdmin"><fa icon="cog" fixed-width/>{{ $t('instance') }}</router-link></li>
-				<li><router-link to="/queue" active-class="active"><fa :icon="faTasks" fixed-width/>{{ $t('queue') }}</router-link></li>
-				<li><router-link to="/db" active-class="active" v-if="$store.getters.isAdmin"><fa :icon="faDatabase" fixed-width/>{{ $t('db') }}</router-link></li>
-				<li><router-link to="/moderators" active-class="active" v-if="$store.getters.isAdmin"><fa :icon="faHeadset" fixed-width/>{{ $t('moderators') }}</router-link></li>
-				<li><router-link to="/users" active-class="active"><fa icon="users" fixed-width/>{{ $t('users') }}</router-link></li>
-				<li><router-link to="/drive" active-class="active"><fa icon="cloud" fixed-width/>{{ $t('@.drive') }}</router-link></li>
-				<li><router-link to="/federation" active-class="active"><fa :icon="faGlobe" fixed-width/>{{ $t('federation') }}</router-link></li>
-				<li><router-link to="/relays" active-class="active"><fa :icon="faProjectDiagram" fixed-width/>{{ $t('relays') }}</router-link></li>
-				<li><router-link to="/emoji" active-class="active"><fa :icon="faGrin" fixed-width/>{{ $t('emoji') }}</router-link></li>
-				<li><router-link to="/announcements" active-class="active" v-if="$store.getters.isAdmin"><fa icon="broadcast-tower" fixed-width/>{{ $t('announcements') }}</router-link></li>
-				<li><router-link to="/abuse" active-class="active"><fa :icon="faExclamationCircle" fixed-width/>{{ $t('abuse') }}</router-link></li>
-			</ul>
-			<div class="back-to-misskey">
-				<a href="/"><fa :icon="faArrowLeft"/> {{ $t('back-to-misskey') }}</a>
-			</div>
-			<div class="version">
-				<small>Areionskey {{ version }}</small>
-			</div>
-		</nav>
-		<main>
-			<div class="page">
-				<template>
-					<div v-if="page == 'dashboard'"><x-dashboard/></div>
-					<div v-if="page == 'instance'"><x-instance/></div>
-					<div v-if="page == 'queue'"><x-queue/></div>
-					<div v-if="page == 'db'"><x-db/></div>
-					<div v-if="page == 'moderators'"><x-moderators/></div>
-					<div v-if="page == 'users'"><x-users/></div>
-					<div v-if="page == 'emoji'"><x-emoji/></div>
-					<div v-if="page == 'announcements'"><x-announcements/></div>
-					<div v-if="page == 'drive'"><x-drive/></div>
-					<div v-if="page == 'federation'"><x-federation/></div>
-					<div v-if="page == 'relays'"><x-relays/></div>
-					<div v-if="page == 'abuse'"><x-abuse/></div>
-				</template>
-			</div>
-		</main>
-	</div>
-	<div v-else class="denied">
-		<h1>{{ $t('permission-denied') }}</h1>
-		<p>{{ $t('permission-denied-text') }}</p>
-		<p><a href="/">{{ $t('back-to-misskey') }}</a></p>
-	</div>
+		</div>
+		<ul>
+			<li><router-link to="/dashboard" activeClass="active"><fa icon="home" fixedWidth/>{{ $t('dashboard') }}</router-link></li>
+			<li><router-link v-if="$store.getters.isAdmin" to="/instance" activeClass="active"><fa icon="cog" fixedWidth/>{{ $t('instance') }}</router-link></li>
+			<li><router-link to="/queue" activeClass="active"><fa :icon="faTasks" fixedWidth/>{{ $t('queue') }}</router-link></li>
+			<li><router-link v-if="$store.getters.isAdmin" to="/db" activeClass="active"><fa :icon="faDatabase" fixedWidth/>{{ $t('db') }}</router-link></li>
+			<li><router-link v-if="$store.getters.isAdmin" to="/moderators" activeClass="active"><fa :icon="faHeadset" fixedWidth/>{{ $t('moderators') }}</router-link></li>
+			<li><router-link to="/users" activeClass="active"><fa icon="users" fixedWidth/>{{ $t('users') }}</router-link></li>
+			<li><router-link to="/drive" activeClass="active"><fa icon="cloud" fixedWidth/>{{ $t('@.drive') }}</router-link></li>
+			<li><router-link to="/federation" activeClass="active"><fa :icon="faGlobe" fixedWidth/>{{ $t('federation') }}</router-link></li>
+			<li><router-link to="/relays" activeClass="active"><fa :icon="faProjectDiagram" fixedWidth/>{{ $t('relays') }}</router-link></li>
+			<li><router-link to="/emoji" activeClass="active"><fa :icon="faGrin" fixedWidth/>{{ $t('emoji') }}</router-link></li>
+			<li><router-link v-if="$store.getters.isAdmin" to="/announcements" activeClass="active"><fa icon="broadcast-tower" fixedWidth/>{{ $t('announcements') }}</router-link></li>
+			<li><router-link to="/abuse" activeClass="active"><fa :icon="faExclamationCircle" fixedWidth/>{{ $t('abuse') }}</router-link></li>
+		</ul>
+		<div class="back-to-misskey">
+			<a href="/"><fa :icon="faArrowLeft"/> {{ $t('back-to-misskey') }}</a>
+		</div>
+		<div class="version">
+			<small>Areionskey {{ version }}</small>
+		</div>
+	</nav>
+	<main>
+		<div class="page">
+			<template>
+				<div v-if="page == 'dashboard'"><x-dashboard/></div>
+				<div v-if="page == 'instance'"><x-instance/></div>
+				<div v-if="page == 'queue'"><x-queue/></div>
+				<div v-if="page == 'db'"><x-db/></div>
+				<div v-if="page == 'moderators'"><x-moderators/></div>
+				<div v-if="page == 'users'"><x-users/></div>
+				<div v-if="page == 'emoji'"><x-emoji/></div>
+				<div v-if="page == 'announcements'"><x-announcements/></div>
+				<div v-if="page == 'drive'"><x-drive/></div>
+				<div v-if="page == 'federation'"><x-federation/></div>
+				<div v-if="page == 'relays'"><x-relays/></div>
+				<div v-if="page == 'abuse'"><x-abuse/></div>
+			</template>
+		</div>
+	</main>
+</div>
+<div v-else class="denied">
+	<h1>{{ $t('permission-denied') }}</h1>
+	<p>{{ $t('permission-denied-text') }}</p>
+	<p><a href="/">{{ $t('back-to-misskey') }}</a></p>
+</div>
 </template>
 
 <script lang="ts">
@@ -82,7 +83,7 @@ import XUsers from './users.vue';
 import XDrive from './drive.vue';
 import XAbuse from './abuse.vue';
 import XFederation from './federation.vue';
-import XRelays from "./relays.vue";
+import XRelays from './relays.vue';
 
 import { faHeadset, faArrowLeft, faGlobe, faProjectDiagram, faExclamationCircle, faTasks, faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { faGrin } from '@fortawesome/free-regular-svg-icons';

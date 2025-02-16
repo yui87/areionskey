@@ -1,27 +1,27 @@
 <template>
 <header class="bvonvjxbwzaiskogyhbwgyxvcgserpmu">
-	<mk-avatar class="avatar" :user="note.user" v-if="$store.state.device.postStyle == 'smart'"/>
-	<router-link class="name" :to="note.user | userPage" v-user-preview="note.user.id">
+	<mk-avatar v-if="$store.state.device.postStyle == 'smart'" class="avatar" :user="note.user"/>
+	<router-link v-user-preview="note.user.id" class="name" :to="note.user | userPage">
 		<mk-user-name :user="note.user"/>
 	</router-link>
-	<span class="is-premium" v-if="note.user.isPremium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
-	<span class="is-verified" v-if="note.user.isVerified" :title="$t('@.verified-user')"><img svg-inline src="../../../../assets/horseshoe.svg" class="horseshoe"/></span>
-	<span class="is-bot" v-if="note.user.isBot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
+	<span v-if="note.user.isPremium" class="is-premium" :title="$t('@.premium-user')"><fa icon="crown"/></span>
+	<span v-if="note.user.isVerified" class="is-verified" :title="$t('@.verified-user')"><img svg-inline src="../../../../assets/horseshoe.svg" class="horseshoe"/></span>
+	<span v-if="note.user.isBot" class="is-bot" :title="$t('@.bot-user')"><fa icon="robot"/></span>
 	<span class="username"><mk-acct :user="note.user"/></span>
 	<div class="info">
-		<span class="app" v-if="note.app && !mini && $store.state.settings.showVia">via <b>{{ note.app.name }}</b></span>
-		<span class="mobile" v-if="note.viaMobile"><fa icon="mobile-alt"/></span>
+		<span v-if="note.app && !mini && $store.state.settings.showVia" class="app">via <b>{{ note.app.name }}</b></span>
+		<span v-if="note.viaMobile" class="mobile"><fa icon="mobile-alt"/></span>
 		<router-link class="created-at" :to="note | notePage">
 			<mk-time :time="note.createdAt"/>
 			{{ }}
-			<span :title="$t('@.edited')" v-if="note.updatedAt != null"><fa :icon="faEdit"/></span>
+			<span v-if="note.updatedAt != null" :title="$t('@.edited')"><fa :icon="faEdit"/></span>
 		</router-link>
-		<span class="visibility" v-if="note.visibility != 'public'">
+		<span v-if="note.visibility != 'public'" class="visibility">
 			<fa v-if="note.visibility == 'home'" icon="home"/>
 			<fa v-if="note.visibility == 'followers'" icon="lock"/>
 			<fa v-if="note.visibility == 'specified'" icon="envelope"/>
 		</span>
-		<span class="localOnly" v-if="note.localOnly == true"><fa icon="heart"/></span>
+		<span v-if="note.localOnly == true" class="localOnly"><fa icon="heart"/></span>
 	</div>
 </header>
 </template>

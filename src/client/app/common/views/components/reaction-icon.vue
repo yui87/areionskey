@@ -27,11 +27,6 @@ export default Vue.extend({
 			customEmojis: []
 		};
 	},
-	created() {
-		this.$root.getMeta().then(meta => {
-			if (meta && meta.emojis) this.customEmojis = meta.emojis;
-		});
-	},
 	computed: {
 		str(): any {
 			switch (this.reaction) {
@@ -49,6 +44,11 @@ export default Vue.extend({
 				default: return this.reaction;
 			}
 		},
+	},
+	created() {
+		this.$root.getMeta().then(meta => {
+			if (meta && meta.emojis) this.customEmojis = meta.emojis;
+		});
 	},
 });
 </script>

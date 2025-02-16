@@ -1,26 +1,27 @@
 <template>
-<div class="syxhndwprovvuqhmyvveewmbqayniwkv" v-if="!fetching">
+<div v-if="!fetching" class="syxhndwprovvuqhmyvveewmbqayniwkv">
 	<div class="signed-in-as">
-		<mfm :text="$t('signed-in-as').replace('{}', myName)" :plain="true" :custom-emojis="$store.state.i.emojis"/>
+		<mfm :text="$t('signed-in-as').replace('{}', myName)" :plain="true" :customEmojis="$store.state.i.emojis"/>
 	</div>
 	<main>
 		<div class="banner" :style="bannerStyle"></div>
-		<mk-avatar class="avatar" :user="user" :disable-preview="true"/>
+		<mk-avatar class="avatar" :user="user" :disablePreview="true"/>
 		<div class="body">
 			<router-link :to="user | userPage" class="name">
 				<mk-user-name :user="user"/>
 			</router-link>
 			<span class="username">@{{ user | acct }}</span>
 			<div class="description">
-				<mfm v-if="user.description" :text="user.description" :is-note="false" :author="user" :i="$store.state.i" :custom-emojis="user.emojis"/>
+				<mfm v-if="user.description" :text="user.description" :isNote="false" :author="user" :i="$store.state.i" :customEmojis="user.emojis"/>
 			</div>
 		</div>
 	</main>
 
 	<button
-			:class="{ wait: followWait, active: user.isFollowing || user.hasPendingFollowRequestFromYou }"
-			@click="onClick"
-			:disabled="followWait">
+		:class="{ wait: followWait, active: user.isFollowing || user.hasPendingFollowRequestFromYou }"
+		:disabled="followWait"
+		@click="onClick"
+	>
 		<template v-if="!followWait">
 			<template v-if="user.hasPendingFollowRequestFromYou && user.isLocked"><fa icon="hourglass-half"/> {{ $t('request-pending') }}</template>
 			<template v-else-if="user.hasPendingFollowRequestFromYou && !user.isLocked"><fa icon="spinner"/> {{ $t('follow-processing') }}</template>
@@ -28,7 +29,7 @@
 			<template v-else-if="!user.isFollowing && user.isLocked"><fa icon="plus"/> {{ $t('follow-request') }}</template>
 			<template v-else-if="!user.isFollowing && !user.isLocked"><fa icon="plus"/> {{ $t('follow') }}</template>
 		</template>
-		<template v-else><fa icon="spinner" pulse fixed-width/></template>
+		<template v-else><fa icon="spinner" pulse fixedWidth/></template>
 	</button>
 </div>
 </template>

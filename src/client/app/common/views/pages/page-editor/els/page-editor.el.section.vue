@@ -1,5 +1,5 @@
 <template>
-<x-container @remove="() => $emit('remove')" :draggable="true">
+<x-container :draggable="true" @remove="() => $emit('remove')">
 	<template #header><fa :icon="faStickyNote"/> {{ value.title }}</template>
 	<template #func>
 		<button @click="rename()">
@@ -11,7 +11,7 @@
 	</template>
 
 	<section class="ilrvjyvi">
-		<x-blocks class="children" v-model="value.children" :ai-script="aiScript"/>
+		<x-blocks v-model="value.children" class="children" :aiScript="aiScript"/>
 	</section>
 </x-container>
 </template>

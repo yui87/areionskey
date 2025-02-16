@@ -1,10 +1,10 @@
 <template>
 <div class="kmmwchoexgckptowjmjgfsygeltxfeqs">
 	<nav ref="nav">
-		<a @click.prevent="goRoot()" href="/i/drive"><fa icon="cloud"/>{{ $t('@.drive') }}</a>
-		<template v-for="folder in hierarchyFolders">
-			<span :key="folder.id + '>'"><fa icon="angle-right"/></span>
-			<a :key="folder.id" @click.prevent="cd(folder)" :href="`/i/drive/folder/${folder.id}`">{{ folder.name }}</a>
+		<a href="/i/drive" @click.prevent="goRoot()"><fa icon="cloud"/>{{ $t('@.drive') }}</a>
+		<template v-for="folder in hierarchyFolders" :key="folder.id">
+			<span><fa icon="angle-right"/></span>
+			<a :href="`/i/drive/folder/${folder.id}`" @click.prevent="cd(folder)">{{ folder.name }}</a>
 		</template>
 		<template v-if="folder != null">
 			<span><fa icon="angle-right"/></span>
@@ -16,8 +16,8 @@
 		</template>
 	</nav>
 	<mk-uploader ref="uploader"/>
-	<div class="browser" :class="{ fetching }" v-if="file == null">
-		<div class="info" v-if="info">
+	<div v-if="file == null" class="browser" :class="{ fetching }">
+		<div v-if="info" class="info">
 			<p v-if="folder == null">{{ (info.usage / info.capacity * 100).toFixed(1) }}% {{ $t('used') }}</p>
 			<p v-if="folder != null && (folder.foldersCount > 0 || folder.filesCount > 0)">
 				<template v-if="folder.foldersCount > 0">{{ folder.foldersCount }} {{ $t('folder-count') }}</template>
@@ -25,22 +25,22 @@
 				<template v-if="folder.filesCount > 0">{{ folder.filesCount }} {{ $t('file-count') }}</template>
 			</p>
 		</div>
-		<div class="folders" v-if="folders.length > 0 || moreFolders">
-			<x-folder class="folder" v-for="folder in folders" :key="folder.id" :folder="folder"/>
+		<div v-if="folders.length > 0 || moreFolders" class="folders">
+			<x-folder v-for="folder in folders" :key="folder.id" class="folder" :folder="folder"/>
 			<p v-if="moreFolders">{{ $t('@.load-more') }}</p>
 		</div>
-		<div class="files" v-if="files.length > 0 || moreFiles">
-			<x-file class="file" v-for="file in files" :key="file.id" :file="file"/>
-			<button class="more" v-if="moreFiles" @click="fetchMoreFiles">
-				{{ fetchingMoreFiles ? this.$t('@.loading') : this.$t('@.load-more') }}
+		<div v-if="files.length > 0 || moreFiles" class="files">
+			<x-file v-for="file in files" :key="file.id" class="file" :file="file"/>
+			<button v-if="moreFiles" class="more" @click="fetchMoreFiles">
+				{{ fetchingMoreFiles ? $t('@.loading') : $t('@.load-more') }}
 			</button>
 		</div>
-		<div class="empty" v-if="files.length == 0 && !moreFiles && folders.length == 0 && !moreFolders && !fetching">
+		<div v-if="files.length == 0 && !moreFiles && folders.length == 0 && !moreFolders && !fetching" class="empty">
 			<p v-if="folder == null">{{ $t('nothing-in-drive') }}</p>
 			<p v-if="folder != null">{{ $t('folder-is-empty') }}</p>
 		</div>
 	</div>
-	<div class="fetching" v-if="fetching && file == null && files.length == 0 && folders.length == 0">
+	<div v-if="fetching && file == null && files.length == 0 && folders.length == 0" class="fetching">
 		<div class="spinner">
 			<div class="dot1"></div>
 			<div class="dot2"></div>
@@ -123,7 +123,7 @@ export default Vue.extend({
 			(this.$refs.nav as any).style.top = `${this.top}px`;
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 	methods: {

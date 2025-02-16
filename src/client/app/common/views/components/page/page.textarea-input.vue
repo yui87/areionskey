@@ -1,6 +1,6 @@
 <template>
 <div>
-	<ui-textarea class="" v-model="v">{{ script.interpolate(value.text) }}</ui-textarea>
+	<ui-textarea v-model="v" class="">{{ script.interpolate(value.text) }}</ui-textarea>
 </div>
 </template>
 

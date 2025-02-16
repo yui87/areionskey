@@ -1,61 +1,64 @@
 <template>
 <div class="fquwcbxs">
 	<transition name="back">
-		<div class="backdrop"
+		<div
 			v-if="isOpen"
+			class="backdrop"
 			@click="$parent.isDrawerOpening = false"
 			@touchstart="$parent.isDrawerOpening = false"
 		></div>
 	</transition>
 	<transition name="nav">
-		<div class="body" :class="{ notifications: showNotifications }" v-if="isOpen">
-			<div class="nav" v-show="!showNotifications">
-				<router-link class="me" v-if="$store.getters.isSignedIn" :to="`/@${$store.state.i.username}`">
+		<div v-if="isOpen" class="body" :class="{ notifications: showNotifications }">
+			<div v-show="!showNotifications" class="nav">
+				<router-link v-if="$store.getters.isSignedIn" class="me" :to="`/@${$store.state.i.username}`">
 					<img class="avatar" :src="$store.state.i.avatarUrl" alt="avatar"/>
 					<p class="name"><mk-user-name :user="$store.state.i"/></p>
 				</router-link>
 				<div class="links">
 					<ul>
-						<li><router-link to="/" :data-active="$route.name == 'index'"><i><fa icon="home" fixed-width/></i>{{ $t('timeline') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li v-if="$store.state.device.enableMobileQuickNotificationView"><p @click="showNotifications = true"><i><fa :icon="faBell" fixed-width/></i>{{ $t('notifications') }}<i v-if="hasUnreadNotification" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></p></li>
-						<li v-else><router-link to="/i/notifications" :data-active="$route.name == 'notifications'"><i><fa :icon="faBell" fixed-width/></i>{{ $t('notifications') }}<i v-if="hasUnreadNotification" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/messaging" :data-active="$route.name == 'messaging'"><i><fa :icon="['far', 'comments']" fixed-width/></i>{{ $t('@.messaging') }}<i v-if="hasUnreadMessagingMessage" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
-						<li v-if="$store.getters.isSignedIn && $store.state.i.pendingReceivedFollowRequestsCount"><router-link to="/i/follow-requests" :data-active="$route.name == 'follow-requests'"><i><fa icon="user-clock" fixed-width/></i>{{ $t('follow-requests') }}<i class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
-						<li><a @click="search"><i><fa icon="search" fixed-width/></i>{{ $t('search') }}<i><fa icon="angle-right"/></i></a></li>
-						<li><router-link to="/explore" :data-active="$route.name == 'explore' || $route.name == 'explore-tag'"><i><fa :icon="faHashtag" fixed-width/></i>{{ $t('@.explore') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/games/reversi" :data-active="$route.name == 'reversi'"><i><fa icon="gamepad" fixed-width/></i>{{ $t('game') }}<i v-if="hasGameInvitation" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/" :data-active="$route.name == 'index'"><i><fa icon="home" fixedWidth/></i>{{ $t('timeline') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li v-if="$store.state.device.enableMobileQuickNotificationView"><p @click="showNotifications = true"><i><fa :icon="faBell" fixedWidth/></i>{{ $t('notifications') }}<i v-if="hasUnreadNotification" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></p></li>
+						<li v-else><router-link to="/i/notifications" :data-active="$route.name == 'notifications'"><i><fa :icon="faBell" fixedWidth/></i>{{ $t('notifications') }}<i v-if="hasUnreadNotification" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/messaging" :data-active="$route.name == 'messaging'"><i><fa :icon="['far', 'comments']" fixedWidth/></i>{{ $t('@.messaging') }}<i v-if="hasUnreadMessagingMessage" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
+						<li v-if="$store.getters.isSignedIn && $store.state.i.pendingReceivedFollowRequestsCount"><router-link to="/i/follow-requests" :data-active="$route.name == 'follow-requests'"><i><fa icon="user-clock" fixedWidth/></i>{{ $t('follow-requests') }}<i class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
+						<li><a @click="search"><i><fa icon="search" fixedWidth/></i>{{ $t('search') }}<i><fa icon="angle-right"/></i></a></li>
+						<li><router-link to="/explore" :data-active="$route.name == 'explore' || $route.name == 'explore-tag'"><i><fa :icon="faHashtag" fixedWidth/></i>{{ $t('@.explore') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/games/reversi" :data-active="$route.name == 'reversi'"><i><fa icon="gamepad" fixedWidth/></i>{{ $t('game') }}<i v-if="hasGameInvitation" class="circle"><fa icon="circle"/></i><i><fa icon="angle-right"/></i></router-link></li>
 					</ul>
 					<ul>
-						<li><router-link to="/i/drive" :data-active="$route.name == 'drive'"><i><fa icon="cloud" fixed-width/></i>{{ $t('@.drive') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/widgets" :data-active="$route.name == 'widgets'"><i><fa icon="calculator" fixed-width/></i>{{ $t('widgets') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/favorites" :data-active="$route.name == 'favorites'"><i><fa icon="star" fixed-width/></i>{{ $t('@.favorites') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/lists" :data-active="$route.name == 'user-lists'"><i><fa icon="list" fixed-width/></i>{{ $t('user-lists') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/groups" :data-active="$route.name == 'user-groups'"><i><fa :icon="faUsers" fixed-width/></i>{{ $t('user-groups') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li><router-link to="/i/pages" :data-active="$route.name == 'pages'"><i><fa :icon="faStickyNote" fixed-width/></i>{{ $t('@.pages') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/drive" :data-active="$route.name == 'drive'"><i><fa icon="cloud" fixedWidth/></i>{{ $t('@.drive') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/widgets" :data-active="$route.name == 'widgets'"><i><fa icon="calculator" fixedWidth/></i>{{ $t('widgets') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/favorites" :data-active="$route.name == 'favorites'"><i><fa icon="star" fixedWidth/></i>{{ $t('@.favorites') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/lists" :data-active="$route.name == 'user-lists'"><i><fa icon="list" fixedWidth/></i>{{ $t('user-lists') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/groups" :data-active="$route.name == 'user-groups'"><i><fa :icon="faUsers" fixedWidth/></i>{{ $t('user-groups') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li><router-link to="/i/pages" :data-active="$route.name == 'pages'"><i><fa :icon="faStickyNote" fixedWidth/></i>{{ $t('@.pages') }}<i><fa icon="angle-right"/></i></router-link></li>
 					</ul>
 					<ul>
-						<li><router-link to="/i/settings" :data-active="$route.name == 'settings'"><i><fa icon="cog" fixed-width/></i>{{ $t('@.settings') }}<i><fa icon="angle-right"/></i></router-link></li>
-						<li v-if="$store.getters.isSignedIn && ($store.state.i.isAdmin || $store.state.i.isModerator)"><a href="/admin"><i><fa icon="terminal" fixed-width/></i><span>{{ $t('admin') }}</span><i><fa icon="angle-right"/></i></a></li>
+						<li><router-link to="/i/settings" :data-active="$route.name == 'settings'"><i><fa icon="cog" fixedWidth/></i>{{ $t('@.settings') }}<i><fa icon="angle-right"/></i></router-link></li>
+						<li v-if="$store.getters.isSignedIn && ($store.state.i.isAdmin || $store.state.i.isModerator)"><a href="/admin"><i><fa icon="terminal" fixedWidth/></i><span>{{ $t('admin') }}</span><i><fa icon="angle-right"/></i></a></li>
 					</ul>
 					<ul>
-						<li @click="toggleDeckMode"><p><i><fa :icon="$store.state.device.inDeckMode ? faHome : faColumns" fixed-width/></i><span>{{ $store.state.device.inDeckMode ? $t('@.home') : $t('@.deck') }}</span></p></li>
+						<li @click="toggleDeckMode"><p><i><fa :icon="$store.state.device.inDeckMode ? faHome : faColumns" fixedWidth/></i><span>{{ $store.state.device.inDeckMode ? $t('@.home') : $t('@.deck') }}</span></p></li>
 						<li v-if="$store.state.device.appTypeForce == 'auto'" @click="toggleAppType">
-							<p><i><fa :icon="$root.isMobile ? faDesktop : faMobileAlt" fixed-width/></i>
-							<span>{{ $root.isMobile ? $t('@.desktop-mode') : $t('@.mobile-mode') }}</span></p>
+							<p>
+								<i><fa :icon="$root.isMobile ? faDesktop : faMobileAlt" fixedWidth/></i>
+								<span>{{ $root.isMobile ? $t('@.desktop-mode') : $t('@.mobile-mode') }}</span>
+							</p>
 						</li>
-						<li @click="dark"><p><i><fa :icon="$store.state.device.darkmode ? faSun : faMoon" fixed-width/></i><span>{{ $store.state.device.darkmode ? $t('@.turn-off-darkmode') : $t('@.turn-on-darkmode') }}</span></p></li>
+						<li @click="dark"><p><i><fa :icon="$store.state.device.darkmode ? faSun : faMoon" fixedWidth/></i><span>{{ $store.state.device.darkmode ? $t('@.turn-off-darkmode') : $t('@.turn-on-darkmode') }}</span></p></li>
 					</ul>
 				</div>
-				<div class="announcements" v-if="announcements && announcements.length > 0">
+				<div v-if="announcements && announcements.length > 0" class="announcements">
 					<article v-for="announcement in announcements">
-						<span v-html="announcement.title" class="title"></span>
+						<span class="title" v-html="announcement.title"></span>
 						<div><mfm :text="announcement.text"/></div>
 						<img v-if="announcement.image" :src="announcement.image" alt="" style="display: block; max-height: 120px; max-width: 100%;"/>
 					</article>
 				</div>
 				<a :href="aboutUrl"><p class="about">Areionskey {{ version }} ({{ codename }})</p></a>
 			</div>
-			<div class="notifications" v-if="showNotifications">
+			<div v-if="showNotifications" class="notifications">
 				<header>
 					<button @click="showNotifications = false"><fa icon="times"/></button>
 					<i v-if="hasUnreadNotification" class="circle"><fa icon="circle"/></i>
@@ -78,11 +81,11 @@ import { search } from '../../../common/scripts/search';
 export default Vue.extend({
 	i18n: i18n('mobile/views/components/ui.nav.vue'),
 
-	props: ['isOpen'],
-
 	provide: {
 		narrow: true
 	},
+
+	props: ['isOpen'],
 
 	data() {
 		return {
@@ -126,7 +129,7 @@ export default Vue.extend({
 		}
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.$store.getters.isSignedIn) {
 			this.connection.dispose();
 		}

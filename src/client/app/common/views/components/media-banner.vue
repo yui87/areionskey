@@ -1,20 +1,23 @@
 <template>
 <div class="mk-media-banner">
-	<div class="sensitive" v-if="media.isSensitive && hide" @click="hide = false">
+	<div v-if="media.isSensitive && hide" class="sensitive" @click="hide = false">
 		<span class="icon"><fa icon="exclamation-triangle"/></span>
 		<b>{{ $t('sensitive') }}</b>
 		<span>{{ $t('click-to-show') }}</span>
 	</div>
-	<div class="audio" v-else-if="media.type.startsWith('audio') && media.type !== 'audio/midi'">
-		<audio class="audio"
+	<div v-else-if="media.type.startsWith('audio') && media.type !== 'audio/midi'" class="audio">
+		<audio
+			ref="audio"
+			class="audio"
 			:src="media.url"
 			:title="media.name"
 			controls
-			ref="audio"
+			preload="metadata"
 			@volumechange="volumechange"
-			preload="metadata" />
+		/>
 	</div>
-	<a class="download" v-else
+	<a
+		v-else class="download"
 		:href="media.url"
 		:title="media.name"
 		:download="media.name"

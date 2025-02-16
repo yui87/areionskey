@@ -19,10 +19,10 @@
 				<ui-button @click="add"><fa :icon="faPlus"/> {{ $t('add-user') }}</ui-button>
 			</ui-margin>
 			<sequential-entrance animation="entranceFromTop" delay="25">
-				<div class="phcqulfl" v-for="user in users">
+				<div v-for="user in users" class="phcqulfl">
 					<div>
 						<a :href="user | userPage">
-							<mk-avatar class="avatar" :user="user" :disable-link="true"/>
+							<mk-avatar class="avatar" :user="user" :disableLink="true"/>
 						</a>
 					</div>
 					<div>

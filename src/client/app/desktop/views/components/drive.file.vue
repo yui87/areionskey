@@ -1,23 +1,24 @@
 <template>
-<div class="gvfdktuvdgwhmztnuekzkswkjygptfcv"
+<div
+	class="gvfdktuvdgwhmztnuekzkswkjygptfcv"
 	:data-is-selected="isSelected"
 	:data-is-contextmenu-showing="isContextmenuShowing"
-	@click="onClick"
 	draggable="true"
+	:title="title"
+	@click="onClick"
 	@dragstart="onDragstart"
 	@dragend="onDragend"
 	@contextmenu.prevent.stop="onContextmenu"
-	:title="title"
 >
-	<div class="label" v-if="$store.state.i.avatarId == file.id">
+	<div v-if="$store.state.i.avatarId == file.id" class="label">
 		<img src="/assets/label.svg"/>
 		<p>{{ $t('avatar') }}</p>
 	</div>
-	<div class="label" v-if="$store.state.i.bannerId == file.id">
+	<div v-if="$store.state.i.bannerId == file.id" class="label">
 		<img src="/assets/label.svg"/>
 		<p>{{ $t('banner') }}</p>
 	</div>
-	<div class="label red" v-if="file.isSensitive">
+	<div v-if="file.isSensitive" class="label red">
 		<img src="/assets/label-red.svg"/>
 		<p>{{ $t('nsfw') }}</p>
 	</div>
@@ -26,7 +27,7 @@
 
 	<p class="name">
 		<span>{{ file.name.lastIndexOf('.') != -1 ? file.name.substring(0, file.name.lastIndexOf('.')) : file.name }}</span>
-		<span class="ext" v-if="file.name.lastIndexOf('.') != -1">{{ file.name.substring(file.name.lastIndexOf('.')) }}</span>
+		<span v-if="file.name.lastIndexOf('.') != -1" class="ext">{{ file.name.substring(file.name.lastIndexOf('.')) }}</span>
 	</p>
 </div>
 </template>
@@ -41,10 +42,10 @@ import XFileThumbnail from '../../../common/views/components/drive-file-thumbnai
 
 export default Vue.extend({
 	i18n: i18n('desktop/views/components/drive.file.vue'),
-	props: ['file'],
 	components: {
 		XFileThumbnail
 	},
+	props: ['file'],
 	data() {
 		return {
 			isContextmenuShowing: false,

@@ -1,10 +1,10 @@
 <template>
 <div class="onchrpzrvnoruiaenfcqvccjfuupzzwv" :class="{ isMobile: $root.isMobile }">
-	<div class="backdrop" ref="backdrop" @click="close"></div>
-	<div class="popover" :class="{ bubble }" ref="popover">
+	<div ref="backdrop" class="backdrop" @click="close"></div>
+	<div ref="popover" class="popover" :class="{ bubble }">
 		<template v-for="item, i in items">
 			<div v-if="item === null"></div>
-			<button v-if="item" @click="clicked(item.action)" :tabindex="i">
+			<button v-if="item" :tabindex="i" @click="clicked(item.action)">
 				<fa v-if="item.icon" :icon="item.icon"/>{{ item.text }}
 			</button>
 		</template>

@@ -5,7 +5,7 @@
 	</template>
 
 	<div>
-		<component :is="component" @init="init" v-bind="$attrs"/>
+		<component :is="component" v-bind="$attrs" @init="init"/>
 	</div>
 </x-column>
 </template>

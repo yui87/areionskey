@@ -5,7 +5,7 @@
 	</header>
 
 	<div v-if="script">
-		<x-block v-for="child in page.content" :value="child" @input="v => updateBlock(v)" :page="page" :script="script" :key="child.id" :h="2"/>
+		<x-block v-for="child in page.content" :key="child.id" :value="child" :page="page" :script="script" :h="2" @input="v => updateBlock(v)"/>
 	</div>
 
 	<footer v-if="showFooter">
@@ -17,9 +17,9 @@
 		</template>
 		<router-link :to="`./${page.name}/view-source`">{{ $t('view-source') }}</router-link>
 		<div class="like">
-			<button @click="unlike()" v-if="page.isLiked" :title="$t('unlike')"><fa :icon="faHeartS"/></button>
-			<button @click="like()" v-else :title="$t('like')"><fa :icon="faHeart"/></button>
-			<span class="count" v-if="page.likedCount > 0">{{ page.likedCount }}</span>
+			<button v-if="page.isLiked" :title="$t('unlike')" @click="unlike()"><fa :icon="faHeartS"/></button>
+			<button v-else :title="$t('like')" @click="like()"><fa :icon="faHeart"/></button>
+			<span v-if="page.likedCount > 0" class="count">{{ page.likedCount }}</span>
 		</div>
 	</footer>
 </div>

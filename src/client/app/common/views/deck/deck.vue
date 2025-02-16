@@ -1,51 +1,55 @@
 <template>
 <mk-ui :class="$style.root">
-	<div class="qlvquzbjribqcaozciifydkngcwtyzje" ref="body" :style="style" :class="`${$store.state.device.deckColumnAlign} ${$store.state.device.deckColumnWidth}`" v-hotkey.global="keymap">
+	<div ref="body" v-hotkey.global="keymap" class="qlvquzbjribqcaozciifydkngcwtyzje" :style="style" :class="`${$store.state.device.deckColumnAlign} ${$store.state.device.deckColumnWidth}`">
 		<template v-for="(ids, layoutIndex) in layoutL">
 			<div v-if="ids.length > 1" class="folder">
-				<template v-for="(id, stackIndex) in ids">
-					<x-column-core :ref="id" :key="id" :column="columns.find(c => c.id == id)" :is-stacked="true" @parentFocus="moveFocus(id, $event)"
-						:pos="{
+				<template v-for="(id, stackIndex) in ids" :key="id">
+					<x-column-core
+						:ref="id" :column="columns.find(c => c.id == id)" :isStacked="true" :pos="{
 							first: layoutIndex === 0,
 							last: layoutIndex === layoutL.length - 1 && layoutR.length === 0,
 							top: stackIndex === 0,
 							bottom: stackIndex === ids.length - 1
 						}"
+						@parentFocus="moveFocus(id, $event)"
 					/>
 				</template>
 			</div>
-			<x-column-core v-else :ref="ids[0]" :key="ids[0]" :column="columns.find(c => c.id == ids[0])" @parentFocus="moveFocus(ids[0], $event)"
-				:pos="{
+			<x-column-core
+				v-else :ref="ids[0]" :key="ids[0]" :column="columns.find(c => c.id == ids[0])" :pos="{
 					alone: layout.length === 1,
 					first: layoutIndex === 0,
 					last: layoutIndex === layoutL.length - 1 && layoutR.length === 0,
 					top: true, bottom: true }"
+				@parentFocus="moveFocus(ids[0], $event)"
 			/>
 		</template>
 		<router-view></router-view>
 		<template v-for="(ids, layoutIndex) in layoutR">
 			<div v-if="ids.length > 1" class="folder">
-				<template v-for="(id, stackIndex) in ids">
-					<x-column-core :ref="id" :key="id" :column="columns.find(c => c.id == id)" :is-stacked="true" @parentFocus="moveFocus(id, $event)"
-						:pos="{
+				<template v-for="(id, stackIndex) in ids" :key="id">
+					<x-column-core
+						:ref="id" :column="columns.find(c => c.id == id)" :isStacked="true" :pos="{
 							first: layoutIndex === 0 && layoutL.length === 0,
 							last: layoutIndex === layoutR.length - 1,
 							top: stackIndex === 0,
 							bottom: stackIndex === ids.length - 1
 						}"
+						@parentFocus="moveFocus(id, $event)"
 					/>
 				</template>
 			</div>
-			<x-column-core v-else :ref="ids[0]" :key="ids[0]" :column="columns.find(c => c.id == ids[0])" @parentFocus="moveFocus(ids[0], $event)"
-				:pos="{
+			<x-column-core
+				v-else :ref="ids[0]" :key="ids[0]" :column="columns.find(c => c.id == ids[0])" :pos="{
 					alone: layout.length === 1,
 					first: layoutIndex === 0 && layoutL.length === 0,
 					last: layoutIndex === layoutR.length - 1,
 					top: true,
 					bottom: true }"
+				@parentFocus="moveFocus(ids[0], $event)"
 			/>
 		</template>
-		<button ref="add" @click="add" :title="$t('@deck.add-column')" style="font-size: 1.5em"><fa icon="plus"/></button>
+		<button ref="add" :title="$t('@deck.add-column')" style="font-size: 1.5em" @click="add"><fa icon="plus"/></button>
 	</div>
 </mk-ui>
 </template>
@@ -63,6 +67,14 @@ export default Vue.extend({
 
 	components: {
 		XColumnCore
+	},
+
+	provide() {
+		return {
+			inDeck: true,
+			getColumnVm: this.getColumnVm,
+			narrow: true
+		};
 	},
 
 	computed: {
@@ -123,14 +135,6 @@ export default Vue.extend({
 		}
 	},
 
-	provide() {
-		return {
-			inDeck: true,
-			getColumnVm: this.getColumnVm,
-			narrow: true
-		};
-	},
-
 	created() {
 		if (this.deck == null) {
 			const deck = {
@@ -167,7 +171,7 @@ export default Vue.extend({
 		document.documentElement.style.overflow = 'hidden';
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		document.documentElement.style.overflow = 'auto';
 	},
 

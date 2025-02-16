@@ -1,20 +1,20 @@
 <template>
 <div class="wojmldye">
-	<x-page class="page" v-if="user.pinnedPage" :page="user.pinnedPage" :key="user.pinnedPage.id" :show-title="!user.pinnedPage.hideTitleWhenPinned"/>
-	<mk-note-detail class="note" v-for="n in user.pinnedNotes" :key="n.id" :note="n" :compact="true"/>
-	<ui-container :body-togglable="true">
+	<x-page v-if="user.pinnedPage" :key="user.pinnedPage.id" class="page" :page="user.pinnedPage" :showTitle="!user.pinnedPage.hideTitleWhenPinned"/>
+	<mk-note-detail v-for="n in user.pinnedNotes" :key="n.id" class="note" :note="n" :compact="true"/>
+	<ui-container :bodyTogglable="true">
 		<template #header><fa :icon="['far', 'comments']"/>{{ $t('recent-notes') }}</template>
 		<div>
 			<x-notes :user="user"/>
 		</div>
 	</ui-container>
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header><fa icon="image"/>{{ $t('images') }}</template>
 		<div>
 			<x-photos :user="user"/>
 		</div>
 	</ui-container>
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header><fa icon="chart-bar"/>{{ $t('activity') }}</template>
 		<div style="padding:8px;">
 			<x-activity :user="user"/>

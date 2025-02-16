@@ -1,48 +1,48 @@
 <template>
 <div class="gqyayizv">
-	<div class="backdrop" ref="backdrop" @click="close"></div>
-	<div class="popover" :class="{ isMobile: $root.isMobile }" ref="popover">
-		<div @click="choose('public')" :class="{ active: v == 'public' }">
+	<div ref="backdrop" class="backdrop" @click="close"></div>
+	<div ref="popover" class="popover" :class="{ isMobile: $root.isMobile }">
+		<div :class="{ active: v == 'public' }" @click="choose('public')">
 			<div><fa icon="globe"/></div>
 			<div>
 				<span>{{ $t('public') }}</span>
 			</div>
 		</div>
-		<div @click="choose('home')" :class="{ active: v == 'home' }">
+		<div :class="{ active: v == 'home' }" @click="choose('home')">
 			<div><fa icon="home"/></div>
 			<div>
 				<span>{{ $t('home') }}</span>
 				<span>{{ $t('home-desc') }}</span>
 			</div>
 		</div>
-		<div @click="choose('followers')" :class="{ active: v == 'followers' }">
+		<div :class="{ active: v == 'followers' }" @click="choose('followers')">
 			<div><fa icon="lock"/></div>
 			<div>
 				<span>{{ $t('followers') }}</span>
 				<span>{{ $t('followers-desc') }}</span>
 			</div>
 		</div>
-		<div @click="choose('specified')" :class="{ active: v == 'specified' }">
+		<div :class="{ active: v == 'specified' }" @click="choose('specified')">
 			<div><fa icon="envelope"/></div>
 			<div>
 				<span>{{ $t('specified') }}</span>
 				<span>{{ $t('specified-desc') }}</span>
 			</div>
 		</div>
-		<div @click="choose('local-public')" :class="{ active: v == 'local-public' }">
+		<div :class="{ active: v == 'local-public' }" @click="choose('local-public')">
 			<div><fa icon="globe"/></div>
 			<div>
 				<span>{{ $t('local-public') }}</span>
 				<span>{{ $t('local-public-desc') }}</span>
 			</div>
 		</div>
-		<div @click="choose('local-home')" :class="{ active: v == 'local-home' }">
+		<div :class="{ active: v == 'local-home' }" @click="choose('local-home')">
 			<div><fa icon="home"/></div>
 			<div>
 				<span>{{ $t('local-home') }}</span>
 			</div>
 		</div>
-		<div @click="choose('local-followers')" :class="{ active: v == 'local-followers' }">
+		<div :class="{ active: v == 'local-followers' }" @click="choose('local-followers')">
 			<div><fa icon="lock"/></div>
 			<div>
 				<span>{{ $t('local-followers') }}</span>

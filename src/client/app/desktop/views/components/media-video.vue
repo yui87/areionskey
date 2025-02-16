@@ -1,16 +1,17 @@
 <template>
-<div class="uofhebxjdgksfmltszlxurtjnjjsvioh" v-if="video.isSensitive && hide && !$store.state.device.alwaysShowNsfw" @click="hide = false">
+<div v-if="video.isSensitive && hide && !$store.state.device.alwaysShowNsfw" class="uofhebxjdgksfmltszlxurtjnjjsvioh" @click="hide = false">
 	<div>
 		<b><fa icon="exclamation-triangle"/> {{ $t('sensitive') }}</b>
 		<span>{{ $t('click-to-show') }}</span>
 	</div>
 </div>
-<div class="vwxdhznewyashiknzolsoihtlpicqepe" v-else>
-	<a class="thumbnail"
+<div v-else class="vwxdhznewyashiknzolsoihtlpicqepe">
+	<a
+		class="thumbnail"
 		:href="video.url"
 		:style="imageStyle"
-		@click.prevent="onClick"
 		:title="video.name"
+		@click.prevent="onClick"
 	>
 		<fa :icon="['far', 'play-circle']"/>
 	</a>

@@ -1,5 +1,5 @@
 <template>
-<div class="iwaalbte" v-if="disabled">
+<div v-if="disabled" class="iwaalbte">
 	<p>
 		<fa :icon="faMinusCircle"/>
 		{{ $t('disabled-timeline.title') }}
@@ -100,7 +100,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 

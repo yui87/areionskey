@@ -1,5 +1,5 @@
 <template>
-<x-container @remove="() => $emit('remove')" :draggable="true">
+<x-container :draggable="true" @remove="() => $emit('remove')">
 	<template #header><fa :icon="faAlignLeft"/> {{ $t('blocks.text') }}</template>
 
 	<section class="ihymsbbe">

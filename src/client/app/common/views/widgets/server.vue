@@ -1,10 +1,10 @@
 <template>
 <div class="mkw-server">
-	<ui-container :show-header="props.design == 0" :naked="props.design == 2">
+	<ui-container :showHeader="props.design == 0" :naked="props.design == 2">
 		<template #header><fa icon="server"/>{{ $t('title') }}</template>
-		<template #func><button @click="toggle" :title="$t('toggle')"><fa icon="sort"/></button></template>
+		<template #func><button :title="$t('toggle')" @click="toggle"><fa icon="sort"/></button></template>
 
-		<p :class="$style.fetching" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>
+		<p v-if="fetching" :class="$style.fetching"><fa icon="spinner" pulse fixedWidth/>{{ $t('@.loading') }}<mk-ellipsis/></p>
 		<template v-if="!fetching">
 			<x-cpu-memory v-show="props.view == 0" :connection="connection"/>
 			<x-cpu v-show="props.view == 1" :connection="connection" :meta="meta"/>

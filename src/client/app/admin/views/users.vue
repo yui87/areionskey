@@ -3,34 +3,34 @@
 	<ui-card>
 		<template #title><fa :icon="faTerminal"/> {{ $t('operation') }}</template>
 		<section class="fit-top">
-			<ui-input class="target" v-model="target" type="text" @enter="showUser">
+			<ui-input v-model="target" class="target" type="text" @enter="showUser">
 				<span>{{ $t('username-or-userid') }}</span>
 			</ui-input>
 			<ui-button @click="showUser"><fa :icon="faSearch"/> {{ $t('lookup') }}</ui-button>
 
-			<div ref="user" class="user" v-if="user" :key="user.id">
+			<div v-if="user" ref="user" :key="user.id" class="user">
 				<x-user :user="user"/>
 				<div class="actions">
 					<ui-button v-if="user.host != null" @click="updateRemoteUser"><fa :icon="faSync"/> {{ $t('update-remote-user') }}</ui-button>
-					<ui-button @click="resetPassword" :disabled="user.isAdmin"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
+					<ui-button :disabled="user.isAdmin" @click="resetPassword"><fa :icon="faKey"/> {{ $t('reset-password') }}</ui-button>
 					<ui-horizon-group>
-						<ui-button @click="setPremium" :disabled="changing"><fa :icon="faCrown"/> {{ $t('premium') }}</ui-button>
-						<ui-button @click="unsetPremium" :disabled="changing">{{ $t('unpremium') }}</ui-button>
+						<ui-button :disabled="changing" @click="setPremium"><fa :icon="faCrown"/> {{ $t('premium') }}</ui-button>
+						<ui-button :disabled="changing" @click="unsetPremium">{{ $t('unpremium') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="verifyUser" :disabled="verifying"><fa :icon="faCertificate"/> {{ $t('verify') }}</ui-button>
-						<ui-button @click="unverifyUser" :disabled="unverifying">{{ $t('unverify') }}</ui-button>
+						<ui-button :disabled="verifying" @click="verifyUser"><fa :icon="faCertificate"/> {{ $t('verify') }}</ui-button>
+						<ui-button :disabled="unverifying" @click="unverifyUser">{{ $t('unverify') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
 						<ui-button @click="silenceUser"><fa :icon="faMicrophoneSlash"/> {{ $t('make-silence') }}</ui-button>
 						<ui-button @click="unsilenceUser">{{ $t('unmake-silence') }}</ui-button>
 					</ui-horizon-group>
 					<ui-horizon-group>
-						<ui-button @click="suspendUser" :disabled="suspending || user.isModerator || user.isAdmin"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
-						<ui-button @click="unsuspendUser" :disabled="unsuspending">{{ $t('unsuspend') }}</ui-button>
+						<ui-button :disabled="suspending || user.isModerator || user.isAdmin" @click="suspendUser"><fa :icon="faSnowflake"/> {{ $t('suspend') }}</ui-button>
+						<ui-button :disabled="unsuspending" @click="unsuspendUser">{{ $t('unsuspend') }}</ui-button>
 					</ui-horizon-group>
-					<ui-button @click="deleteAllFiles" :disabled="(user.isModerator && !$store.getters.isAdmin) || user.isAdmin"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
-					<ui-button @click="deleteAccount" :disabled="deleting || user.isModerator || user.isAdmin"><fa :icon="faTrashAlt"/> {{ $t('delete-account') }}</ui-button>
+					<ui-button :disabled="(user.isModerator && !$store.getters.isAdmin) || user.isAdmin" @click="deleteAllFiles"><fa :icon="faTrashAlt"/> {{ $t('delete-all-files') }}</ui-button>
+					<ui-button :disabled="deleting || user.isModerator || user.isAdmin" @click="deleteAccount"><fa :icon="faTrashAlt"/> {{ $t('delete-account') }}</ui-button>
 					<ui-textarea v-if="user" :value="user | json5" readonly tall style="margin-top:16px;"></ui-textarea>
 				</div>
 			</div>
@@ -72,12 +72,12 @@
 				<ui-input v-model="searchUsername" type="text" spellcheck="false" @input="fetchUsers(true)">
 					<span>{{ $t('username') }}</span>
 				</ui-input>
-				<ui-input v-model="searchHost" type="text" spellcheck="false" @input="fetchUsers(true)" :disabled="origin === 'local'">
+				<ui-input v-model="searchHost" type="text" spellcheck="false" :disabled="origin === 'local'" @input="fetchUsers(true)">
 					<span>{{ $t('host') }}</span>
 				</ui-input>
 			</ui-horizon-group>
 			<sequential-entrance animation="entranceFromTop" delay="25">
-				<x-user v-for="user in users" :key="user.id" :user='user' :click="showUserOnClick"/>
+				<x-user v-for="user in users" :key="user.id" :user="user" :click="showUserOnClick"/>
 			</sequential-entrance>
 			<ui-button v-if="existMore" @click="fetchUsers">{{ $t('@.load-more') }}</ui-button>
 		</section>
@@ -88,7 +88,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../i18n';
-import parseAcct from "../../../../misc/acct/parse";
+import parseAcct from '../../../../misc/acct/parse';
 import { faCrown, faCertificate, faUsers, faTerminal, faSearch, faKey, faSync, faMicrophoneSlash } from '@fortawesome/free-solid-svg-icons';
 import { faSnowflake, faTrashAlt } from '@fortawesome/free-regular-svg-icons';
 import XUser from './users.user.vue';
@@ -437,7 +437,7 @@ export default Vue.extend({
 			this.deleting = false;
 		},
 
-		async getConfirmed(text: string): Promise<Boolean> {
+		async getConfirmed(text: string): Promise<boolean> {
 			const confirm = await this.$root.dialog({
 				type: 'warning',
 				showCancelButton: true,

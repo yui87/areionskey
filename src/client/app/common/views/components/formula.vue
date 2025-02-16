@@ -1,5 +1,5 @@
 <template>
-<x-formula :formula="formula" :block="block" />
+<x-formula :formula="formula" :block="block"/>
 </template>
 
 <script lang="ts">

@@ -1,6 +1,6 @@
 <template>
 <component :is="ui ? 'mk-ui' : 'div'">
-	<x-reversi :game-id="$route.params.game" @nav="nav" :self-nav="false"/>
+	<x-reversi :gameId="$route.params.game" :selfNav="false" @nav="nav"/>
 </component>
 </template>
 

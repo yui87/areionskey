@@ -30,7 +30,7 @@ export default Vue.extend({
 	mounted() {
 		this.connection.on('stats', this.onStats);
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.off('stats', this.onStats);
 	},
 	methods: {

@@ -33,18 +33,18 @@
 				animation="150"
 				@sort="onWidgetSort"
 			>
-				<div v-for="widget in widgets" class="customize-container" :key="widget.id">
+				<div v-for="widget in widgets" :key="widget.id" class="customize-container">
 					<header>
 						<span class="handle"><fa icon="bars"/></span>{{ widget.name }}<button class="remove" @click="removeWidget(widget)"><fa icon="times"/></button>
 					</header>
 					<div @click="widgetFunc(widget.id)">
-						<component :is="`mkw-${widget.name}`" :widget="widget" :ref="widget.id" :is-customize-mode="true" platform="mobile"/>
+						<component :is="`mkw-${widget.name}`" :ref="widget.id" :widget="widget" :isCustomizeMode="true" platform="mobile"/>
 					</div>
 				</div>
 			</x-draggable>
 		</template>
 		<template v-else>
-			<component class="widget" v-for="widget in widgets" :is="`mkw-${widget.name}`" :key="widget.id" :ref="widget.id" :widget="widget" platform="mobile"/>
+			<component :is="`mkw-${widget.name}`" v-for="widget in widgets" :key="widget.id" :ref="widget.id" class="widget" :widget="widget" platform="mobile"/>
 		</template>
 	</main>
 </mk-ui>

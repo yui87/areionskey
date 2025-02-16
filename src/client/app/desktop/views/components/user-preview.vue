@@ -2,13 +2,13 @@
 <div class="mk-user-preview">
 	<template v-if="u != null">
 		<div class="banner" :style="u.bannerUrl ? `background-image: url(${u.bannerUrl})` : ''"></div>
-		<mk-avatar class="avatar" :user="u" :disable-preview="true"/>
+		<mk-avatar class="avatar" :user="u" :disablePreview="true"/>
 		<div class="title">
 			<router-link class="name" :to="u | userPage"><mk-user-name :user="u" :nowrap="false"/></router-link>
 			<p class="username"><mk-acct :user="u"/></p>
 		</div>
 		<div class="description">
-			<mfm v-if="u.description" :text="u.description" :author="u" :i="$store.state.i" :custom-emojis="u.emojis"/>
+			<mfm v-if="u.description" :text="u.description" :author="u" :i="$store.state.i" :customEmojis="u.emojis"/>
 		</div>
 		<div class="status">
 			<div>
@@ -21,7 +21,7 @@
 				<p>{{ $t('followers') }}</p><span>{{ u.followersCount }}</span>
 			</div>
 		</div>
-		<mk-follow-button class="koudoku-button" v-if="$store.getters.isSignedIn && u.id != $store.state.i.id" :user="u" mini/>
+		<mk-follow-button v-if="$store.getters.isSignedIn && u.id != $store.state.i.id" class="koudoku-button" :user="u" mini/>
 	</template>
 </div>
 </template>

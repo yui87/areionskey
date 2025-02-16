@@ -1,7 +1,7 @@
 <template>
 <div>
-	<ui-info warn v-if="latestStats && latestStats.waiting > 0">The queue is jammed.</ui-info>
-	<ui-horizon-group inputs v-if="latestStats" class="fit-bottom">
+	<ui-info v-if="latestStats && latestStats.waiting > 0" warn>The queue is jammed.</ui-info>
+	<ui-horizon-group v-if="latestStats" inputs class="fit-bottom">
 		<ui-input :value="latestStats.activeSincePrevTick | number" type="text" readonly>
 			<span>Process</span>
 			<template #prefix><fa :icon="fasPlayCircle"/></template>

@@ -3,40 +3,40 @@
 	<ui-input v-model="query" style="margin: 1.2em 0.5em 1.5em;">
 		<span>{{ $t('searchUser') }}</span>
 	</ui-input>
-	<mk-user-list v-if="query && query !== ''" :pagination="foundUsers" :key="`${query}`" :noMore="true">
-		<fa :icon="faSearch" fixed-width/>{{ query }}
+	<mk-user-list v-if="query && query !== ''" :key="`${query}`" :pagination="foundUsers" :noMore="true">
+		<fa :icon="faSearch" fixedWidth/>{{ query }}
 	</mk-user-list>
 
-	<div class="localfedi7" v-if="meta && stats && tag == null" :style="{ backgroundImage: meta.bannerUrl ? `url(${meta.bannerUrl})` : null }">
+	<div v-if="meta && stats && tag == null" class="localfedi7" :style="{ backgroundImage: meta.bannerUrl ? `url(${meta.bannerUrl})` : null }">
 		<header>{{ $t('explore', { host: meta.name || 'Areionskey' }) }}</header>
 		<div>{{ $t('users-info', { users: num(stats.originalUsersCount) }) }}</div>
 	</div>
 
 	<template v-if="tag == null">
 		<mk-user-list :pagination="pinnedUsers" :expanded="false" :noMore="true">
-			<fa :icon="faBookmark" fixed-width/>{{ $t('pinned-users') }}
+			<fa :icon="faBookmark" fixedWidth/>{{ $t('pinned-users') }}
 		</mk-user-list>
 		<mk-user-list :pagination="verifiedUsers" :expanded="false" :noMore="true">
-			<fa :icon="faCertificate" fixed-width/>{{ $t('verified-users') }}
+			<fa :icon="faCertificate" fixedWidth/>{{ $t('verified-users') }}
 		</mk-user-list>
 		<mk-user-list :pagination="recentlyUpdatedUsers" :expanded="false" :noMore="true">
-			<fa :icon="faCommentAlt" fixed-width/>{{ $t('recently-updated-users') }}
+			<fa :icon="faCommentAlt" fixedWidth/>{{ $t('recently-updated-users') }}
 		</mk-user-list>
 		<mk-user-list :pagination="recentlyRegisteredUsers" :expanded="false" :noMore="true">
-			<fa :icon="faPlus" fixed-width/>{{ $t('recently-registered-users') }}
+			<fa :icon="faPlus" fixedWidth/>{{ $t('recently-registered-users') }}
 		</mk-user-list>
 	</template>
 
-	<div class="localfedi7" v-if="tag == null" :style="{ backgroundImage: `url(/assets/fedi.jpg)` }">
+	<div v-if="tag == null" class="localfedi7" :style="{ backgroundImage: `url(/assets/fedi.jpg)` }">
 		<header>{{ $t('explore-fediverse') }}</header>
 	</div>
 
 	<template v-if="tag == null">
 		<mk-user-list :pagination="recentlyUpdatedUsersF" :expanded="false" :noMore="true">
-			<fa :icon="faCommentAlt" fixed-width/>{{ $t('recently-updated-users') }}
+			<fa :icon="faCommentAlt" fixedWidth/>{{ $t('recently-updated-users') }}
 		</mk-user-list>
 		<mk-user-list :pagination="recentlyRegisteredUsersF" :expanded="false" :noMore="true">
-			<fa :icon="faRocket" fixed-width/>{{ $t('recently-discovered-users') }}
+			<fa :icon="faRocket" fixedWidth/>{{ $t('recently-discovered-users') }}
 		</mk-user-list>
 	</template>
 </div>
@@ -51,16 +51,16 @@ import { faBookmark, faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 export default Vue.extend({
 	i18n: i18n('common/views/pages/explore.vue'),
 
+	inject: {
+		inNakedDeckColumn: {
+			default: false
+		}
+	},
+
 	props: {
 		tag: {
 			type: String,
 			required: false
-		}
-	},
-
-	inject: {
-		inNakedDeckColumn: {
-			default: false
 		}
 	},
 

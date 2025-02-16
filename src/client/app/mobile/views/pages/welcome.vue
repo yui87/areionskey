@@ -8,7 +8,7 @@
 		<p class="host">{{ host }}</p>
 		<p class="pba" v-html="$t('@.powered-by-areionskey')"></p>
 		<div class="about">
-			<p v-html="description || this.$t('@.about')"></p>
+			<p v-html="description || $t('@.about')"></p>
 			<div class="sign">
 				<router-link class="signup" to="/signup">{{ $t('@.signup') }}</router-link>
 				<span class="divider">|</span>
@@ -21,11 +21,11 @@
 		<div class="photos">
 			<div v-for="photo in photos" :style="`background-image: url(${photo.thumbnailUrl})`"></div>
 		</div>
-		<div class="stats" v-if="stats">
+		<div v-if="stats" class="stats">
 			<span><fa icon="user"/> {{ stats.originalUsersCount | number }}</span>
 			<span><fa icon="pencil-alt"/> {{ stats.originalNotesCount | number }}</span>
 		</div>
-		<div class="announcements" v-if="announcements && announcements.length > 0">
+		<div v-if="announcements && announcements.length > 0" class="announcements">
 			<article v-for="announcement in announcements">
 				<span class="title" v-html="announcement.title"></span>
 				<mfm :text="announcement.text"/>
@@ -34,33 +34,33 @@
 		</div>
 		<article class="about-misskey">
 			<h1>{{ $t('@.intro.title') }}</h1>
-			<p v-html="this.$t('@.intro.about')"></p>
+			<p v-html="$t('@.intro.about')"></p>
 			<section>
 				<h2>{{ $t('@.intro.features') }}</h2>
 				<section>
 					<h3>{{ $t('@.intro.rich-contents') }}</h3>
 					<div class="image"><img src="/assets/about/post.png" alt=""></div>
-					<p v-html="this.$t('@.intro.rich-contents-desc')"></p>
+					<p v-html="$t('@.intro.rich-contents-desc')"></p>
 				</section>
 				<section>
 					<h3>{{ $t('@.intro.reaction') }}</h3>
 					<div class="image"><img src="/assets/about/reaction.png" alt=""></div>
-					<p v-html="this.$t('@.intro.reaction-desc')"></p>
+					<p v-html="$t('@.intro.reaction-desc')"></p>
 				</section>
 				<section>
 					<h3>{{ $t('@.intro.ui') }}</h3>
 					<div class="image"><img src="/assets/about/ui.png" alt=""></div>
-					<p v-html="this.$t('@.intro.ui-desc')"></p>
+					<p v-html="$t('@.intro.ui-desc')"></p>
 				</section>
 				<section>
 					<h3>{{ $t('@.intro.drive') }}</h3>
 					<div class="image"><img src="/assets/about/drive.png" alt=""></div>
-					<p v-html="this.$t('@.intro.drive-desc')"></p>
+					<p v-html="$t('@.intro.drive-desc')"></p>
 				</section>
 			</section>
-			<p v-html="this.$t('@.intro.outro')"></p>
+			<p v-html="$t('@.intro.outro')"></p>
 		</article>
-		<div class="info" v-if="meta">
+		<div v-if="meta" class="info">
 			<p>Version: <b>{{ meta.version }}</b></p>
 			<p>Maintainer: <b><a :href="'mailto:' + meta.maintainerEmail" target="_blank">{{ meta.maintainerName }}</a></b></p>
 		</div>

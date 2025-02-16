@@ -3,10 +3,10 @@
 	<mk-note-preview class="preview" :note="note"/>
 	<template v-if="!quote">
 		<footer>
-			<a class="quote" v-if="!quote" @click="onQuote">{{ $t('quote') }}</a>
+			<a v-if="!quote" class="quote" @click="onQuote">{{ $t('quote') }}</a>
 			<ui-button class="button cancel" inline @click="cancel">{{ $t('cancel') }}</ui-button>
-			<ui-button class="button home" inline :primary="visibility != 'public'" @click="ok('home')"   :disabled="wait">{{ wait ? this.$t('reposting') : this.$t('renote-home') }}</ui-button>
-			<ui-button class="button ok"   inline :primary="visibility == 'public'" @click="ok('public')" :disabled="wait">{{ wait ? this.$t('reposting') : this.$t('renote') }}</ui-button>
+			<ui-button class="button home" inline :primary="visibility != 'public'" :disabled="wait" @click="ok('home')">{{ wait ? $t('reposting') : $t('renote-home') }}</ui-button>
+			<ui-button class="button ok" inline :primary="visibility == 'public'" :disabled="wait" @click="ok('public')">{{ wait ? $t('reposting') : $t('renote') }}</ui-button>
 		</footer>
 	</template>
 	<template v-if="quote">

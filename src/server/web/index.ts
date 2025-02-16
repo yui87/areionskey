@@ -380,7 +380,7 @@ router.get('/info', async ctx => {
 	ctx.set('Cache-Control', 'public, max-age=60');
 });
 
-const override = (source: string, target: string, depth: number = 0) =>
+const override = (source: string, target: string, depth = 0) =>
 	[, ...target.split('/').filter(x => x), ...source.split('/').filter(x => x).splice(depth)].join('/');
 
 router.get('/othello', async ctx => ctx.redirect(override(ctx.URL.pathname, 'games/reversi', 1)));

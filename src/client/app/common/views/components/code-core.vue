@@ -1,5 +1,5 @@
 <template>
-<code class="inline" v-if="inline">{{ code }}</code>
+<code v-if="inline" class="inline">{{ code }}</code>
 <highlightjs v-else :language="lang" :code="code"/>
 </template>
 

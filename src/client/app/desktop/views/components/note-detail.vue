@@ -1,11 +1,11 @@
 <template>
 <div class="mk-note-detail" :title="title" tabindex="-1" :class="{ shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }">
 	<button
-		class="read-more"
 		v-if="appearNote.reply && appearNote.reply.replyId && conversation.length == 0"
+		class="read-more"
 		:title="$t('title')"
-		@click="fetchConversation"
 		:disabled="conversationFetching"
+		@click="fetchConversation"
 	>
 		<template v-if="!conversationFetching"><fa icon="ellipsis-v"/></template>
 		<template v-if="conversationFetching"><fa icon="spinner" pulse/></template>
@@ -13,14 +13,14 @@
 	<div class="conversation">
 		<x-sub v-for="note in conversation" :key="note.id" :note="note"/>
 	</div>
-	<div class="reply-to" v-if="appearNote.reply">
+	<div v-if="appearNote.reply" class="reply-to">
 		<x-sub :note="appearNote.reply"/>
 	</div>
-	<mk-renote class="renote" v-if="isRenote" :note="note"/>
+	<mk-renote v-if="isRenote" class="renote" :note="note"/>
 	<article>
 		<mk-avatar class="avatar" :user="appearNote.user"/>
 		<header>
-			<router-link class="name" :to="appearNote.user | userPage" v-user-preview="appearNote.user.id">
+			<router-link v-user-preview="appearNote.user.id" class="name" :to="appearNote.user | userPage">
 				<mk-user-name :user="appearNote.user"/>
 			</router-link>
 			<span class="username"><mk-acct :user="appearNote.user"/></span>
@@ -31,62 +31,62 @@
 					<fa v-if="appearNote.updatedAt != null" :icon="faEdit"/>
 				</router-link>
 				<div class="visibility-info">
-					<span class="visibility" v-if="appearNote.visibility != 'public'">
+					<span v-if="appearNote.visibility != 'public'" class="visibility">
 						<fa v-if="appearNote.visibility == 'home'" icon="home"/>
 						<fa v-if="appearNote.visibility == 'followers'" icon="lock"/>
 						<fa v-if="appearNote.visibility == 'specified'" icon="envelope"/>
 					</span>
-					<span class="localOnly" v-if="appearNote.localOnly == true"><fa icon="heart"/></span>
+					<span v-if="appearNote.localOnly == true" class="localOnly"><fa icon="heart"/></span>
 				</div>
 			</div>
 		</header>
 		<div class="body">
 			<p v-if="appearNote.cw != null" class="cw">
-				<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" :no-sticker="true"/>
+				<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :customEmojis="appearNote.emojis" :noSticker="true"/>
 				<mk-cw-button v-model="showContent" :note="appearNote"/>
 			</p>
-			<div class="content" v-show="appearNote.cw == null || showContent">
+			<div v-show="appearNote.cw == null || showContent" class="content">
 				<div class="text">
 					<span v-if="appearNote.isHidden" style="opacity: 0.5">{{ $t('private') }}</span>
 					<span v-if="appearNote.deletedAt" style="opacity: 0.5">{{ $t('deleted') }}</span>
-					<mfm v-if="appearNote.text" :text="appearNote.text" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" />
+					<mfm v-if="appearNote.text" :text="appearNote.text" :author="appearNote.user" :i="$store.state.i" :customEmojis="appearNote.emojis"/>
 				</div>
-				<div class="files" v-if="appearNote.files.length > 0">
-					<mk-media-list :media-list="appearNote.files" :raw="true"/>
+				<div v-if="appearNote.files.length > 0" class="files">
+					<mk-media-list :mediaList="appearNote.files" :raw="true"/>
 				</div>
 				<mk-poll v-if="appearNote.poll" :note="appearNote"/>
-				<mk-url-preview v-for="url in urls" :url="url" :key="url" :detail="true"/>
-				<div class="renote" v-if="appearNote.renote">
+				<mk-url-preview v-for="url in urls" :key="url" :url="url" :detail="true"/>
+				<div v-if="appearNote.renote" class="renote">
 					<mk-note-preview :note="appearNote.renote"/>
 				</div>
 			</div>
 		</div>
 		<footer>
-			<span class="app" v-if="note.app && $store.state.settings.showVia">via <b>{{ note.app.name }}</b></span>
+			<span v-if="note.app && $store.state.settings.showVia" class="app">via <b>{{ note.app.name }}</b></span>
 			<mk-reactions-viewer :note="appearNote"/>
-			<button class="replyButton" @click="reply()" :title="$t('reply')">
+			<button class="replyButton" :title="$t('reply')" @click="reply()">
 				<template v-if="appearNote.reply"><fa icon="reply-all"/></template>
 				<template v-else><fa icon="reply"/></template>
-				<p class="count" v-if="appearNote.repliesCount > 0">{{ appearNote.repliesCount }}</p>
+				<p v-if="appearNote.repliesCount > 0" class="count">{{ appearNote.repliesCount }}</p>
 			</button>
-			<button v-if="['public', 'home'].includes(appearNote.visibility)" class="renoteButton" @click="renote()" :title="$t('renote')">
-				<fa icon="retweet"/><p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
+			<button v-if="['public', 'home'].includes(appearNote.visibility)" class="renoteButton" :title="$t('renote')" @click="renote()">
+				<fa icon="retweet"/><p v-if="appearNote.renoteCount > 0" class="count">{{ appearNote.renoteCount }}</p>
 			</button>
 			<button v-else class="inhibitedButton">
 				<fa icon="ban"/>
 			</button>
-			<button v-if="appearNote.myReaction == null" class="reactionButton" @click="react()" ref="reactButton" :title="$t('add-reaction')">
-				<fa icon="plus"/><p class="count" v-if="Object.values(appearNote.reactions).some(x => x)">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
+			<button v-if="appearNote.myReaction == null" ref="reactButton" class="reactionButton" :title="$t('add-reaction')" @click="react()">
+				<fa icon="plus"/><p v-if="Object.values(appearNote.reactions).some(x => x)" class="count">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
 			</button>
-			<button v-if="appearNote.myReaction != null" class="reactionButton reacted" @click="undoReact(appearNote)" ref="reactButton" :title="$t('undo-reaction')">
-				<fa icon="minus"/><p class="count" v-if="Object.values(appearNote.reactions).some(x => x)">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
+			<button v-if="appearNote.myReaction != null" ref="reactButton" class="reactionButton reacted" :title="$t('undo-reaction')" @click="undoReact(appearNote)">
+				<fa icon="minus"/><p v-if="Object.values(appearNote.reactions).some(x => x)" class="count">{{ Object.values(appearNote.reactions).reduce((a, c) => a + c, 0) }}</p>
 			</button>
-			<button @click="menu()" ref="menuButton">
+			<button ref="menuButton" @click="menu()">
 				<fa icon="ellipsis-h"/>
 			</button>
 		</footer>
 	</article>
-	<div class="replies" v-if="!compact">
+	<div v-if="!compact" class="replies">
 		<x-sub v-for="note in replies" :key="note.id" :note="note"/>
 	</div>
 </div>

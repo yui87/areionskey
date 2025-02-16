@@ -1,5 +1,5 @@
 <template>
-<a class="jvwxssxsytqlqvrpiymarjlzlsxskqsr" @click.prevent="onClick" :href="`/i/drive/folder/${ folder.id }`">
+<a class="jvwxssxsytqlqvrpiymarjlzlsxskqsr" :href="`/i/drive/folder/${ folder.id }`" @click.prevent="onClick">
 	<div class="container">
 		<p class="name"><fa icon="folder"/>{{ folder.name }}</p><fa icon="angle-right"/>
 	</div>

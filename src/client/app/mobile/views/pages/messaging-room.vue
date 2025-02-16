@@ -5,7 +5,7 @@
 		<template v-else-if="group"><span style="margin-right:4px;"><fa :icon="['far', 'comments']"/></span>{{ group.name }}</template>
 		<template v-else><mk-ellipsis/></template>
 	</template>
-	<x-messaging-room v-if="!fetching" :user="user" :group="group" :is-naked="true"/>
+	<x-messaging-room v-if="!fetching" :user="user" :group="group" :isNaked="true"/>
 </mk-ui>
 </template>
 
@@ -42,7 +42,7 @@ export default Vue.extend({
 
 		this.fetch();
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		document.documentElement.style.removeProperty('background');
 		document.documentElement.style.removeProperty('background-color'); // for safari's bug
 		this.unwatchDarkmode();

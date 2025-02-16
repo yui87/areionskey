@@ -1,6 +1,6 @@
 <template>
 <div class="mkw-hashtags">
-	<ui-container :show-header="!props.compact">
+	<ui-container :showHeader="!props.compact">
 		<template #header><fa icon="hashtag"/>{{ $t('title') }}</template>
 
 		<div class="mkw-hashtags--body">

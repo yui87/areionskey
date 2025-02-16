@@ -3,16 +3,17 @@
 	<nav>
 		<div class="path" @contextmenu.prevent.stop="() => {}">
 			<x-nav-folder :class="{ current: folder == null }"/>
-			<template v-for="folder in hierarchyFolders">
+			<template v-for="folder in hierarchyFolders" :key="folder.id">
 				<span class="separator"><fa icon="angle-right"/></span>
-				<x-nav-folder :folder="folder" :key="folder.id"/>
+				<x-nav-folder :folder="folder"/>
 			</template>
-			<span class="separator" v-if="folder != null"><fa icon="angle-right"/></span>
-			<span class="folder current" v-if="folder != null">{{ folder.name }}</span>
+			<span v-if="folder != null" class="separator"><fa icon="angle-right"/></span>
+			<span v-if="folder != null" class="folder current">{{ folder.name }}</span>
 		</div>
 	</nav>
-	<div class="main" :class="{ uploading: uploadings.length > 0, fetching }"
-		ref="main"
+	<div
+		ref="main" class="main"
+		:class="{ uploading: uploadings.length > 0, fetching }"
 		@mousedown="onMousedown"
 		@dragover.prevent.stop="onDragover"
 		@dragenter="onDragenter"
@@ -20,34 +21,34 @@
 		@drop.prevent.stop="onDrop"
 		@contextmenu.prevent.stop="onContextmenu"
 	>
-		<div class="selection" ref="selection"></div>
-		<div class="contents" ref="contents">
-			<div class="folders" ref="foldersContainer" v-if="folders.length > 0 || moreFolders">
+		<div ref="selection" class="selection"></div>
+		<div ref="contents" class="contents">
+			<div v-if="folders.length > 0 || moreFolders" ref="foldersContainer" class="folders">
 				<x-folder v-for="folder in folders" :key="folder.id" class="folder" :folder="folder"/>
 				<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-				<div class="padding" v-for="n in 16"></div>
+				<div v-for="n in 16" class="padding"></div>
 				<ui-button v-if="moreFolders">{{ $t('@.load-more') }}</ui-button>
 			</div>
-			<div class="files" ref="filesContainer" v-if="files.length > 0 || moreFiles">
+			<div v-if="files.length > 0 || moreFiles" ref="filesContainer" class="files">
 				<x-file v-for="file in files" :key="file.id" class="file" :file="file"/>
 				<!-- SEE: https://stackoverflow.com/questions/18744164/flex-box-align-last-row-to-grid -->
-				<div class="padding" v-for="n in 16"></div>
+				<div v-for="n in 16" class="padding"></div>
 				<ui-button v-if="moreFiles" @click="fetchMoreFiles">{{ $t('@.load-more') }}</ui-button>
 			</div>
-			<div class="empty" v-if="files.length == 0 && !moreFiles && folders.length == 0 && !moreFolders && !fetching">
+			<div v-if="files.length == 0 && !moreFiles && folders.length == 0 && !moreFolders && !fetching" class="empty">
 				<p v-if="draghover">{{ $t('empty-draghover') }}</p>
 				<p v-if="!draghover && folder == null"><strong>{{ $t('empty-drive') }}</strong><br/>{{ $t('empty-drive-description') }}</p>
 				<p v-if="!draghover && folder != null">{{ $t('empty-folder') }}</p>
 			</div>
 		</div>
-		<div class="fetching" v-if="fetching">
+		<div v-if="fetching" class="fetching">
 			<div class="spinner">
 				<div class="dot1"></div>
 				<div class="dot2"></div>
 			</div>
 		</div>
 	</div>
-	<div class="dropzone" v-if="draghover"></div>
+	<div v-if="draghover" class="dropzone"></div>
 	<mk-uploader ref="uploader" @change="onChangeUploaderUploads" @uploaded="onUploaderUploaded"/>
 	<input ref="fileInput" type="file" accept="*/*" multiple="multiple" tabindex="-1" @change="onChangeFileInput"/>
 </div>
@@ -133,7 +134,7 @@ export default Vue.extend({
 			this.fetch();
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 	methods: {

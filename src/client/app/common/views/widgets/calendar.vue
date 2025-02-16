@@ -1,13 +1,13 @@
 <template>
 <div class="mkw-calendar" :data-special="special" :data-mobile="platform == 'mobile'">
-	<ui-container :naked="props.design == 1" :show-header="false">
+	<ui-container :naked="props.design == 1" :showHeader="false">
 		<div class="mkw-calendar--body">
 			<div class="calendar" :data-is-holiday="isHoliday">
 				<p class="month-and-year">
-					<span class="year">{{ this.$t('year').split('{}')[0] }}{{ year }}{{ this.$t('year').split('{}')[1] }}</span>
-					<span class="month">{{ this.$t('month').split('{}')[0] }}{{ month }}{{ this.$t('month').split('{}')[1] }}</span>
+					<span class="year">{{ $t('year').split('{}')[0] }}{{ year }}{{ $t('year').split('{}')[1] }}</span>
+					<span class="month">{{ $t('month').split('{}')[0] }}{{ month }}{{ $t('month').split('{}')[1] }}</span>
 				</p>
-				<p class="day">{{ this.$t('day').split('{}')[0] }}{{ day }}{{ this.$t('day').split('{}')[1] }}</p>
+				<p class="day">{{ $t('day').split('{}')[0] }}{{ day }}{{ $t('day').split('{}')[1] }}</p>
 				<p class="week-day">{{ weekDay }}</p>
 			</div>
 			<div class="info">

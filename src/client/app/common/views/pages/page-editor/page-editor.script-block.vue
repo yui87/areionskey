@@ -1,6 +1,6 @@
 <template>
-<x-container :removable="removable" @remove="() => $emit('remove')" :error="error" :warn="warn" :draggable="draggable">
-	<template #header><fa v-if="icon" :icon="icon"/> <template v-if="title">{{ title }} <span class="turmquns" v-if="typeText">({{ typeText }})</span></template><template v-else-if="typeText">{{ typeText }}</template></template>
+<x-container :removable="removable" :error="error" :warn="warn" :draggable="draggable" @remove="() => $emit('remove')">
+	<template #header><fa v-if="icon" :icon="icon"/> <template v-if="title">{{ title }} <span v-if="typeText" class="turmquns">({{ typeText }})</span></template><template v-else-if="typeText">{{ typeText }}</template></template>
 	<template #func>
 		<button @click="changeType()">
 			<fa :icon="faPencilAlt"/>
@@ -41,13 +41,13 @@
 			<span>{{ $t('script.blocks._fn.slots') }}</span>
 			<template #desc>{{ $t('script.blocks._fn.slots-info') }}</template>
 		</ui-textarea>
-		<x-v v-if="value.value.expression" v-model="value.value.expression" :title="$t(`script.blocks._fn.arg1`)" :get-expected-type="() => null" :ai-script="aiScript" :fn-slots="value.value.slots" :name="name"/>
+		<x-v v-if="value.value.expression" v-model="value.value.expression" :title="$t(`script.blocks._fn.arg1`)" :getExpectedType="() => null" :aiScript="aiScript" :fnSlots="value.value.slots" :name="name"/>
 	</section>
 	<section v-else-if="value.type.startsWith('fn:')" class="" style="padding:16px;">
-		<x-v v-for="(x, i) in value.args" v-model="value.args[i]" :title="aiScript.getVarByName(value.type.split(':')[1]).value.slots[i].name" :get-expected-type="() => null" :ai-script="aiScript" :name="name" :key="i"/>
+		<x-v v-for="(x, i) in value.args" :key="i" v-model="value.args[i]" :title="aiScript.getVarByName(value.type.split(':')[1]).value.slots[i].name" :getExpectedType="() => null" :aiScript="aiScript" :name="name"/>
 	</section>
 	<section v-else class="" style="padding:16px;">
-		<x-v v-for="(x, i) in value.args" v-model="value.args[i]" :title="$t(`script.blocks._${value.type}.arg${i + 1}`)" :get-expected-type="() => _getExpectedType(i)" :ai-script="aiScript" :name="name" :fn-slots="fnSlots" :key="i"/>
+		<x-v v-for="(x, i) in value.args" :key="i" v-model="value.args[i]" :title="$t(`script.blocks._${value.type}.arg${i + 1}`)" :getExpectedType="() => _getExpectedType(i)" :aiScript="aiScript" :name="name" :fnSlots="fnSlots"/>
 	</section>
 </x-container>
 </template>

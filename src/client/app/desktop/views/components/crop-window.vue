@@ -1,23 +1,24 @@
 <template>
-	<mk-window ref="window" is-modal width="800px" :can-close="false">
-		<template #header>{{ title }}</template>
+<mk-window ref="window" isModal width="800px" :canClose="false">
+	<template #header>{{ title }}</template>
 
-		<div class="hjirwjri">
-			<div class="body">
-				<vue-cropper ref="cropper"
-					:src="imageUrl"
-					:view-mode="1"
-					:aspect-ratio="aspectRatio"
-					:container-style="{ width: '100%', 'max-height': '400px' }"
-				/>
-			</div>
-			<div class="footer">
-				<ui-button inline @click="skip" style="margin-right:16px;">{{ $t('skip') }}</ui-button>
-				<ui-button inline @click="cancel" style="margin-right:16px;">{{ $t('cancel') }}</ui-button>
-				<ui-button inline @click="ok" primary>{{ $t('ok') }}</ui-button>
-			</div>
+	<div class="hjirwjri">
+		<div class="body">
+			<vue-cropper
+				ref="cropper"
+				:src="imageUrl"
+				:viewMode="1"
+				:aspectRatio="aspectRatio"
+				:containerStyle="{ width: '100%', 'max-height': '400px' }"
+			/>
 		</div>
-	</mk-window>
+		<div class="footer">
+			<ui-button inline style="margin-right:16px;" @click="skip">{{ $t('skip') }}</ui-button>
+			<ui-button inline style="margin-right:16px;" @click="cancel">{{ $t('cancel') }}</ui-button>
+			<ui-button inline primary @click="ok">{{ $t('ok') }}</ui-button>
+		</div>
+	</div>
+</mk-window>
 </template>
 
 <script lang="ts">

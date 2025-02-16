@@ -1,12 +1,12 @@
 <template>
 <transition name="zoom-in-top">
-	<div class="buebdbiu" ref="popover" v-if="show">
+	<div v-if="show" ref="popover" class="buebdbiu">
 		<div class="reaction">
-			<mk-reaction-icon class="icon" :reaction="reaction" :custom-emojis="customEmojis" :noStyle="true" ref="icon"/>
+			<mk-reaction-icon ref="icon" class="icon" :reaction="reaction" :customEmojis="customEmojis" :noStyle="true"/>
 			<div class="name">{{ getReactionName(reaction) }}</div>
 		</div>
 		<div class="users">
-			<div class="user" v-for="u in users" :key="u.id">
+			<div v-for="u in users" :key="u.id" class="user">
 				<mk-avatar class="avatar" :user="u" style="width: 24px; height: 24px; margin-right: 4px;"/>
 				<mk-user-name class="name" :user="u" :nowrap="true"/>
 			</div>

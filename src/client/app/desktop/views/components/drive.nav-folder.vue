@@ -1,5 +1,6 @@
 <template>
-<div class="root nav-folder"
+<div
+	class="root nav-folder"
 	:data-draghover="draghover"
 	@click="onClick"
 	@dragover.prevent.stop="onDragover"

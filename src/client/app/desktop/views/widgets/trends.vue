@@ -1,6 +1,6 @@
 <template>
 <div class="mkw-trends">
-	<ui-container :show-header="!props.compact">
+	<ui-container :showHeader="!props.compact">
 		<template #header><fa icon="fire"/>{{ $t('title') }}</template>
 
 		<div class="mkw-trends--body">

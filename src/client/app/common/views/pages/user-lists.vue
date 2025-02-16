@@ -4,11 +4,11 @@
 	<ui-margin>
 		<ui-button @click="add"><fa :icon="faPlus"/> {{ $t('create-list') }}</ui-button>
 	</ui-margin>
-	<div class="cpqqyrst" v-for="list in lists" :key="list.id">
+	<div v-for="list in lists" :key="list.id" class="cpqqyrst">
 		<ui-hr/>
 		<ui-margin>
 			<router-link :to="`/i/lists/${list.id}`">{{ list.name }}</router-link>
-			<x-avatars :user-ids="list.userIds" style="margin-top:8px;"/>
+			<x-avatars :userIds="list.userIds" style="margin-top:8px;"/>
 		</ui-margin>
 	</div>
 </ui-container>

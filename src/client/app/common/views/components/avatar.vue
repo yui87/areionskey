@@ -1,10 +1,10 @@
 <template>
-	<span class="mk-avatar" :style="style" :class="{ cat }" :title="user | acct" v-if="disableLink" v-user-preview="disablePreview ? undefined : user.id" @click="onClick" v-once>
-		<img class="inner" :style="style" :src="url"/>
-	</span>
-	<router-link class="mk-avatar" :style="style" :class="{ cat }" :to="user | userPage" :title="user | acct" :target="target" v-else v-user-preview="disablePreview ? undefined : user.id">
-		<img class="inner" :style="style" :src="url"/>
-	</router-link>
+<span v-if="disableLink" v-once v-user-preview="disablePreview ? undefined : user.id" class="mk-avatar" :style="style" :class="{ cat }" :title="user | acct" @click="onClick">
+	<img class="inner" :style="style" :src="url"/>
+</span>
+<router-link v-else v-user-preview="disablePreview ? undefined : user.id" class="mk-avatar" :style="style" :class="{ cat }" :to="user | userPage" :title="user | acct" :target="target">
+	<img class="inner" :style="style" :src="url"/>
+</router-link>
 </template>
 
 <script lang="ts">
@@ -52,7 +52,7 @@ export default Vue.extend({
 		'user.avatarBlurhash'() {
 			const avgColor = this.getBlurhashAvgColor(this.user.avatarBlurhash);
 			if (avgColor === undefined){
-				this.$el.style.color = "var(--noteText)";
+				this.$el.style.color = 'var(--noteText)';
 			}	else {
 				this.$el.style.color = avgColor;
 			}
@@ -61,7 +61,7 @@ export default Vue.extend({
 	mounted() {
 		const avgColor = this.getBlurhashAvgColor(this.user.avatarBlurhash);
 		if (avgColor === undefined){
-			this.$el.style.color = "var(--noteText)";
+			this.$el.style.color = 'var(--noteText)';
 		}	else {
 			this.$el.style.color = avgColor;
 		}

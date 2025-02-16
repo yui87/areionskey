@@ -1,10 +1,10 @@
 <template>
 <div>
 	<vue-content-loading v-if="width" :width="width" :height="100" :primary="primary" :secondary="secondary">
-		<circle cx="30" cy="30" r="30" />
-		<rect x="75" y="13" rx="4" ry="4" :width="150 + r1" height="15" />
-		<rect x="75" y="39" rx="4" ry="4" :width="260 + r2" height="10" />
-		<rect x="75" y="59" rx="4" ry="4" :width="230 + r3" height="10" />
+		<circle cx="30" cy="30" r="30"/>
+		<rect x="75" y="13" rx="4" ry="4" :width="150 + r1" height="15"/>
+		<rect x="75" y="39" rx="4" ry="4" :width="260 + r2" height="10"/>
+		<rect x="75" y="59" rx="4" ry="4" :width="230 + r3" height="10"/>
 	</vue-content-loading>
 </div>
 </template>

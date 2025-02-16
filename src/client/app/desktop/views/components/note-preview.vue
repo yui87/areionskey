@@ -1,14 +1,14 @@
 <template>
 <div class="qiziqtywpuaucsgarwajitwaakggnisj" :title="title">
-	<mk-avatar class="avatar" :user="note.user" v-if="!narrow"/>
+	<mk-avatar v-if="!narrow" class="avatar" :user="note.user"/>
 	<div class="main">
 		<mk-note-header class="header" :note="note" :mini="true"/>
 		<div class="body">
 			<p v-if="note.cw != null" class="cw">
-				<mfm v-if="note.cw != ''" class="text" :text="note.cw" :author="note.user" :i="$store.state.i" :custom-emojis="note.emojis" />
+				<mfm v-if="note.cw != ''" class="text" :text="note.cw" :author="note.user" :i="$store.state.i" :customEmojis="note.emojis"/>
 				<mk-cw-button v-model="showContent" :note="note"/>
 			</p>
-			<div class="content" v-show="note.cw == null || showContent">
+			<div v-show="note.cw == null || showContent" class="content">
 				<mk-sub-note-content class="text" :note="note"/>
 			</div>
 		</div>
@@ -20,17 +20,17 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-	props: {
-		note: {
-			type: Object,
-			required: true
-		},
-	},
 
 	inject: {
 		narrow: {
 			default: false
 		}
+	},
+	props: {
+		note: {
+			type: Object,
+			required: true
+		},
 	},
 
 	data() {

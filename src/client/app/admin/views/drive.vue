@@ -39,7 +39,7 @@
 				</ui-select>
 			</ui-horizon-group>
 			<sequential-entrance animation="entranceFromTop" delay="25">
-				<div class="kidvdlkg" v-for="file in files">
+				<div v-for="file in files" class="kidvdlkg">
 					<div @click="file._open = !file._open">
 						<div>
 							<x-file-thumbnail class="thumbnail" :file="file" fit="contain" @click="showFileMenu(file)"/>
@@ -61,8 +61,8 @@
 					<div v-show="file._open">
 						<ui-input readonly :value="file.url"></ui-input>
 						<ui-horizon-group>
-							<ui-button @click="toggleSensitive(file)" v-if="file.isSensitive"><fa :icon="faEye"/> {{ $t('unmark-as-sensitive') }}</ui-button>
-							<ui-button @click="toggleSensitive(file)" v-else><fa :icon="faEyeSlash"/> {{ $t('mark-as-sensitive') }}</ui-button>
+							<ui-button v-if="file.isSensitive" @click="toggleSensitive(file)"><fa :icon="faEye"/> {{ $t('unmark-as-sensitive') }}</ui-button>
+							<ui-button v-else @click="toggleSensitive(file)"><fa :icon="faEyeSlash"/> {{ $t('mark-as-sensitive') }}</ui-button>
 							<ui-button @click="del(file)"><fa :icon="faTrashAlt"/> {{ $t('delete') }}</ui-button>
 						</ui-horizon-group>
 					</div>

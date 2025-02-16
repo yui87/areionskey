@@ -14,7 +14,7 @@
 			<h2 class="heading">{{ $t('security-key-header') }}</h2>
 			<p>{{ $t('security-key') }}</p>
 			<div class="key-list">
-				<div class="key" v-for="key in $store.state.i.securityKeysList">
+				<div v-for="key in $store.state.i.securityKeysList" class="key">
 					<h3>
 						{{ key.name }}
 					</h3>
@@ -28,27 +28,27 @@
 				</div>
 			</div>
 
-			<ui-switch v-model="usePasswordLessLogin" @change="updatePasswordLessLogin" v-if="$store.state.i.securityKeysList.length > 0">
+			<ui-switch v-if="$store.state.i.securityKeysList.length > 0" v-model="usePasswordLessLogin" @change="updatePasswordLessLogin">
 				{{ $t('use-password-less-login') }}
 			</ui-switch>
 
-			<ui-info warn v-if="registration && registration.error">{{ $t('something-went-wrong') }} {{ registration.error }}</ui-info>
+			<ui-info v-if="registration && registration.error" warn>{{ $t('something-went-wrong') }} {{ registration.error }}</ui-info>
 			<ui-button v-if="!registration || registration.error" @click="addSecurityKey">{{ $t('register') }}</ui-button>
 
 			<ol v-if="registration && !registration.error">
 				<li v-if="registration.stage >= 0">
 					{{ $t('activate-key') }}
-					<fa icon="spinner" pulse fixed-width v-if="registration.saving && registration.stage == 0" />
+					<fa v-if="registration.saving && registration.stage == 0" icon="spinner" pulse fixedWidth/>
 				</li>
 				<li v-if="registration.stage >= 1">
 					<ui-form :disabled="registration.stage != 1 || registration.saving">
 						<ui-input v-model="keyName" :max="30">
 							<span>{{ $t('security-key-name') }}</span>
 						</ui-input>
-						<ui-button @click="registerKey" :disabled="this.keyName.length == 0">
+						<ui-button :disabled="keyName.length == 0" @click="registerKey">
 							{{ $t('register-security-key') }}
 						</ui-button>
-						<fa icon="spinner" pulse fixed-width v-if="registration.saving && registration.stage == 1" />
+						<fa v-if="registration.saving && registration.stage == 1" icon="spinner" pulse fixedWidth/>
 					</ui-form>
 				</li>
 			</ol>
@@ -58,7 +58,8 @@
 		<ol>
 			<li>{{ $t('authenticator') }}<a href="https://support.google.com/accounts/answer/1066447" rel="noopener" target="_blank">{{ $t('howtoinstall') }}</a></li>
 			<li>{{ $t('scan') }}<br><img :src="data.qr"></li>
-			<li>{{ $t('done') }}<br>
+			<li>
+				{{ $t('done') }}<br>
 				<ui-input v-model="token">{{ $t('token') }}</ui-input>
 				<ui-button primary @click="submit">{{ $t('submit') }}</ui-button>
 			</li>

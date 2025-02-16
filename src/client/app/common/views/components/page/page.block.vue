@@ -1,5 +1,5 @@
 <template>
-<component :is="'x-' + value.type" :value="value" :page="page" :script="script" :key="value.id" :h="h"/>
+<component :is="'x-' + value.type" :key="value.id" :value="value" :page="page" :script="script" :h="h"/>
 </template>
 
 <script lang="ts">

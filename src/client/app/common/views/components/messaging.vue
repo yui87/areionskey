@@ -1,33 +1,35 @@
 <template>
 <div class="mk-messaging" :data-compact="compact">
-	<div class="search" v-if="!compact" :style="{ top: headerTop + 'px' }">
+	<div v-if="!compact" class="search" :style="{ top: headerTop + 'px' }">
 		<div class="form">
 			<label for="search-input"><i><fa icon="search"/></i></label>
-			<input v-model="q" type="search" @input="search" @keydown="onSearchKeydown" :placeholder="$t('search-user')"/>
+			<input v-model="q" type="search" :placeholder="$t('search-user')" @input="search" @keydown="onSearchKeydown"/>
 		</div>
 		<div class="result">
-			<ol class="users" v-if="result.length > 0" ref="searchResult">
-				<li v-for="(user, i) in result"
+			<ol v-if="result.length > 0" ref="searchResult" class="users">
+				<li
+					v-for="(user, i) in result"
+					tabindex="-1"
 					@keydown.enter="navigate(user)"
 					@keydown="onSearchResultKeydown(i)"
 					@click="navigate(user)"
-					tabindex="-1"
 				>
-					<mk-avatar class="avatar" :user="user" :key="user.id"/>
-					<span class="name"><mk-user-name :user="user" :key="user.id"/></span>
+					<mk-avatar :key="user.id" class="avatar" :user="user"/>
+					<span class="name"><mk-user-name :key="user.id" :user="user"/></span>
 					<span class="username">@{{ user | acct }}</span>
 				</li>
 			</ol>
 		</div>
 	</div>
-	<div class="history" v-if="messages.length > 0">
-		<a v-for="message in messages"
+	<div v-if="messages.length > 0" class="history">
+		<a
+			v-for="message in messages"
+			:key="message.id"
 			class="user"
 			:href="message.groupId ? `/i/messaging/group/${message.groupId}` : `/i/messaging/${getAcct(isMe(message) ? message.recipient : message.user)}`"
 			:data-is-me="isMe(message)"
 			:data-is-read="message.groupId ? message.reads.includes($store.state.i.id) : message.isRead"
 			@click.prevent="message.groupId ? navigateGroup(message.group) : navigate(isMe(message) ? message.recipient : message.user)"
-			:key="message.id"
 		>
 			<div>
 				<mk-avatar class="avatar" :user="message.groupId ? message.user : isMe(message) ? message.recipient : message.user"/>
@@ -41,13 +43,13 @@
 					<mk-time :time="message.createdAt"/>
 				</header>
 				<div class="body">
-					<p class="text"><span class="me" v-if="isMe(message)">{{ $t('you') }}:</span>{{ message.text }}</p>
+					<p class="text"><span v-if="isMe(message)" class="me">{{ $t('you') }}:</span>{{ message.text }}</p>
 				</div>
 			</div>
 		</a>
 	</div>
-	<p class="no-history" v-if="!fetching && messages.length == 0">{{ $t('no-history') }}</p>
-	<p class="fetching" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>
+	<p v-if="!fetching && messages.length == 0" class="no-history">{{ $t('no-history') }}</p>
+	<p v-if="fetching" class="fetching"><fa icon="spinner" pulse fixedWidth/>{{ $t('@.loading') }}<mk-ellipsis/></p>
 	<ui-margin>
 		<ui-button @click="startUser()"><fa :icon="faUser"/> {{ $t('start-with-user') }}</ui-button>
 		<ui-button @click="startGroup()"><fa :icon="faUsers"/> {{ $t('start-with-group') }}</ui-button>
@@ -99,7 +101,7 @@ export default Vue.extend({
 			});
 		});
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 	methods: {

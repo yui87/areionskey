@@ -4,7 +4,7 @@
 
 	<section class="esokaraujimuwfttfzgocmutcihewscl">
 		<div class="header" :style="bannerStyle">
-			<mk-avatar class="avatar" :user="$store.state.i" :disable-preview="true" :disable-link="true"/>
+			<mk-avatar class="avatar" :user="$store.state.i" :disablePreview="true" :disableLink="true"/>
 		</div>
 
 		<ui-form :disabled="saving">
@@ -38,19 +38,19 @@
 			<ui-select v-model="lang">
 				<template #label>{{ $t('language') }}</template>
 				<template #icon><fa icon="language"/></template>
-				<option v-for="lang in unique(Object.values(langmap).map(x => x.nativeName)).map(name => Object.keys(langmap).find(k => langmap[k].nativeName == name))" :value="lang" :key="lang">{{ langmap[lang].nativeName }}</option>
+				<option v-for="lang in unique(Object.values(langmap).map(x => x.nativeName)).map(name => Object.keys(langmap).find(k => langmap[k].nativeName == name))" :key="lang" :value="lang">{{ langmap[lang].nativeName }}</option>
 			</ui-select>
 
 			<ui-input type="file" @change="onAvatarChange">
 				<span>{{ $t('avatar') }}</span>
 				<template #icon><fa icon="image"/></template>
-				<template #desc v-if="avatarUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
+				<template v-if="avatarUploading" #desc>{{ $t('uploading') }}<mk-ellipsis/></template>
 			</ui-input>
 
 			<ui-input type="file" @change="onBannerChange">
 				<span>{{ $t('banner') }}</span>
 				<template #icon><fa icon="image"/></template>
-				<template #desc v-if="bannerUploading">{{ $t('uploading') }}<mk-ellipsis/></template>
+				<template v-if="bannerUploading" #desc>{{ $t('uploading') }}<mk-ellipsis/></template>
 			</ui-input>
 
 			<div class="fields">
@@ -81,10 +81,12 @@
 		<header><fa :icon="faCogs"/> {{ $t('advanced') }}</header>
 
 		<div>
-			<ui-switch v-model="isCat" @change="save(false)">{{ $t('is-cat') }}
+			<ui-switch v-model="isCat" @change="save(false)">
+				{{ $t('is-cat') }}
 				<template #desc>{{ $t('is-cat-desc') }}</template>
 			</ui-switch>
-			<ui-switch v-model="isBot" @change="save(false)">{{ $t('is-bot') }}
+			<ui-switch v-model="isBot" @change="save(false)">
+				{{ $t('is-bot') }}
 				<template #desc>{{ $t('is-bot-desc') }}</template>
 			</ui-switch>
 			<ui-switch v-model="alwaysMarkNsfw">{{ $t('@._settings.always-mark-nsfw') }}</ui-switch>
@@ -114,7 +116,7 @@
 				<ui-info v-else warn>{{ $t('email-not-verified') }}</ui-info>
 			</template>
 			<ui-input v-model="email" type="email"><span>{{ $t('email-address') }}</span></ui-input>
-			<ui-button @click="updateEmail()" :disabled="email === $store.state.i.email"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
+			<ui-button :disabled="email === $store.state.i.email" @click="updateEmail()"><fa :icon="faSave"/> {{ $t('save') }}</ui-button>
 		</div>
 	</section>
 
@@ -131,7 +133,7 @@
 			</ui-select>
 			<ui-horizon-group class="fit-bottom">
 				<ui-button @click="doExport()"><fa :icon="faDownload"/> {{ $t('export') }}</ui-button>
-				<ui-button @click="doImport()" :disabled="!['following', 'blocking', 'user-lists'].includes(exportTarget)"><fa :icon="faUpload"/> {{ $t('import') }}</ui-button>
+				<ui-button :disabled="!['following', 'blocking', 'user-lists'].includes(exportTarget)" @click="doImport()"><fa :icon="faUpload"/> {{ $t('import') }}</ui-button>
 			</ui-horizon-group>
 		</div>
 	</section>

@@ -1,6 +1,7 @@
 <template>
-<component class="dmtdnykelhudezerjlfpbhgovrgnqqgr"
+<component
 	:is="link ? 'a' : 'button'"
+	class="dmtdnykelhudezerjlfpbhgovrgnqqgr"
 	:class="{ inline, primary, wait, round: $store.state.device.roundedCorners }"
 	:type="type"
 	@click="$emit('click')"

@@ -7,10 +7,10 @@
 			</router-link>
 		</div>
 		<div class="post">
-			<button @click="post" :title="$t('title')"><fa icon="pencil-alt"/></button>
+			<button :title="$t('title')" @click="post"><fa icon="pencil-alt"/></button>
 		</div>
 
-		<div class="nav" v-if="$store.getters.isSignedIn">
+		<div v-if="$store.getters.isSignedIn" class="nav">
 			<div class="home" :class="{ active: $route.name == 'index' }" @click="goToTop">
 				<router-link to="/"><fa icon="home"/></router-link>
 			</div>
@@ -22,7 +22,7 @@
 			</div>
 		</div>
 
-		<div class="nav bottom" v-if="$store.getters.isSignedIn">
+		<div v-if="$store.getters.isSignedIn" class="nav bottom">
 			<div :title="$t('@.search')">
 				<a @click="search"><fa icon="search"/></a>
 			</div>
@@ -48,7 +48,7 @@
 	</div>
 
 	<transition :name="`slide-${navbar}`">
-		<div class="notifications" v-if="showNotifications" ref="notifications" :class="navbar" :data-shadow="$store.state.device.useShadow">
+		<div v-if="showNotifications" ref="notifications" class="notifications" :class="navbar" :data-shadow="$store.state.device.useShadow">
 			<mk-notifications/>
 		</div>
 	</transition>
@@ -95,7 +95,7 @@ export default Vue.extend({
 		}
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.$store.getters.isSignedIn) {
 			this.connection.dispose();
 		}

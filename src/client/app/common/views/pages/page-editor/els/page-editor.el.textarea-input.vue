@@ -1,5 +1,5 @@
 <template>
-<x-container @remove="() => $emit('remove')" :draggable="true">
+<x-container :draggable="true" @remove="() => $emit('remove')">
 	<template #header><fa :icon="faBolt"/> {{ $t('blocks.textareaInput') }}</template>
 
 	<section style="padding: 0 16px 16px 16px;">

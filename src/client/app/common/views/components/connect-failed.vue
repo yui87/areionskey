@@ -2,9 +2,9 @@
 <div class="mk-connect-failed">
 	<h1>{{ $t('title') }}</h1>
 	<p class="text">
-		<span>{{ this.$t('description').substring(0, this.$t('description').indexOf('{')) }}</span>
-		<a @click="reload">{{ this.$t('description').match(/\{(.+?)\}/)[1] }}</a>
-		<span>{{ this.$t('description').substring(this.$t('description').indexOf('}') + 1) }}</span>
+		<span>{{ $t('description').substring(0, $t('description').indexOf('{')) }}</span>
+		<a @click="reload">{{ $t('description').match(/\{(.+?)\}/)[1] }}</a>
+		<span>{{ $t('description').substring($t('description').indexOf('}') + 1) }}</span>
 	</p>
 	<p class="thanks">{{ $t('thanks') }}</p>
 </div>

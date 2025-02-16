@@ -1,66 +1,66 @@
 <template>
 <div
+	v-show="($store.state.settings.remainDeletedNote || appearNote.deletedAt == null) && !hideThisNote"
+	v-hotkey="keymap"
 	class="note"
 	:class="{ mini: narrow }"
-	v-show="(this.$store.state.settings.remainDeletedNote || appearNote.deletedAt == null) && !hideThisNote"
 	:tabindex="appearNote.deletedAt == null ? '-1' : null"
-	v-hotkey="keymap"
 	:title="title"
 >
 	<x-sub v-for="note in conversation" :key="note.id" :note="note"/>
-	<div class="reply-to" v-if="appearNote.reply && (!$store.getters.isSignedIn || $store.state.settings.showReplyTarget)">
+	<div v-if="appearNote.reply && (!$store.getters.isSignedIn || $store.state.settings.showReplyTarget)" class="reply-to">
 		<x-sub :note="appearNote.reply"/>
 	</div>
-	<mk-renote class="renote" v-if="isRenote" :note="note"/>
+	<mk-renote v-if="isRenote" class="renote" :note="note"/>
 	<article class="article">
 		<mk-avatar class="avatar" :user="appearNote.user"/>
 		<div class="main">
 			<mk-note-header class="header" :note="appearNote" :mini="narrow"/>
-			<div class="body" v-if="appearNote.deletedAt == null">
+			<div v-if="appearNote.deletedAt == null" class="body">
 				<p v-if="appearNote.cw != null" class="cw">
-					<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis" :no-sticker="true"/>
+					<mfm v-if="appearNote.cw != ''" class="text" :text="appearNote.cw" :author="appearNote.user" :i="$store.state.i" :customEmojis="appearNote.emojis" :noSticker="true"/>
 					<mk-cw-button v-model="showContent" :note="appearNote"/>
 				</p>
-				<div class="content" v-show="appearNote.cw == null || showContent">
+				<div v-show="appearNote.cw == null || showContent" class="content">
 					<div class="text">
 						<span v-if="appearNote.isHidden" style="opacity: 0.5">{{ $t('private') }}</span>
-						<a class="reply" v-if="appearNote.reply"><fa icon="reply"/></a>
-						<mfm v-if="appearNote.text" :text="appearNote.text" :author="appearNote.user" :i="$store.state.i" :custom-emojis="appearNote.emojis"/>
+						<a v-if="appearNote.reply" class="reply"><fa icon="reply"/></a>
+						<mfm v-if="appearNote.text" :text="appearNote.text" :author="appearNote.user" :i="$store.state.i" :customEmojis="appearNote.emojis"/>
 					</div>
-					<div class="files" v-if="appearNote.files.length > 0">
-						<mk-media-list :media-list="appearNote.files"/>
+					<div v-if="appearNote.files.length > 0" class="files">
+						<mk-media-list :mediaList="appearNote.files"/>
 					</div>
-					<mk-poll v-if="appearNote.poll" :note="appearNote" ref="pollViewer"/>
-					<div class="renote" v-if="appearNote.renote"><mk-note-preview :note="appearNote.renote"/></div>
-					<mk-url-preview v-for="url in urls" :url="url" :key="url" :compact="compact"/>
+					<mk-poll v-if="appearNote.poll" ref="pollViewer" :note="appearNote"/>
+					<div v-if="appearNote.renote" class="renote"><mk-note-preview :note="appearNote.renote"/></div>
+					<mk-url-preview v-for="url in urls" :key="url" :url="url" :compact="compact"/>
 				</div>
 			</div>
 			<footer v-if="appearNote.deletedAt == null && !preview" class="footer">
-				<span class="app" v-if="appearNote.app && narrow && $store.state.settings.showVia">via <b>{{ appearNote.app.name }}</b></span>
-				<mk-reactions-viewer :note="appearNote" ref="reactionsViewer"/>
-				<button class="replyButton button" @click="reply()" :title="$t('reply')">
+				<span v-if="appearNote.app && narrow && $store.state.settings.showVia" class="app">via <b>{{ appearNote.app.name }}</b></span>
+				<mk-reactions-viewer ref="reactionsViewer" :note="appearNote"/>
+				<button class="replyButton button" :title="$t('reply')" @click="reply()">
 					<template v-if="appearNote.reply"><fa icon="reply-all"/></template>
 					<template v-else><fa icon="reply"/></template>
-					<p class="count" v-if="appearNote.repliesCount > 0">{{ appearNote.repliesCount }}</p>
+					<p v-if="appearNote.repliesCount > 0" class="count">{{ appearNote.repliesCount }}</p>
 				</button>
-				<button v-if="['public', 'home'].includes(appearNote.visibility)" class="renoteButton button" @click="renote()" :title="$t('renote')">
+				<button v-if="['public', 'home'].includes(appearNote.visibility)" class="renoteButton button" :title="$t('renote')" @click="renote()">
 					<fa icon="retweet"/>
-					<p class="count" v-if="appearNote.renoteCount > 0">{{ appearNote.renoteCount }}</p>
+					<p v-if="appearNote.renoteCount > 0" class="count">{{ appearNote.renoteCount }}</p>
 				</button>
 				<button v-else class="inhibitedButton button">
 					<fa icon="ban"/>
 				</button>
-				<button v-if="appearNote.myReaction == null" class="reactionButton button" @click="react()" ref="reactButton" :title="$t('add-reaction')">
+				<button v-if="appearNote.myReaction == null" ref="reactButton" class="reactionButton button" :title="$t('add-reaction')" @click="react()">
 					<fa icon="plus"/>
 				</button>
-				<button v-if="appearNote.myReaction != null" class="reactionButton reacted button" @click="undoReact(appearNote)" ref="reactButton" :title="$t('undo-reaction')">
+				<button v-if="appearNote.myReaction != null" ref="reactButton" class="reactionButton reacted button" :title="$t('undo-reaction')" @click="undoReact(appearNote)">
 					<fa icon="minus"/>
 				</button>
-				<button @click="menu()" ref="menuButton" class="button">
+				<button ref="menuButton" class="button" @click="menu()">
 					<fa icon="ellipsis-h"/>
 				</button>
 			</footer>
-			<div class="deleted" v-if="appearNote.deletedAt != null">{{ $t('deleted') }}</div>
+			<div v-if="appearNote.deletedAt != null" class="deleted">{{ $t('deleted') }}</div>
 		</div>
 	</article>
 	<x-sub v-for="note in replies" :key="note.id" :note="note"/>
@@ -87,6 +87,12 @@ export default Vue.extend({
 		noteSubscriber('note')
 	],
 
+	inject: {
+		narrow: {
+			default: false
+		}
+	},
+
 	props: {
 		note: {
 			type: Object,
@@ -107,12 +113,6 @@ export default Vue.extend({
 			required: false,
 			default: false
 		},
-	},
-
-	inject: {
-		narrow: {
-			default: false
-		}
 	},
 
 	data() {

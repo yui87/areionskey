@@ -7,8 +7,8 @@
 				<template #prefix>@</template>
 			</ui-input>
 			<ui-horizon-group>
-				<ui-button @click="add" :disabled="changing || !$store.getters.isAdmin">{{ $t('add-moderator.add') }}</ui-button>
-				<ui-button @click="remove" :disabled="changing || !$store.getters.isAdmin">{{ $t('add-moderator.remove') }}</ui-button>
+				<ui-button :disabled="changing || !$store.getters.isAdmin" @click="add">{{ $t('add-moderator.add') }}</ui-button>
+				<ui-button :disabled="changing || !$store.getters.isAdmin" @click="remove">{{ $t('add-moderator.remove') }}</ui-button>
 			</ui-horizon-group>
 		</section>
 	</ui-card>
@@ -43,7 +43,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import i18n from '../../i18n';
-import parseAcct from "../../../../misc/acct/parse";
+import parseAcct from '../../../../misc/acct/parse';
 
 export default Vue.extend({
 	i18n: i18n('admin/views/moderators.vue'),

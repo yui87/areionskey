@@ -1,7 +1,7 @@
 <template>
 <div class="modal">
-	<div class="bg" ref="bg" @click="onBgClick" />
-	<slot class="main" />
+	<div ref="bg" class="bg" @click="onBgClick"/>
+	<slot class="main"/>
 </div>
 </template>
 

@@ -1,14 +1,14 @@
 <template>
 <span
+	v-if="count > 0"
+	ref="reaction"
 	class="reaction"
 	:class="{ reacted: note.myReaction == reaction }"
 	@click="toggleReaction(reaction)"
-	v-if="count > 0"
 	@mouseover="onMouseover"
 	@mouseleave="onMouseleave"
-	ref="reaction"
 >
-	<mk-reaction-icon class="icon" :reaction="reaction" :customEmojis="note.emojis" ref="icon"/>
+	<mk-reaction-icon ref="icon" class="icon" :reaction="reaction" :customEmojis="note.emojis"/>
 	<span>{{ count }}</span>
 </span>
 </template>
@@ -50,14 +50,14 @@ export default Vue.extend({
 			isHovering: false
 		};
 	},
-	mounted() {
-		if (!this.isInitial) this.anime();
-	},
 	watch: {
 		count(newCount, oldCount) {
 			if (oldCount < newCount) this.anime();
 			if (this.details != null) this.openDetails();
 		},
+	},
+	mounted() {
+		if (!this.isInitial) this.anime();
 	},
 	methods: {
 		toggleReaction() {

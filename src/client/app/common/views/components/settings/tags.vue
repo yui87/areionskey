@@ -1,6 +1,6 @@
 <template>
 <div class="vfcitkilproprqtbnpoertpsziierwzi">
-	<div v-for="timeline in timelines" class="timeline" :key="timeline.id">
+	<div v-for="timeline in timelines" :key="timeline.id" class="timeline">
 		<ui-input v-model="timeline.title" @change="save">
 			<span>{{ $t('title') }}</span>
 		</ui-input>

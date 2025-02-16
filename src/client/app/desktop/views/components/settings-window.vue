@@ -1,7 +1,7 @@
 <template>
-<mk-window ref="window" is-modal width="700px" height="550px" @closed="destroyDom">
+<mk-window ref="window" isModal width="700px" height="550px" @closed="destroyDom">
 	<template #header :class="$style.header"><fa icon="cog"/>{{ $t('@.settings') }}</template>
-	<x-settings :initial-page="initialPage" @done="close"/>
+	<x-settings :initialPage="initialPage" @done="close"/>
 </mk-window>
 </template>
 

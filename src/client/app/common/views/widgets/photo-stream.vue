@@ -1,18 +1,19 @@
 <template>
 <div class="mkw-photo-stream" :class="$style.root" :data-melt="props.design == 2">
-	<ui-container :show-header="props.design == 0" :naked="props.design == 2">
+	<ui-container :showHeader="props.design == 0" :naked="props.design == 2">
 		<template #header><fa icon="camera"/>{{ $t('title') }}</template>
 
-		<p :class="$style.fetching" v-if="fetching"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}<mk-ellipsis/></p>
-		<div :class="$style.stream" v-if="!fetching && images.length > 0">
-			<div v-for="(image, i) in images" :key="i"
+		<p v-if="fetching" :class="$style.fetching"><fa icon="spinner" pulse fixedWidth/>{{ $t('@.loading') }}<mk-ellipsis/></p>
+		<div v-if="!fetching && images.length > 0" :class="$style.stream">
+			<div
+				v-for="(image, i) in images" :key="i"
 				:class="$style.img"
 				:style="`background-image: url(${thumbnail(image)})`"
 				draggable="true"
 				@dragstart="onDragstart(image, $event)"
 			></div>
 		</div>
-		<p :class="$style.empty" v-if="!fetching && images.length == 0">{{ $t('no-photos') }}</p>
+		<p v-if="!fetching && images.length == 0" :class="$style.empty">{{ $t('no-photos') }}</p>
 	</ui-container>
 </div>
 </template>

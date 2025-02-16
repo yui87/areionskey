@@ -45,20 +45,20 @@ export default Vue.extend({
 		};
 	},
 
-	created() {
-		this.$root.getMeta().then(meta => {
-			this.enableTwitterIntegration = meta.enableTwitterIntegration;
-			this.enableDiscordIntegration = meta.enableDiscordIntegration;
-			this.enableGithubIntegration = meta.enableGithubIntegration;
-		});
-	},
-
 	computed: {
 		discordName(): string {
 			return this.$store.state.i.discord.discriminator === '0'
 				? `${this.$store.state.i.discord.username}`
 				: `${this.$store.state.i.discord.username}#${this.$store.state.i.discord.discriminator}`;
 		},
+	},
+
+	created() {
+		this.$root.getMeta().then(meta => {
+			this.enableTwitterIntegration = meta.enableTwitterIntegration;
+			this.enableDiscordIntegration = meta.enableDiscordIntegration;
+			this.enableGithubIntegration = meta.enableGithubIntegration;
+		});
 	},
 
 	mounted() {

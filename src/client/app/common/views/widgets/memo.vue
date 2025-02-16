@@ -1,6 +1,6 @@
 <template>
 <div class="mkw-memo">
-	<ui-container :show-header="!props.compact">
+	<ui-container :showHeader="!props.compact">
 		<template #header><fa :icon="['far', 'sticky-note']"/>{{ $t('title') }}</template>
 
 		<div class="mkw-memo--body">

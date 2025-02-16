@@ -6,7 +6,8 @@
 	:aria-disabled="disabled"
 	@click="toggle"
 >
-	<input type="radio"
+	<input
+		type="radio"
 		:disabled="disabled"
 	>
 	<span class="button">

@@ -1,6 +1,6 @@
 <template>
 <a class="zxrjzpcj" :href="url" :class="service" rel="noopener" target="_blank">
-	<fa :icon="icon" size="lg" fixed-width /><span>{{ text }}</span>
+	<fa :icon="icon" size="lg" fixedWidth/><span>{{ text }}</span>
 </a>
 </template>
 

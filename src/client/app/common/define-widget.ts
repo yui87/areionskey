@@ -23,6 +23,12 @@ export default function <T extends object>(data: {
 			}
 		},
 
+		data() {
+			return {
+				bakedOldProps: null
+			};
+		},
+
 		computed: {
 			id(): string {
 				return this.widget.id;
@@ -31,12 +37,6 @@ export default function <T extends object>(data: {
 			props(): T {
 				return this.widget.data;
 			}
-		},
-
-		data() {
-			return {
-				bakedOldProps: null
-			};
 		},
 
 		created() {

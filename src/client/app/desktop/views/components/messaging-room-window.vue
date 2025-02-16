@@ -1,5 +1,5 @@
 <template>
-<mk-window ref="window" width="500px" height="560px" :popout-url="popout" @closed="destroyDom">
+<mk-window ref="window" width="500px" height="560px" :popoutUrl="popout" @closed="destroyDom">
 	<template #header><fa icon="comments"/> {{ $t('@.messaging') }}: <mk-user-name v-if="user" :user="user"/><span v-else>{{ group.name }}</span></template>
 	<x-messaging-room :user="user" :group="group" :class="$style.content"/>
 </mk-window>

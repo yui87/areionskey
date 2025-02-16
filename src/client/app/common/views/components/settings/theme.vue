@@ -4,7 +4,7 @@
 	<section class="nicnklzforebnpfgasiypmpdaaglujqm fit-top">
 		<div class="dark">
 			<div class="toggleWrapper">
-				<input type="checkbox" class="dn" id="dn" v-model="darkmode"/>
+				<input id="dn" v-model="darkmode" type="checkbox" class="dn"/>
 				<label for="dn" class="toggle">
 					<span class="toggle__handler">
 						<span class="crater crater--1"></span>
@@ -25,10 +25,10 @@
 			<ui-select v-model="light" :placeholder="$t('light-theme')">
 				<template #label><fa :icon="faSun"/> {{ $t('light-theme') }}</template>
 				<optgroup :label="$t('light-themes')">
-					<option v-for="x in lightThemes" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in lightThemes" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 				<optgroup :label="$t('dark-themes')">
-					<option v-for="x in darkThemes" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in darkThemes" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 			</ui-select>
 		</label>
@@ -37,10 +37,10 @@
 			<ui-select v-model="dark" :placeholder="$t('dark-theme')">
 				<template #label><fa :icon="faMoon"/> {{ $t('dark-theme') }}</template>
 				<optgroup :label="$t('dark-themes')">
-					<option v-for="x in darkThemes" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in darkThemes" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 				<optgroup :label="$t('light-themes')">
-					<option v-for="x in lightThemes" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in lightThemes" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 			</ui-select>
 		</label>
@@ -84,20 +84,20 @@
 			<ui-textarea v-model="installThemeCode">
 				<span>{{ $t('theme-code') }}</span>
 			</ui-textarea>
-			<ui-button @click="() => install(this.installThemeCode)"><fa icon="check"/> {{ $t('install') }}</ui-button>
+			<ui-button @click="() => install(installThemeCode)"><fa icon="check"/> {{ $t('install') }}</ui-button>
 		</details>
 
 		<details>
 			<summary><fa icon="folder-open"/> {{ $t('manage-themes') }}</summary>
 			<ui-select v-model="selectedThemeId" :placeholder="$t('select-theme')">
 				<optgroup :label="$t('builtin-themes')">
-					<option v-for="x in builtinThemes" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in builtinThemes" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 				<optgroup :label="$t('my-themes')">
-					<option v-for="x in installedThemes.filter(t => t.author == this.$store.state.i.username)" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in installedThemes.filter(t => t.author == $store.state.i.username)" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 				<optgroup :label="$t('installed-themes')">
-					<option v-for="x in installedThemes.filter(t => t.author != this.$store.state.i.username)" :value="x.id" :key="x.id">{{ x.name }}</option>
+					<option v-for="x in installedThemes.filter(t => t.author != $store.state.i.username)" :key="x.id" :value="x.id">{{ x.name }}</option>
 				</optgroup>
 			</ui-select>
 			<template v-if="selectedTheme">
@@ -110,8 +110,8 @@
 				<ui-textarea readonly tall :value="selectedThemeCode">
 					<span>{{ $t('theme-code') }}</span>
 				</ui-textarea>
-				<ui-button @click="export_()" link :download="`${selectedTheme.name}.misskeytheme`" ref="export"><fa icon="box"/> {{ $t('export') }}</ui-button>
-				<ui-button @click="uninstall()" v-if="!builtinThemes.some(t => t.id == selectedTheme.id)"><fa :icon="['far', 'trash-alt']"/> {{ $t('uninstall') }}</ui-button>
+				<ui-button ref="export" link :download="`${selectedTheme.name}.misskeytheme`" @click="export_()"><fa icon="box"/> {{ $t('export') }}</ui-button>
+				<ui-button v-if="!builtinThemes.some(t => t.id == selectedTheme.id)" @click="uninstall()"><fa :icon="['far', 'trash-alt']"/> {{ $t('uninstall') }}</ui-button>
 			</template>
 		</details>
 	</section>

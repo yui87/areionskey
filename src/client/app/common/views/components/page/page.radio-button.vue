@@ -1,7 +1,7 @@
 <template>
 <div>
 	<div>{{ script.interpolate(value.title) }}</div>
-	<ui-radio v-for="x in value.values" v-model="v" :value="x" :key="x">{{ x }}</ui-radio>
+	<ui-radio v-for="x in value.values" :key="x" v-model="v" :value="x">{{ x }}</ui-radio>
 </div>
 </template>
 

@@ -2,15 +2,16 @@
 <div class="cdxzvcfawjxdyxsekbxbfgtplebnoneb">
 	<div class="body">
 		<header>
-			<h1>{{ $t('select-file') }}<span class="count" v-if="files.length > 0">({{ files.length }})</span></h1>
+			<h1>{{ $t('select-file') }}<span v-if="files.length > 0" class="count">({{ files.length }})</span></h1>
 			<button class="close" @click="cancel"><fa icon="times"/></button>
 			<button v-if="multiple" class="ok" @click="ok"><fa icon="check"/></button>
 		</header>
-		<x-drive class="drive" ref="browser"
-			:select-file="true"
+		<x-drive
+			ref="browser" class="drive"
+			:selectFile="true"
 			:type="type"
 			:multiple="multiple"
-			@change-selection="onChangeSelection"
+			@changeSelection="onChangeSelection"
 			@selected="onSelected"
 		/>
 	</div>

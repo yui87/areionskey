@@ -42,7 +42,7 @@ export default Vue.extend({
 		window.addEventListener('scroll', this.onScroll, { passive: true });
 		Progress.start();
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		document.removeEventListener('keydown', this.onDocumentKeydown);
 		window.removeEventListener('scroll', this.onScroll);
 	},

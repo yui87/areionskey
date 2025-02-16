@@ -1,11 +1,11 @@
 <template>
-<div class="ecsvsegy" v-if="!fetching">
+<div v-if="!fetching" class="ecsvsegy">
 	<sequential-entrance animation="entranceFromTop" delay="25">
-		<template v-for="note in notes">
-			<mk-note-detail class="post" :note="note" :key="note.id"/>
+		<template v-for="note in notes" :key="note.id">
+			<mk-note-detail class="post" :note="note"/>
 		</template>
 	</sequential-entrance>
-	<div class="more" v-if="more">
+	<div v-if="more" class="more">
 		<ui-button inline @click="fetchMore()">{{ $t('@.load-more') }}</ui-button>
 	</div>
 </div>

@@ -1,9 +1,10 @@
 <template>
 <mk-activity
 	:design="props.design"
-	:init-view="props.view"
+	:initView="props.view"
 	:user="$store.state.i"
-	@view-changed="viewChanged"/>
+	@viewChanged="viewChanged"
+/>
 </template>
 
 <script lang="ts">

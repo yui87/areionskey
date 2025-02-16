@@ -1,26 +1,26 @@
 <template>
 <div class="mk-autocomplete" @contextmenu.prevent="() => {}">
-	<ol class="users" ref="suggests" v-if="users.length > 0">
-		<li v-for="user in users" @click="complete(type, user)" @keydown="onKeydown" tabindex="-1">
+	<ol v-if="users.length > 0" ref="suggests" class="users">
+		<li v-for="user in users" tabindex="-1" @click="complete(type, user)" @keydown="onKeydown">
 			<img class="avatar" :src="user.avatarUrl" alt=""/>
 			<span class="name">
-				<mk-user-name :user="user" :key="user.id"/>
+				<mk-user-name :key="user.id" :user="user"/>
 			</span>
 			<span class="username">@{{ user | acct }}</span>
 		</li>
 	</ol>
-	<ol class="hashtags" ref="suggests" v-if="hashtags.length > 0">
-		<li v-for="hashtag in hashtags" @click="complete(type, hashtag)" @keydown="onKeydown" tabindex="-1">
+	<ol v-if="hashtags.length > 0" ref="suggests" class="hashtags">
+		<li v-for="hashtag in hashtags" tabindex="-1" @click="complete(type, hashtag)" @keydown="onKeydown">
 			<span class="name">{{ hashtag }}</span>
 		</li>
 	</ol>
-	<ol class="emojis" ref="suggests" v-if="emojis.length > 0">
-		<li v-for="emoji in emojis" @click="complete(type, emoji.emoji)" @keydown="onKeydown" tabindex="-1">
-			<span class="emoji" v-if="emoji.isCustomEmoji"><img :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url" :alt="emoji.emoji"/></span>
-			<span class="emoji" v-else-if="!useOsDefaultEmojis"><img :src="emoji.url" :alt="emoji.emoji"/></span>
-			<span class="emoji" v-else>{{ emoji.emoji }}</span>
+	<ol v-if="emojis.length > 0" ref="suggests" class="emojis">
+		<li v-for="emoji in emojis" tabindex="-1" @click="complete(type, emoji.emoji)" @keydown="onKeydown">
+			<span v-if="emoji.isCustomEmoji" class="emoji"><img :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url" :alt="emoji.emoji"/></span>
+			<span v-else-if="!useOsDefaultEmojis" class="emoji"><img :src="emoji.url" :alt="emoji.emoji"/></span>
+			<span v-else class="emoji">{{ emoji.emoji }}</span>
 			<span class="name" v-html="emoji.name.replace(q, `<b>${q}</b>`)"></span>
-			<span class="alias" v-if="emoji.aliasOf">({{ emoji.aliasOf }})</span>
+			<span v-if="emoji.aliasOf" class="alias">({{ emoji.aliasOf }})</span>
 		</li>
 	</ol>
 </div>
@@ -199,7 +199,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.textarea.removeEventListener('keydown', this.onKeydown);
 
 		for (const el of Array.from(document.querySelectorAll('body *'))) {

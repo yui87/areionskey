@@ -1,33 +1,34 @@
 <template>
 <div>
-	<ui-container :show-header="props.design == 0">
+	<ui-container :showHeader="props.design == 0">
 		<template #header><fa icon="pencil-alt"/>{{ $t('title') }}</template>
 
-		<div class="lhcuptdmcdkfwmipgazeawoiuxpzaclc-body"
+		<div
+			class="lhcuptdmcdkfwmipgazeawoiuxpzaclc-body"
 			@dragover.stop="onDragover"
 			@drop.stop="onDrop"
 		>
 			<div class="textarea">
 				<textarea
-					:disabled="posting"
+					ref="text"
 					v-model="text"
+					v-autocomplete="{ model: 'text' }"
+					:disabled="posting"
+					:placeholder="placeholder"
 					@keydown="onKeydown"
 					@paste="onPaste"
-					:placeholder="placeholder"
-					ref="text"
-					v-autocomplete="{ model: 'text' }"
 				></textarea>
-				<button title="Pick" class="emoji" @click="emoji" ref="emoji">
+				<button ref="emoji" title="Pick" class="emoji" @click="emoji">
 					<fa :icon="['far', 'laugh']"/>
 				</button>
 			</div>
-			<x-post-form-attaches class="files" :files="files" :detach-media-fn="detachMedia"/>
+			<x-post-form-attaches class="files" :files="files" :detachMediaFn="detachMedia"/>
 			<input ref="file" type="file" multiple="multiple" tabindex="-1" @change="onChangeFile"/>
 			<mk-uploader ref="uploader" @uploaded="attachMedia"/>
 			<footer>
 				<button @click="chooseFile"><fa icon="upload"/></button>
 				<button @click="chooseFileFromDrive"><fa icon="cloud"/></button>
-				<button @click="post" :disabled="posting" class="post">{{ $t('note') }}</button>
+				<button :disabled="posting" class="post" @click="post">{{ $t('note') }}</button>
 			</footer>
 		</div>
 	</ui-container>

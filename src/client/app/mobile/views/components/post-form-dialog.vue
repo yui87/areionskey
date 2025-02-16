@@ -1,19 +1,22 @@
 <template>
 <ui-modal
 	ref="modal"
-	:close-on-bg-click="false"
-	:close-anime-duration="300"
-	@before-close="onBeforeClose">
-	<div class="main" ref="main">
-		<x-post-form ref="form"
+	:closeOnBgClick="false"
+	:closeAnimeDuration="300"
+	@beforeClose="onBeforeClose"
+>
+	<div ref="main" class="main">
+		<x-post-form
+			ref="form"
 			:reply="reply"
 			:renote="renote"
 			:mention="mention"
-			:initial-text="initialText"
-			:initial-note="initialNote"
+			:initialText="initialText"
+			:initialNote="initialNote"
 			:instant="instant"
 			@posted="onPosted"
-			@cancel="onCanceled"/>
+			@cancel="onCanceled"
+		/>
 	</div>
 </ui-modal>
 </template>

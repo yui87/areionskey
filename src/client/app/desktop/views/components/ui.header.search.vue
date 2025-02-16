@@ -1,7 +1,7 @@
 <template>
 <form class="wlvfdpkp" @submit.prevent="onSubmit">
 	<i><fa icon="search"/></i>
-	<input v-model="q" type="search" :placeholder="$t('placeholder')" v-autocomplete="{ model: 'q' }"/>
+	<input v-model="q" v-autocomplete="{ model: 'q' }" type="search" :placeholder="$t('placeholder')"/>
 	<div class="result"></div>
 </form>
 </template>

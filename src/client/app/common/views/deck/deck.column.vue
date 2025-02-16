@@ -1,25 +1,29 @@
 <template>
-<div class="dnpfarvgbnfmyzbdquhhzyxcmstpdqzs" :class="{ naked, narrow, active, isStacked, draghover, dragging, dropready, isMobile: $root.isMobile, shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }"
-		@dragover.prevent.stop="onDragover"
-		@dragleave="onDragleave"
-		@drop.prevent.stop="onDrop"
-		v-hotkey="keymap">
-	<header :class="{ indicate: count > 0 }"
-			draggable="true"
-			@click="goTop"
-			@dragstart="onDragstart"
-			@dragend="onDragend"
-			@contextmenu.prevent.stop="onContextmenu">
-		<button class="toggleActive" @click="toggleActive" v-if="isStacked">
+<div
+	v-hotkey="keymap" class="dnpfarvgbnfmyzbdquhhzyxcmstpdqzs"
+	:class="{ naked, narrow, active, isStacked, draghover, dragging, dropready, isMobile: $root.isMobile, shadow: $store.state.device.useShadow, round: $store.state.device.roundedCorners }"
+	@dragover.prevent.stop="onDragover"
+	@dragleave="onDragleave"
+	@drop.prevent.stop="onDrop"
+>
+	<header
+		:class="{ indicate: count > 0 }"
+		draggable="true"
+		@click="goTop"
+		@dragstart="onDragstart"
+		@dragend="onDragend"
+		@contextmenu.prevent.stop="onContextmenu"
+	>
+		<button v-if="isStacked" class="toggleActive" @click="toggleActive">
 			<template v-if="active"><fa icon="angle-up"/></template>
 			<template v-else><fa icon="angle-down"/></template>
 		</button>
 		<span class="header"><slot name="header"></slot></span>
-		<span class="count" v-if="count > 0">({{ count }})</span>
-		<button v-if="!isTemporaryColumn" class="menu" ref="menu" @click.stop="showMenu"><fa icon="caret-down"/></button>
+		<span v-if="count > 0" class="count">({{ count }})</span>
+		<button v-if="!isTemporaryColumn" ref="menu" class="menu" @click.stop="showMenu"><fa icon="caret-down"/></button>
 		<button v-else class="close" @click.stop="close"><fa icon="times"/></button>
 	</header>
-	<div ref="body" v-show="active">
+	<div v-show="active" ref="body">
 		<slot></slot>
 	</div>
 </div>
@@ -35,6 +39,19 @@ import { faWindowMaximize } from '@fortawesome/free-regular-svg-icons';
 
 export default Vue.extend({
 	i18n: i18n('deck'),
+
+	inject: {
+		getColumnVm: { from: 'getColumnVm' }
+	},
+
+	provide() {
+		return {
+			column: this,
+			isScrollTop: this.isScrollTop,
+			count: v => this.count = v,
+			inNakedDeckColumn: !this.naked
+		};
+	},
 	props: {
 		column: {
 			type: Object,
@@ -98,10 +115,6 @@ export default Vue.extend({
 		}
 	},
 
-	inject: {
-		getColumnVm: { from: 'getColumnVm' }
-	},
-
 	watch: {
 		active(v) {
 			if (v && this.isScrollTop()) {
@@ -113,15 +126,6 @@ export default Vue.extend({
 		}
 	},
 
-	provide() {
-		return {
-			column: this,
-			isScrollTop: this.isScrollTop,
-			count: v => this.count = v,
-			inNakedDeckColumn: !this.naked
-		};
-	},
-
 	mounted() {
 		this.$refs.body.addEventListener('scroll', this.onScroll, { passive: true });
 
@@ -131,7 +135,7 @@ export default Vue.extend({
 		}
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.$refs.body.removeEventListener('scroll', this.onScroll);
 
 		if (!this.isTemporaryColumn) {

@@ -1,7 +1,7 @@
 <template>
 <div>
 	<x-room v-if="!g.isStarted" :game="g" :connection="connection"/>
-	<x-game v-else :init-game="g" :connection="connection" :self-nav="selfNav" @go-index="goIndex"/>
+	<x-game v-else :initGame="g" :connection="connection" :selfNav="selfNav" @goIndex="goIndex"/>
 </div>
 </template>
 
@@ -40,7 +40,7 @@ export default Vue.extend({
 		});
 		this.connection.on('started', this.onStarted);
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 	methods: {

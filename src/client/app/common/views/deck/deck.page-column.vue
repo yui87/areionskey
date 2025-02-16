@@ -5,7 +5,7 @@
 	</template>
 
 	<div v-if="page">
-		<x-page :page="page" :key="page.id"/>
+		<x-page :key="page.id" :page="page"/>
 	</div>
 </x-column>
 </template>

@@ -17,6 +17,11 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
+	inject: {
+		inNakedDeckColumn: {
+			default: false
+		}
+	},
 	props: {
 		showHeader: {
 			type: Boolean,
@@ -34,11 +39,6 @@ export default Vue.extend({
 			type: Boolean,
 			default: true
 		},
-	},
-	inject: {
-		inNakedDeckColumn: {
-			default: false
-		}
 	},
 	data() {
 		return {

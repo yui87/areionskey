@@ -1,6 +1,6 @@
 <template>
 <div v-show="script.vars[value.var]">
-	<x-block v-for="child in value.children" :value="child" :page="page" :script="script" :key="child.id" :h="h"/>
+	<x-block v-for="child in value.children" :key="child.id" :value="child" :page="page" :script="script" :h="h"/>
 </div>
 </template>
 

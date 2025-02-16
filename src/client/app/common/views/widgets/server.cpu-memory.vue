@@ -10,23 +10,27 @@
 				<polygon
 					:points="cpuPolygonPoints"
 					fill="#fff"
-					fill-opacity="0.5"/>
+					fill-opacity="0.5"
+				/>
 				<polyline
 					:points="cpuPolylinePoints"
 					fill="none"
 					stroke="#fff"
-					stroke-width="1"/>
+					stroke-width="1"
+				/>
 				<circle
 					:cx="cpuHeadX"
 					:cy="cpuHeadY"
 					r="1.5"
-					fill="#fff"/>
+					fill="#fff"
+				/>
 			</mask>
 		</defs>
 		<rect
 			x="-2" y="-2"
 			:width="viewBoxX + 4" :height="viewBoxY + 4"
-			:style="`stroke: none; fill: url(#${ cpuGradientId }); mask: url(#${ cpuMaskId })`"/>
+			:style="`stroke: none; fill: url(#${ cpuGradientId }); mask: url(#${ cpuMaskId })`"
+		/>
 		<text x="1" y="5">CPU <tspan>{{ cpuP }}%</tspan></text>
 	</svg>
 	<svg :viewBox="`0 0 ${ viewBoxX } ${ viewBoxY }`">
@@ -39,23 +43,27 @@
 				<polygon
 					:points="memPolygonPoints"
 					fill="#fff"
-					fill-opacity="0.5"/>
+					fill-opacity="0.5"
+				/>
 				<polyline
 					:points="memPolylinePoints"
 					fill="none"
 					stroke="#fff"
-					stroke-width="1"/>
+					stroke-width="1"
+				/>
 				<circle
 					:cx="memHeadX"
 					:cy="memHeadY"
 					r="1.5"
-					fill="#fff"/>
+					fill="#fff"
+				/>
 			</mask>
 		</defs>
 		<rect
 			x="-2" y="-2"
 			:width="viewBoxX + 4" :height="viewBoxY + 4"
-			:style="`stroke: none; fill: url(#${ memGradientId }); mask: url(#${ memMaskId })`"/>
+			:style="`stroke: none; fill: url(#${ memGradientId }); mask: url(#${ memMaskId })`"
+		/>
 		<text x="1" y="5">MEM <tspan>{{ memP }}%</tspan></text>
 	</svg>
 </div>
@@ -95,7 +103,7 @@ export default Vue.extend({
 			id: Math.random().toString().substr(2, 8)
 		});
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.off('stats', this.onStats);
 		this.connection.off('statsLog', this.onStatsLog);
 	},

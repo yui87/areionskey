@@ -1,7 +1,7 @@
 <template>
 <mk-ui>
 	<template #header><span style="margin-right:4px;"><fa :icon="['far', 'comments']"/></span>{{ $t('@.messaging') }}</template>
-	<x-messaging @navigate="navigate" @navigateGroup="navigateGroup" :header-top="48"/>
+	<x-messaging :headerTop="48" @navigate="navigate" @navigateGroup="navigateGroup"/>
 </mk-ui>
 </template>
 

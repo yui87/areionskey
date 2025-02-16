@@ -1,6 +1,6 @@
 <template>
 <div class="note">
-	<button @click="post" :title="$t('post')"><fa icon="pencil-alt"/></button>
+	<button :title="$t('post')" @click="post"><fa icon="pencil-alt"/></button>
 </div>
 </template>
 

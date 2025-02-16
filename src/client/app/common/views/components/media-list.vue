@@ -1,13 +1,13 @@
 <template>
 <div class="mk-media-list">
-	<template v-for="media in mediaList.filter(media => !previewable(media))">
-		<x-banner :media="media" :key="media.id"/>
+	<template v-for="media in mediaList.filter(media => !previewable(media))" :key="media.id">
+		<x-banner :media="media"/>
 	</template>
 	<div v-if="mediaList.filter(media => previewable(media)).length > 0" class="gird-container">
-		<div :data-count="mediaList.filter(media => previewable(media)).length" ref="grid">
-			<template v-for="media in mediaList">
-				<mk-media-video :video="media" :key="media.id" v-if="media.type.startsWith('video')"/>
-				<x-image :image="media" :key="media.id" v-else-if="media.type.startsWith('image')" :raw="raw"/>
+		<div ref="grid" :data-count="mediaList.filter(media => previewable(media)).length">
+			<template v-for="media in mediaList" :key="media.id">
+				<mk-media-video v-if="media.type.startsWith('video')" :video="media"/>
+				<x-image v-else-if="media.type.startsWith('image')" :image="media" :raw="raw"/>
 			</template>
 		</div>
 	</div>

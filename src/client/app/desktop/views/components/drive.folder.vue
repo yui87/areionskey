@@ -1,7 +1,10 @@
 <template>
-<div class="ynntpczxvnusfwdyxsfuhvcmuypqopdd"
+<div
+	class="ynntpczxvnusfwdyxsfuhvcmuypqopdd"
 	:data-is-contextmenu-showing="isContextmenuShowing"
 	:data-draghover="draghover"
+	draggable="true"
+	:title="title"
 	@click="onClick"
 	@mouseover="onMouseover"
 	@mouseout="onMouseout"
@@ -9,18 +12,16 @@
 	@dragenter.prevent="onDragenter"
 	@dragleave="onDragleave"
 	@drop.prevent.stop="onDrop"
-	draggable="true"
 	@dragstart="onDragstart"
 	@dragend="onDragend"
 	@contextmenu.prevent.stop="onContextmenu"
-	:title="title"
 >
 	<p class="name">
-		<template v-if="hover"><fa :icon="['far', 'folder-open']" fixed-width/></template>
-		<template v-if="!hover"><fa :icon="['far', 'folder']" fixed-width/></template>
+		<template v-if="hover"><fa :icon="['far', 'folder-open']" fixedWidth/></template>
+		<template v-if="!hover"><fa :icon="['far', 'folder']" fixedWidth/></template>
 		{{ folder.name }}
 	</p>
-	<p class="upload" v-if="$store.state.settings.uploadFolder == folder.id">
+	<p v-if="$store.state.settings.uploadFolder == folder.id" class="upload">
 		{{ $t('upload-folder') }}
 	</p>
 </div>

@@ -1,6 +1,6 @@
 <template>
 <div class="mk-messaging-room-page">
-	<x-messaging-room v-if="user || group" :user="user" :group="group" :is-naked="true"/>
+	<x-messaging-room v-if="user || group" :user="user" :group="group" :isNaked="true"/>
 </div>
 </template>
 
@@ -38,7 +38,7 @@ export default Vue.extend({
 
 		this.fetch();
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		document.documentElement.style.removeProperty('background');
 		document.documentElement.style.removeProperty('background-color'); // for safari's bug
 		this.unwatchDarkmode();

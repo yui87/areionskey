@@ -1,5 +1,5 @@
 <template>
-<mfm-core v-bind="$attrs" class="havbbuyv" :class="{ nowrap: $attrs['nowrap'], sticker: !$attrs['no-sticker'] && $store.state.device.useSticker }" v-once/>
+<mfm-core v-once v-bind="$attrs" class="havbbuyv" :class="{ nowrap: $attrs['nowrap'], sticker: !$attrs['no-sticker'] && $store.state.device.useSticker }"/>
 </template>
 
 <script lang="ts">

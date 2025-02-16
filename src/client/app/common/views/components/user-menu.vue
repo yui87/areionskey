@@ -62,7 +62,7 @@ export default Vue.extend({
 			if (this.user.host != null) {
 				menu = menu.concat({
 					icon: faSync,
-					text: this.$t("update-remote-user"),
+					text: this.$t('update-remote-user'),
 					action: this.updateRemoteUser,
 				});
 			}
@@ -254,7 +254,7 @@ export default Vue.extend({
 			});
 		},
 
-		async getConfirmed(text: string): Promise<Boolean> {
+		async getConfirmed(text: string): Promise<boolean> {
 			const confirm = await this.$root.dialog({
 				type: 'warning',
 				showCancelButton: true,

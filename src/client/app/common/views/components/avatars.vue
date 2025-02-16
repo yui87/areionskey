@@ -1,6 +1,6 @@
 <template>
 <div>
-	<mk-avatar v-for="user in us" :user="user" :key="user.id" style="width:32px;height:32px;"/>
+	<mk-avatar v-for="user in us" :key="user.id" :user="user" style="width:32px;height:32px;"/>
 </div>
 </template>
 

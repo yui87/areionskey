@@ -1,6 +1,6 @@
 <template>
 <div>
-	<ui-container :show-header="!props.compact">
+	<ui-container :showHeader="!props.compact">
 		<template #header><fa :icon="faTasks"/>Queue</template>
 
 		<div class="mntrproz">

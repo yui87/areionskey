@@ -1,12 +1,12 @@
-import { getApLock } from "../../../../misc/app-lock";
-import { extractDbHost } from "../../../../misc/convert-host";
-import { Notes } from "../../../../models";
-import { IRemoteUser } from "../../../../models/entities/user";
-import { publishNoteStream } from "../../../../services/stream";
-import DbResolver from "../../db-resolver";
-import { apLogger } from "../../logger";
-import { htmlToMfm } from "../../misc/html-to-mfm";
-import { IPost, getApId } from "../../type";
+import { getApLock } from '../../../../misc/app-lock';
+import { extractDbHost } from '../../../../misc/convert-host';
+import { Notes } from '../../../../models';
+import { IRemoteUser } from '../../../../models/entities/user';
+import { publishNoteStream } from '../../../../services/stream';
+import DbResolver from '../../db-resolver';
+import { apLogger } from '../../logger';
+import { htmlToMfm } from '../../misc/html-to-mfm';
+import { IPost, getApId } from '../../type';
 
 const logger = apLogger;
 

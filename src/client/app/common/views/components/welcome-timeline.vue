@@ -5,7 +5,7 @@
 			<mk-avatar class="avatar" :user="note.user" target="_blank"/>
 			<div class="body">
 				<header>
-					<router-link class="name" :to="note.user | userPage" v-user-preview="note.user.id">
+					<router-link v-user-preview="note.user.id" class="name" :to="note.user | userPage">
 						<mk-user-name :user="note.user"/>
 					</router-link>
 					<span class="username">@{{ note.user | acct }}</span>
@@ -16,11 +16,11 @@
 					</div>
 				</header>
 				<p v-if="note.cw != null" class="cw">
-					<mfm v-if="note.cw != ''" class="text" :text="note.cw" :author="note.user" :custom-emojis="note.emojis" :no-sticker="true"/>
+					<mfm v-if="note.cw != ''" class="text" :text="note.cw" :author="note.user" :customEmojis="note.emojis" :noSticker="true"/>
 					<mk-cw-button v-model="showContent" :note="note"/>
 				</p>
-				<div class="text" v-show="note.cw == null || showContent">
-					<mfm v-if="note.text" :text="note.text" :author="note.user" :custom-emojis="note.emojis" :no-sticker="true"/>
+				<div v-show="note.cw == null || showContent" class="text">
+					<mfm v-if="note.text" :text="note.text" :author="note.user" :customEmojis="note.emojis" :noSticker="true"/>
 				</div>
 				<mk-reactions-viewer class="reactions" :note="note"/>
 			</div>
@@ -58,7 +58,7 @@ export default Vue.extend({
 		this.connection.on('note', this.onNote);
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 	},
 

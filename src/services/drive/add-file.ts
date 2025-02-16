@@ -312,8 +312,8 @@ export default async function(
 	name: string | null = null,
 	comment: string | null = null,
 	folderId: any = null,
-	force: boolean = false,
-	isLink: boolean = false,
+	force = false,
+	isLink = false,
 	url: string | null = null,
 	uri: string | null = null,
 	sensitive: boolean | null = null

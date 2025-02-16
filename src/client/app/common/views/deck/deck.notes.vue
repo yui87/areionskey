@@ -1,24 +1,23 @@
 <template>
 <div class="eamppglmnmimdhrlzhplwpvyeaqmmhxu">
-	<div class="empty" v-if="empty">{{ $t('@.no-notes') }}</div>
+	<div v-if="empty" class="empty">{{ $t('@.no-notes') }}</div>
 
 	<mk-error v-if="error" @retry="init()"/>
 
-	<div class="placeholder" v-if="fetching">
-		<template v-for="i in 10">
-			<mk-note-skeleton :key="i"/>
+	<div v-if="fetching" class="placeholder">
+		<template v-for="i in 10" :key="i">
+			<mk-note-skeleton/>
 		</template>
 	</div>
 
 	<!-- トランジションを有効にするとなぜかメモリリークする -->
-	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" name="mk-notes" class="transition notes" ref="notes" tag="div">
-		<template v-for="(note, i) in _notes">
+	<component :is="!$store.state.device.reduceMotion ? 'transition-group' : 'div'" ref="notes" name="mk-notes" class="transition notes" tag="div">
+		<template v-for="(note, i) in _notes" :key="`${note.id}-${note.updatedAt}`">
 			<mk-note
 				:note="note"
-				:key="`${note.id}-${note.updatedAt}`"
 				:compact="true"
 			/>
-			<p class="date" :key="note.id + '_date'" v-if="i != notes.length - 1 && note._date != _notes[i + 1]._date">
+			<p v-if="i != notes.length - 1 && note._date != _notes[i + 1]._date" :key="note.id + '_date'" class="date">
 				<span><fa icon="angle-up"/>{{ note._datetext }}</span>
 				<span><fa icon="angle-down"/>{{ _notes[i + 1]._datetext }}</span>
 			</p>
@@ -26,9 +25,9 @@
 	</component>
 
 	<footer v-if="more">
-		<button @click="fetchMore()" :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }">
+		<button :disabled="moreFetching" :style="{ cursor: moreFetching ? 'wait' : 'pointer' }" @click="fetchMore()">
 			<template v-if="!moreFetching">{{ $t('@.load-more') }}</template>
-			<template v-if="moreFetching"><fa icon="spinner" pulse fixed-width/></template>
+			<template v-if="moreFetching"><fa icon="spinner" pulse fixedWidth/></template>
 		</button>
 	</footer>
 </div>
@@ -95,7 +94,7 @@ export default Vue.extend({
 		this.column.$on('bottom', this.onBottom);
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.column.$off('top', this.onTop);
 		this.column.$off('bottom', this.onBottom);
 	},

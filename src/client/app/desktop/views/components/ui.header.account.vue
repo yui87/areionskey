@@ -1,64 +1,64 @@
 <template>
-<div class="account" v-hotkey.global="keymap">
+<div v-hotkey.global="keymap" class="account">
 	<button class="header" :data-active="isOpen" @click="toggle">
 		<span class="username">{{ $store.state.i.username }}<template v-if="!isOpen"><fa icon="angle-down"/></template><template v-if="isOpen"><fa icon="angle-up"/></template></span>
 		<mk-avatar class="avatar" :user="$store.state.i"/>
 	</button>
 	<transition name="zoom-in-top">
-		<div class="menu" v-if="isOpen">
+		<div v-if="isOpen" class="menu">
 			<ul>
 				<li>
 					<router-link :to="`/@${ $store.state.i.username }`">
-						<i><fa icon="user" fixed-width/></i>
+						<i><fa icon="user" fixedWidth/></i>
 						<span>{{ $t('profile') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li @click="drive">
 					<p>
-						<i><fa icon="cloud" fixed-width/></i>
+						<i><fa icon="cloud" fixedWidth/></i>
 						<span>{{ $t('@.drive') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</p>
 				</li>
 				<li>
 					<router-link to="/i/favorites">
-						<i><fa icon="star" fixed-width/></i>
+						<i><fa icon="star" fixedWidth/></i>
 						<span>{{ $t('@.favorites') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/i/lists">
-						<i><fa icon="list" fixed-width/></i>
+						<i><fa icon="list" fixedWidth/></i>
 						<span>{{ $t('lists') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/i/groups">
-						<i><fa :icon="faUsers" fixed-width/></i>
+						<i><fa :icon="faUsers" fixedWidth/></i>
 						<span>{{ $t('groups') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li>
 					<router-link to="/i/pages">
-						<i><fa :icon="faStickyNote" fixed-width/></i>
+						<i><fa :icon="faStickyNote" fixedWidth/></i>
 						<span>{{ $t('@.pages') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li>
 					<router-link :to="`/@${ $store.state.i.username }/room`">
-						<i><fa :icon="faDoorOpen" fixed-width/></i>
+						<i><fa :icon="faDoorOpen" fixedWidth/></i>
 						<span>{{ $t('room') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li v-if="$store.state.i.pendingReceivedFollowRequestsCount">
 					<router-link to="/i/follow-requests">
-						<i><fa icon="user-clock" fixed-width/></i>
+						<i><fa icon="user-clock" fixedWidth/></i>
 						<span>{{ $t('follow-requests') }}<i v-if="$store.state.i.pendingReceivedFollowRequestsCount">{{ $store.state.i.pendingReceivedFollowRequestsCount }}</i></span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
@@ -67,14 +67,14 @@
 			<ul>
 				<li>
 					<router-link to="/i/settings">
-						<i><fa icon="cog" fixed-width/></i>
+						<i><fa icon="cog" fixedWidth/></i>
 						<span>{{ $t('@.settings') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</router-link>
 				</li>
 				<li v-if="$store.state.i.isAdmin || $store.state.i.isModerator">
 					<a href="/admin">
-						<i><fa icon="terminal" fixed-width/></i>
+						<i><fa icon="terminal" fixedWidth/></i>
 						<span>{{ $t('admin') }}</span>
 						<i><fa icon="angle-right"/></i>
 					</a>
@@ -83,19 +83,19 @@
 			<ul>
 				<li @click="toggleDeckMode">
 					<p>
-						<template v-if="$store.state.device.inDeckMode"><i><fa :icon="faHome" fixed-width/></i><span>{{ $t('@.home') }}</span></template>
-						<template v-else><i><fa :icon="faColumns" fixed-width/></i><span>{{ $t('@.deck') }}</span></template>
+						<template v-if="$store.state.device.inDeckMode"><i><fa :icon="faHome" fixedWidth/></i><span>{{ $t('@.home') }}</span></template>
+						<template v-else><i><fa :icon="faColumns" fixedWidth/></i><span>{{ $t('@.deck') }}</span></template>
 					</p>
 				</li>
 				<li v-if="$store.state.device.appTypeForce == 'auto'" @click="toggleAppType">
 					<p>
-						<template v-if="$root.isMobile"><i><fa :icon="faDesktop" fixed-width/></i><span>{{ $t('@.desktop-mode') }}</span></template>
-						<template v-else><i><fa :icon="faMobileAlt" fixed-width/></i><span>{{ $t('@.mobile-mode') }}</span></template>
+						<template v-if="$root.isMobile"><i><fa :icon="faDesktop" fixedWidth/></i><span>{{ $t('@.desktop-mode') }}</span></template>
+						<template v-else><i><fa :icon="faMobileAlt" fixedWidth/></i><span>{{ $t('@.mobile-mode') }}</span></template>
 					</p>
 				</li>
 				<li @click="dark">
 					<p>
-						<template><i><fa :icon="$store.state.device.darkmode ? faSun : faMoon" fixed-width/></i></template>
+						<template><i><fa :icon="$store.state.device.darkmode ? faSun : faMoon" fixedWidth/></i></template>
 						<span>{{ $store.state.device.darkmode ? $t('@.turn-off-darkmode') : $t('@.turn-on-darkmode') }}</span>
 					</p>
 				</li>
@@ -103,7 +103,7 @@
 			<ul>
 				<li @click="signout">
 					<p class="signout">
-						<i><fa icon="power-off" fixed-width/></i>
+						<i><fa icon="power-off" fixedWidth/></i>
 						<span>{{ $t('@.signout') }}</span>
 					</p>
 				</li>
@@ -137,7 +137,7 @@ export default Vue.extend({
 			};
 		}
 	},
-	beforeDestroy() {
+	beforeUnmount() {
 		this.close();
 	},
 	methods: {

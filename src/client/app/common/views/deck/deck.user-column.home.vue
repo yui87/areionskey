@@ -1,33 +1,38 @@
 <template>
 <div>
-	<ui-container v-if="user.pinnedPage" :body-togglable="true">
+	<ui-container v-if="user.pinnedPage" :bodyTogglable="true">
 		<template #header><fa icon="thumbtack"/> {{ $t('pinned-page') }}</template>
 		<div>
-			<x-page :page="user.pinnedPage" :key="user.pinnedPage.id" :show-title="!user.pinnedPage.hideTitleWhenPinned"/>
+			<x-page :key="user.pinnedPage.id" :page="user.pinnedPage" :showTitle="!user.pinnedPage.hideTitleWhenPinned"/>
 		</div>
 	</ui-container>
-	<ui-container v-if="user.pinnedNotes && user.pinnedNotes.length > 0" :body-togglable="true">
+	<ui-container v-if="user.pinnedNotes && user.pinnedNotes.length > 0" :bodyTogglable="true">
 		<template #header><fa icon="thumbtack"/> {{ $t('pinned-notes') }}</template>
 		<div>
 			<mk-note v-for="n in user.pinnedNotes" :key="n.id" :note="n"/>
 		</div>
 	</ui-container>
-	<ui-container v-if="images.length > 0" :body-togglable="true"
+	<ui-container
+		v-if="images.length > 0" :bodyTogglable="true"
 		:expanded="$store.state.device.expandUsersPhotos"
-		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersPhotos', value: expanded })">
+		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersPhotos', value: expanded })"
+	>
 		<template #header><fa :icon="['far', 'images']"/> {{ $t('images') }}</template>
 		<div class="sainvnaq">
-			<router-link v-for="image in images"
-				:style="`background-image: url(${image.thumbnailUrl})`"
+			<router-link
+				v-for="image in images"
 				:key="`${image.id}:${image._note.id}`"
+				:style="`background-image: url(${image.thumbnailUrl})`"
 				:to="image._note | notePage"
 				:title="`${image.name}\n${(new Date(image.createdAt)).toLocaleString()}`"
 			></router-link>
 		</div>
 	</ui-container>
-	<ui-container :body-togglable="true"
+	<ui-container
+		:bodyTogglable="true"
 		:expanded="$store.state.device.expandUsersActivity"
-		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersActivity', value: expanded })">
+		@toggle="expanded => $store.commit('device/set', { key: 'expandUsersActivity', value: expanded })"
+	>
 		<template #header><fa :icon="['far', 'chart-bar']"/> {{ $t('activity') }}</template>
 		<div>
 			<div ref="chart"></div>
@@ -36,7 +41,7 @@
 	<ui-container>
 		<template #header><fa :icon="['far', 'comment-alt']"/> {{ $t('timeline') }}</template>
 		<div>
-			<x-notes ref="timeline" :pagination="pagination" @inited="() => $emit('loaded')" :key="user.id"/>
+			<x-notes ref="timeline" :key="user.id" :pagination="pagination" @inited="() => $emit('loaded')"/>
 		</div>
 	</ui-container>
 </div>

@@ -17,7 +17,7 @@
 	</div>
 	<section v-if="invitations.length > 0">
 		<h2>{{ $t('invitations') }}</h2>
-		<div class="invitation" v-for="i in invitations" tabindex="-1" @click="accept(i)">
+		<div v-for="i in invitations" class="invitation" tabindex="-1" @click="accept(i)">
 			<mk-avatar class="avatar" :user="i.parent"/>
 			<span class="name"><b><mk-user-name :user="i.parent"/></b></span>
 			<span class="username">@{{ i.parent.username }}</span>
@@ -26,22 +26,22 @@
 	</section>
 	<section v-if="myGames.length > 0">
 		<h2>{{ $t('my-games') }}</h2>
-		<a class="game" v-for="g in myGames" tabindex="-1" @click.prevent="go(g)" :href="`/games/reversi/${g.id}`">
+		<a v-for="g in myGames" class="game" tabindex="-1" :href="`/games/reversi/${g.id}`" @click.prevent="go(g)">
 			<mk-avatar class="avatar" :user="g.user1"/>
 			<mk-avatar class="avatar" :user="g.user2"/>
 			<span><b><mk-user-name :user="g.user1"/></b> vs <b><mk-user-name :user="g.user2"/></b></span>
 			<span class="state">{{ g.isEnded ? $t('game-state.ended') : $t('game-state.playing') }}</span>
-			<mk-time :time="g.createdAt" />
+			<mk-time :time="g.createdAt"/>
 		</a>
 	</section>
 	<section v-if="games.length > 0">
 		<h2>{{ $t('all-games') }}</h2>
-		<a class="game" v-for="g in games" tabindex="-1" @click.prevent="go(g)" :href="`/games/reversi/${g.id}`">
+		<a v-for="g in games" class="game" tabindex="-1" :href="`/games/reversi/${g.id}`" @click.prevent="go(g)">
 			<mk-avatar class="avatar" :user="g.user1"/>
 			<mk-avatar class="avatar" :user="g.user2"/>
 			<span><b><mk-user-name :user="g.user1"/></b> vs <b><mk-user-name :user="g.user2"/></b></span>
 			<span class="state">{{ g.isEnded ? $t('game-state.ended') : $t('game-state.playing') }}</span>
-			<mk-time :time="g.createdAt" />
+			<mk-time :time="g.createdAt"/>
 		</a>
 	</section>
 </div>
@@ -88,7 +88,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.connection) {
 			this.connection.dispose();
 		}

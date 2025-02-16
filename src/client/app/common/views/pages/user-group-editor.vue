@@ -20,16 +20,16 @@
 				<ui-button @click="invite()"><fa :icon="faPlus"/> {{ $t('invite') }}</ui-button>
 			</ui-margin>
 			<sequential-entrance animation="entranceFromTop" delay="25">
-				<div class="kjlrfbes" v-for="user in users">
+				<div v-for="user in users" class="kjlrfbes">
 					<div>
 						<a :href="user | userPage">
-							<mk-avatar class="avatar" :user="user" :disable-link="true"/>
+							<mk-avatar class="avatar" :user="user" :disableLink="true"/>
 						</a>
 					</div>
 					<div>
 						<header>
 							<b><mk-user-name :user="user"/></b>
-							<span class="is-owner" v-if="group.ownerId === user.id">owner</span>
+							<span v-if="group.ownerId === user.id" class="is-owner">owner</span>
 							<span class="username">@{{ user | acct }}</span>
 						</header>
 						<div v-if="group.ownerId !== user.id">

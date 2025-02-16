@@ -1,29 +1,30 @@
 <template>
-<div class="mk-messaging-room"
+<div
+	class="mk-messaging-room"
 	@dragover.prevent.stop="onDragover"
 	@drop.prevent.stop="onDrop"
 >
 	<div class="body">
-		<p class="init" v-if="init"><fa icon="spinner" pulse fixed-width/>{{ $t('@.loading') }}</p>
-		<p class="empty" v-if="!init && messages.length == 0"><fa icon="info-circle"/>{{ user ? $t('not-talked-user') : $t('not-talked-group') }}</p>
-		<p class="no-history" v-if="!init && messages.length > 0 && !existMoreMessages"><fa :icon="faFlag"/>{{ $t('no-history') }}</p>
-		<button class="more" :class="{ fetching: fetchingMoreMessages }" v-if="existMoreMessages" @click="fetchMoreMessages" :disabled="fetchingMoreMessages">
-			<template v-if="fetchingMoreMessages"><fa icon="spinner" pulse fixed-width/></template>{{ fetchingMoreMessages ? $t('@.loading') : $t('@.load-more') }}
+		<p v-if="init" class="init"><fa icon="spinner" pulse fixedWidth/>{{ $t('@.loading') }}</p>
+		<p v-if="!init && messages.length == 0" class="empty"><fa icon="info-circle"/>{{ user ? $t('not-talked-user') : $t('not-talked-group') }}</p>
+		<p v-if="!init && messages.length > 0 && !existMoreMessages" class="no-history"><fa :icon="faFlag"/>{{ $t('no-history') }}</p>
+		<button v-if="existMoreMessages" class="more" :class="{ fetching: fetchingMoreMessages }" :disabled="fetchingMoreMessages" @click="fetchMoreMessages">
+			<template v-if="fetchingMoreMessages"><fa icon="spinner" pulse fixedWidth/></template>{{ fetchingMoreMessages ? $t('@.loading') : $t('@.load-more') }}
 		</button>
-		<template v-for="(message, i) in _messages">
-			<x-message :message="message" :key="message.id" :is-group="group != null"/>
-			<p class="date" v-if="i != messages.length - 1 && message._date != _messages[i + 1]._date">
+		<template v-for="(message, i) in _messages" :key="message.id">
+			<x-message :message="message" :isGroup="group != null"/>
+			<p v-if="i != messages.length - 1 && message._date != _messages[i + 1]._date" class="date">
 				<span>{{ _messages[i + 1]._datetext }}</span>
 			</p>
 		</template>
 	</div>
 	<footer>
 		<transition name="fade">
-			<div class="new-message" v-show="showIndicator">
+			<div v-show="showIndicator" class="new-message">
 				<button @click="onIndicatorClick"><i><fa :icon="faArrowCircleDown"/></i>{{ $t('new-message') }}</button>
 			</div>
 		</transition>
-		<x-form :user="user" :group="group" ref="form"/>
+		<x-form ref="form" :user="user" :group="group"/>
 	</footer>
 </div>
 </template>
@@ -112,7 +113,7 @@ export default Vue.extend({
 		});
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		this.connection.dispose();
 
 		if (this.isNaked) {

@@ -4,14 +4,14 @@
 		<header>
 			<div class="title"><fa :icon="faStickyNote"/> {{ readonly ? $t('read-page') : pageId ? $t('edit-page') : $t('new-page') }}</div>
 			<div class="buttons">
-				<button @click="del()" v-if="!readonly"><fa :icon="faTrashAlt"/></button>
+				<button v-if="!readonly" @click="del()"><fa :icon="faTrashAlt"/></button>
 				<button @click="() => showOptions = !showOptions"><fa :icon="faCog"/></button>
-				<button @click="save()" v-if="!readonly"><fa :icon="faSave"/></button>
+				<button v-if="!readonly" @click="save()"><fa :icon="faSave"/></button>
 			</div>
 		</header>
 
 		<section>
-			<router-link class="view" v-if="pageId" :to="`/@${ author.username }/pages/${ currentName }`"><fa :icon="faExternalLinkSquareAlt"/> {{ $t('view-page') }}</router-link>
+			<router-link v-if="pageId" class="view" :to="`/@${ author.username }/pages/${ currentName }`"><fa :icon="faExternalLinkSquareAlt"/> {{ $t('view-page') }}</router-link>
 
 			<ui-input v-model="title">
 				<span>{{ $t('title') }}</span>
@@ -41,37 +41,38 @@
 					<ui-button v-if="eyeCatchingImageId == null && !readonly" @click="setEyeCatchingImage()"><fa :icon="faPlus"/> {{ $t('set-eye-catching-image') }}</ui-button>
 					<div v-else-if="eyeCatchingImage">
 						<img :src="eyeCatchingImage.url" :alt="eyeCatchingImage.name"/>
-						<ui-button @click="removeEyeCatchingImage()" v-if="!readonly"><fa :icon="faTrashAlt"/> {{ $t('remove-eye-catching-image') }}</ui-button>
+						<ui-button v-if="!readonly" @click="removeEyeCatchingImage()"><fa :icon="faTrashAlt"/> {{ $t('remove-eye-catching-image') }}</ui-button>
 					</div>
 				</div>
 			</template>
 
-			<x-blocks class="content" v-model="content" :ai-script="aiScript"/>
+			<x-blocks v-model="content" class="content" :aiScript="aiScript"/>
 
-			<ui-button @click="add()" v-if="!readonly"><fa :icon="faPlus"/></ui-button>
+			<ui-button v-if="!readonly" @click="add()"><fa :icon="faPlus"/></ui-button>
 		</section>
 	</div>
 
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header><fa :icon="faMagic"/> {{ $t('variables') }}</template>
 		<div class="qmuvgica">
-			<x-draggable tag="div" class="variables" v-show="variables.length > 0" :list="variables" handle=".drag-handle" :group="{ name: 'variables' }" animation="150" swap-threshold="0.5">
-				<x-variable v-for="variable in variables"
+			<x-draggable v-show="variables.length > 0" tag="div" class="variables" :list="variables" handle=".drag-handle" :group="{ name: 'variables' }" animation="150" swapThreshold="0.5">
+				<x-variable
+					v-for="variable in variables"
+					:key="variable.name"
 					:value="variable"
 					:removable="true"
-					@input="v => updateVariable(v)"
-					@remove="() => removeVariable(variable)"
-					:key="variable.name"
-					:ai-script="aiScript"
+					:aiScript="aiScript"
 					:name="variable.name"
 					:title="variable.name"
 					:draggable="true"
+					@input="v => updateVariable(v)"
+					@remove="() => removeVariable(variable)"
 				/>
 			</x-draggable>
 
-			<ui-button @click="addVariable()" class="add" v-if="!readonly"><fa :icon="faPlus"/></ui-button>
+			<ui-button v-if="!readonly" class="add" @click="addVariable()"><fa :icon="faPlus"/></ui-button>
 
-			<ui-info><span v-html="$t('variables-info')"></span><a @click="() => moreDetails = true" style="display:block;">{{ $t('more-details') }}</a></ui-info>
+			<ui-info><span v-html="$t('variables-info')"></span><a style="display:block;" @click="() => moreDetails = true">{{ $t('more-details') }}</a></ui-info>
 
 			<template v-if="moreDetails">
 				<ui-info><span v-html="$t('variables-info2')"></span></ui-info>
@@ -81,7 +82,7 @@
 		</div>
 	</ui-container>
 
-	<ui-container :body-togglable="true" :expanded="false">
+	<ui-container :bodyTogglable="true" :expanded="false">
 		<template #header><fa :icon="faCode"/> {{ $t('inspector') }}</template>
 		<div style="padding:0 32px 32px 32px;">
 			<ui-textarea :value="JSON.stringify(content, null, 2)" readonly tall>{{ $t('content') }}</ui-textarea>
@@ -110,6 +111,14 @@ export default Vue.extend({
 
 	components: {
 		XDraggable, XVariable, XBlocks
+	},
+
+	provide() {
+		return {
+			readonly: this.readonly,
+			getScriptBlockList: this.getScriptBlockList,
+			getPageBlockList: this.getPageBlockList
+		}
 	},
 
 	props: {
@@ -207,14 +216,6 @@ export default Vue.extend({
 				type: 'text',
 				text: 'Hello World!'
 			}];
-		}
-	},
-
-	provide() {
-		return {
-			readonly: this.readonly,
-			getScriptBlockList: this.getScriptBlockList,
-			getPageBlockList: this.getPageBlockList
 		}
 	},
 

@@ -1,6 +1,6 @@
 <template>
 <div>
-	<ui-container :body-togglable="true">
+	<ui-container :bodyTogglable="true">
 		<template #header>{{ $t('received-follow-requests') }}</template>
 		<div v-if="!fetching">
 			<sequential-entrance animation="entranceFromTop" delay="25" tag="div">

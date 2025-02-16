@@ -8,8 +8,8 @@
 	@click="toggle"
 >
 	<input
-		type="checkbox"
 		ref="input"
+		type="checkbox"
 		:disabled="disabled"
 		@keydown.enter="toggle"
 	>

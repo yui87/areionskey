@@ -1,29 +1,31 @@
 <template>
-<mk-window class="mk-post-form-window" ref="window" is-modal @closed="onWindowClosed" :animation="animation">
+<mk-window ref="window" class="mk-post-form-window" isModal :animation="animation" @closed="onWindowClosed">
 	<template #header>
 		<span class="mk-post-form-window--header">
-			<span class="icon" v-if="geo"><fa icon="map-marker-alt"/></span>
+			<span v-if="geo" class="icon"><fa icon="map-marker-alt"/></span>
 			<span v-if="!reply">{{ $t('note') }}</span>
 			<span v-if="reply">{{ $t('reply') }}</span>
-			<span class="count" v-if="files.length != 0">{{ $t('attaches').replace('{}', files.length) }}</span>
-			<span class="count" v-if="uploadings.length != 0">{{ $t('uploading-media').replace('{}', uploadings.length) }}<mk-ellipsis/></span>
+			<span v-if="files.length != 0" class="count">{{ $t('attaches').replace('{}', files.length) }}</span>
+			<span v-if="uploadings.length != 0" class="count">{{ $t('uploading-media').replace('{}', uploadings.length) }}<mk-ellipsis/></span>
 		</span>
 	</template>
 
 	<div class="mk-post-form-window--body" :style="{ maxHeight: `${maxHeight}px` }">
 		<mk-note-preview v-if="reply" class="notePreview" :note="reply"/>
-		<x-post-form ref="form"
+		<x-post-form
+			ref="form"
 			:reply="reply"
 			:mention="mention"
-			:initial-text="initialText"
-			:initial-note="initialNote"
+			:initialText="initialText"
+			:initialNote="initialNote"
 			:instant="instant"
 
 			@posted="onPosted"
-			@change-uploadings="onChangeUploadings"
-			@change-attached-files="onChangeFiles"
-			@geo-attached="onGeoAttached"
-			@geo-dettached="onGeoDettached"/>
+			@changeUploadings="onChangeUploadings"
+			@changeAttachedFiles="onChangeFiles"
+			@geoAttached="onGeoAttached"
+			@geoDettached="onGeoDettached"
+		/>
 	</div>
 </mk-window>
 </template>

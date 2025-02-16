@@ -1,13 +1,14 @@
 <template>
 <div class="prlncendiewqqkrevzeruhndoakghvtx">
 	<header>
-		<button v-for="category in categories"
-			:title="category.text"
-			@click="go(category)"
-			:class="{ active: category.isActive }"
+		<button
+			v-for="category in categories"
 			:key="category.text"
+			:title="category.text"
+			:class="{ active: category.isActive }"
+			@click="go(category)"
 		>
-			<fa :icon="category.icon" fixed-width/>
+			<fa :icon="category.icon" fixedWidth/>
 		</button>
 	</header>
 	<div class="emojis">
@@ -15,11 +16,12 @@
 			<ui-input v-model="q" :autofocus="false" style="margin: 0.4em;">
 				<span>{{ $t('search-emoji') }}</span>
 			</ui-input>
-			<div class="list" v-if="searchResults.length > 0">
-				<button v-for="emoji in (searchResults || [])"
+			<div v-if="searchResults.length > 0" class="list">
+				<button
+					v-for="emoji in (searchResults || [])"
+					:key="emoji.char || emoji.name"
 					:title="emoji.sources ? emoji.sources.map(x => `${x.name}@${x.host}`).join(',\n') : emoji.name"
 					@click="chosen(emoji)"
-					:key="emoji.char || emoji.name"
 				>
 					<mk-emoji v-if="emoji.char != null" :emoji="emoji.char" :local="emoji.local"/>
 					<img v-else loading="lazy" :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
@@ -27,12 +29,13 @@
 			</div>
 		</div>
 		<template v-if="categories[0].isActive">
-			<header class="category"><fa :icon="faHistory" fixed-width/> {{ $t('recent-emoji') }}</header>
+			<header class="category"><fa :icon="faHistory" fixedWidth/> {{ $t('recent-emoji') }}</header>
 			<div class="list">
-				<button v-for="emoji in ($store.state.device.recentEmojis || [])"
+				<button
+					v-for="emoji in ($store.state.device.recentEmojis || [])"
+					:key="emoji.char || emoji.name"
 					:title="emoji.name"
 					@click="chosen(emoji)"
-					:key="emoji.char || emoji.name"
 				>
 					<mk-emoji v-if="emoji.char != null" :emoji="emoji.char"/>
 					<img v-else loading="lazy" :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
@@ -41,20 +44,21 @@
 		</template>
 
 		<header class="category">
-			<fa :icon="categories.find(x => x.isActive).icon" fixed-width/>
+			<fa :icon="categories.find(x => x.isActive).icon" fixedWidth/>
 			{{ categories.find(x => x.isActive).text }}
 			<div class="skinTones">
-				<button class="skinTone" v-for="st in SKIN_TONES" :key="st" @click="changeSkinTone(st)">
+				<button v-for="st in SKIN_TONES" :key="st" class="skinTone" @click="changeSkinTone(st)">
 					<mk-emoji :emoji="getSkinToneModifiedChar(SKIN_TONES_SAMPLE, st)"/>
 				</button>
 			</div>
 		</header>
 		<template v-if="categories.find(x => x.isActive).name">
 			<div class="list">
-				<button v-for="emoji in emojilist.filter(e => e.category === categories.find(x => x.isActive).name)"
+				<button
+					v-for="emoji in emojilist.filter(e => e.category === categories.find(x => x.isActive).name)"
+					:key="`${emoji.name}-${skinTone}`"
 					:title="emoji.name"
 					@click="chosen(emoji, skinTone)"
-					:key="`${emoji.name}-${skinTone}`"
 				>
 					<mk-emoji :emoji="emojiToSkinToneModifiedChar(emoji, skinTone)" :local="emoji.local"/>
 				</button>
@@ -64,10 +68,11 @@
 			<div v-for="(key, i) in Object.keys(customEmojis)" :key="i">
 				<header class="sub">{{ key || $t('no-category') }}</header>
 				<div class="list">
-					<button v-for="emoji in customEmojis[key]"
+					<button
+						v-for="emoji in customEmojis[key]"
+						:key="emoji.name"
 						:title="emoji.name"
 						@click="chosen(emoji)"
-						:key="emoji.name"
 					>
 						<img loading="lazy" :src="$store.state.device.disableShowingAnimatedImages ? getStaticImageUrl(emoji.url) : emoji.url"/>
 					</button>

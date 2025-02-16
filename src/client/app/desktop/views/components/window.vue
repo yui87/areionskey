@@ -1,17 +1,18 @@
 <template>
 <div class="mk-window" :data-flexible="isFlexible" @dragover="onDragover">
-	<div class="bg" ref="bg" v-show="isModal" @click="onBgClick"></div>
-	<div class="main" ref="main" tabindex="-1" :data-is-modal="isModal" @mousedown="onBodyMousedown" @keydown="onKeydown" :style="{ width, height }">
+	<div v-show="isModal" ref="bg" class="bg" @click="onBgClick"></div>
+	<div ref="main" class="main" tabindex="-1" :data-is-modal="isModal" :style="{ width, height }" @mousedown="onBodyMousedown" @keydown="onKeydown">
 		<div class="body">
-			<header ref="header"
+			<header
+				ref="header"
 				@contextmenu.prevent="() => {}" @mousedown.prevent="onHeaderMousedown"
 			>
 				<h1><slot name="header"></slot></h1>
 				<div>
-					<button class="popout" v-if="popoutUrl" @mousedown.stop="() => {}" @click="popout" :title="$t('popout')">
+					<button v-if="popoutUrl" class="popout" :title="$t('popout')" @mousedown.stop="() => {}" @click="popout">
 						<i><fa :icon="['far', 'window-restore']"/></i>
 					</button>
-					<button class="close" v-if="canClose" @mousedown.stop="() => {}" @click="close" :title="$t('close')">
+					<button v-if="canClose" class="close" :title="$t('close')" @mousedown.stop="() => {}" @click="close">
 						<i><fa icon="times"/></i>
 					</button>
 				</div>
@@ -115,7 +116,7 @@ export default Vue.extend({
 		});
 	},
 
-	destroyed() {
+	unmounted() {
 		// ウィンドウをウィンドウシステムから削除
 		this.$root.os.windows.remove(this);
 

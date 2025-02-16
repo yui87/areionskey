@@ -1,10 +1,10 @@
 <template>
 <div class="vchtoekanapleubgzioubdtmlkribzfd">
 	<div v-if="game">
-		<x-gameroom :game="game" :self-nav="selfNav" @go-index="goIndex"/>
+		<x-gameroom :game="game" :selfNav="selfNav" @goIndex="goIndex"/>
 	</div>
-	<div class="matching" v-else-if="matching">
-		<h1>{{ this.$t('matching.waiting-for').split('{}')[0] }}<b><mk-user-name :user="matching"/></b>{{ this.$t('matching.waiting-for').split('{}')[1] }}<mk-ellipsis/></h1>
+	<div v-else-if="matching" class="matching">
+		<h1>{{ $t('matching.waiting-for').split('{}')[0] }}<b><mk-user-name :user="matching"/></b>{{ $t('matching.waiting-for').split('{}')[1] }}<mk-ellipsis/></h1>
 		<div class="cancel">
 			<form-button round @click="cancel">{{ $t('matching.cancel') }}</form-button>
 		</div>
@@ -12,7 +12,7 @@
 	<div v-else-if="gameId">
 		...
 	</div>
-	<div class="index" v-else>
+	<div v-else class="index">
 		<x-index @go="nav" @matching="onMatching"/>
 	</div>
 </div>
@@ -81,7 +81,7 @@ export default Vue.extend({
 		}
 	},
 
-	beforeDestroy() {
+	beforeUnmount() {
 		if (this.connection) {
 			this.connection.dispose();
 			clearInterval(this.pingClock);

@@ -1,10 +1,10 @@
 <template>
-<div class="skeikyzd" v-show="files.length != 0">
+<div v-show="files.length != 0" class="skeikyzd">
 	<x-draggable class="files" :list="files" animation="150">
 		<div v-for="file in files" :key="file.id" @click="showFileMenu(file, $event)" @contextmenu.prevent="showFileMenu(file, $event)">
 			<x-file-thumbnail :data-id="file.id" class="thumbnail" :file="file" fit="cover"/>
-			<img class="remove" @click.stop="detachMedia(file.id)" src="/assets/desktop/remove.png" :title="$t('attach-cancel')" alt=""/>
-			<div class="sensitive" v-if="file.isSensitive">
+			<img class="remove" src="/assets/desktop/remove.png" :title="$t('attach-cancel')" alt="" @click.stop="detachMedia(file.id)"/>
+			<div v-if="file.isSensitive" class="sensitive">
 				<fa class="icon" :icon="faExclamationTriangle"/>
 			</div>
 		</div>

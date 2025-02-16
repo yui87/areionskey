@@ -1,10 +1,10 @@
 <template>
 <div class="header" :style="style">
-	<p class="warn" v-if="env != 'production'">{{ $t('@.do-not-use-in-production') }}</p>
-	<div class="main" ref="main">
+	<p v-if="env != 'production'" class="warn">{{ $t('@.do-not-use-in-production') }}</p>
+	<div ref="main" class="main">
 		<div class="backdrop"></div>
 		<div class="main">
-			<div class="container" ref="mainContainer">
+			<div ref="mainContainer" class="container">
 				<div class="left">
 					<x-nav/>
 				</div>

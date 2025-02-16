@@ -1,10 +1,11 @@
 <template>
 <div class="ui-select" :class="[{ focused, disabled, filled, inline }, styl]">
-	<div class="icon" ref="icon"><slot name="icon"></slot></div>
+	<div ref="icon" class="icon"><slot name="icon"></slot></div>
 	<div class="input" @click="focus">
-		<span class="label" ref="label"><slot name="label"></slot></span>
-		<div class="prefix" ref="prefix"><slot name="prefix"></slot></div>
-		<select ref="input"
+		<span ref="label" class="label"><slot name="label"></slot></span>
+		<div ref="prefix" class="prefix"><slot name="prefix"></slot></div>
+		<select
+			ref="input"
 			v-model="v"
 			:required="required"
 			:disabled="disabled"
